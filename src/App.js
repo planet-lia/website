@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import Header from './components/layout/Header';
 import Routes from './components/layout/Routes';
-import Popup from './views/Popup';
+import Popup from './components/views/Popup';
 import SignInForm from './components/forms/SignInForm';
 import SignUpForm from './components/forms/SignUpForm';
 
