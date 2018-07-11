@@ -1,0 +1,109 @@
+/*
+Colors
+#585858 - Header gray
+#af78c3 - purple
+
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hide-from-page {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+
+}
+
+/* Layout */
+
+#main-header {
+  background-color: #585858;
+  color: #fff;
+  width: 100%;
+  padding: 0;
+}
+
+#custom-navbar {
+  background-color: #585858;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* Layout Overwrites */
+#custom-navbar span, #custom-navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#custom-navbar a:hover {
+  color: #ddd;
+}
+
+/* Popups */
+.sign-in {
+  width: 30%;
+}
+
+.sign-up {
+  width: 37%;
+}
+
+.upload-bot {
+  width: 40%;
+}
+
+#cont-upload-bot {
+  text-align: center;
+}
+
+#cont-upload-bot > section {
+  display: inline-block;
+}
+.dropzone {
+  display: inline-block;
+  width: 70%;
+  position: relative;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: #585858;
+  border-radius: 4px;
+}
+
+.dropzone p {
+  margin: 4em 2em;
+}
+
+/* Popups Overwrites*/
+.modal-content {
+  border-radius: 0;
+}
+
+.custom-modal-header {
+  background-color: #585858;
+  color: #fff;
+}
+
+.close {
+  color: #888;
+  text-shadow: none;
+  opacity: 1;
+}
+
+.close:focus, .close:hover {
+  color: #aaa;
+  opacity: 1;
+}
+
+/* Buttons */
+#btn-upload {
+  display: block;
+  margin: 20px auto;
+}
