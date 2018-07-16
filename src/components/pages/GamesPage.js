@@ -1,32 +1,17 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import Table from '../views/Table';
+import GamesList from '../views/GamesList';
+import GameReplay from '../views/GameReplay';
 
 class GamesPage extends Component {
 
   render(){
-    const gamesColumns = [{
-      dataField: 'date',
-			text: 'Date'
-    }, {
-      dataField: 'result',
-			text: 'Result'
-    }, {
-      dataField: 'stat1',
-			text: 'Stat'
-    }, {
-      dataField: 'stat2',
-			text: 'Stat'
-    }, {
-      dataField: 'stat3',
-      text: 'Stat'
-    }];
-
     return (
-      <div>
-        <h2>Games</h2>
-        <Table data={[]} columns={gamesColumns} keyField="date" />
-      </div>
+      <Switch>
+        <Route exact path='/games' component={GamesList} />
+        <Route path='/games/:number' component={GameReplay} />
+      </Switch>
     )
   }
 

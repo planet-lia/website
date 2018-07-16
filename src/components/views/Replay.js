@@ -5,7 +5,7 @@ class Replay extends Component {
     super(props);
     this.state = {
       speed: 1,
-      loaded: false
+      replay: null
     }
 
   }
@@ -14,16 +14,22 @@ class Replay extends Component {
     this.checkAndRun()
   }
 
+  componentWillUnmount = () => {
+    window.liaGame.destroyReplay(this.state.replay);
+  }
+
   checkAndRun = () => {
     if(window.liaGame){
-      window.liaGame.playReplay(
-        "gameView",
-        "assets/",
-        "assets/replays/replay_1.lia",
-        "timeSpinner",
-        "speedSpinner",
-        ["camera1", "camera2", "camera3"]
-      );
+      this.setState({
+        replay: window.liaGame.playReplay(
+          "gameView",
+          "/assets/",
+          "/assets/replays/replay_" + this.props.number + ".lia",
+          "timeSpinner",
+          "speedSpinner",
+          ["camera1", "camera2", "camera3"]
+        )
+      });
     } else {
       setTimeout(this.checkAndRun, 100);
     }

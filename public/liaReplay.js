@@ -91475,6 +91475,7 @@ module.exports = ReplayReader
 },{"../c2w-client-logic/c2w-client-logic-js.js":1,"../curves_elements/curves_elements":2,"protobufjs/minimal":186}],213:[function(require,module,exports){
 (function (global){
 
+
 function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, cameraIds) {
     global.kotlin = require('kotlin')
     let pixi = require('pixi.js')
@@ -91636,10 +91637,17 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
         currentWidth = w
         currentHeight = h
     }
+
+    return app
+}
+
+function destroyReplay(app) {
+    app.destroy(true)
 }
 
 module.exports = {
-    playReplay
+    playReplay,
+    destroyReplay
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../c2w-client-logic/c2w-client-logic-js":1,"./Camera":210,"./JsAdapter":211,"./ReplayReader":212,"kotlin":14,"pixi.js":151}]},{},[213])(213)

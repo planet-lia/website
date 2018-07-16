@@ -40,7 +40,6 @@ class App extends Component {
   }
 
   onSignIn = () => {
-    console.log("signed in");
     this.setState({
       showSignInPopup: false,
       showSignUpPopup: false,
@@ -49,7 +48,6 @@ class App extends Component {
   }
 
   onSignUp = () => {
-    console.log("signed up");
     this.setState({
       showSignInPopup: false,
       showSignUpPopup: false

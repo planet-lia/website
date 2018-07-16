@@ -1,6 +1,6 @@
 /*
 Colors
-#585858 - Header gray
+#333333 - Header gray
 #af78c3 - purple
 
 */
@@ -24,14 +24,14 @@ body {
 /* Layout */
 
 #main-header {
-  background-color: #585858;
+  background-color: #333;
   color: #fff;
   width: 100%;
   padding: 0;
 }
 
 #custom-navbar {
-  background-color: #585858;
+  background-color: #333;
   border: 0;
   border-radius: 0;
   margin: 0;
@@ -73,7 +73,7 @@ body {
   position: relative;
   border-width: 2px;
   border-style: dashed;
-  border-color: #585858;
+  border-color: #333;
   border-radius: 4px;
 }
 
@@ -87,7 +87,7 @@ body {
 }
 
 .custom-modal-header {
-  background-color: #585858;
+  background-color: #333;
   color: #fff;
 }
 
