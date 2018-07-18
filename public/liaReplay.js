@@ -91476,7 +91476,7 @@ module.exports = ReplayReader
 (function (global){
 
 
-function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, cameraIds) {
+function playReplay(divId, pathToAssets, pathToReplay, cameraIds, setGameDuration, setTime) {
     global.kotlin = require('kotlin')
     let pixi = require('pixi.js')
     let Sprite = pixi.Sprite
@@ -91490,6 +91490,8 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
     let camera = require('./Camera')
 
     /******************* Game *******************/
+
+    let TIME_BAR_UPDATE_TIME = 0.5
 
     //Create a Pixi Application
     let app = new PIXI.Application({
@@ -91512,6 +91514,7 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
     let newTime = -1
     let gameDuration = 0
     let gameWinner = null
+    let lastTimeBarUpdate = TIME_BAR_UPDATE_TIME
 
     document.getElementById(divId).appendChild(renderer.view)
 
@@ -91541,12 +91544,7 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
         gameDuration = logicAdapter.getGameDuration()
         gameWinner = logicAdapter.getWinner()
 
-        // Add timeline to UI
-        let timeBar = document.getElementById(timeBarId)
-        timeBar.max = gameDuration
-        timeBar.addEventListener('input', function() {
-            newTime = Number(timeBar.value)
-        })
+        setGameDuration(gameDuration)
 
         //Start the game loop by adding the `gameLoop` function to
         //Pixi's `ticker` and providing it with a `delta` argument.
@@ -91561,7 +91559,12 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
     function gameLoop(delta) {
         delta = calculateNewTime(delta)
 
-        document.getElementById(timeBarId).value = stopwatch.time
+        lastTimeBarUpdate += Math.abs(delta / speedScale)
+        if (lastTimeBarUpdate > TIME_BAR_UPDATE_TIME) {
+            console.log(lastTimeBarUpdate)
+            setTime(stopwatch.time)
+            lastTimeBarUpdate = 0
+        }
 
         jsAdapter.clear()
 
@@ -91575,9 +91578,6 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
     }
 
     function calculateNewTime(delta) {
-        // TODO demo purposes only! Pooling is bad for performance
-        speedScale = document.getElementById(speedBarId).value
-
         let deltaTime
 
         // If the user chose new time through UI
@@ -91636,6 +91636,13 @@ function playReplay(divId, pathToAssets, pathToReplay, timeBarId, speedBarId, ca
         renderer.view.style.height = h + 'px'
         currentWidth = w
         currentHeight = h
+    }
+
+    app.changeTime = function (time) {
+        newTime = time
+    }
+    app.changeSpeed = function (speed) {
+        speedScale = speed
     }
 
     return app
