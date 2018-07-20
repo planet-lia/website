@@ -10,8 +10,11 @@ class Replay extends Component {
       replay: null,
       duration: 0,
       time: 0,
+      speed: 1,
+      camera: 1,
       isFull: false,
-      speed: 1
+      showSpeedSlider: false,
+      showCameras: false
     }
 
   }
@@ -82,33 +85,69 @@ class Replay extends Component {
           </div>
           <div className="row-pui">
             <div className="pui-timeline">
-              <ReactBootstrapSlider value={this.state.time} min={0} max={this.state.duration} step={0.01} change={this.onChangeTime} />
+              <ReactBootstrapSlider value={this.state.time} min={0} max={this.state.duration} step={0.01} change={this.onChangeTime} tooltip="hide" />
             </div>
             <div className="pui-buttons">
               <div className="pui-btns-left">
-                <button>
-                  <Glyphicon glyph="play" />
-                </button>
-                <button>
-                  <span className="btn-move-text-up">{this.state.speed + "x"}</span>
-                </button>
-                <div>
-                  <ReactBootstrapSlider value={this.state.speed} min={-6} max={6} step={0.1} change={this.onSpeedChange} tooltip="hide" />
+                <div className="pui-btn">
+                  <Glyphicon className="pui-btns-glyph" glyph="play" />
+                </div>
+                <div className="pui-cont" onMouseEnter={() => this.setState({showSpeedSlider: true})} onMouseLeave={() => this.setState({showSpeedSlider: false})}>
+                  <div className="pui-btn pui-btn-wide">
+                    <span>{this.state.speed + "x"}</span>
+                  </div>
+                  {this.state.showSpeedSlider ? (
+                    <div className="pui-btn pui-speed-slider">
+                      <ReactBootstrapSlider value={this.state.speed} min={-6} max={6} step={0.1} change={this.onSpeedChange} tooltip="hide" />
+                    </div>
+                  ) : (
+                    <div className="pui-btn pui-speed-slider hidden">
+                      <ReactBootstrapSlider value={this.state.speed} min={-6} max={6} step={0.1} change={this.onSpeedChange} tooltip="hide" />
+                    </div>
+                  ) }
                 </div>
               </div>
               <div className="pui-btns-right">
-                <div className="cameras hidden">
-                  <button type="button" id="camera1">c1</button>
-                  <button type="button" id="camera2">c2</button>
-                  <button type="button" id="camera3">c3</button>
+                <div className="pui-cont" onMouseEnter={() => this.setState({showCameras: true})} onMouseLeave={() => this.setState({showCameras: false})}>
+                  {this.state.showCameras ? (
+                    <div className="pui-cont pui-cameras">
+                      <div className="pui-btn" id="camera1" onClick={() => this.setState({camera: 1})}>
+                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                        <span> 1</span>
+                      </div>
+                      <div className="pui-btn" id="camera2" onClick={() => this.setState({camera: 2})}>
+                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                        <span> 2</span>
+                      </div>
+                      <div className="pui-btn" id="camera3" onClick={() => this.setState({camera: 3})}>
+                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                        <span> 3</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="pui-cont pui-cameras hidden">
+                      <div className="pui-btn" id="camera1" onClick={() => this.setState({camera: 1})}>
+                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                        <span> 1</span>
+                      </div>
+                      <div className="pui-btn" id="camera2" onClick={() => this.setState({camera: 2})}>
+                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                        <span> 2</span>
+                      </div>
+                      <div className="pui-btn" id="camera3" onClick={() => this.setState({camera: 3})}>
+                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                        <span> 3</span>
+                      </div>
+                    </div>
+                  ) }
+                  <div className="pui-btn">
+                    <Glyphicon className="pui-btns-glyph" glyph="facetime-video" />
+                    <span>{" " + this.state.camera}</span>
+                  </div>
                 </div>
-                <button>
-                  <Glyphicon glyph="facetime-video" />
-                  <span className="pui-move-text-up"> 1</span>
-                </button>
-                <button onClick={this.goFull}>
-                  {this.state.isFull ? <Glyphicon glyph="fullscreen" /> : <Glyphicon glyph="fullscreen" />}
-                </button>
+                <div className="pui-btn" onClick={this.goFull}>
+                  {this.state.isFull ? <Glyphicon className="pui-btns-glyph" glyph="fullscreen" /> : <Glyphicon className="pui-btns-glyph" glyph="fullscreen" />}
+                </div>
               </div>
             </div>
           </div>

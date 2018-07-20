@@ -5,7 +5,14 @@ import Replay from './Replay';
 class GameReplay extends Component {
   render(){
     return (
-      <Replay number={this.props.match.params.number}/>
+      <div>
+        <div className="cont-game-title">
+          <div className="game-title">Creator1 vs Creator2</div>
+          <div>vpsmfbvsmbčsl</div>
+          <div>7.20.2018</div>
+        </div>
+        <Replay number={this.props.match.params.number}/>
+      </div>
     )
   }
 }
