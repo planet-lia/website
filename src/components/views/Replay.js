@@ -12,19 +12,22 @@ class Replay extends Component {
       time: 0,
       speed: 1,
       camera: 1,
-      isFull: false,
+      isPlaying: true,
       showSpeedSlider: false,
-      showCameras: false
+      speedSliderActive: false,
+      showCameras: false,
+      isFull: false,
+      overlayOpacity: 0,
     }
 
   }
 
   componentDidMount = () => {
-    this.checkAndRun()
+    this.checkAndRun();
   }
 
   componentWillUnmount = () => {
-    window.liaGame.destroyReplay(this.state.replay);
+    this.state.replay.destroyReplay();
   }
 
   checkAndRun = () => {
@@ -34,7 +37,6 @@ class Replay extends Component {
           "gameView",
           "/assets/",
           "/assets/replays/replay_" + this.props.number + ".lia",
-          ["camera1", "camera2", "camera3"],
           this.setGameDuration,
           this.setTime
         )
@@ -52,25 +54,61 @@ class Replay extends Component {
     this.setState({time: time});
   }
 
+  onChangeTime = (event) => {
+    this.state.replay.changeTime(event.target.value);
+    if(this.state.isPlaying===false){
+      this.state.replay.forceUpdate();
+    }
+    this.setState({
+      time: event.target.value,
+    });
+  }
+
+  onTogglePlay = () => {
+    if(this.state.isPlaying===true){
+      this.state.replay.pause();
+      this.setState({
+        isPlaying: false,
+      });
+    } else {
+      this.state.replay.resume();
+      this.setState({
+        isPlaying: true,
+      });
+    }
+
+    //overlayAnimation
+    this.setState({ overlayOpacity: 0.7 })
+    setTimeout(() => this.setState({ overlayOpacity: 0 }), 250);
+  }
+
+  onToggleSpeedSlider = () => {
+    if(this.state.showSpeedSlider===false){
+      this.setState({showSpeedSlider: true});
+    } else if(this.state.speedSliderActive===false){
+      this.setState({showSpeedSlider: false});
+    }
+  }
+
+  onSpeedChange = (event) => {
+    this.state.replay.changeSpeed(event.target.value);
+    this.setState({ speed: event.target.value });
+  }
+
+  onCamChange(camId){
+    this.state.replay.changeCamera(camId);
+    if(this.state.isPlaying===false){
+      this.state.replay.forceUpdate();
+    }
+    this.setState({ camera: camId+1 });
+  }
+
   goFull = () => {
     if(this.state.isFull===true){
       this.setState({ isFull: false });
     } else {
       this.setState({ isFull: true });
     }
-
-  }
-
-  onChangeTime = (event) => {
-    this.state.replay.changeTime(event.target.value);
-    this.setState({
-      time: event.target.value,
-    });
-  }
-
-  onSpeedChange = (event) => {
-    this.state.replay.changeSpeed(event.target.value);
-    this.setState({speed: event.target.value});
   }
 
   render() {
@@ -80,8 +118,13 @@ class Replay extends Component {
         onChange={isFull => this.setState({isFull})}
       >
         <div className="cont-player">
-          <div className="row-replay">
+          <div className="row-replay" onClick={this.onTogglePlay}>
               <div id="gameView"></div>
+              {this.state.isPlaying ? (
+                <Glyphicon className="player-overlay" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
+              ) : (
+                <Glyphicon className="player-overlay" glyph="pause" style={{opacity: this.state.overlayOpacity}}/>
+              )}
           </div>
           <div className="row-pui">
             <div className="pui-timeline">
@@ -89,57 +132,54 @@ class Replay extends Component {
             </div>
             <div className="pui-buttons">
               <div className="pui-btns-left">
-                <div className="pui-btn">
-                  <Glyphicon className="pui-btns-glyph" glyph="play" />
+                <div className="pui-btn" onClick={this.onTogglePlay}>
+                  {this.state.isPlaying ? (
+                    <Glyphicon className="pui-btns-glyph" glyph="pause" />
+                  ) : (
+                    <Glyphicon className="pui-btns-glyph" glyph="play" />
+                  )}
                 </div>
-                <div className="pui-cont" onMouseEnter={() => this.setState({showSpeedSlider: true})} onMouseLeave={() => this.setState({showSpeedSlider: false})}>
+                <div className="pui-cont"
+                  onMouseEnter={ this.onToggleSpeedSlider }
+                  onMouseLeave={ this.onToggleSpeedSlider }
+                >
                   <div className="pui-btn pui-btn-wide">
                     <span>{this.state.speed + "x"}</span>
                   </div>
                   {this.state.showSpeedSlider ? (
-                    <div className="pui-btn pui-speed-slider">
-                      <ReactBootstrapSlider value={this.state.speed} min={-6} max={6} step={0.1} change={this.onSpeedChange} tooltip="hide" />
-                    </div>
-                  ) : (
-                    <div className="pui-btn pui-speed-slider hidden">
-                      <ReactBootstrapSlider value={this.state.speed} min={-6} max={6} step={0.1} change={this.onSpeedChange} tooltip="hide" />
-                    </div>
-                  ) }
+                    <span className="pui-speed-slider">
+                      <span className="pui-divider"></span>
+                      <ReactBootstrapSlider
+                        value={this.state.speed}
+                        min={-6}
+                        max={6}
+                        step={0.1}
+                        change={this.onSpeedChange}
+                        tooltip="hide"
+                        />
+                    </span>
+                  ) : null}
                 </div>
               </div>
               <div className="pui-btns-right">
                 <div className="pui-cont" onMouseEnter={() => this.setState({showCameras: true})} onMouseLeave={() => this.setState({showCameras: false})}>
                   {this.state.showCameras ? (
                     <div className="pui-cont pui-cameras">
-                      <div className="pui-btn" id="camera1" onClick={() => this.setState({camera: 1})}>
-                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                      <div className="pui-btn" onClick={() => this.onCamChange(0)} style={this.state.camera===1 ? {color: "#facd3b"} : {}}>
+                        <Glyphicon glyph="facetime-video" />
                         <span> 1</span>
                       </div>
-                      <div className="pui-btn" id="camera2" onClick={() => this.setState({camera: 2})}>
-                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                      <div className="pui-btn" onClick={() => this.onCamChange(1)} style={this.state.camera===2 ? {color: "#facd3b"} : {}}>
+                        <Glyphicon glyph="facetime-video" />
                         <span> 2</span>
                       </div>
-                      <div className="pui-btn" id="camera3" onClick={() => this.setState({camera: 3})}>
-                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
+                      <div className="pui-btn" onClick={() => this.onCamChange(2)} style={this.state.camera===3 ? {color: "#facd3b"} : {}}>
+                        <Glyphicon glyph="facetime-video" />
                         <span> 3</span>
                       </div>
+                      <span className="pui-divider"></span>
                     </div>
-                  ) : (
-                    <div className="pui-cont pui-cameras hidden">
-                      <div className="pui-btn" id="camera1" onClick={() => this.setState({camera: 1})}>
-                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
-                        <span> 1</span>
-                      </div>
-                      <div className="pui-btn" id="camera2" onClick={() => this.setState({camera: 2})}>
-                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
-                        <span> 2</span>
-                      </div>
-                      <div className="pui-btn" id="camera3" onClick={() => this.setState({camera: 3})}>
-                        <Glyphicon className="pui-btns-glyph-small" glyph="facetime-video" />
-                        <span> 3</span>
-                      </div>
-                    </div>
-                  ) }
+                  ) : null }
                   <div className="pui-btn">
                     <Glyphicon className="pui-btns-glyph" glyph="facetime-video" />
                     <span>{" " + this.state.camera}</span>
