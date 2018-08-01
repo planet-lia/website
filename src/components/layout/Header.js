@@ -10,14 +10,14 @@ class Header extends Component {
             <Navbar fluid id="custom-navbar">
               <Navbar.Header>
                 <Navbar.Brand>
-                  LIA
+                  <Link to="/">LIA</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />
               </Navbar.Header>
               <Navbar.Collapse>
                 <ul className="nav navbar-nav">
                   <li role="presentation">
-                    <Link to="/">LeaderBoard</Link>
+                    <Link to="/leaderboard">LeaderBoard</Link>
                   </li>
                   <li role="presentation">
                     <Link to="/games">Games</Link>

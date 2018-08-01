@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import LandingPage from '../pages/LandingPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
 import GamesPage from '../pages/GamesPage';
 import HowToPage from '../pages/HowToPage';
@@ -9,7 +10,8 @@ const Routes = () => {
   return (
     <div className="container">
       <Switch>
-        <Route exact path="/" component={LeaderboardPage} />
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/leaderboard" component={LeaderboardPage} />
         <Route path="/games" component={GamesPage} />
         <Route path="/how-to" component={HowToPage} />
       </Switch>
