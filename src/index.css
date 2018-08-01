@@ -163,6 +163,11 @@ body {
   height: 0.7em;
 }
 
+.row-pui .pui-speed-slider {
+  height: inherit;
+  display: inline-block;
+}
+
 .row-pui > .pui-buttons {
   width: inherit;
   height: 2em;
@@ -202,11 +207,12 @@ body {
   border-right: 1px solid #bdbdbd;
   margin: 0 0.4em;
 }
-
+/* small cameras
 .pui-buttons .pui-cameras > .pui-btn {
   font-size: small;
   vertical-align: top;
 }
+*/
 
 .pui-buttons .pui-cameras > .pui-btn > span:first-child {
   position: relative;

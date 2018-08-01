@@ -13,8 +13,8 @@ class Replay extends Component {
       speed: 1,
       camera: 1,
       isPlaying: true,
-      showSpeedSlider: false,
-      speedSliderActive: false,
+      insideSpeedSlider: false,
+      speedSliderTabId: -1,
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
@@ -82,17 +82,20 @@ class Replay extends Component {
     setTimeout(() => this.setState({ overlayOpacity: 0 }), 250);
   }
 
-  onToggleSpeedSlider = () => {
-    if(this.state.showSpeedSlider===false){
-      this.setState({showSpeedSlider: true});
-    } else if(this.state.speedSliderActive===false){
-      this.setState({showSpeedSlider: false});
-    }
+  onResetSpeed = () => {
+    this.state.replay.changeSpeed(1);
+    this.setState({
+      speed: 1,
+      speedSliderTabId: 1
+    });
   }
 
   onSpeedChange = (event) => {
     this.state.replay.changeSpeed(event.target.value);
-    this.setState({ speed: event.target.value });
+    this.setState({
+      speed: event.target.value,
+      speedSliderTabId: 1
+    });
   }
 
   onCamChange(camId){
@@ -118,7 +121,7 @@ class Replay extends Component {
         onChange={isFull => this.setState({isFull})}
       >
         <div className="cont-player">
-          <div className="row-replay" onClick={this.onTogglePlay}>
+          <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
               <div id="gameView"></div>
               {this.state.isPlaying ? (
                 <Glyphicon className="player-overlay" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
@@ -140,14 +143,26 @@ class Replay extends Component {
                   )}
                 </div>
                 <div className="pui-cont"
-                  onMouseEnter={ this.onToggleSpeedSlider }
-                  onMouseLeave={ this.onToggleSpeedSlider }
+                  onMouseEnter={ () => this.setState({insideSpeedSlider: true}) }
+                  onMouseLeave={ () => this.setState({insideSpeedSlider: false}) }
                 >
                   <div className="pui-btn pui-btn-wide">
                     <span>{this.state.speed + "x"}</span>
                   </div>
-                  {this.state.showSpeedSlider ? (
-                    <span className="pui-speed-slider">
+                  {(this.state.insideSpeedSlider ||  this.state.speedSliderTabId>0) ? (
+                    <div className="pui-speed-slider"
+                      tabIndex={ this.state.speedSliderTabId }
+                      onBlur={
+                        this.state.insideSpeedSlider ? (
+                          null
+                        ) : (
+                          () => this.setState({
+                            insideSpeedSlider: false,
+                            speedSliderTabId: -1
+                          })
+                        )
+                      }
+                    >
                       <span className="pui-divider"></span>
                       <ReactBootstrapSlider
                         value={this.state.speed}
@@ -157,7 +172,11 @@ class Replay extends Component {
                         change={this.onSpeedChange}
                         tooltip="hide"
                         />
-                    </span>
+                        <span className="pui-divider"></span>
+                        <span className="pui-btn" onClick={this.onResetSpeed}>
+                          <Glyphicon className="pui-btns-glyph" glyph="refresh" />
+                        </span>
+                    </div>
                   ) : null}
                 </div>
               </div>
