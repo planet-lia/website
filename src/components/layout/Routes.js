@@ -8,14 +8,12 @@ import HowToPage from '../pages/HowToPage';
 
 const Routes = () => {
   return (
-    <div className="container">
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/leaderboard" component={LeaderboardPage} />
-        <Route path="/games" component={GamesPage} />
-        <Route path="/how-to" component={HowToPage} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/leaderboard" component={LeaderboardPage} />
+      <Route path="/games" component={GamesPage} />
+      <Route path="/how-to" component={HowToPage} />
+    </Switch>
   );
 }
 

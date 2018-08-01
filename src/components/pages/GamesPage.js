@@ -8,10 +8,12 @@ class GamesPage extends Component {
 
   render(){
     return (
-      <Switch>
-        <Route exact path='/games' component={GamesList} />
-        <Route path='/games/:number' component={GameReplay} />
-      </Switch>
+      <div className="container">
+        <Switch>
+          <Route exact path='/games' component={GamesList} />
+          <Route path='/games/:number' component={GameReplay} />
+        </Switch>
+      </div>
     )
   }
 

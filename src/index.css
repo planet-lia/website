@@ -24,6 +24,10 @@ body {
   z-index: -1;
 }*/
 
+.center-text {
+  text-align: center;
+}
+
 /* Layout */
 
 #main-header {
@@ -113,10 +117,79 @@ body {
   margin: 20px auto;
 }
 
+/* Landing Page*/
+#land-pic {
+  position: relative;
+  width: 100%;
+  height: 35em;
+  background-color: #333;
+}
+
+#land-btn-try {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  font-size: x-large;
+  background-color: #facd3b;
+  padding: 0.5em 1em;
+}
+
+.land-section {
+  padding: 12em 0;
+}
+
+.sec-gray {
+  background-color: #f3f3f3
+}
+
+.land-cont-title {
+  margin-bottom: 5em;
+}
+
+.land-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.land-subtext {
+  text-align: center;
+  font-style: italic;
+}
+
+#land-cont-thumbs {
+  min-height: 15em;
+}
+
+.land-thumbnail {
+  width: 100%;
+  height: 15em;
+  background-color: #333;
+}
+
+.land-subtitle {
+  font-size: 1.5em;
+  margin: 0.4em 0;
+}
+
+.land-cont-glyph {
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+.land-glyph {
+  background-color: #facd3b;
+  font-size: 5em;
+  padding: 0.5em;
+  border-radius: 100%;
+}
+
 /* Game Title */
 .cont-game-title {
   text-align: center;
-  font-size: larger;
+  font-size: 1.5em;
   margin: 2em 0;
 }
 
@@ -161,6 +234,16 @@ body {
 
 .row-pui > .pui-timeline {
   height: 0.7em;
+}
+
+.cont-player .pui-text::selection {
+  background: #1f1f1d;
+  color: #bdbdbd;
+}
+
+.cont-player .pui-text::-moz-selection {
+  background: #1f1f1d;
+  color: #bdbdbd;
 }
 
 .row-pui .pui-speed-slider {
@@ -298,11 +381,11 @@ body {
 .pui-speed-slider > .slider > .slider-track {
   padding: 0;
   margin: 0;
-  top: 0.7em;
+  top: 0.6em;
 }
 
 .pui-speed-slider > .slider > .slider-handle {
-  top: 0.3em;
+  top: 0.2em;
 }
 
 /* Fullscreen Player */

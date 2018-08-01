@@ -147,7 +147,7 @@ class Replay extends Component {
                   onMouseLeave={ () => this.setState({insideSpeedSlider: false}) }
                 >
                   <div className="pui-btn pui-btn-wide">
-                    <span>{this.state.speed + "x"}</span>
+                    <span className="pui-text">{this.state.speed + "x"}</span>
                   </div>
                   {(this.state.insideSpeedSlider ||  this.state.speedSliderTabId>0) ? (
                     <div className="pui-speed-slider"
@@ -186,22 +186,22 @@ class Replay extends Component {
                     <div className="pui-cont pui-cameras">
                       <div className="pui-btn" onClick={() => this.onCamChange(0)} style={this.state.camera===1 ? {color: "#facd3b"} : {}}>
                         <Glyphicon glyph="facetime-video" />
-                        <span> 1</span>
+                        <span className="pui-text"> 1</span>
                       </div>
                       <div className="pui-btn" onClick={() => this.onCamChange(1)} style={this.state.camera===2 ? {color: "#facd3b"} : {}}>
                         <Glyphicon glyph="facetime-video" />
-                        <span> 2</span>
+                        <span className="pui-text"> 2</span>
                       </div>
                       <div className="pui-btn" onClick={() => this.onCamChange(2)} style={this.state.camera===3 ? {color: "#facd3b"} : {}}>
                         <Glyphicon glyph="facetime-video" />
-                        <span> 3</span>
+                        <span className="pui-text"> 3</span>
                       </div>
                       <span className="pui-divider"></span>
                     </div>
                   ) : null }
                   <div className="pui-btn">
                     <Glyphicon className="pui-btns-glyph" glyph="facetime-video" />
-                    <span>{" " + this.state.camera}</span>
+                    <span className="pui-text">{" " + this.state.camera}</span>
                   </div>
                 </div>
                 <div className="pui-btn" onClick={this.goFull}>

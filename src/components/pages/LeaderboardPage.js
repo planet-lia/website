@@ -54,7 +54,7 @@ class LeaderboardPage extends Component {
     }];
 
     return (
-      <div>
+      <div className="container">
         <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload your bot</Button>
         <h2>LeaderBoard</h2>
         <Table data={data} columns={leaderboardColumns} keyField="name" />
