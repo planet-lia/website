@@ -34,7 +34,7 @@ class Replay extends Component {
     if(window.liaGame){
       this.setState({
         replay: window.liaGame.playReplay(
-          "gameView",
+          this.props.containerId,
           "/assets/",
           "/assets/replays/replay_" + this.props.number + ".lia",
           this.setGameDuration,
@@ -122,7 +122,7 @@ class Replay extends Component {
       >
         <div className="cont-player">
           <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
-              <div id="gameView"></div>
+              <div id={ this.props.containerId }></div>
               {this.state.isPlaying ? (
                 <Glyphicon className="player-overlay" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
               ) : (

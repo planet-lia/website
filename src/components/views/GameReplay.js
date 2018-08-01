@@ -11,7 +11,7 @@ class GameReplay extends Component {
           <div>vpsmfbvsmbčsl</div>
           <div>7.20.2018</div>
         </div>
-        <Replay number={this.props.match.params.number}/>
+        <Replay containerId="gameView" number={this.props.match.params.number}/>
       </div>
     )
   }
