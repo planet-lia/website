@@ -8,27 +8,35 @@ Colors
 #facd3b - Player yellow
 */
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
-/*.hide-from-page {
-  display: none;
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}*/
+#root {
+  height: 100%;
+}
 
 .center-text {
   text-align: center;
 }
 
 /* Layout */
+
+#main-container {
+   min-height: 100%;
+   position: relative;
+}
+
+#main-content {
+  padding-bottom: 3.8em;
+}
 
 #main-header {
   background-color: #1c1c1a;
@@ -46,10 +54,21 @@ body {
 }
 
 #footer {
+  position:absolute;
+  bottom: 0;
+  width:100%;
+  height: 3.8em;
   background-color: #1c1c1a;
   color: #ddd;
-  padding: 1.4em 0;
   text-align: center;
+}
+
+#footer > div {
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 #foot-right span {
