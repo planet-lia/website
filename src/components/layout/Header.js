@@ -41,7 +41,7 @@ class Header extends Component {
             <Navbar.Collapse>
               <ul className="nav navbar-nav">
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/leaderboard">LeaderBoard</Link>
+                  <Link to="/leaderboard">Leaderboard</Link>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
                   <Link to="/games">Games</Link>
