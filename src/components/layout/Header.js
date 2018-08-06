@@ -34,7 +34,7 @@ class Header extends Component {
           <Navbar id="custom-navbar" fluid expanded={this.state.isExpanded} onToggle={this.onNavbarToggle}>
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to="/"><img id="logo" src="/favicon.ico" /></Link>
+                <Link to="/"><img id="logo" src="/favicon.ico" alt="logo"/></Link>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
@@ -47,7 +47,7 @@ class Header extends Component {
                   <Link to="/games">Games</Link>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <a href="https://docs.liagame.com/" target="_blank">How To</a>
+                  <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">How To</a>
                 </li>
               </ul>
               {this.props.isSignedIn ? (

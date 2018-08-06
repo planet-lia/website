@@ -38,15 +38,15 @@ class LandingPage extends Component {
             </Row>
             <Row>
               <Col md={4}>
-                <img className="land-thumbnail" src={thumb1} onClick={ () => this.setState({ gameId: 1 }) }/>
+                <img className="land-thumbnail" src={thumb1} alt="thumb1" onClick={ () => this.setState({ gameId: 1 }) }/>
                 <div className="land-thumb-title" onClick={ () => this.setState({ gameId: 1 }) }>GreatArmy vs Strongman7</div>
               </Col>
               <Col md={4}>
-                <img className="land-thumbnail" src={thumb2} onClick={ () => this.setState({ gameId: 2 }) } />
+                <img className="land-thumbnail" src={thumb2} alt="thumb2" onClick={ () => this.setState({ gameId: 2 }) } />
                 <div className="land-thumb-title" onClick={ () => this.setState({ gameId: 2 }) }>Sparta300 vs LazyBattalion</div>
               </Col>
               <Col md={4}>
-                <img className="land-thumbnail" src={thumb3} onClick={ () => this.setState({ gameId: 3 }) } />
+                <img className="land-thumbnail" src={thumb3} alt="thumb3" onClick={ () => this.setState({ gameId: 3 }) } />
                 <div className="land-thumb-title" onClick={ () => this.setState({ gameId: 3 }) }>PlayHard vs Spiral44</div>
               </Col>
             </Row>
