@@ -16,11 +16,12 @@ class LandingPage extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <div id="land-pic">
           <div id="land-cont-try">
-            <div id="land-btn-try">Try Out</div>
+            <div id="land-btn-try" onClick={() => this.props.onNavSignClick(2)}>Try Now</div>
           </div>
         </div>
         <div className="land-section">

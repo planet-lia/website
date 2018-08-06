@@ -6,10 +6,10 @@ import LeaderboardPage from '../pages/LeaderboardPage';
 import GamesPage from '../pages/GamesPage';
 import HowToPage from '../pages/HowToPage';
 
-const Routes = () => {
+const Routes = (props) => {
   return (
     <Switch>
-      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/" render={() => <LandingPage {...props}/>} />
       <Route path="/leaderboard" component={LeaderboardPage} />
       <Route path="/games" component={GamesPage} />
       <Route path="/how-to" component={HowToPage} />

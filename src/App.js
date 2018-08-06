@@ -59,7 +59,7 @@ class App extends Component {
     return (
       <div>
         <Header isSignedIn={this.state.isSignedIn} onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
-        <Route component={Routes}/>
+        <Route render={(props) => <Routes {...props} onNavSignClick={ (signingMode) => this.onNavSignClick(signingMode) } /> }/>
         <Footer />
 
         <Popup
