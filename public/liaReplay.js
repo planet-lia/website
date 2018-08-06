@@ -5612,7 +5612,7 @@
         tmp$ = Config_getInstance().COLOR_GOLD;
         break;
       case 'TEAM_2':
-        tmp$ = Config_getInstance().COLOR_VIOLET;
+        tmp$ = Config_getInstance().COLOR_PLAYER_GREEN;
         break;
       case 'NONE':
         throw Exception_init('Team should be specified.');
@@ -92583,7 +92583,6 @@ function playReplay(divId, pathToAssets, pathToReplay, setGameDuration, setTime)
     }
     app.forceUpdate = function() {
         app.ticker.update()
-
     }
 
     return app
