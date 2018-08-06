@@ -32,9 +32,10 @@ body {
 
 #main-header {
   background-color: #1c1c1a;
-  color: #eee;
+  color: #ddd;
+  font-size: 1.2em;
   width: 100%;
-  padding: 0;
+  padding: 0.3em 0;
 }
 
 #custom-navbar {
@@ -44,27 +45,39 @@ body {
   margin: 0;
 }
 
+#footer {
+  background-color: #1c1c1a;
+  color: #ddd;
+  padding: 2em 0;
+  text-align: center;
+}
+
+#foot-right span {
+  margin: 0 0.5em;
+}
+
 /* Layout Overwrites */
 #custom-navbar span, #custom-navbar a {
-  color: #eee;
+  color: #ddd;
   text-decoration: none;
 }
 
 #custom-navbar a:hover {
-  color: #fafafa;
+  background-color: #facd3b;
+  color: #333;
 }
 
 /* Popups */
 .sign-in {
-  width: 30%;
+  width: 400px;
 }
 
 .sign-up {
-  width: 37%;
+  width: 500px;
 }
 
 .upload-bot {
-  width: 40%;
+  width: 500px;
 }
 
 #cont-upload-bot {
@@ -119,22 +132,35 @@ body {
 
 /* Landing Page*/
 #land-pic {
-  position: relative;
   width: 100%;
-  height: 35em;
   background-color: #333;
+  background-image: url(./assets/main_header.jpg);
+  background-position: center center;
+  background-repeat: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#land-cont-try {
+  width: 80%;
+  padding: 220px 0;
+  margin: 0 auto;
 }
 
 #land-btn-try {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  width: 6em;
   font-size: x-large;
+  text-align: center;
   background-color: #facd3b;
   padding: 0.5em 1em;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+#land-btn-try:hover {
+  background-color: #eabd2b;
 }
 
 .land-section {
@@ -171,13 +197,20 @@ body {
 
 .land-thumbnail {
   width: 100%;
-  height: 15em;
+  height: auto;
   background-color: #333;
+  cursor: pointer;
 }
 
-.land-subtitle {
+.land-thumb-title{
+  display: inline-block;
   font-size: 1.5em;
-  margin: 0.4em 0;
+  margin: 0 0 0.5em 0;
+  cursor: pointer;
+}
+
+.land-funs {
+  margin-bottom: 3em;
 }
 
 .land-cont-glyph {
@@ -190,6 +223,11 @@ body {
   font-size: 5em;
   padding: 0.5em;
   border-radius: 100%;
+}
+
+.land-subtitle {
+  font-size: 1.5em;
+  margin: 0.4em 0;
 }
 
 /* Game Title */

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import Routes from './components/layout/Routes';
 import Popup from './components/views/Popup';
 import SignInForm from './components/forms/SignInForm';
@@ -58,8 +59,8 @@ class App extends Component {
     return (
       <div>
         <Header isSignedIn={this.state.isSignedIn} onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
-
         <Route component={Routes}/>
+        <Footer />
 
         <Popup
           dialogClassName="sign-in"
