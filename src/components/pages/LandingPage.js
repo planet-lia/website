@@ -16,7 +16,6 @@ class LandingPage extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <div id="land-pic">

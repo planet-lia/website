@@ -89,14 +89,17 @@ body {
 /* Popups */
 .sign-in {
   width: 400px;
+  margin: 0 auto;
 }
 
 .sign-up {
   width: 500px;
+  margin: 0 auto;
 }
 
 .upload-bot {
   width: 500px;
+  margin: 0 auto;
 }
 
 #cont-upload-bot {
@@ -127,7 +130,7 @@ body {
 
 .custom-modal-header {
   background-color: #1c1c1a;
-  color: #eee;
+  color: #ddd;
 }
 
 .close {
