@@ -47,7 +47,7 @@ class Header extends Component {
                   <Link to="/games">Games</Link>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/how-to">How To</Link>
+                  <a href="https://docs.liagame.com/" target="_blank">How To</a>
                 </li>
               </ul>
               {this.props.isSignedIn ? (

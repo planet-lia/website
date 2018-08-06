@@ -12,7 +12,6 @@ const Routes = (props) => {
       <Route exact path="/" render={() => <LandingPage {...props}/>} />
       <Route path="/leaderboard" component={LeaderboardPage} />
       <Route path="/games" component={GamesPage} />
-      <Route path="/how-to" component={HowToPage} />
     </Switch>
   );
 }
