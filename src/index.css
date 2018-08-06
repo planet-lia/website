@@ -46,6 +46,12 @@ body {
   padding: 0.3em 0;
 }
 
+#logo {
+  width: auto;
+  height: 2em;
+  margin-top: -0.5em;
+}
+
 #custom-navbar {
   background-color: #1c1c1a;
   border: 0;

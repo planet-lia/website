@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import LandingPage from '../pages/LandingPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
 import GamesPage from '../pages/GamesPage';
-import HowToPage from '../pages/HowToPage';
 
 const Routes = (props) => {
   return (

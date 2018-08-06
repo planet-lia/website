@@ -34,7 +34,7 @@ class Header extends Component {
           <Navbar id="custom-navbar" fluid expanded={this.state.isExpanded} onToggle={this.onNavbarToggle}>
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to="/">LIA</Link>
+                <Link to="/"><img id="logo" src="/favicon.ico" /></Link>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
