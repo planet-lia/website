@@ -26,7 +26,7 @@ class LandingPage extends Component {
         <div className="land-section">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
-            <div className="land-subtext">Grab your popcorn and watch AIs fight each other.</div>
+            <div className="land-subtext">Grab popcorn and watch AIs fight each other.</div>
           </div>
           <div className="container" id="land-cont-watch">
             <Row>
@@ -71,9 +71,9 @@ class LandingPage extends Component {
               <div className="land-cont-glyph">
                 <Glyphicon className="land-glyph" glyph="road" />
               </div>
-              <div className="land-subtitle center-text">Join the ladder</div>
+              <div className="land-subtitle center-text">Join the leaderboard</div>
               <div className="center-text">
-                Join the global ladder and compete for fame and glory.
+                Join the global leaderboard and compete for fame and glory.
               </div>
             </Col>
             <Col className="land-funs" md={4}>
