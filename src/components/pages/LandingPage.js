@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon } from 'react-bootstrap';
 
 import Replay from '../views/Replay';
+import ReplayThumb from '../views/ReplayThumb'
 
 import thumb1 from '../../assets/thumb1.jpg'
 import thumb2 from '../../assets/thumb2.jpg'
@@ -38,16 +39,13 @@ class LandingPage extends Component {
             </Row>
             <Row>
               <Col md={4}>
-                <img className="land-thumbnail" src={thumb1} alt="thumb1" onClick={ () => this.setState({ gameId: 1 }) }/>
-                <div className="land-thumb-title" onClick={ () => this.setState({ gameId: 1 }) }>GreatArmy vs Strongman7</div>
+                <ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="GreatArmy vs Strongman7" />
               </Col>
               <Col md={4}>
-                <img className="land-thumbnail" src={thumb2} alt="thumb2" onClick={ () => this.setState({ gameId: 2 }) } />
-                <div className="land-thumb-title" onClick={ () => this.setState({ gameId: 2 }) }>Sparta300 vs LazyBattalion</div>
+                <ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="Sparta300 vs LazyBattalion" />
               </Col>
               <Col md={4}>
-                <img className="land-thumbnail" src={thumb3} alt="thumb3" onClick={ () => this.setState({ gameId: 3 }) } />
-                <div className="land-thumb-title" onClick={ () => this.setState({ gameId: 3 }) }>PlayHard vs Spiral44</div>
+                <ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="PlayHard vs Spiral44" />
               </Col>
             </Row>
           </div>
