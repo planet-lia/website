@@ -60,7 +60,7 @@ class LeaderboardPage extends Component {
         <Table data={data} columns={leaderboardColumns} keyField="name" />
 
         <Popup
-          dialogClassName="upload-bot"
+          dialogClassName="custom-popup upload-bot"
           show={this.state.showUploadPopup}
           onHide={this.onBotUploadClose}
           onButtonClick={this.onBotUpload}

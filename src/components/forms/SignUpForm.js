@@ -24,28 +24,28 @@ class SignUpForm extends Component {
         </Row>
         <Row>
           <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Username</ControlLabel>
-            <FormControl type="text" placeholder="Pick a username" />
+            <div className="form-group">
+              <ControlLabel>Username</ControlLabel>
+              <FormControl type="text" placeholder="Pick a username" />
+            </div>
+            <div className="form-group">
+              <ControlLabel>Password</ControlLabel>
+              <FormControl type="password" placeholder="Create a password" />
+            </div>
+            <div className="form-group">
+              <ControlLabel>Repeat Password</ControlLabel>
+              <FormControl type="password" placeholder="Repeat password" />
+            </div>
           </Col>
           <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Country</ControlLabel>
-            <FormControl type="text" placeholder="Your country" />
-          </Col>
-        </Row>
-        <Row>
-          <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Password</ControlLabel>
-            <FormControl type="password" placeholder="Create a password" />
-          </Col>
-          <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Organization</ControlLabel>
-            <FormControl type="text" placeholder="Your organization" />
-          </Col>
-        </Row>
-        <Row>
-          <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Repeat Password</ControlLabel>
-            <FormControl type="password" placeholder="Repeat password" />
+            <div className="form-group">
+              <ControlLabel>Country</ControlLabel>
+              <FormControl type="text" placeholder="Your country" />
+            </div>
+            <div className="form-group">
+              <ControlLabel>Organization</ControlLabel>
+              <FormControl type="text" placeholder="Your organization" />
+            </div>
           </Col>
         </Row>
       </form>

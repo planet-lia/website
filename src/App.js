@@ -65,7 +65,7 @@ class App extends Component {
         <Footer />
 
         <Popup
-          dialogClassName="sign-in"
+          dialogClassName="custom-popup sign-in"
           show={this.state.showSignInPopup}
           onHide={this.onSignPopupClose}
           onButtonClick={this.onSignIn}
@@ -75,7 +75,7 @@ class App extends Component {
           <SignInForm />
         </Popup>
         <Popup
-          dialogClassName="sign-up"
+          dialogClassName="custom-popup sign-up"
           show={this.state.showSignUpPopup}
           onHide={this.onSignPopupClose}
           onButtonClick={this.onSignUp}
