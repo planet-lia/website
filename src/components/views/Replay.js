@@ -19,7 +19,6 @@ class Replay extends Component {
       isFull: false,
       overlayOpacity: 0,
     }
-
   }
 
   componentDidMount = () => {
