@@ -27,19 +27,6 @@ body {
   text-align: center;
 }
 
-/* Mobile */
-@media only screen and (max-width: 500px) {
-  .custom-popup {
-    margin: 0 auto;
-  }
-
-  .sign-in,
-  .sign-up,
-  .upload-bot {
-    width: 100%;
-  }
-}
-
 /* Layout */
 
 #main-container {
@@ -107,19 +94,28 @@ body {
 
 /* Popups */
 .custom-popup {
-  margin: 30px auto;
+  margin: 0 auto;
 }
 
-.sign-in {
-  width: 400px;
-}
-
-.sign-up {
-  width: 500px;
-}
-
+.sign-in,
+.sign-up,
 .upload-bot {
-  width: 500px;
+  width: 100%;
+}
+
+@media screen and (min-width: 534px) {
+  .custom-popup {
+    margin: 30px auto;
+  }
+
+  .sign-in {
+    width: 400px;
+  }
+
+  .sign-up,
+  .upload-bot {
+    width: 500px;
+  }
 }
 
 #cont-upload-bot {
