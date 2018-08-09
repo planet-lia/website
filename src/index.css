@@ -182,10 +182,26 @@ body {
   background-size: cover;
 }
 
-#land-cont-try {
+#land-cont-title {
   width: 80%;
-  padding: 220px 0;
+  padding: 140px 0 250px;
   margin: 0 auto;
+  color: #ddd;
+  text-align: center;
+}
+
+#land-slogan {
+  font-family: 'Headland One', serif;
+  font-size: 3.2em;
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 0.05em;
+}
+
+#land-desc {
+  font-family: 'Headland One', serif;
+  font-size: 1.2em;
+  margin-bottom: 1em;
 }
 
 #land-btn-try {
@@ -193,6 +209,7 @@ body {
   font-size: x-large;
   text-align: center;
   background-color: #facd3b;
+  color: #333;
   padding: 0.5em 1em;
   margin: 0 auto;
   cursor: pointer;

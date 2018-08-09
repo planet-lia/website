@@ -20,7 +20,9 @@ class LandingPage extends Component {
     return (
       <div>
         <div id="land-pic">
-          <div id="land-cont-try">
+          <div id="land-cont-title">
+            <div id="land-slogan">Fighting for Nerds</div>
+            <div id="land-desc">League for artificial intelligence</div>
             <div id="land-btn-try" onClick={() => this.props.onNavSignClick(2)}>Try Now</div>
           </div>
         </div>
