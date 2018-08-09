@@ -122,10 +122,11 @@ class Replay extends Component {
         <div className="cont-player">
           <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
               <div id={ this.props.containerId }></div>
+              <div className="player-overlay"></div>
               {this.state.isPlaying ? (
-                <Glyphicon className="player-overlay" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
+                <Glyphicon className="player-overlay-icon" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
               ) : (
-                <Glyphicon className="player-overlay" glyph="pause" style={{opacity: this.state.overlayOpacity}}/>
+                <Glyphicon className="player-overlay-icon" glyph="pause" style={{opacity: this.state.overlayOpacity}}/>
               )}
           </div>
           <div className="row-pui">
