@@ -27,6 +27,19 @@ body {
   text-align: center;
 }
 
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  .custom-popup {
+    margin: 0 auto;
+  }
+
+  .sign-in,
+  .sign-up,
+  .upload-bot {
+    width: 100%;
+  }
+}
+
 /* Layout */
 
 #main-container {
@@ -35,7 +48,7 @@ body {
 }
 
 #main-content {
-  padding-bottom: 3.8em;
+  padding-bottom: 7.6em;
 }
 
 #main-header {
