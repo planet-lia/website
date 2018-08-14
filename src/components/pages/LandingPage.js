@@ -23,7 +23,9 @@ class LandingPage extends Component {
           <div id="land-cont-title">
             <div id="land-slogan">Fighting for Nerds</div>
             <div id="land-desc">League for artificial intelligence</div>
-            <div id="land-btn-try" onClick={() => this.props.onNavSignClick(2)}>Try Now</div>
+            <div id="land-btn-try">
+              <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Try Now</a>
+            </div>
           </div>
         </div>
         <div className="land-section">
@@ -64,7 +66,7 @@ class LandingPage extends Component {
               </div>
               <div className="land-subtitle center-text">Develop bots</div>
               <div className="center-text">
-                Use your favourite programming language and IDE to create unbeatable bots that can fight on their own.
+                Use Java, Python or Kotlin alongside your favourite IDE to create unbeatable bots that can fight on their own.
               </div>
             </Col>
             <Col className="land-funs" md={4}>
