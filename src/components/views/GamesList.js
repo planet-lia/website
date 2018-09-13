@@ -10,23 +10,34 @@ class GamesList extends Component {
     return (<Link to={"/games/" + row.gameNum}>{row.date}</Link>);
   }
 
+  playersFormatter = (cell, row, rowIndex) => {
+    if(row.result===1){
+      return (<span><strong>{row.player1}</strong>{" vs " + row.player2}</span>)
+    } else if (row.result===2) {
+      return (<span>{row.player1 + " vs "}<strong>{row.player2}</strong></span>)
+    }
+  }
+
+  durationFormatter = (cell, row, rowIndex) => {
+    return (Math.floor(row.duration/60) + ":" + row.duration%60);
+  }
+
   render(){
     const gamesColumns = [{
       dataField: 'no1',
 			text: 'Date',
       formatter: this.linkFormatter
     }, {
-      dataField: 'result',
-			text: 'Result'
+      dataField: 'no2',
+			text: 'Players',
+      formatter: this.playersFormatter
     }, {
-      dataField: 'stat1',
-			text: 'Stat'
+      dataField: 'no3',
+			text: 'Duration',
+      formatter: this.durationFormatter
     }, {
-      dataField: 'stat2',
-			text: 'Stat'
-    }, {
-      dataField: 'stat3',
-      text: 'Stat'
+      dataField: 'unitsRemain',
+			text: 'Remaining Units'
     }];
 
     return (

@@ -37,8 +37,8 @@ class LeaderboardPage extends Component {
       dataField: 'rank',
 			text: 'Rank'
     }, {
-      dataField: 'name',
-			text: 'Name'
+      dataField: 'username',
+			text: 'Username'
     }, {
       dataField: 'elo',
 			text: 'Elo'
@@ -55,9 +55,9 @@ class LeaderboardPage extends Component {
 
     return (
       <div className="container">
-        <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload your bot</Button>
+        <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload bot</Button>
         <h2>Leaderboard</h2>
-        <Table data={data} columns={leaderboardColumns} keyField="name" />
+        <Table data={data} columns={leaderboardColumns} keyField="username" />
 
         <Popup
           dialogClassName="custom-popup upload-bot"
