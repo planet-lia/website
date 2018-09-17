@@ -21,7 +21,8 @@ class LandingPage extends Component {
       <div>
         <div id="land-pic">
           <div id="land-cont-title">
-            <div id="land-slogan">Competitive AI Programming</div>
+            <div className="land-slogan">Competitive AI</div>
+            <div className="land-slogan">Programming Game</div>
             <div id="land-desc">League for artificial intelligence</div>
             <div id="land-btn-try">
               <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Try Now</a>
