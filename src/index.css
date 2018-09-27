@@ -103,7 +103,7 @@ body {
   width: 100%;
 }
 
-@media screen and (min-width: 534px) {
+@media screen and (min-width: 576px) {
   .custom-popup {
     margin: 30px auto;
   }
@@ -251,9 +251,21 @@ body {
 
 .cont-video {
 	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
+	padding-bottom: 52.9%; /* 16:9 */
 	padding-top: 25px;
 	height: 0;
+}
+
+@media (max-width: 575.98px){
+  .cont-video {
+    padding-bottom: 51.5%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .cont-video {
+    padding-bottom: 52.2%;
+  }
 }
 
 .cont-video iframe {
@@ -268,10 +280,23 @@ iframe {
   background: #f3f3f3;
 }
 
-.land-whattext {
+.land-what-title {
+  font-weight: bold;
+}
+
+.land-what-text {
   margin-top: 1.5em;
-  text-align: center;
   font-size: 1.3em;
+}
+
+@media screen and (max-width: 991.98px) {
+  .land-what-title {
+    text-align: center;
+    margin-top: 1.5em;
+  }
+  .land-what-text {
+    text-align: center;
+  }
 }
 
 #land-cont-watch {

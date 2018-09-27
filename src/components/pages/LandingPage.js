@@ -29,24 +29,29 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <div className="land-section">
+        <div className="land-section sec-gray">
           <div className="container">
             <Row>
-              <Col md={6}>
+              <Col md={8}>
                 <div className="cont-video">
                   <iframe width="560" height="349" title="Teaser Video" src="https://www.youtube.com/embed/gavqPRhhEg0?rel=0&showinfo=0&fs=0" frameBorder="0"/>
                 </div>
               </Col>
-              <Col md={6}>
-                  <h2 className="land-title">What is Lia?</h2>
-                  <p className="land-whattext">
-                    Lia is an open source programming competition where your role is to write AI bots that can play a game and beat other programmer’s AIs at it. It is a place where enthusiastic programmers gather, improve their programming skills and compete with each other in a competitive and collaborative way.
+              <Col md={4}>
+                  <h2 className="land-what-title">What is Lia?</h2>
+                  <p className="land-what-text">
+                    Lia is a competitive AI programming game where your goal is
+                    to lead your units to victory by using your awesome
+                    programming skills. Create your AI bot and put it to the
+                    test. Our aim is to create an environment where you can
+                    compete with your friends and programmers from all around
+                    the world.
                   </p>
               </Col>
             </Row>
           </div>
         </div>
-        <div className="land-section sec-gray">
+        <div className="land-section">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
             <div className="land-subtext">Grab popcorn and watch AIs fight each other.</div>
@@ -72,7 +77,7 @@ class LandingPage extends Component {
             </Row>
           </div>
         </div>
-        <div className="land-section">
+        <div className="land-section sec-gray">
           <div className="land-cont-title">
             <h2 className="land-title">COMPETE</h2>
             <div className="land-subtext">Build, test, battle. Create the ultimate bot.</div>
