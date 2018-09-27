@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon } from 'react-bootstrap';
 
 import Replay from '../views/Replay';
-import ReplayThumb from '../views/ReplayThumb'
+import ReplayThumb from '../views/ReplayThumb';
 
-import thumb1 from '../../assets/thumb1.jpg'
-import thumb2 from '../../assets/thumb2.jpg'
-import thumb3 from '../../assets/thumb3.jpg'
+import thumb1 from '../../assets/thumb1.jpg';
+import thumb2 from '../../assets/thumb2.jpg';
+import thumb3 from '../../assets/thumb3.jpg';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -25,11 +25,28 @@ class LandingPage extends Component {
             <div className="land-slogan">Programming Game</div>
             <div id="land-desc">League for artificial intelligence</div>
             <div id="land-btn-try">
-              <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Try Now</a>
+              <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer"><div>Try Now</div></a>
             </div>
           </div>
         </div>
         <div className="land-section">
+          <div className="container">
+            <Row>
+              <Col md={6}>
+                <div className="cont-video">
+                  <iframe width="560" height="349" title="Teaser Video" src="https://www.youtube.com/embed/gavqPRhhEg0?rel=0&showinfo=0&fs=0" frameBorder="0"/>
+                </div>
+              </Col>
+              <Col md={6}>
+                  <h2 className="land-title">What is Lia?</h2>
+                  <p className="land-whattext">
+                    Lia is an open source programming competition where your role is to write AI bots that can play a game and beat other programmer’s AIs at it. It is a place where enthusiastic programmers gather, improve their programming skills and compete with each other in a competitive and collaborative way.
+                  </p>
+              </Col>
+            </Row>
+          </div>
+        </div>
+        <div className="land-section sec-gray">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
             <div className="land-subtext">Grab popcorn and watch AIs fight each other.</div>
@@ -55,7 +72,7 @@ class LandingPage extends Component {
             </Row>
           </div>
         </div>
-        <div className="land-section sec-gray">
+        <div className="land-section">
           <div className="land-cont-title">
             <h2 className="land-title">COMPETE</h2>
             <div className="land-subtext">Build, test, battle. Create the ultimate bot.</div>

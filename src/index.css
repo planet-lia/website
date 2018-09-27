@@ -206,13 +206,8 @@ body {
 }
 
 #land-btn-try {
-  width: 6em;
-  font-size: x-large;
-  text-align: center;
-  background-color: #facd3b;
-  padding: 0.5em 1em;
+  width: 12em;
   margin: 0 auto;
-  cursor: pointer;
 }
 
 #land-btn-try:hover {
@@ -224,8 +219,16 @@ body {
   text-decoration: none;
 }
 
+#land-btn-try a div {
+  padding: 0.5em 1em;
+  font-size: x-large;
+  text-align: center;
+  background-color: #facd3b;
+  cursor: pointer;
+}
+
 .land-section {
-  padding: 10em 0;
+  padding: 8em 0;
 }
 
 .sec-gray {
@@ -244,6 +247,31 @@ body {
 .land-subtext {
   text-align: center;
   font-style: italic;
+}
+
+.cont-video {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+
+.cont-video iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+iframe {
+  background: #f3f3f3;
+}
+
+.land-whattext {
+  margin-top: 1.5em;
+  text-align: center;
+  font-size: 1.3em;
 }
 
 #land-cont-watch {
