@@ -32,12 +32,12 @@ class LandingPage extends Component {
         <div className="land-section sec-gray">
           <div className="container">
             <Row>
-              <Col md={8}>
+              <Col md={7}>
                 <div className="cont-video">
                   <iframe width="560" height="349" title="Teaser Video" src="https://www.youtube.com/embed/gavqPRhhEg0?rel=0&showinfo=0&fs=0" frameBorder="0"/>
                 </div>
               </Col>
-              <Col md={4}>
+              <Col md={5}>
                   <h2 className="land-what-title">What is Lia?</h2>
                   <p className="land-what-text">
                     Lia is a competitive AI programming game where your goal is
