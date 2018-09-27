@@ -251,21 +251,8 @@ body {
 
 .cont-video {
 	position: relative;
-	padding-bottom: 52.9%; /* 16:9 */
-	padding-top: 25px;
+	padding-bottom: 56.25%; /* 16:9 */
 	height: 0;
-}
-
-@media (max-width: 575.98px){
-  .cont-video {
-    padding-bottom: 51.5%;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .cont-video {
-    padding-bottom: 52.2%;
-  }
 }
 
 .cont-video iframe {
