@@ -34,7 +34,7 @@ class LandingPage extends Component {
             <Row>
               <Col md={7}>
                 <div className="cont-video">
-                  <iframe width="560" height="349" title="Teaser Video" src="https://www.youtube.com/embed/gavqPRhhEg0?rel=0&showinfo=0&fs=0" frameBorder="0"/>
+                  <iframe width="560" height="349" title="Teaser Video" src="https://www.youtube.com/embed/gavqPRhhEg0?rel=0&showinfo=0" frameBorder="0" allowFullScreen />
                 </div>
               </Col>
               <Col md={5}>
