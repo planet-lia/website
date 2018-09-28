@@ -8,6 +8,11 @@ import Popup from './components/views/Popup';
 import SignInForm from './components/forms/SignInForm';
 import SignUpForm from './components/forms/SignUpForm';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope  } from '@fortawesome/free-solid-svg-icons';
+library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope);
+
 class App extends Component {
   constructor(props){
 		super(props);

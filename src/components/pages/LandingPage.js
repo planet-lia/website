@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Glyphicon } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Replay from '../views/Replay';
 import ReplayThumb from '../views/ReplayThumb';
@@ -25,7 +26,7 @@ class LandingPage extends Component {
             <div className="land-slogan">Programming Game</div>
             <div id="land-desc">League for artificial intelligence</div>
             <div id="land-btn-try">
-              <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer"><div>Try Now</div></a>
+              <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer"><div>Try Alpha</div></a>
             </div>
           </div>
         </div>
@@ -47,6 +48,12 @@ class LandingPage extends Component {
                     compete with your friends and programmers from all around
                     the world.
                   </p>
+                  <div id="land-cont-contact">
+                    <a className="land-contact-logo clr-fb" href="https://www.facebook.com/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "facebook-square"]} /></a>
+                    <a className="land-contact-logo clr-gh" href="https://github.com/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "github"]} /></a>
+                    <a className="land-contact-logo clr-yt" href="https://www.youtube.com/channel/UC4BFxoC4iBr3m5LQVBxBDzA" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "youtube"]} /></a>
+                    <a className="land-contact-logo clr-em" href="mailto:info@liagame.com" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon="envelope" /></a>
+                  </div>
               </Col>
             </Row>
           </div>

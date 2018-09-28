@@ -27,6 +27,22 @@ body {
   text-align: center;
 }
 
+.clr-fb:hover {
+  color: #3e5b99;
+}
+
+.clr-gh:hover {
+  color: #000;
+}
+
+.clr-yt:hover {
+  color: #ff0000;
+}
+
+.clr-em:hover {
+  color: #facd3b;
+}
+
 /* Layout */
 
 #main-container {
@@ -268,28 +284,46 @@ iframe {
 }
 
 .land-what-title {
-  margin-top: 2.5em;
+  margin-top: 1.5em;
   font-weight: bold;
 }
 
 .land-what-text {
-  margin-top: 1.5em;
   font-size: 1.3em;
+  margin: 1em 0;
+}
+
+#land-cont-contact {
+  max-width: 17em;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a.land-contact-logo {
+  color: #333;
+  font-size: 2.5em;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 991.98px) {
   .land-what-title {
     text-align: center;
-    margin-top: 1.5em;
+    margin-top: 3.5em;
   }
   .land-what-text {
     text-align: center;
+  }
+  #land-cont-contact {
+    justify-content: space-around;
+    margin: 0 auto;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .land-what-title {
-    margin-top: 0.9em;
+    margin-top: 0.1em;
   }
 }
 
