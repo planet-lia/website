@@ -200,7 +200,7 @@ body {
 
 #land-cont-title {
   width: 80%;
-  padding: 145px 0 200px;
+  padding: 125px 0 190px;
   margin: 0 auto;
   color: #ddd;
   text-align: center;
@@ -241,6 +241,16 @@ body {
 
 #land-btn-try a div:hover {
   background-color: #eabd2b;
+}
+
+@media screen and (max-width: 575.98px) {
+  #land-cont-title {
+    padding: 45px 0 100px;
+    font-size: 0.65em;
+  }
+  #land-btn-try a div {
+    font-size: initial;
+  }
 }
 
 .land-section {
