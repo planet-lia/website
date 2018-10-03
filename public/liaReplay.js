@@ -281,7 +281,7 @@
     return this.gameLogic.replayEndTime;
   };
   LogicAdapter.prototype.getWinner = function () {
-    return this.gameLogic.winner;
+    return this.gameLogic.gameOverEvent.winner;
   };
   LogicAdapter.$metadata$ = {
     kind: Kind_CLASS,
@@ -3137,12 +3137,14 @@
     simpleName: 'Event',
     interfaces: [Element]
   };
-  function GameOverEvent(t, winner) {
+  function GameOverEvent(t, winner, bot1CrashTime, bot2CrashTime) {
     if (t === void 0)
       t = 0.0;
     Event.call(this);
     this.t = t;
     this.winner = winner;
+    this.bot1CrashTime = bot1CrashTime;
+    this.bot2CrashTime = bot2CrashTime;
   }
   GameOverEvent.$metadata$ = {
     kind: Kind_CLASS,
@@ -3155,20 +3157,28 @@
   GameOverEvent.prototype.component2 = function () {
     return this.winner;
   };
-  GameOverEvent.prototype.copy_o6um71$ = function (t, winner) {
-    return new GameOverEvent(t === void 0 ? this.t : t, winner === void 0 ? this.winner : winner);
+  GameOverEvent.prototype.component3 = function () {
+    return this.bot1CrashTime;
+  };
+  GameOverEvent.prototype.component4 = function () {
+    return this.bot2CrashTime;
+  };
+  GameOverEvent.prototype.copy_6pwkg3$ = function (t, winner, bot1CrashTime, bot2CrashTime) {
+    return new GameOverEvent(t === void 0 ? this.t : t, winner === void 0 ? this.winner : winner, bot1CrashTime === void 0 ? this.bot1CrashTime : bot1CrashTime, bot2CrashTime === void 0 ? this.bot2CrashTime : bot2CrashTime);
   };
   GameOverEvent.prototype.toString = function () {
-    return 'GameOverEvent(t=' + Kotlin.toString(this.t) + (', winner=' + Kotlin.toString(this.winner)) + ')';
+    return 'GameOverEvent(t=' + Kotlin.toString(this.t) + (', winner=' + Kotlin.toString(this.winner)) + (', bot1CrashTime=' + Kotlin.toString(this.bot1CrashTime)) + (', bot2CrashTime=' + Kotlin.toString(this.bot2CrashTime)) + ')';
   };
   GameOverEvent.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.t) | 0;
     result = result * 31 + Kotlin.hashCode(this.winner) | 0;
+    result = result * 31 + Kotlin.hashCode(this.bot1CrashTime) | 0;
+    result = result * 31 + Kotlin.hashCode(this.bot2CrashTime) | 0;
     return result;
   };
   GameOverEvent.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.t, other.t) && Kotlin.equals(this.winner, other.winner)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.t, other.t) && Kotlin.equals(this.winner, other.winner) && Kotlin.equals(this.bot1CrashTime, other.bot1CrashTime) && Kotlin.equals(this.bot2CrashTime, other.bot2CrashTime)))));
   };
   function InitialDataEvent(mapWidth, mapHeight, username1, username2, gameDuration, health, viewingAreaLength, viewingAreaWidth, viewingAreaOffset, background, nBulletsInMagazine) {
     Event.call(this);
@@ -4365,6 +4375,7 @@
     this.N_BULLETS_IN_MAGAZINE = -1;
     this.PLAYER_HEALTH = -1.0;
     this.PLAYER_VIEWING_AREA_fvzauj$_0 = lazy(Config$PLAYER_VIEWING_AREA$lambda(this));
+    this.PLAYR_CRASHED_TEXT_DURATION = 3.0;
     this.CAMERA_ACTION_BORDER = 2.0;
     this.UNIMPORTANT_CURVE_ID = -1;
     this.CAMERA_SPEED = 15.0;
@@ -4447,13 +4458,22 @@
     this.curvesListener_0 = new CurvesListener(this);
     this.dbAdapter_0 = new CurveAdapter(this.db_0, this.curvesListener_0);
     this.stopwatch = new Stopwatch();
-    this.gameOverTime = 0.0;
+    this.gameOverEvent_cw8i6k$_0 = this.gameOverEvent_cw8i6k$_0;
     this.replayEndTime = 0.0;
-    this.winner = Team$NONE_getInstance();
     this.actionReporter = new ActionReporter(this.engine, this.stopwatch);
     this.cameraManager_6p8d7s$_0 = this.cameraManager_6p8d7s$_0;
     this.first = true;
   }
+  Object.defineProperty(GameLogic.prototype, 'gameOverEvent', {
+    get: function () {
+      if (this.gameOverEvent_cw8i6k$_0 == null)
+        return throwUPAE('gameOverEvent');
+      return this.gameOverEvent_cw8i6k$_0;
+    },
+    set: function (gameOverEvent) {
+      this.gameOverEvent_cw8i6k$_0 = gameOverEvent;
+    }
+  });
   Object.defineProperty(GameLogic.prototype, 'cameraManager', {
     get: function () {
       if (this.cameraManager_6p8d7s$_0 == null)
@@ -4597,8 +4617,7 @@
     (Kotlin.isType(tmp$_0 = component, CurveComponent) ? tmp$_0 : throwCCE()).curve = c;
   };
   CurvesListener.prototype.gameOverEvent_keddi7$ = function (e) {
-    this.gameLogic_0.gameOverTime = e.t;
-    this.gameLogic_0.winner = e.winner;
+    this.gameLogic_0.gameOverEvent = e;
   };
   CurvesListener.prototype.newPoint_3vy0it$ = function (p) {
     if (p.t > this.gameLogic_0.replayEndTime) {
@@ -5548,16 +5567,20 @@
     this.drawPowerLevelBar_0();
     this.drawPlayerNames_0();
     this.drawTime_0();
+    this.drawPlayerCrashedText_0(Team$TEAM_1_getInstance());
+    this.drawPlayerCrashedText_0(Team$TEAM_2_getInstance());
     this.drawEndGameAnimation_0();
   };
   HudSystem.prototype.drawEndGameAnimation_0 = function () {
-    if (this.stopwatch_0.time > this.gameLogic_0.gameOverTime) {
-      var animationTime = this.gameLogic_0.replayEndTime - this.gameLogic_0.gameOverTime;
-      var elapsed = this.stopwatch_0.time - this.gameLogic_0.gameOverTime;
+    var gameOverTime = this.gameLogic_0.gameOverEvent.t;
+    if (this.stopwatch_0.time > gameOverTime) {
+      var animationTime = this.gameLogic_0.replayEndTime - gameOverTime;
+      var elapsed = this.stopwatch_0.time - gameOverTime;
       var alpha = elapsed / animationTime;
       this.platform_0.draw(AssetManager_getInstance().bgPatch, 0.0, 0.0, Config_getInstance().SCENE_WIDTH * 0.5, Config_getInstance().SCENE_HEIGHT * 0.5, Config_getInstance().SCENE_WIDTH, Config_getInstance().SCENE_HEIGHT, 1.0, 1.0, alpha, 0.0, Config_getInstance().HUD_LAYER, true);
-      var text = this.getGameOverText_0(this.gameLogic_0.winner);
-      var color = this.getGameOverColor_0(this.gameLogic_0.winner);
+      var winner = this.gameLogic_0.gameOverEvent.winner;
+      var text = this.getUsername_0(winner) + ' wins!';
+      var color = this.getTeamColor_0(winner);
       if (elapsed > Config_getInstance().WINNING_TEXT_DELAY) {
         this.platform_0.drawText(AssetManager_getInstance().fontLarge, text, Config_getInstance().VIEWPORT_WIDTH * 0.5, Config_getInstance().VIEWPORT_HEIGHT * 0.5, color.r, color.g, color.b, color.a, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
       }
@@ -5588,7 +5611,30 @@
     var time = prefix.toString() + '.' + suffixStr;
     this.platform_0.drawText(AssetManager_getInstance().fontMedium, time, Config_getInstance().TIME_POSITION.x, Config_getInstance().TIME_POSITION.y, 1.0, 1.0, 1.0, 1.0, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
   };
-  HudSystem.prototype.getGameOverText_0 = function (team) {
+  HudSystem.prototype.drawPlayerCrashedText_0 = function (team) {
+    var tmp$;
+    switch (team.name) {
+      case 'TEAM_1':
+        tmp$ = this.gameLogic_0.gameOverEvent.bot1CrashTime;
+        break;
+      case 'TEAM_2':
+        tmp$ = this.gameLogic_0.gameOverEvent.bot2CrashTime;
+        break;
+      case 'NONE':
+        throw Exception_init('Team should be specified.');
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
+    }
+    var timeCrashed = tmp$;
+    if (timeCrashed !== -1.0) {
+      if (rangeTo(0.0, Config_getInstance().PLAYR_CRASHED_TEXT_DURATION).contains_mef7kx$(this.gameLogic_0.stopwatch.time - timeCrashed)) {
+        this.platform_0.draw(AssetManager_getInstance().bgPatch, 0.0, 0.0, Config_getInstance().SCENE_WIDTH * 0.5, Config_getInstance().SCENE_HEIGHT * 0.5, Config_getInstance().SCENE_WIDTH, Config_getInstance().SCENE_HEIGHT, 1.0, 1.0, 0.3, 0.0, Config_getInstance().HUD_LAYER, true);
+        var color = this.getTeamColor_0(team);
+        this.platform_0.drawText(AssetManager_getInstance().fontLarge, this.getUsername_0(team) + ' disqualified', Config_getInstance().VIEWPORT_WIDTH * 0.5, Config_getInstance().VIEWPORT_HEIGHT * 0.5, color.r, color.g, color.b, color.a, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
+      }
+    }
+  };
+  HudSystem.prototype.getUsername_0 = function (team) {
     var tmp$;
     switch (team.name) {
       case 'TEAM_1':
@@ -5602,10 +5648,9 @@
       default:tmp$ = Kotlin.noWhenBranchMatched();
         break;
     }
-    var user = tmp$;
-    return user + ' wins!';
+    return tmp$;
   };
-  HudSystem.prototype.getGameOverColor_0 = function (team) {
+  HudSystem.prototype.getTeamColor_0 = function (team) {
     var tmp$;
     switch (team.name) {
       case 'TEAM_1':
@@ -6104,7 +6149,7 @@
 }(module.exports, require('kotlin')));
 
 },{"kotlin":14}],2:[function(require,module,exports){
-/*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
 var $protobuf = require("protobufjs/minimal");
@@ -7294,6 +7339,8 @@ $root.curves = (function() {
          * @interface IGameOverEvent
          * @property {number|null} [t] GameOverEvent t
          * @property {curves.GameOverEvent.Team|null} [winner] GameOverEvent winner
+         * @property {number|null} [bot1CrashTime] GameOverEvent bot1CrashTime
+         * @property {number|null} [bot2CrashTime] GameOverEvent bot2CrashTime
          */
 
         /**
@@ -7328,6 +7375,22 @@ $root.curves = (function() {
         GameOverEvent.prototype.winner = 0;
 
         /**
+         * GameOverEvent bot1CrashTime.
+         * @member {number} bot1CrashTime
+         * @memberof curves.GameOverEvent
+         * @instance
+         */
+        GameOverEvent.prototype.bot1CrashTime = 0;
+
+        /**
+         * GameOverEvent bot2CrashTime.
+         * @member {number} bot2CrashTime
+         * @memberof curves.GameOverEvent
+         * @instance
+         */
+        GameOverEvent.prototype.bot2CrashTime = 0;
+
+        /**
          * Creates a new GameOverEvent instance using the specified properties.
          * @function create
          * @memberof curves.GameOverEvent
@@ -7355,6 +7418,10 @@ $root.curves = (function() {
                 writer.uint32(/* id 1, wireType 5 =*/13).float(message.t);
             if (message.winner != null && message.hasOwnProperty("winner"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.winner);
+            if (message.bot1CrashTime != null && message.hasOwnProperty("bot1CrashTime"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.bot1CrashTime);
+            if (message.bot2CrashTime != null && message.hasOwnProperty("bot2CrashTime"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.bot2CrashTime);
             return writer;
         };
 
@@ -7394,6 +7461,12 @@ $root.curves = (function() {
                     break;
                 case 2:
                     message.winner = reader.int32();
+                    break;
+                case 3:
+                    message.bot1CrashTime = reader.float();
+                    break;
+                case 4:
+                    message.bot2CrashTime = reader.float();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7442,6 +7515,12 @@ $root.curves = (function() {
                 case 2:
                     break;
                 }
+            if (message.bot1CrashTime != null && message.hasOwnProperty("bot1CrashTime"))
+                if (typeof message.bot1CrashTime !== "number")
+                    return "bot1CrashTime: number expected";
+            if (message.bot2CrashTime != null && message.hasOwnProperty("bot2CrashTime"))
+                if (typeof message.bot2CrashTime !== "number")
+                    return "bot2CrashTime: number expected";
             return null;
         };
 
@@ -7473,6 +7552,10 @@ $root.curves = (function() {
                 message.winner = 2;
                 break;
             }
+            if (object.bot1CrashTime != null)
+                message.bot1CrashTime = Number(object.bot1CrashTime);
+            if (object.bot2CrashTime != null)
+                message.bot2CrashTime = Number(object.bot2CrashTime);
             return message;
         };
 
@@ -7492,11 +7575,17 @@ $root.curves = (function() {
             if (options.defaults) {
                 object.t = 0;
                 object.winner = options.enums === String ? "UNKNOWN" : 0;
+                object.bot1CrashTime = 0;
+                object.bot2CrashTime = 0;
             }
             if (message.t != null && message.hasOwnProperty("t"))
                 object.t = options.json && !isFinite(message.t) ? String(message.t) : message.t;
             if (message.winner != null && message.hasOwnProperty("winner"))
                 object.winner = options.enums === String ? $root.curves.GameOverEvent.Team[message.winner] : message.winner;
+            if (message.bot1CrashTime != null && message.hasOwnProperty("bot1CrashTime"))
+                object.bot1CrashTime = options.json && !isFinite(message.bot1CrashTime) ? String(message.bot1CrashTime) : message.bot1CrashTime;
+            if (message.bot2CrashTime != null && message.hasOwnProperty("bot2CrashTime"))
+                object.bot2CrashTime = options.json && !isFinite(message.bot2CrashTime) ? String(message.bot2CrashTime) : message.bot2CrashTime;
             return object;
         };
 
@@ -10573,13 +10662,13 @@ exports.interleave3 = function(x, y, z) {
   y  = (y | (y<<4))  & 3272356035;
   y  = (y | (y<<2))  & 1227133513;
   x |= (y << 1);
-
+  
   z &= 0x3FF;
   z  = (z | (z<<16)) & 4278190335;
   z  = (z | (z<<8))  & 251719695;
   z  = (z | (z<<4))  & 3272356035;
   z  = (z | (z<<2))  & 1227133513;
-
+  
   return x | (z << 2);
 }
 
@@ -13216,7 +13305,7 @@ if ('undefined' !== typeof module) {
     Object.defineProperty(package$internal, 'ByteCompanionObject', {get: ByteCompanionObject_getInstance});
     Object.defineProperty(package$internal, 'CharCompanionObject', {get: CharCompanionObject_getInstance});
     Kotlin.defineModule('kotlin', _);
-
+    
   }());
   (function() {
     'use strict';
@@ -49659,7 +49748,7 @@ if ('undefined' !== typeof module) {
     State_Done = 4;
     State_Failed = 5;
     Kotlin.defineModule('kotlin', _);
-
+    
   }());
 }));
 
@@ -50682,7 +50771,7 @@ var Shader = function(gl, vertexSrc, fragmentSrc, precision, attributeLocations)
 };
 /**
  * Uses this shader
- *
+ * 
  * @return {PIXI.glCore.GLShader} Returns itself.
  */
 Shader.prototype.bind = function()
@@ -51325,7 +51414,7 @@ VertexArrayObject.prototype.getSize = function()
  */
 var createContext = function(canvas, options)
 {
-    var gl = canvas.getContext('webgl', options) ||
+    var gl = canvas.getContext('webgl', options) || 
          canvas.getContext('experimental-webgl', options);
 
     if (!gl)
@@ -51512,36 +51601,36 @@ module.exports = compileProgram;
  * @param type {String} Type of value
  * @param size {Number}
  */
-var defaultValue = function(type, size)
+var defaultValue = function(type, size) 
 {
     switch (type)
     {
         case 'float':
             return 0;
 
-        case 'vec2':
+        case 'vec2': 
             return new Float32Array(2 * size);
 
         case 'vec3':
             return new Float32Array(3 * size);
 
-        case 'vec4':
+        case 'vec4':     
             return new Float32Array(4 * size);
-
+            
         case 'int':
         case 'sampler2D':
             return 0;
 
-        case 'ivec2':
+        case 'ivec2':   
             return new Int32Array(2 * size);
 
         case 'ivec3':
             return new Int32Array(3 * size);
 
-        case 'ivec4':
+        case 'ivec4': 
             return new Int32Array(4 * size);
 
-        case 'bool':
+        case 'bool':     
             return false;
 
         case 'bvec2':
@@ -51558,7 +51647,7 @@ var defaultValue = function(type, size)
             return new Float32Array([1, 0,
                                      0, 1]);
 
-        case 'mat3':
+        case 'mat3': 
             return new Float32Array([1, 0, 0,
                                      0, 1, 0,
                                      0, 0, 1]);
@@ -51575,7 +51664,7 @@ var booleanArray = function(size)
 {
     var array = new Array(size);
 
-    for (var i = 0; i < array.length; i++)
+    for (var i = 0; i < array.length; i++) 
     {
         array[i] = false;
     }
@@ -51806,8 +51895,8 @@ module.exports = {
  * @param type {String}
  * @return {Number}
  */
-var mapSize = function(type)
-{
+var mapSize = function(type) 
+{ 
     return GLSL_TO_SIZE[type];
 };
 
@@ -51840,15 +51929,15 @@ module.exports = mapSize;
 },{}],34:[function(require,module,exports){
 
 
-var mapType = function(gl, type)
+var mapType = function(gl, type) 
 {
-    if(!GL_TABLE)
+    if(!GL_TABLE) 
     {
         var typeNames = Object.keys(GL_TO_GLSL_TYPES);
 
         GL_TABLE = {};
 
-        for(var i = 0; i < typeNames.length; ++i)
+        for(var i = 0; i < typeNames.length; ++i) 
         {
             var tn = typeNames[i];
             GL_TABLE[ gl[tn] ] = GL_TO_GLSL_TYPES[tn];
@@ -51870,17 +51959,17 @@ var GL_TO_GLSL_TYPES = {
   'INT_VEC2':    'ivec2',
   'INT_VEC3':    'ivec3',
   'INT_VEC4':    'ivec4',
-
+  
   'BOOL':        'bool',
   'BOOL_VEC2':   'bvec2',
   'BOOL_VEC3':   'bvec3',
   'BOOL_VEC4':   'bvec4',
-
+  
   'FLOAT_MAT2':  'mat2',
   'FLOAT_MAT3':  'mat3',
   'FLOAT_MAT4':  'mat4',
-
-  'SAMPLER_2D':  'sampler2D'
+  
+  'SAMPLER_2D':  'sampler2D'  
 };
 
 module.exports = mapType;
@@ -92382,7 +92471,7 @@ ReplayReader.prototype.read = function (pathToReplay, logicAdapter, callbackFun)
                 if (m.winner !== protobuf.curves.GameOverEvent.Team.TEAM_1) {
                     winner = shared.Team.TEAM_2
                 }
-                e = new curvesDb.events.GameOverEvent(pValue(m.t), winner)
+                e = new curvesDb.events.GameOverEvent(pValue(m.t), winner, pValue(m.bot1CrashTime), pValue(m.bot2CrashTime))
             }
             else {
                 throw "Element is not recognized. " + m
@@ -92557,7 +92646,7 @@ function playReplay(divId, pathToAssets, pathToReplay, setGameDuration, setTime)
 
         renderer.view.style.width = w + 'px'
         renderer.view.style.height = h + 'px'
-        //console.log(w, h)
+
         currentWidth = w
         currentHeight = h
     }
@@ -92584,6 +92673,7 @@ function playReplay(divId, pathToAssets, pathToReplay, setGameDuration, setTime)
     app.forceUpdate = function() {
         app.ticker.update()
     }
+    app.resize = resize
 
     return app
 }

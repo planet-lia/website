@@ -226,10 +226,6 @@ body {
   margin: 0 auto;
 }
 
-#land-btn-try:hover {
-  background-color: #eabd2b;
-}
-
 #land-btn-try a, #land-btn-try a:hover {
   color: #333;
   text-decoration: none;
@@ -241,6 +237,10 @@ body {
   text-align: center;
   background-color: #facd3b;
   cursor: pointer;
+}
+
+#land-btn-try a div:hover {
+  background-color: #eabd2b;
 }
 
 .land-section {
@@ -614,10 +614,12 @@ a.land-contact-logo {
 
 .fullscreen:fullscreen > .cont-player  > .row-replay {
   position: absolute;
+  left: 50%;
   top: 50%;
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  padding-bottom: 2.7em;
 }
 
 .fullscreen:fullscreen > .cont-player > .row-pui {

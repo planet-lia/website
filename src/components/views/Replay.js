@@ -18,7 +18,9 @@ class Replay extends Component {
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
+      replayWidth: "100%",
     }
+    this.puiRef = React.createRef();
   }
 
   componentDidMount = () => {
@@ -109,8 +111,21 @@ class Replay extends Component {
     if(this.state.isFull===true){
       this.setState({ isFull: false });
     } else {
-      this.setState({ isFull: true });
+      let cssWidth = "100%";
+      const avalibleW = window.screen.width;
+      const avalibleH = window.screen.height - this.puiRef.current.clientHeight;
+      const replayRatio = 16/9;
+
+      if(avalibleW/avalibleH > replayRatio){
+        cssWidth = avalibleH * replayRatio;
+      }
+
+      this.setState({
+        isFull: true,
+        replayWidth: cssWidth
+      });
     }
+    this.state.replay.resize();
   }
 
   render() {
@@ -121,7 +136,7 @@ class Replay extends Component {
       >
         <div className="cont-player">
           <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
-              <div id={ this.props.containerId }></div>
+              <div id={ this.props.containerId } style={{width: this.state.replayWidth}}></div>
               <div className="player-overlay"></div>
               {this.state.isPlaying ? (
                 <Glyphicon className="player-overlay-icon" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
@@ -129,7 +144,7 @@ class Replay extends Component {
                 <Glyphicon className="player-overlay-icon" glyph="pause" style={{opacity: this.state.overlayOpacity}}/>
               )}
           </div>
-          <div className="row-pui">
+          <div className="row-pui" ref={ this.puiRef }>
             <div className="pui-timeline">
               <ReactBootstrapSlider value={this.state.time} min={0} max={this.state.duration} step={0.01} change={this.onChangeTime} tooltip="hide" />
             </div>
