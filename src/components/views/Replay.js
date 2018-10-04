@@ -18,17 +18,42 @@ class Replay extends Component {
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
-      replayWidth: "100%",
+      forceReplayWidth: "100%",
     }
     this.puiRef = React.createRef();
   }
 
   componentDidMount = () => {
+    window.addEventListener("resize", this.updateReplayWidth);
+    this.updateReplayWidth();
     this.checkAndRun();
   }
 
   componentWillUnmount = () => {
-    this.state.replay.destroyReplay();
+    window.removeEventListener("resize", this.updateReplayWidth);
+    if(this.state.replay){
+      this.state.replay.destroyReplay();
+    }
+  }
+
+  updateReplayWidth = () => {
+    let containerWidth = "100%";
+    const avalibleW = window.screen.width;
+    const avalibleH = window.screen.height - this.puiRef.current.clientHeight;
+    const avalibleRatio = (avalibleW/avalibleH).toFixed(2);
+    const replayRatio = (16/9).toFixed(2);
+
+    if(avalibleRatio > replayRatio){
+      containerWidth = Number((avalibleH * replayRatio).toFixed(2));
+    }
+
+    if(containerWidth !== this.state.forceReplayWidth){
+      this.setState({ forceReplayWidth: containerWidth });
+      if(this.state.replay){
+        this.state.replay.resize();
+      }
+    }
+    console.log(containerWidth);
   }
 
   checkAndRun = () => {
@@ -56,9 +81,11 @@ class Replay extends Component {
   }
 
   onChangeTime = (event) => {
-    this.state.replay.changeTime(event.target.value);
-    if(this.state.isPlaying===false){
-      this.state.replay.forceUpdate();
+    if(this.state.replay){
+        this.state.replay.changeTime(event.target.value);
+      if(this.state.isPlaying===false){
+        this.state.replay.forceUpdate();
+      }
     }
     this.setState({
       time: event.target.value,
@@ -67,12 +94,16 @@ class Replay extends Component {
 
   onTogglePlay = () => {
     if(this.state.isPlaying===true){
-      this.state.replay.pause();
+      if(this.state.replay){
+        this.state.replay.pause();
+      }
       this.setState({
         isPlaying: false,
       });
     } else {
-      this.state.replay.resume();
+      if(this.state.replay){
+        this.state.replay.resume();
+      }
       this.setState({
         isPlaying: true,
       });
@@ -84,7 +115,9 @@ class Replay extends Component {
   }
 
   onResetSpeed = () => {
-    this.state.replay.changeSpeed(1);
+    if(this.state.replay){
+      this.state.replay.changeSpeed(1);
+    }
     this.setState({
       speed: 1,
       speedSliderTabId: 1
@@ -92,7 +125,9 @@ class Replay extends Component {
   }
 
   onSpeedChange = (event) => {
-    this.state.replay.changeSpeed(event.target.value);
+    if(this.state.replay){
+      this.state.replay.changeSpeed(event.target.value);
+    }
     this.setState({
       speed: event.target.value,
       speedSliderTabId: 1
@@ -100,32 +135,28 @@ class Replay extends Component {
   }
 
   onCamChange(camId){
-    this.state.replay.changeCamera(camId);
-    if(this.state.isPlaying===false){
-      this.state.replay.forceUpdate();
+    if(this.state.replay){
+      this.state.replay.changeCamera(camId);
+      if(this.state.isPlaying===false){
+        this.state.replay.forceUpdate();
+      }
     }
     this.setState({ camera: camId+1 });
   }
 
   goFull = () => {
+    let goFullScreen;
+
     if(this.state.isFull===true){
-      this.setState({ isFull: false });
+      goFullScreen = false;
     } else {
-      let cssWidth = "100%";
-      const avalibleW = window.screen.width;
-      const avalibleH = window.screen.height - this.puiRef.current.clientHeight;
-      const replayRatio = 16/9;
-
-      if(avalibleW/avalibleH > replayRatio){
-        cssWidth = avalibleH * replayRatio;
-      }
-
-      this.setState({
-        isFull: true,
-        replayWidth: cssWidth
-      });
+      goFullScreen = true;
     }
-    this.state.replay.resize();
+
+    this.setState({ isFull: goFullScreen });
+    if(this.state.replay){
+      this.state.replay.resize();
+    }
   }
 
   render() {
@@ -136,7 +167,7 @@ class Replay extends Component {
       >
         <div className="cont-player">
           <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
-              <div id={ this.props.containerId } style={{width: this.state.replayWidth}}></div>
+              <div id={ this.props.containerId } style={{width: (this.state.isFull ? this.state.forceReplayWidth : "100%") }}></div>
               <div className="player-overlay"></div>
               {this.state.isPlaying ? (
                 <Glyphicon className="player-overlay-icon" glyph="play" style={{opacity: this.state.overlayOpacity}}/>

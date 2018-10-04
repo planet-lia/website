@@ -425,6 +425,7 @@ a.land-contact-logo {
 
 .cont-player > .row-replay > div {
   font-size: 0;
+  margin: 0 auto;
 }
 
 .cont-player > .row-replay > .player-overlay {
@@ -624,11 +625,10 @@ a.land-contact-logo {
 
 .fullscreen:fullscreen > .cont-player  > .row-replay {
   position: absolute;
-  left: 50%;
   top: 50%;
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
   padding-bottom: 2.7em;
 }
 
