@@ -19,7 +19,8 @@
     "react-full-screen": "^0.2.2",
     "react-player": "^1.6.6",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "react-scrollchor": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

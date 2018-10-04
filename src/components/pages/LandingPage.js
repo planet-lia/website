@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Glyphicon } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Scrollchor from 'react-scrollchor';
 
 import Replay from '../views/Replay';
 import ReplayThumb from '../views/ReplayThumb';
@@ -73,13 +74,13 @@ class LandingPage extends Component {
             </Row>
             <Row>
               <Col md={4}>
-                <ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="GreatArmy vs Strongman7" />
+                <Scrollchor to="#land-cont-player"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="GreatArmy vs Strongman7" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="Sparta300 vs LazyBattalion" />
+                <Scrollchor to="#land-cont-player"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="Sparta300 vs LazyBattalion" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="PlayHard vs Spiral44" />
+                <Scrollchor to="#land-cont-player"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="PlayHard vs Spiral44" /></Scrollchor>
               </Col>
             </Row>
           </div>
