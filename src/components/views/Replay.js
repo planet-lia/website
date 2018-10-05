@@ -25,12 +25,20 @@ class Replay extends Component {
 
   componentDidMount = () => {
     window.addEventListener("resize", this.updateReplayWidth);
+    window.addEventListener('fullscreenchange', this.resizeReplay);
+    window.addEventListener('webkitfullscreenchange', this.resizeReplay);
+    window.addEventListener('mozfullscreenchange', this.resizeReplay);
+    window.addEventListener('MSFullscreenChange', this.resizeReplay);
     this.updateReplayWidth();
     this.checkAndRun();
   }
 
   componentWillUnmount = () => {
     window.removeEventListener("resize", this.updateReplayWidth);
+    window.removeEventListener('fullscreenchange', this.resizeReplay);
+    window.removeEventListener('webkitfullscreenchange', this.resizeReplay);
+    window.removeEventListener('mozfullscreenchange', this.resizeReplay);
+    window.removeEventListener('MSFullscreenChange', this.resizeReplay);
     if(this.state.replay){
       this.state.replay.destroyReplay();
     }
@@ -44,16 +52,19 @@ class Replay extends Component {
     const replayRatio = (16/9).toFixed(2);
 
     if(avalibleRatio > replayRatio){
-      containerWidth = Number((avalibleH * replayRatio).toFixed(2));
+      containerWidth = (((avalibleH * replayRatio)/avalibleW)*100).toFixed(2) + "%";
     }
 
     if(containerWidth !== this.state.forceReplayWidth){
       this.setState({ forceReplayWidth: containerWidth });
-      if(this.state.replay){
-        this.state.replay.resize();
-      }
+      this.resizeReplay();
     }
-    console.log(containerWidth);
+  }
+
+  resizeReplay = () => {
+    if(this.state.replay){
+      this.state.replay.resize();
+    }
   }
 
   checkAndRun = () => {
@@ -154,9 +165,7 @@ class Replay extends Component {
     }
 
     this.setState({ isFull: goFullScreen });
-    if(this.state.replay){
-      this.state.replay.resize();
-    }
+    this.resizeReplay();
   }
 
   render() {

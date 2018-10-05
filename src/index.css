@@ -19,6 +19,11 @@ body {
   height: 100%;
 }
 
+a, a:hover, a:focus, a:active {
+  color: #333;
+  text-decoration: none;
+}
+
 #root {
   height: 100%;
 }
@@ -100,7 +105,6 @@ body {
 /* Layout Overwrites */
 #custom-navbar span, #custom-navbar a {
   color: #ddd;
-  text-decoration: none;
 }
 
 #custom-navbar a:hover {
@@ -224,11 +228,6 @@ body {
 #land-btn-try {
   width: 12em;
   margin: 0 auto;
-}
-
-#land-btn-try a, #land-btn-try a:hover {
-  color: #333;
-  text-decoration: none;
 }
 
 #land-btn-try a div {
