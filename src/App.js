@@ -75,7 +75,7 @@ class App extends Component {
           onHide={this.onSignPopupClose}
           onButtonClick={this.onSignIn}
           heading="Sign In"
-          buttonText="Sign in"
+          buttonText="Sign In"
         >
           <SignInForm />
         </Popup>
@@ -85,7 +85,7 @@ class App extends Component {
           onHide={this.onSignPopupClose}
           onButtonClick={this.onSignUp}
           heading="Sign Up"
-          buttonText="Sign up"
+          buttonText="Sign Up"
         >
           <SignUpForm />
         </Popup>

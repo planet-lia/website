@@ -26,7 +26,7 @@ class UploadBotForm extends Component {
 
   render() {
     return (
-      <div id="cont-upload-bot">
+      <div id="cont-upload-bot" className="center-text">
         <section>
         <div>
           <Dropzone className="dropzone" accept=".zip" disablePreview onDrop={this.onDrop.bind(this)}>

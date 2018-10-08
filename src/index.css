@@ -108,8 +108,7 @@ a, a:hover, a:focus, a:active {
 }
 
 #custom-navbar a:hover {
-  background-color: #facd3b;
-  color: #333;
+  color: #019170;
 }
 
 /* Popups */
@@ -136,10 +135,6 @@ a, a:hover, a:focus, a:active {
   .upload-bot {
     width: 500px;
   }
-}
-
-#cont-upload-bot {
-  text-align: center;
 }
 
 #cont-upload-bot > section {
@@ -203,7 +198,7 @@ a, a:hover, a:focus, a:active {
 }
 
 #land-cont-title {
-  width: 80%;
+  width: 90%;
   padding: 125px 0 190px;
   margin: 0 auto;
   color: #ddd;
@@ -225,21 +220,33 @@ a, a:hover, a:focus, a:active {
   margin-bottom: 1em;
 }
 
-#land-btn-try {
-  width: 12em;
-  margin: 0 auto;
-}
-
-#land-btn-try a div {
-  padding: 0.5em 1em;
+.land-btn, .land-btn:hover {
+  border: none;
+  border-radius: 0;
   font-size: x-large;
-  text-align: center;
-  background-color: #facd3b;
-  cursor: pointer;
+  padding: 0.5em 1em;
+  margin: 0 10px;
+  color: #ddd;
 }
 
-#land-btn-try a div:hover {
-  background-color: #eabd2b;
+.land-btn.btn-try {
+  background-color: #018e6a; /*#03965c*/
+  color: #ddd;
+}
+
+.land-btn.btn-try:hover {
+  background-color: #007e5a;
+  color: #ddd;
+}
+
+.land-btn.btn-sub {
+  background-color: #666;
+  color: #ddd;
+}
+
+.land-btn.btn-sub:hover {
+  background-color: #555;
+  color: #ddd;
 }
 
 @media screen and (max-width: 575.98px) {
@@ -247,7 +254,8 @@ a, a:hover, a:focus, a:active {
     padding: 45px 0 100px;
     font-size: 0.65em;
   }
-  #land-btn-try a div {
+
+  .land-btn {
     font-size: initial;
   }
 }

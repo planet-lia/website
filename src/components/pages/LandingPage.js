@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Row, Col, Glyphicon } from 'react-bootstrap';
+import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
 
 import Replay from '../views/Replay';
 import ReplayThumb from '../views/ReplayThumb';
+import Popup from '../views/Popup';
+import TryOut from '../forms/TryOut';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
@@ -15,7 +17,20 @@ class LandingPage extends Component {
     super(props);
     this.state = {
       gameId: null,
+      showTryNowPopup: false,
+      showSubscribePopup: false
     }
+  }
+
+  onTryNow = () => {
+    window.open("https://docs.liagame.com/", "_blank");
+  }
+
+  onPopupClose = () => {
+    this.setState({
+      showTryNowPopup: false,
+      showSubscribePopup: false
+    });
   }
 
   render() {
@@ -26,9 +41,8 @@ class LandingPage extends Component {
             <div className="land-slogan">Competitive AI</div>
             <div className="land-slogan">Programming Game</div>
             <div id="land-desc">League for artificial intelligence</div>
-            <div id="land-btn-try">
-              <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer"><div>Try Alpha</div></a>
-            </div>
+            <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Try Alpha</Button>
+            <Button className="land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
           </div>
         </div>
         <div className="land-section sec-gray">
@@ -120,6 +134,26 @@ class LandingPage extends Component {
             </Col>
           </div>
         </div>
+        <Popup
+          dialogClassName="custom-popup pop-tryout"
+          show={this.state.showTryNowPopup}
+          onHide={this.onPopupClose}
+          onButtonClick={this.onTryNow}
+          heading="Try Alpha"
+          buttonText="Go To Docs"
+        >
+          <TryOut />
+        </Popup>
+        <Popup
+          dialogClassName="custom-popup pop-subscribe"
+          show={this.state.showSubscribePopup}
+          onHide={this.onPopupClose}
+          onButtonClick={this.onPopupClose}
+          heading="Subscribe"
+          buttonText="Done"
+        >
+          <div>Subscribe</div>
+        </Popup>
       </div>
 
     );
