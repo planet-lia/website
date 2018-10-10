@@ -150,7 +150,7 @@ class LandingPage extends Component {
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
           heading="Subscribe"
-          buttonText="Done"
+          buttonText="Close"
         >
           <div>Subscribe</div>
         </Popup>

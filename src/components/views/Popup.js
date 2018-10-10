@@ -13,7 +13,7 @@ class Popup extends Component {
           {this.props.children}
         </Modal.Body>
         <Modal.Footer>
-            <Button onClick={this.props.onButtonClick}>{this.props.buttonText}</Button>
+            <Button bsClass="btn custom-btn" onClick={this.props.onButtonClick}>{this.props.buttonText}</Button>
         </Modal.Footer>
       </Modal>
     )
