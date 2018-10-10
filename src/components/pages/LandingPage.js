@@ -7,6 +7,7 @@ import Replay from '../views/Replay';
 import ReplayThumb from '../views/ReplayThumb';
 import Popup from '../views/Popup';
 import TryOut from '../forms/TryOut';
+import SubscriptionForm from '../forms/SubscriptionForm';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
@@ -152,7 +153,7 @@ class LandingPage extends Component {
           heading="Subscribe"
           buttonText="Close"
         >
-          <div>Subscribe</div>
+          <SubscriptionForm />
         </Popup>
       </div>
 
