@@ -136,22 +136,24 @@ class LandingPage extends Component {
           </div>
         </div>
         <Popup
-          dialogClassName="custom-popup pop-tryout"
+          dialogClassName="custom-popup pop-text"
           show={this.state.showTryNowPopup}
           onHide={this.onPopupClose}
           onButtonClick={this.onTryNow}
           heading="Try Alpha"
           buttonText="Go To Docs"
+          type="try"
         >
           <TryOut />
         </Popup>
         <Popup
-          dialogClassName="custom-popup pop-subscribe"
+          dialogClassName="custom-popup pop-sub pop-text"
           show={this.state.showSubscribePopup}
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
           heading="Subscribe"
-          buttonText="Close"
+          buttonText="Subscribe"
+          type="sub"
         >
           <SubscriptionForm />
         </Popup>

@@ -19,9 +19,13 @@ body {
   height: 100%;
 }
 
-a, a:hover, a:focus, a:active {
+a, a:focus, a:active {
   color: #019170;
   text-decoration: underline;
+}
+
+a:hover {
+  color: #34C4A2;
 }
 
 #root {
@@ -119,7 +123,8 @@ a, a:hover, a:focus, a:active {
 
 .sign-in,
 .sign-up,
-.upload-bot {
+.upload-bot,
+.pop-sub {
   width: 100%;
 }
 
@@ -133,7 +138,8 @@ a, a:hover, a:focus, a:active {
   }
 
   .sign-up,
-  .upload-bot {
+  .upload-bot,
+  .pop-sub {
     width: 500px;
   }
 }
@@ -154,6 +160,28 @@ a, a:hover, a:focus, a:active {
 
 .dropzone p {
   margin: 4em 2em;
+}
+
+.pop-text p {
+  font-size: 1.3em;
+  margin: 0 10px 18px;
+}
+
+.pop-text p:last-child {
+  margin: 0 10px;
+}
+
+.pop-text .sub-footnote {
+  font-size: 0.8em;
+}
+
+.sub-form {
+  margin-bottom: 18px;
+}
+
+.sub-form .form-control {
+  display: inline;
+  width: 20em;
 }
 
 /* Popups Overwrites*/
@@ -198,6 +226,8 @@ a, a:hover, a:focus, a:active {
   border-radius: 0;
   background-color: #018e6a; /*#03965c*/
   color: #ddd;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .custom-btn:hover {
@@ -495,13 +525,9 @@ a.land-contact-logo {
   height: 0.7em;
 }
 
-.cont-player .pui-text::selection {
+.cont-player .pui-text::selection, .cont-player .pui-text::-moz-selection {
   background: #1f1f1d;
-  color: #bdbdbd;
-}
-
-.cont-player .pui-text::-moz-selection {
-  background: #1f1f1d;
+  background: rgba(31, 31, 29, 0);
   color: #bdbdbd;
 }
 
