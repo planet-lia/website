@@ -7,7 +7,7 @@ import Replay from '../views/Replay';
 import ReplayThumb from '../views/ReplayThumb';
 import Popup from '../views/Popup';
 import TryOut from '../forms/TryOut';
-import SubscriptionForm from '../forms/SubscriptionForm';
+import SubscriptionPopup from '../views/SubscriptionPopup';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
@@ -142,21 +142,17 @@ class LandingPage extends Component {
           onButtonClick={this.onTryNow}
           heading="Try Alpha"
           buttonText="Go To Docs"
-          type="try"
         >
           <TryOut />
         </Popup>
-        <Popup
+        <SubscriptionPopup
           dialogClassName="custom-popup pop-sub pop-text"
           show={this.state.showSubscribePopup}
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
           heading="Subscribe"
           buttonText="Subscribe"
-          type="sub"
-        >
-          <SubscriptionForm />
-        </Popup>
+        />
       </div>
 
     );

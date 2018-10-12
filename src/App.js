@@ -76,7 +76,6 @@ class App extends Component {
           onButtonClick={this.onSignIn}
           heading="Sign In"
           buttonText="Sign In"
-          type="sin"
         >
           <SignInForm />
         </Popup>
@@ -87,7 +86,6 @@ class App extends Component {
           onButtonClick={this.onSignUp}
           heading="Sign Up"
           buttonText="Sign Up"
-          type="sup"
         >
           <SignUpForm />
         </Popup>

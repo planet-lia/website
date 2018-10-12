@@ -13,11 +13,7 @@ class Popup extends Component {
           {this.props.children}
         </Modal.Body>
         <Modal.Footer>
-          {this.props.type==="sub" ? (
-            <label className="btn custom-btn" htmlFor="mc-embedded-subscribe" onClick={this.props.onButtonClick}>{this.props.buttonText}</label>
-          ) : (
-            <Button bsClass="btn custom-btn" onClick={this.props.onButtonClick}>{this.props.buttonText}</Button>
-          )}
+          <Button bsClass="btn custom-btn" onClick={this.props.onButtonClick}>{this.props.buttonText}</Button>
         </Modal.Footer>
       </Modal>
     )
