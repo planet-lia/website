@@ -92242,10 +92242,15 @@ JsAdapter.prototype.drawTriangle = function(shapeType,
     x2 = x2  * this.app.ratio
     y2 = -y2 * this.app.ratio
 
-    gfx.moveTo(x0, y0);
-    gfx.lineTo(x1, y1);
-    gfx.lineTo(x2, y2);
-    gfx.lineTo(x0, y0);
+    // gfx.moveTo(x0, y0);
+    // gfx.lineTo(x1, y1);
+    // gfx.lineTo(x2, y2);
+    // gfx.lineTo(x0, y0);
+
+    gfx.beginFill(0xffffee, 0.015); // 0x505050, 0.13  0xffffbb, 0.015
+    gfx.lineStyle(0);
+    gfx.drawPolygon([x0,y0, x1, y1, x2, y2]);
+    gfx.endFill();
 }
 
 JsAdapter.prototype.setShapeType = function (shapeType, lineWidth, layer, r, g, b, a, isHud) {
