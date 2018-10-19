@@ -4383,7 +4383,7 @@
     this.CAMERA_ZOOM_MAX = 1.0;
     this.CAMERA_ZOOM_MIN = 0.6;
     this.BACKGROUND_COLOR_j63kf4$_0 = this.BACKGROUND_COLOR_j63kf4$_0;
-    this.BACKGROUND_COLOR_LIGHTER_p1jx4s$_0 = this.BACKGROUND_COLOR_LIGHTER_p1jx4s$_0;
+    this.TRANSPARENT_WHITE = new CurveColor(1.0, 1.0, 0.93333, 0.015);
     this.COLOR_GOLD = new CurveColor(1.0, 0.9, 0.38, 1.0);
     this.COLOR_VIOLET = new CurveColor(0.68, 0.47, 0.76, 1.0);
     this.COLOR_DARK_VIOLET = new CurveColor(0.1, 0.07, 0.11, 1.0);
@@ -4419,16 +4419,6 @@
     },
     set: function (BACKGROUND_COLOR) {
       this.BACKGROUND_COLOR_j63kf4$_0 = BACKGROUND_COLOR;
-    }
-  });
-  Object.defineProperty(Config.prototype, 'BACKGROUND_COLOR_LIGHTER', {
-    get: function () {
-      if (this.BACKGROUND_COLOR_LIGHTER_p1jx4s$_0 == null)
-        return throwUPAE('BACKGROUND_COLOR_LIGHTER');
-      return this.BACKGROUND_COLOR_LIGHTER_p1jx4s$_0;
-    },
-    set: function (BACKGROUND_COLOR_LIGHTER) {
-      this.BACKGROUND_COLOR_LIGHTER_p1jx4s$_0 = BACKGROUND_COLOR_LIGHTER;
     }
   });
   Config.prototype.calculateViewingArea_0 = function (length, endWidth, offset) {
@@ -4551,7 +4541,6 @@
     Config_getInstance().VIEWING_AREA_WIDTH = e.viewingAreaWidth;
     Config_getInstance().VIEWING_AREA_OFFSET = e.viewingAreaOffset;
     Config_getInstance().BACKGROUND_COLOR = e.background;
-    Config_getInstance().BACKGROUND_COLOR_LIGHTER = new CurveColor(e.background.r * 1.2, e.background.g * 1.2, e.background.b * 1.2, e.background.a);
     Config_getInstance().N_BULLETS_IN_MAGAZINE = e.nBulletsInMagazine;
     buildMapBackground(this.engine_0);
     this.gameLogic_0.setupCameraManager();
@@ -4737,11 +4726,11 @@
     var viewArea = engine.createEntity();
     var color = new Color();
     color.curve = new ColorCurve(Config_getInstance().UNIMPORTANT_CURVE_ID);
-    color.curve.addPoint_gonimj$(new ColorPoint(0.0, color.curve.id, Config_getInstance().BACKGROUND_COLOR_LIGHTER));
+    color.curve.addPoint_gonimj$(new ColorPoint(0.0, color.curve.id, Config_getInstance().TRANSPARENT_WHITE));
     var size = new Size();
     size.curve = new LinearVectorCurve(Config_getInstance().UNIMPORTANT_CURVE_ID);
     size.curve.addPoint_gonimj$(new VectorPoint(0.0, size.curve.id, 0.0, 0.0));
-    var components = [new ShapeRender(ShapeRender$Shape$TRIANGLE_getInstance(), ShapeType$Line_getInstance(), Config_getInstance().VIEW_AREA_LINE_WIDTH), new Layer(0), new Visible(), position, rotation, color, visibility, size];
+    var components = [new ShapeRender(ShapeRender$Shape$TRIANGLE_getInstance(), ShapeType$Filled_getInstance(), Config_getInstance().VIEW_AREA_LINE_WIDTH), new Layer(0), new Visible(), position, rotation, color, visibility, size];
     for (tmp$ = 0; tmp$ !== components.length; ++tmp$) {
       var c = components[tmp$];
       viewArea.add_u94k3q$(c);
@@ -92247,7 +92236,7 @@ JsAdapter.prototype.drawTriangle = function(shapeType,
     // gfx.lineTo(x2, y2);
     // gfx.lineTo(x0, y0);
 
-    gfx.beginFill(0xffffee, 0.015); // 0x505050, 0.13  0xffffbb, 0.015
+    gfx.beginFill(pixi.utils.rgb2hex([r, g, b]), a); // 0x505050, 0.13  0xffffbb, 0.015
     gfx.lineStyle(0);
     gfx.drawPolygon([x0,y0, x1, y1, x2, y2]);
     gfx.endFill();
