@@ -4,9 +4,7 @@ import { Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Routes from './components/layout/Routes';
-import Popup from './components/views/Popup';
-import SignInForm from './components/forms/SignInForm';
-import SignUpForm from './components/forms/SignUpForm';
+import PopupSubmit from './components/views/PopupSubmit';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -45,21 +43,6 @@ class App extends Component {
     });
   }
 
-  onSignIn = () => {
-    this.setState({
-      showSignInPopup: false,
-      showSignUpPopup: false,
-      isSignedIn: true
-    });
-  }
-
-  onSignUp = () => {
-    this.setState({
-      showSignInPopup: false,
-      showSignUpPopup: false
-    });
-  }
-
   render() {
     return (
       <div id="main-container">
@@ -69,26 +52,22 @@ class App extends Component {
         </div>
         <Footer />
 
-        <Popup
+        <PopupSubmit
           dialogClassName="custom-popup sign-in"
           show={this.state.showSignInPopup}
           onHide={this.onSignPopupClose}
-          onButtonClick={this.onSignIn}
           heading="Sign In"
           buttonText="Sign In"
-        >
-          <SignInForm />
-        </Popup>
-        <Popup
+          formType="sign-in"
+        />
+        <PopupSubmit
           dialogClassName="custom-popup sign-up"
           show={this.state.showSignUpPopup}
           onHide={this.onSignPopupClose}
-          onButtonClick={this.onSignUp}
           heading="Sign Up"
           buttonText="Sign Up"
-        >
-          <SignUpForm />
-        </Popup>
+          formType="sign-up"
+        />
       </div>
     );
   }

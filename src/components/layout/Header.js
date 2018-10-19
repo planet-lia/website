@@ -58,10 +58,10 @@ class Header extends Component {
                 </Nav>
               ) : (
                 <Nav pullRight>
-                  <NavItem onClick={() => this.onSelectNavSignItem(2)} disabled>
+                  <NavItem onClick={() => this.onSelectNavSignItem(2)}>
                     Sign Up
                   </NavItem>
-                  <NavItem onClick={() => this.onSelectNavSignItem(1)} disabled>
+                  <NavItem onClick={() => this.onSelectNavSignItem(1)}>
                     Sign In
                   </NavItem>
                 </Nav>

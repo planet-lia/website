@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
-import {Row, Col, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import {Row, Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap';
 
 class SignUpForm extends Component {
 
+  formSubmit = (event) => {
+    event.preventDefault();
+
+
+    this.props.closePopup();
+  }
+
   render(){
     return (
-      <form>
+      <form onSubmit={this.formSubmit}>
         <Row>
           <Col componentClass={FormGroup} md={6}>
             <ControlLabel>Name</ControlLabel>
@@ -48,6 +55,7 @@ class SignUpForm extends Component {
             </div>
           </Col>
         </Row>
+        <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
       </form>
     );
   }
