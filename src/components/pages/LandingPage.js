@@ -39,7 +39,7 @@ class LandingPage extends Component {
       <div>
         <div id="land-pic">
           <div id="land-cont-title">
-            <div className="land-slogan">Competitive AI</div>
+            <div className="land-slogan">Competitive</div>
             <div className="land-slogan">Programming Game</div>
             <div id="land-desc">League for artificial intelligence</div>
             <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Try Alpha</Button>
@@ -57,9 +57,9 @@ class LandingPage extends Component {
               <Col md={5}>
                   <h2 className="land-what-title">What is Lia?</h2>
                   <p className="land-what-text">
-                    Lia is a competitive AI programming game where your goal is
+                    Lia is a competitive programming game where your goal is
                     to lead your units to victory by using your awesome
-                    programming skills. Create your AI bot and put it to the
+                    programming skills. Create your bot and put it to the
                     test. Our aim is to create an environment where you can
                     compete with your friends and programmers from all around
                     the world.
@@ -77,7 +77,7 @@ class LandingPage extends Component {
         <div className="land-section">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
-            <div className="land-subtext">Grab popcorn and watch AIs fight each other.</div>
+            <div className="land-subtext">Grab popcorn and watch bots fight each other.</div>
           </div>
           <div className="container" id="land-cont-watch">
             <Row>
