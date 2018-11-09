@@ -52,6 +52,14 @@ a:hover {
   color: #facd3b;
 }
 
+select.placeholder, select.placeholder > option[value=""], select > option[value=""] {
+  color: #999;
+}
+
+select.placeholder > option {
+  color: #555;
+}
+
 /* Layout */
 
 #main-container {
@@ -237,7 +245,7 @@ a:hover {
   border: none;
   border-radius: 0;
   background-color: #018e6a; /*#03965c*/
-  color: #ddd;
+  color: #eee;
   font-size: 16px;
   font-weight: bold;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap';
 
-import Table from '../views/Table';
+import Table from '../elems/Table';
 import Popup from '../views/Popup';
 import UploadBotForm from '../forms/UploadBotForm';
 

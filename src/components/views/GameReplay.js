@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
 
-import Replay from './Replay';
+import Replay from '../elems/Replay';
 import data from '../../assets/GamesData';
 
 class GameReplay extends Component {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Row, Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap';
 
+import Select from '../elems/Select';
 import api from '../../utils/api';
 
 class SignUpForm extends Component {
@@ -14,11 +15,30 @@ class SignUpForm extends Component {
       password: "",
       repeat: "",
       country: "",
-      skill: "",
-      organization: "",
+
+      countriesList: [],
 
       error: null,
+      errorUn: null
     }
+  }
+
+  componentDidMount = () => {
+    this.loadCodes();
+  }
+
+  loadCodes = async () => {
+    try {
+      let respCountries = await api.codes.getCountries();
+      this.setState({countriesList: this.parseCountries(respCountries.countries)});
+    } catch(err) {
+      this.setState({error: "Network Error"});
+      console.log(err.message);
+    }
+  }
+
+  parseCountries = (respCountries) => {
+    return respCountries.map( (country) => ({value: country.alpha2Code, label: country.name}) );
   }
 
   formSubmit = async (event) => {
@@ -26,27 +46,34 @@ class SignUpForm extends Component {
 
     const isValid = this.validateForm();
 
-    if(isValid){
-      let resp;
+    if(isValid) {
       try {
-        resp = await api.user.register(
-          this.state.username,
-          this.state.email,
-          this.state.firstName,
-          this.state.lastName,
-          this.state.password);
-      }
-      catch(err) {
-        this.setState({error: "NetworkError"});
-      }
-
-      if(resp) {
-        if(resp.success===true){
+        await api.user.register(
+            this.state.username,
+            this.state.email,
+            this.state.firstName,
+            this.state.lastName,
+            this.state.password,
+            this.state.country
+          );
           this.props.closePopup();
-        } else if(resp.success===false){
-          this.setState({error: "No. server errors: " + resp.errors.length});
+          this.setState({
+            firstName: "",
+            lastName: "",
+            email: "",
+            username: "",
+            password: "",
+            repeat: "",
+            country: "",
+            error: null,
+            errorUn: null
+          })
+      } catch(err) {
+        if(err.response){
+          this.setState({error: "Cannot register; server (REG) error"});
+          //set up errors for each field
         } else {
-          this.setState({error: "Error: " + resp.success});
+          this.setState({error: "Network Error"});
         }
       }
 
@@ -56,16 +83,20 @@ class SignUpForm extends Component {
   }
 
   validateForm = () => {
+    let regUsername = /^[a-zA-Z0-9_-]+$/;
+    let regEmail = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+
     if( !this.validateLength(this.state.username, 32, 3) ) return false;
     if( !this.validateLength(this.state.email, 200) ) return false;
     if( !this.validateLength(this.state.firstName, 30) ) return false;
     if( !this.validateLength(this.state.lastName, 50) ) return false;
     if( !this.validateLength(this.state.password, 64, 6) ) return false;
 
-    // check if username already in use
-    let reEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/;
-    if( !reEmail.test(String(this.state.email).toUpperCase()) ) return false;
+    if( !regUsername.test(String(this.state.username)) ) return false;
+    if( !regEmail.test(String(this.state.email).toUpperCase()) ) return false;
     if( this.state.password !== this.state.repeat ) return false;
+
+    if( !this.usernameAvalible ) return false;
 
     return true;
   }
@@ -75,6 +106,22 @@ class SignUpForm extends Component {
       return false;
     }
     return true;
+  }
+
+  usernameAvalible = async () => {
+    try {
+      let resp = await api.user.usernameAvalible(this.state.username);
+      if(resp.available===true){
+        this.setState({errorUn: null});
+        return true;
+      } else if(resp.available===false){
+        this.setState({errorUn: "Username already in use"});
+        return false;
+      }
+    } catch(err) {
+      this.setState({error: "Network Error"});
+      console.log(err.message);
+    }
   }
 
   render(){
@@ -120,6 +167,7 @@ class SignUpForm extends Component {
                 placeholder="Pick a username"
                 value={this.state.username}
                 onChange={ (event) => this.setState({username: event.target.value}) }
+                onBlur={ this.usernameAvalible }
               />
             </div>
             <div className="form-group">
@@ -144,26 +192,18 @@ class SignUpForm extends Component {
           <Col componentClass={FormGroup} md={6}>
             <div className="form-group">
               <ControlLabel>Country</ControlLabel>
-              <FormControl
-                type="text"
+              <Select
+                options={this.state.countriesList}
                 placeholder="Your country"
                 value={this.state.country}
                 onChange={ (event) => this.setState({country: event.target.value}) }
-              />
-            </div>
-            <div className="form-group">
-              <ControlLabel>Organization</ControlLabel>
-              <FormControl
-                type="text"
-                placeholder="Your organization"
-                value={this.state.organization}
-                onChange={ (event) => this.setState({organization: event.target.value}) }
               />
             </div>
           </Col>
         </Row>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
         <span className="text-danger">{this.state.error}</span>
+        <span className="text-danger">{this.state.errorUn}</span>
       </form>
     );
   }

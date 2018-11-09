@@ -3,8 +3,8 @@ import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
 
-import Replay from '../views/Replay';
-import ReplayThumb from '../views/ReplayThumb';
+import Replay from '../elems/Replay';
+import ReplayThumb from '../elems/ReplayThumb';
 import Popup from '../views/Popup';
 import TryOut from '../forms/TryOut';
 import SubscriptionPopup from '../views/SubscriptionPopup';
