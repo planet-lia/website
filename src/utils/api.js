@@ -4,6 +4,25 @@ const API_BASE_URL = "http://localhost:8000";
 
 export default {
   user: {
+    edit: (firstName, lastName, organization, country, level) =>
+      axios.post(API_BASE_URL + "/user/",
+        {
+          firstName: firstName,
+          lastName: lastName,
+          organization: organization,
+          countryAlpha2Code: country,
+          level: level
+        }
+      ).then((response) => response.data),
+
+    getUserInfo: () =>
+      axios.get(API_BASE_URL + "/user/")
+        .then((response) => response.data),
+
+    login: (username, password) =>
+      axios.post(API_BASE_URL + "/auth/", {username, password})
+      .then((response) => response.data),
+
     register: (username, email, firstName, lastName, password, country) =>
       axios.post(API_BASE_URL + "/user/register/",
         {
@@ -20,17 +39,6 @@ export default {
     usernameAvalible: (username) =>
       axios.get(API_BASE_URL + "/user/username-available/?username=" + encodeURI(username))
         .then((response) => response.data),
-
-    edit: (firstName, lastName, organization, country, level) =>
-      axios.post(API_BASE_URL + "/user/",
-        {
-          firstName: firstName,
-          lastName: lastName,
-          organization: organization,
-          countryAlpha2Code: country,
-          level: level
-        }
-      ).then((response) => response.data),
   },
   codes: {
     getCountries: () =>

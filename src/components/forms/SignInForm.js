@@ -15,11 +15,11 @@ class SignInForm extends Component {
       <form onSubmit={this.formSubmit}>
         <FormGroup>
           <ControlLabel>Email</ControlLabel>
-          <FormControl type="email" placeholder="you@example.com" />
+          <FormControl type="email" name="username" placeholder="you@example.com" />
         </FormGroup>
         <FormGroup>
           <ControlLabel>Password</ControlLabel>
-          <FormControl type="password" placeholder="Enter your password" />
+          <FormControl type="password" name="password" placeholder="Enter your password" />
         </FormGroup>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
       </form>

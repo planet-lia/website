@@ -29,16 +29,21 @@ class SignUpForm extends Component {
 
   loadCodes = async () => {
     try {
-      let respCountries = await api.codes.getCountries();
-      this.setState({countriesList: this.parseCountries(respCountries.countries)});
+      const respCountries = await api.codes.getCountries();
+      this.setCountriesList(respCountries.countries)
     } catch(err) {
       this.setState({error: "Network Error"});
       console.log(err.message);
     }
   }
 
-  parseCountries = (respCountries) => {
-    return respCountries.map( (country) => ({value: country.alpha2Code, label: country.name}) );
+  setCountriesList = (respCountries) => {
+    const countries = respCountries.map(
+      (country) => (
+        {value: country.alpha2Code, label: country.name}
+      )
+    );
+    this.setState({countriesList: countries});
   }
 
   formSubmit = async (event) => {
@@ -110,7 +115,7 @@ class SignUpForm extends Component {
 
   usernameAvalible = async () => {
     try {
-      let resp = await api.user.usernameAvalible(this.state.username);
+      const resp = await api.user.usernameAvalible(this.state.username);
       if(resp.available===true){
         this.setState({errorUn: null});
         return true;
