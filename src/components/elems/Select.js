@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {FormControl} from 'react-bootstrap';
 
 const Select = (props) => {
@@ -22,6 +23,10 @@ const Select = (props) => {
       {optionsList}
     </FormControl>
   )
+}
+
+Select.propTypes = {
+  options: PropTypes.array
 }
 
 export default Select;

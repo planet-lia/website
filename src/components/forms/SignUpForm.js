@@ -129,6 +129,10 @@ class SignUpForm extends Component {
     }
   }
 
+  onChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   render(){
     return (
       <form onSubmit={this.formSubmit} noValidate>
@@ -137,18 +141,20 @@ class SignUpForm extends Component {
             <ControlLabel>Name</ControlLabel>
             <FormControl
               type="text"
+              name="firstName"
               placeholder="Name"
               value={this.state.firstName}
-              onChange={ (event) => this.setState({firstName: event.target.value}) }
+              onChange={this.onChange}
             />
           </Col>
           <Col componentClass={FormGroup} md={6}>
             <ControlLabel>Last Name</ControlLabel>
             <FormControl
               type="text"
+              name="lastName"
               placeholder="Last name"
               value={this.state.lastName}
-              onChange={ (event) => this.setState({lastName: event.target.value}) }
+              onChange={this.onChange}
             />
           </Col>
         </Row>
@@ -157,9 +163,10 @@ class SignUpForm extends Component {
             <ControlLabel>Email</ControlLabel>
             <FormControl
             type="email"
+            name="email"
             placeholder="you@example.com"
             value={this.state.email}
-            onChange={ (event) => this.setState({email: event.target.value}) }
+            onChange={this.onChange}
           />
           </Col>
         </Row>
@@ -169,28 +176,31 @@ class SignUpForm extends Component {
               <ControlLabel>Username</ControlLabel>
               <FormControl
                 type="text"
+                name="username"
                 placeholder="Pick a username"
                 value={this.state.username}
-                onChange={ (event) => this.setState({username: event.target.value}) }
-                onBlur={ this.usernameAvalible }
+                onChange={this.onChange}
+                onBlur={this.usernameAvalible}
               />
             </div>
             <div className="form-group">
               <ControlLabel>Password</ControlLabel>
               <FormControl
                 type="password"
+                name="password"
                 placeholder="Create a password"
                 value={this.state.password}
-                onChange={ (event) => this.setState({password: event.target.value}) }
+                onChange={this.onChange}
               />
             </div>
             <div className="form-group">
               <ControlLabel>Repeat Password</ControlLabel>
               <FormControl
                 type="password"
+                name="repeat"
                 placeholder="Repeat password"
                 value={this.state.repeat}
-                onChange={ (event) => this.setState({repeat: event.target.value}) }
+                onChange={this.onChange}
               />
             </div>
           </Col>
@@ -200,8 +210,9 @@ class SignUpForm extends Component {
               <Select
                 options={this.state.countriesList}
                 placeholder="Your country"
+                name="country"
                 value={this.state.country}
-                onChange={ (event) => this.setState({country: event.target.value}) }
+                onChange={this.onChange}
               />
             </div>
           </Col>
