@@ -7,6 +7,7 @@ import Replay from "../views/Replay";
 class EditorPage extends Component {
     constructor(props) {
         super(props);
+        this.onChange = this.onChange.bind(this);
 
         this.state = {
             code: '',
@@ -26,20 +27,20 @@ class EditorPage extends Component {
             },
             currentLang: "python3",
             currentLog: "",
-            generatingGame: false
+            currentReplayFileBase64: "",
+            generatingGame: false,
+            editor: null,
         };
 
         this.changeLanguage(this.state.currentLang)
     }
 
     editorDidMount(editor, monaco) {
-        // ...
         editor.focus();
-
     }
 
     onChange(newValue, e) {
-        // ...
+        this.setState({ code: newValue });
     }
 
     changeLanguage = (lang) => {
@@ -57,7 +58,7 @@ class EditorPage extends Component {
 
     generateGame = () => {
         // Let the user know that the game is being generated
-        this.setState({ currentLog: "Generating new game. This may take up to 20s.\nGenerating..." });
+        this.setState({ currentLog: "Generating a new game. This may take up to 20 seconds..." });
         this.setState({ generatingGame: true });
 
         // Generate the game
@@ -79,7 +80,7 @@ class EditorPage extends Component {
                 this.setState({ generatingGame: false });
 
                 // Display new replay file
-                // TODO ...
+                this.setState({ currentReplayFileBase64: json['game']['replay']})
             })
     };
 
@@ -97,7 +98,7 @@ class EditorPage extends Component {
 
         let spinner = "";
         if (generatingGame) {
-            spinner = <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+            spinner = <img style={{width: '150px'}} src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
         }
 
         return (
@@ -133,11 +134,14 @@ class EditorPage extends Component {
                             </Row>
                         </Col>
                         <Col md={6}>
-                            { <Replay containerId="player1" number={ 1 }/> }
+                            {/* Key resets the replay */}
+                            <div key={this.state.currentReplayFileBase64}>
+                            { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
+                            </div>
                         </Col>
                         <Row>
                             {/* Prints out currentLog while also replacing new lines with breaks */}
-                            <Modal.Body style={{'max-height': 'calc(100vh - 210px)', 'overflow-y': 'auto'}}>
+                            <Modal.Body style={{'maxHeight': 'calc(100vh - 210px)', 'overflowY': 'auto'}}>
                                 {this.state.currentLog.split('\n').map(function(item, key) {
                                     return (
                                         <span key={key}>
