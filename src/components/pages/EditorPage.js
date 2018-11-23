@@ -56,13 +56,13 @@ class EditorPage extends Component {
             });
     };
 
-    generateGame = () => {
+    generateGame = async () => {
         // Let the user know that the game is being generated
         this.setState({ currentLog: "Generating a new game. This may take up to 20 seconds..." });
         this.setState({ generatingGame: true });
 
-        // Generate the game
-        fetch('https://editor.cloud1.liagame.com/generate', {
+        // Generate replay
+        const response = await fetch('https://editor.cloud1.liagame.com/generate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -71,17 +71,40 @@ class EditorPage extends Component {
             body: JSON.stringify({
                 language: this.state.currentLang,
                 code:     this.state.code
-            })})
-            .then((resp)=>{ return resp.json() })
-            .then((json)=>{
+            })});
+        const json = await response.json();
 
-                // Update current logs
-                this.setState({ currentLog: json['game']['log'] });
-                this.setState({ generatingGame: false });
+        // TODO handle if there is an error!
+        let trackingId = json['trackingId'];
 
+        // Fetch results
+        for (let i = 0; i < 60; i++) {
+            const response = await fetch('https://editor.cloud1.liagame.com/results/' + trackingId, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                }});
+            const json2 = await response.json();
+
+            // Update current logs
+            this.setState({ currentLog: json2['game']['log'] });
+
+            if (json2['game']['finished']) {
                 // Display new replay file
-                this.setState({ currentReplayFileBase64: json['game']['replay']})
-            })
+                this.setState({currentReplayFileBase64: json2['game']['replay']});
+                this.setState({ generatingGame: false });
+                return;
+            }
+
+            await this.sleep(500);
+        }
+
+        console.error("Failed to fetch game results in time.")
+
+    };
+
+    sleep = async (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
     };
 
     render() {
