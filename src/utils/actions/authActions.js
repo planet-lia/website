@@ -1,7 +1,7 @@
 import { actionTypesAuth } from '../constants/actionTypesAuth';
 import api from '../api';
 import setAuthHeader from '../helpers/setAuthHeader';
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 export const authActions = {
   login,
@@ -10,21 +10,22 @@ export const authActions = {
 
 function login(username, password) {
   return async dispatch => {
-    dispatch(request({ username }));
+    dispatch(request( username ));
     try {
       const respLogin = await api.user.login(username, password);
-      const decoded = jwt_decode(respLogin.token);
+      const decoded = jwtDecode(respLogin.token);
       localStorage.setItem("user", {username: decoded.username, token: respLogin.token});
       setAuthHeader(respLogin.token);
-      dispatch(success(decoded.username));
+      dispatch(success( decoded.username ));
     } catch(err) {
+      localStorage.removeItem("user");
+      setAuthHeader();
       dispatch(failure(err));
-      logout();
     }
   }
-  function request(user) { return {type: actionTypesAuth.LOGIN_REQUEST, user} }
-  function success(user) { return {type: actionTypesAuth.LOGIN_SUCCESS, user} }
-  function failure(error) { return {type: actionTypesAuth.LOGIN_FALIURE, error} }
+  function request(username) { return {type: actionTypesAuth.LOGIN_REQUEST, username} }
+  function success(username) { return {type: actionTypesAuth.LOGIN_SUCCESS, username} }
+  function failure(error) { return {type: actionTypesAuth.LOGIN_FAILURE, error} }
 }
 
 function logout() {

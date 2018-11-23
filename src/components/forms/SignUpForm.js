@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Row, Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap';
 
 import Select from '../elems/Select';
+import { validators } from '../../utils/helpers/validators';
 import api from '../../utils/api';
 
 class SignUpForm extends Component {
@@ -49,9 +50,7 @@ class SignUpForm extends Component {
   formSubmit = async (event) => {
     event.preventDefault();
 
-    const isValid = this.validateForm();
-
-    if(isValid) {
+    if(this.validateForm()) {
       try {
         await api.user.register(
             this.state.username,
@@ -88,32 +87,22 @@ class SignUpForm extends Component {
   }
 
   validateForm = () => {
-    let regUsername = /^[a-zA-Z0-9_-]+$/;
-    let regEmail = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+    const {firstName, lastName, username, email, password, repeat} = this.state;
 
-    if( !this.validateLength(this.state.username, 32, 3) ) return false;
-    if( !this.validateLength(this.state.email, 200) ) return false;
-    if( !this.validateLength(this.state.firstName, 30) ) return false;
-    if( !this.validateLength(this.state.lastName, 50) ) return false;
-    if( !this.validateLength(this.state.password, 64, 6) ) return false;
+    if( !validators.length(firstName, 30) ) return false;
+    if( !validators.length(lastName, 50) )return false;
+    if( !validators.username(username) ) return false;
+    if( !validators.email(email) ) return false;
+    if( !validators.passwordWithRepeat(password, repeat) ) return false;
 
-    if( !regUsername.test(String(this.state.username)) ) return false;
-    if( !regEmail.test(String(this.state.email).toUpperCase()) ) return false;
-    if( this.state.password !== this.state.repeat ) return false;
-
-    if( !this.usernameAvalible ) return false;
+    if( !this.isUsernameAvalible ) return false;
 
     return true;
   }
 
-  validateLength = (string, maxLen, minLen=1) => {
-    if(string.length < minLen || string.length > maxLen){
-      return false;
-    }
-    return true;
-  }
+  isUsernameAvalible = async () => {
+    if( !validators.username(this.state.username) ) return false;
 
-  usernameAvalible = async () => {
     try {
       const resp = await api.user.usernameAvalible(this.state.username);
       if(resp.available===true){
@@ -126,6 +115,7 @@ class SignUpForm extends Component {
     } catch(err) {
       this.setState({error: "Network Error"});
       console.log(err.message);
+      return false;
     }
   }
 

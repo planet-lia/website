@@ -1,22 +1,25 @@
 import { actionTypesAuth } from '../constants/actionTypesAuth';
 
 let user = localStorage.getItem("user");
-const initialState = user ? { loggedIn: true, user } : {};
+const initialState = user ? { loggedIn: true, username: user.username } : {};
 
-export function authReducer(state = initialState, action) {
+export function authentication(state = initialState, action) {
     switch (action.type) {
     case actionTypesAuth.LOGIN_REQUEST:
         return {
-        loggingIn: true,
-        user: action.user
+          loggingIn: true,
+          username: action.username
         };
     case actionTypesAuth.LOGIN_SUCCESS:
         return {
-        loggedIn: true,
-        user: action.user
+          success: true,
+          username: action.username
         };
     case actionTypesAuth.LOGIN_FAILURE:
-        return {};
+        return {
+          success: false,
+          error: action.error
+        };
     case actionTypesAuth.LOGOUT:
         return {};
     default:
