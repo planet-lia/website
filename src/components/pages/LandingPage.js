@@ -82,9 +82,9 @@ class LandingPage extends Component {
           <div className="container" id="land-cont-watch">
             <Row>
               <Col id="land-cont-player">
-                { this.state.gameId===1 ? <Replay containerId="player1" number={ this.state.gameId } /> : null }
-                { this.state.gameId===2 ? <Replay containerId="player1" number={ this.state.gameId } /> : null }
-                { this.state.gameId===3 ? <Replay containerId="player1" number={ this.state.gameId } /> : null }
+                { this.state.gameId===1 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                { this.state.gameId===2 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                { this.state.gameId===3 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
               </Col>
             </Row>
             <Row>
