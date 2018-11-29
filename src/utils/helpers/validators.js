@@ -1,12 +1,17 @@
+import { validationConst } from '../constants/validationConst';
+
 export const validators = {
   length,
   username,
-  email,
-  password,
+  usernameLength,
+  usernameRegex,
+  emailLength,
+  emailRegex,
+  passwordLength,
   passwordWithRepeat
 };
 
-function length(string, maxLen, minLen=1) {
+function length(string, maxLen, minLen=0) {
   if(string.length < minLen || string.length > maxLen){
     return false;
   }
@@ -14,33 +19,37 @@ function length(string, maxLen, minLen=1) {
 }
 
 function username(username) {
+  if(!usernameLength(username)){
+    return false;
+  }
+  if(!usernameRegex(username)){
+    return false;
+  }
+  return true
+}
+
+function usernameLength(username) {
+  return length(username, validationConst.USERNAME_MAX_LENGTH, validationConst.USERNAME_MIN_LENGTH);
+}
+
+function usernameRegex(username) {
   const regUsername = /^[a-zA-Z0-9_-]+$/;
-  if(length(username, 32, 3)){
-    return regUsername.test(String(username));
-  } else {
-    return false;
-  }
+  return regUsername.test(String(username));
 }
 
-function email(email) {
+function emailLength(email) {
+  return length(email, validationConst.EMAIL_MAX_LENGTH);
+}
+
+function emailRegex(email) {
   let regEmail = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-  if(length(email, 200)){
-      return regEmail.test(String(email));
-  } else {
-    return false;
-  }
-
+  return regEmail.test(String(email));
 }
 
-function password(password) {
-  return length(password, 64, 6);
+function passwordLength(password) {
+  return length(password, validationConst.PASSWORD_MAX_LENGTH, validationConst.PASSWORD_MIN_LENGTH);
 }
 
 function passwordWithRepeat(password, repeat) {
-  if(length(password, 64, 6)) {
     return (password === repeat);
-  } else {
-    return false;
-  }
-
 }

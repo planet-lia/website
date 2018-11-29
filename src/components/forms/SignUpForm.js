@@ -89,10 +89,13 @@ class SignUpForm extends Component {
   validateForm = () => {
     const {firstName, lastName, username, email, password, repeat} = this.state;
 
-    if( !validators.length(firstName, 30) ) return false;
-    if( !validators.length(lastName, 50) )return false;
-    if( !validators.username(username) ) return false;
-    if( !validators.email(email) ) return false;
+    if( !(firstName && validators.length(firstName, 30)) ) return false;
+    if( !(lastName && validators.length(lastName, 50)) )return false;
+    if( !(validators.usernameLength(username)) ) return false;
+    if( !(email && validators.emailLength(email)) ) return false;
+    if( !validators.passwordLength(password) ) return false;
+    if( !validators.usernameRegex(username) ) return false;
+    if( !validators.emailRegex(email) ) return false;
     if( !validators.passwordWithRepeat(password, repeat) ) return false;
 
     if( !this.isUsernameAvalible ) return false;

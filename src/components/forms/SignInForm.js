@@ -23,7 +23,7 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const {username, password} = this.state;
-    const {closePopup, dispatch, loggedIn} = this.props;
+    const {closePopup, dispatch, authenticated, error} = this.props;
 
     this.setState({
       usernameError: null,
@@ -33,7 +33,7 @@ class SignInForm extends Component {
 
     if(this.validateForm()){
       await dispatch(authActions.login(username, password));
-      if(this.props.success){
+      if(authenticated){
         closePopup();
 
         this.setState({
@@ -45,7 +45,7 @@ class SignInForm extends Component {
         });
       } else {
         this.setState({error: "Error"});
-        console.log(this.props.error);
+        console.log(error);
       }
     }
   }
@@ -55,7 +55,7 @@ class SignInForm extends Component {
     let errors = {};
 
     if(username){
-      if(!validators.username(username)){
+      if( !validators.username(username) ){
         errors.usernameError = "Invalid username"
       }
     } else {
@@ -63,7 +63,7 @@ class SignInForm extends Component {
     }
 
     if(password){
-      if(!validators.password(password)){
+      if(!validators.passwordLength(password)){
         errors.passwordError = "Invalid password"
       }
     } else {
@@ -117,10 +117,10 @@ class SignInForm extends Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn, success, error } = state.authentication;
+    const { loggingIn, authenticated, error } = state.authentication;
     return {
         loggingIn,
-        success,
+        authenticated,
         error
     };
 }
