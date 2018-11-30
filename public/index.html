@@ -27,22 +27,6 @@
       gtag('config', 'UA-122844498-3');
     </script>
 
-    <!-- Monaco editor -->
-    <!--<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.15.5/min/vs/loader.js"></script>-->
-    <script>
-        require.config({
-            paths: {
-                'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.15.5/min/vs'
-            }
-        });
-        window.MonacoEnvironment = {
-            getWorkerUrl: function (workerId, label) {
-                return '/monaco-editor-worker-loader-proxy.js';
-            }
-        };
-        require(["vs/editor/editor.main"], function () {})
-    </script>
-
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.

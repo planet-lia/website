@@ -74,7 +74,7 @@ class Replay extends Component {
           this.props.containerId,
           "/assets/",
           "/assets/replays/replay_" + this.props.number + ".lia",
-            this.props.replayFileBase64,
+          this.props.replayFileBase64,
           "/assets/banned-words.txt",
           this.setGameDuration,
           this.setTime

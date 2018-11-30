@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, ButtonToolbar, SplitButton, MenuItem, Modal } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
-import Replay from "../views/Replay";
+
+import Replay from '../views/Replay';
+import { programmingLanguages } from '../../utils/constants/programmingLanguages';
 
 
 class EditorPage extends Component {
@@ -9,20 +11,6 @@ class EditorPage extends Component {
     super(props);
     this.state = {
       code: '',
-      languages: {
-        "python3": {
-            highlighting: "python",
-            baseBotUrl: "https://raw.githubusercontent.com/liagame/python3-bot/v0.2.0/my_bot.py"
-        },
-        "java": {
-            highlighting: "java",
-            baseBotUrl: "https://raw.githubusercontent.com/liagame/java-bot/v0.2.0/src/MyBot.java"
-        },
-        "kotlin": {
-            highlighting: "java",
-            baseBotUrl: "https://raw.githubusercontent.com/liagame/kotlin-bot/v0.2.0/src/MyBot.kt"
-        },
-      },
       currentLang: "python3",
       currentLog: "",
       currentReplayFileBase64: "",
@@ -35,6 +23,7 @@ class EditorPage extends Component {
     this.changeLanguage(this.state.currentLang);
   }
 
+  // ASK does it need focus?
   editorDidMount(editor, monaco) {
     editor.focus();
   }
@@ -44,7 +33,7 @@ class EditorPage extends Component {
   }
 
   changeLanguage = (lang) => {
-    let langData = this.state.languages[lang];
+    let langData = programmingLanguages[lang];
 
     // Store current language
     this.setState({ currentLang: lang});
@@ -116,10 +105,8 @@ class EditorPage extends Component {
 
   render() {
     // TODO beautify this
-    const code = this.state.code;
-    const highlighting = this.state.languages[this.state.currentLang].highlighting;
-    const lang = this.state.currentLang;
-    const generatingGame = this.state.generatingGame;
+    const { code, currentLang, generatingGame } = this.state;
+    const highlighting = programmingLanguages[currentLang].highlighting;
 
     const options = {
       selectOnLineNumbers: true,
@@ -147,7 +134,7 @@ class EditorPage extends Component {
               <Row>
                 <Col md={2}>
                   <ButtonToolbar>
-                    <SplitButton title={lang} dropup id="split-button-dropup">
+                    <SplitButton title={currentLang} dropup id="split-button-dropup">
                       <MenuItem eventKey="1" bsStyle="primary" onClick={() => this.changeLanguage("python3")} type="button">Python3</MenuItem>
                       <MenuItem eventKey="2" bsStyle="primary" onClick={() => this.changeLanguage("java")} type="button">Java</MenuItem>
                       <MenuItem eventKey="3" bsStyle="primary" onClick={() => this.changeLanguage("kotlin")} type="button">Kotlin</MenuItem>
