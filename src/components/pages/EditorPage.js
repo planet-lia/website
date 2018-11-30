@@ -23,10 +23,6 @@ class EditorPage extends Component {
     this.changeLanguage(this.state.currentLang);
   }
 
-  // ASK does it need focus?
-  editorDidMount(editor, monaco) {
-    editor.focus();
-  }
 
   onChange = (newValue, e) => {
     this.setState({ code: newValue });
@@ -49,7 +45,6 @@ class EditorPage extends Component {
   generateGame = async () => {
     // Let the user know that the game is being generated
     this.setState({
-      currentLog: "Generating a new game. This may take up to 20 seconds...",
       generatingGame: true
     });
 
@@ -80,7 +75,7 @@ class EditorPage extends Component {
 
       // Update current logs
       // TODO apend Generating a new game. This may take up to 20 seconds...
-      // ASK if fetch always returns full log
+      // if fetch always returns full log: YES
       this.setState({ currentLog: json2['game']['log'] });
 
       if (json2['game']['finished']) {
@@ -128,7 +123,6 @@ class EditorPage extends Component {
                 value={code}
                 options={options}
                 onChange={this.onChange}
-                editorDidMount={this.editorDidMount}
               />
               </Row>
               <Row>
@@ -147,7 +141,7 @@ class EditorPage extends Component {
               </Row>
             </Col>
             <Col md={6}>
-              {/* Key resets the replay; ASK how does it work */}
+              {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
               <div key={this.state.currentReplayFileBase64}>
                 { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
               </div>
