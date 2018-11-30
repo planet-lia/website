@@ -4,24 +4,42 @@ let user = localStorage.getItem("user");
 const initialState = user ? { loggedIn: true, username: user.username } : {};
 
 export function authentication(state = initialState, action) {
-    switch (action.type) {
-    case actionTypesAuth.LOGIN_REQUEST:
-        return {
-          loggingIn: true,
-          username: action.username
-        };
-    case actionTypesAuth.LOGIN_SUCCESS:
-        return {
-          authenticated: true,
-          username: action.username
-        };
-    case actionTypesAuth.LOGIN_FAILURE:
-        return {
-          error: action.error
-        };
-    case actionTypesAuth.LOGOUT:
-        return {};
-    default:
-        return state
-    }
+  switch (action.type) {
+  case actionTypesAuth.LOGIN_REQUEST:
+    return {
+      isLoggingIn: true,
+      username: action.username
+    };
+  case actionTypesAuth.LOGIN_SUCCESS:
+    return {
+      isAuthenticated: true,
+      username: action.username
+    };
+  case actionTypesAuth.LOGIN_FAILURE:
+    return {
+      error: action.error
+    };
+  case actionTypesAuth.LOGOUT:
+    return {};
+  case actionTypesAuth.SET_AUTH:
+    return {
+      isAuthenticated: true,
+      username: action.username
+    };
+  case actionTypesAuth.EMAIL_CONFIRM_REQUEST:
+    return {
+      isVerifing: true,
+    };
+  case actionTypesAuth.EMAIL_CONFIRM_SUCCESS:
+    return {
+      isAuthenticated: true,
+      username: action.username
+    };
+  case actionTypesAuth.EMAIL_CONFIRM_FAILURE:
+    return {
+      error: action.error
+    };
+  default:
+    return state;
+  }
 }

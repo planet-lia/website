@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import PrivateRoute from './PrivateRoute';
+//import PrivateRoute from './PrivateRoute';
 import LandingPage from '../pages/LandingPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
 import GamesPage from '../pages/GamesPage';
+import EmailVerificationPage from '../pages/EmailVerificationPage';
 
 const Routes = () => {
   return (
@@ -12,6 +13,7 @@ const Routes = () => {
       <Route exact path="/" component={LandingPage} />
       <Route path="/leaderboard" component={LeaderboardPage} />
       <Route path="/games" component={GamesPage} />
+      <Route path="/account/verify" component={EmailVerificationPage} />
     </Switch>
   );
 }

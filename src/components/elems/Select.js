@@ -19,7 +19,7 @@ const Select = (props) => {
   }
 
   return (
-    <FormControl componentClass="select" bsClass={bsClass} value={props.value} onChange={props.onChange}>
+    <FormControl componentClass="select" bsClass={bsClass} value={props.value} onChange={props.onChange} name={props.name}>
       {optionsList}
     </FormControl>
   )

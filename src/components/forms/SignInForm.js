@@ -23,7 +23,7 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const {username, password} = this.state;
-    const {closePopup, dispatch, authenticated, error} = this.props;
+    const {closePopup, dispatch, isAuthenticated, error} = this.props;
 
     this.setState({
       usernameError: null,
@@ -33,7 +33,7 @@ class SignInForm extends Component {
 
     if(this.validateForm()){
       await dispatch(authActions.login(username, password));
-      if(authenticated){
+      if(isAuthenticated){
         closePopup();
 
         this.setState({
@@ -117,10 +117,10 @@ class SignInForm extends Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn, authenticated, error } = state.authentication;
+    const { isLoggingIn, isAuthenticated, error } = state.authentication;
     return {
-        loggingIn,
-        authenticated,
+        isLoggingIn,
+        isAuthenticated,
         error
     };
 }

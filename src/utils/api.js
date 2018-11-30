@@ -4,6 +4,10 @@ const API_BASE_URL = "http://localhost:8000";
 
 export default {
   user: {
+    confirmEmail: (emailVerificationCode) =>
+      axios.post(API_BASE_URL + "/user/confirm-email/", {emailVerificationCode})
+        .then((response) => response.data),
+
     edit: (firstName, lastName, organization, country, level) =>
       axios.post(API_BASE_URL + "/user/",
         {
@@ -21,7 +25,7 @@ export default {
 
     login: (username, password) =>
       axios.post(API_BASE_URL + "/auth/", {username, password})
-      .then((response) => response.data),
+        .then((response) => response.data),
 
     register: (username, email, firstName, lastName, password, country) =>
       axios.post(API_BASE_URL + "/user/register/",
