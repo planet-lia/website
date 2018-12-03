@@ -1,7 +1,7 @@
+import jwtDecode from 'jwt-decode'
 import { actionTypesAuth } from '../constants/actionTypesAuth';
 import api from '../api';
 import setAuthHeader from '../helpers/setAuthHeader';
-import jwtDecode from 'jwt-decode'
 
 export const authActions = {
   login,
@@ -16,11 +16,11 @@ function login(username, password) {
     try {
       const respLogin = await api.user.login(username, password);
       const decoded = jwtDecode(respLogin.token);
-      localStorage.setItem("user", {username: decoded.username, token: respLogin.token});
+      localStorage.setItem("token", respLogin.token);
       setAuthHeader(respLogin.token);
       dispatch(success( decoded.username ));
     } catch(err) {
-      localStorage.removeItem("user");
+      localStorage.removeItem("token");
       setAuthHeader();
       dispatch(failure(err));
     }
@@ -31,14 +31,15 @@ function login(username, password) {
 }
 
 function logout() {
-  localStorage.removeItem("user");
+  localStorage.removeItem("token");
   setAuthHeader();
   return { type: actionTypesAuth.LOGOUT };
 }
 
-function authenticate(user) {
-  setAuthHeader(user.token);
-  return { type: actionTypesAuth.SET_AUTH, username: user.username };
+function authenticate(token) {
+  const decoded = jwtDecode(token);
+  setAuthHeader(token);
+  return { type: actionTypesAuth.SET_AUTH, username: decoded.username };
 }
 
 function confirmEmail(code) {
@@ -47,7 +48,7 @@ function confirmEmail(code) {
     try {
       const respConfirm = await api.user.confirmEmail(code);
       const decoded = jwtDecode(respConfirm.token);
-      localStorage.setItem("user", {username: decoded.username, token: respConfirm.token});
+      localStorage.setItem("token", respConfirm.token);
       setAuthHeader(respConfirm.token);
       dispatch(success( decoded.username ));
     } catch(err) {

@@ -8,8 +8,8 @@ import App from './App';
 import { store } from './utils/helpers/store';
 import { authActions } from './utils/actions/authActions'
 
-if(localStorage.user){
-  store.dispatch(authActions.authenticate(localStorage.user));
+if(localStorage.token){
+  store.dispatch(authActions.authenticate(localStorage.token));
 }
 
 ReactDOM.render((
