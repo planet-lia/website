@@ -63,13 +63,17 @@ textarea {
   position: relative;
 }
 
-#main-content {
-  padding-bottom: 3.8em;
+.main-content {
+  padding-bottom: 7.6em;
+}
+
+.main-content.no-footer {
+  padding-bottom: 0;
 }
 
 .cont-fullpage {
   width: 100%;
-  height: calc(100vh - 50px - 0.6em - 3.8em);
+  height: calc(100vh - 50px - 0.6em - 1.8px);
   position: relative;
 
 }
@@ -249,8 +253,11 @@ textarea {
   border-radius: 0;
   background-color: #018e6a; /*#03965c*/
   color: #ddd;
-  font-size: 16px;
   font-weight: bold;
+}
+
+.custom-btn-lg {
+  font-size: 16px;
 }
 
 .custom-btn:hover {
@@ -455,25 +462,15 @@ a.land-contact-logo {
 }
 
 /* Editor Page */
-.editor-notification {
-  text-align: center;
-  padding: 10px;
-  background-color: #1e1e1e;
-  border-top: 1px solid #333;
-  color: #666;
-}
 
 .editor-cont-page {
   width: 100%;
-  height: calc(100% - 41px);
-  position: relative;
   display: flex;
   flex-wrap: nowrap;
   background-color: #1e1e1e;
 }
 
 .editor-cont-page > div {
-  display: inline-block;
   flex-grow: 1;
   width: calc(50vw - 1px);
   border-top: 1px solid #333;
@@ -494,26 +491,16 @@ a.land-contact-logo {
 .editor-cont-page > div > .editor-cont-bottom {
   width: inherit;
   position: absolute;
-  bottom: 1px;
+  bottom: 0;
   border-bottom: 1px solid #333;
-}
-
-.editor-cont-page > div > #cont-editor {
-  width: inherit;
-  position: absolute;
-  top: 1px;
-  bottom: 86px;
+  border-top: 1px solid #333;
 }
 
 #editor-cont-ui {
   display: flex;
   flex-wrap: nowrap;
-  padding: 10px;
-  border-top: 1px solid #333;
-}
-
-#editor-lang {
-  margin-bottom: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #333;
 }
 
 #editor-lang > select {
@@ -521,23 +508,38 @@ a.land-contact-logo {
   border: 1px solid #333;
 }
 
+#editor-play {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.editor-cont-page > div > #cont-editor {
+  width: inherit;
+  position: absolute;
+  top: 42px;
+  bottom: 42px;
+}
+
 #editor-cont-links {
   color: #666;
+  padding: 10px;
 }
 
 #editor-cont-links > a {
   margin-left: 10px;
 }
 
-#editor-play {
-  flex-grow: 1;
-  text-align: right;
-  align-self: center
+#editor-notification {
+  text-align: center;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #333;
+  color: #666;
 }
 
 #editor-cont-replay {
   position: relative;
-  height: calc(28.125vw + 2.7em + 1px);
+  height: calc(28.125vw + 2.7em);
 }
 
 #editor-loader-overlay {
@@ -560,8 +562,7 @@ a.land-contact-logo {
 }
 
 #editor-cont-log {
-  top: calc(28.125vw + 2.7em + 1px);
-  border-top: 1px solid #333;
+  top: calc(28.125vw + 2.7em + 1px + 41px);
 }
 
 #editor-cont-log > textarea {

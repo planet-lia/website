@@ -61,13 +61,14 @@ class App extends Component {
   }
 
   render() {
+    const isEditor = (window.location.pathname.split("/")[1]==="editor");
     return (
       <div id="main-container">
         <Header isSignedIn={this.state.isSignedIn} onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
-        <div id="main-content">
+        <div className={isEditor ? "main-content no-footer" : "main-content"}>
           <Route component={Routes}/>
         </div>
-        <Footer />
+        { !isEditor && <Footer />}
 
         <Popup
           dialogClassName="custom-popup sign-in"

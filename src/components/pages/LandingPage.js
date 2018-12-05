@@ -24,7 +24,7 @@ class LandingPage extends Component {
   }
 
   onTryNow = () => {
-    window.open("https://docs.liagame.com/", "_blank");
+    window.open("/editor", "_self");
   }
 
   onPopupClose = () => {
@@ -141,7 +141,7 @@ class LandingPage extends Component {
           onHide={this.onPopupClose}
           onButtonClick={this.onTryNow}
           heading="Try Alpha"
-          buttonText="Go To Docs"
+          buttonText="Online Editor"
         >
           <TryOut />
         </Popup>
