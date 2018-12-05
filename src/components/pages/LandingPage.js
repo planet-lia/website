@@ -42,7 +42,7 @@ class LandingPage extends Component {
             <div className="land-slogan">Competitive</div>
             <div className="land-slogan">Programming Game</div>
             <div id="land-desc">Bring your code to life</div>
-            <Button className="land-btn btn-try btn-rel" onClick={() => this.setState({showTryNowPopup: true})}>Play Online<div className="btn-subtext">without registration</div></Button>
+            <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Play Online<div className="btn-subtext">Without registration</div></Button>
             <Button className="land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
           </div>
         </div>
@@ -140,7 +140,7 @@ class LandingPage extends Component {
           show={this.state.showTryNowPopup}
           onHide={this.onPopupClose}
           onButtonClick={this.onTryNow}
-          heading="Try Alpha"
+          heading="Play Online"
           buttonText="Online Editor"
           center={true}
         >
