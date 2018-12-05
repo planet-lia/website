@@ -505,6 +505,8 @@ a.land-contact-logo {
 
 #editor-lang > select {
   width: 7.5em;
+  background-color: #333;
+  color: #ddd;
   border: 1px solid #333;
 }
 
