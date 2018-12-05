@@ -5,6 +5,7 @@ import LandingPage from '../pages/LandingPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
 import GamesPage from '../pages/GamesPage';
 import EditorPage from "../pages/EditorPage";
+import EditorTracking from "../pages/EditorTracking";
 
 const Routes = () => {
   return (
@@ -13,6 +14,7 @@ const Routes = () => {
       <Route path="/leaderboard" component={LeaderboardPage} />
       <Route path="/games" component={GamesPage} />
         <Route path="/editor" component={EditorPage} />
+      <Route path="/editor/tracking" component={EditorTracking} />
     </Switch>
   );
 }

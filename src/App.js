@@ -7,11 +7,13 @@ import Routes from './components/layout/Routes';
 import Popup from './components/views/Popup';
 import SignInForm from './components/forms/SignInForm';
 import SignUpForm from './components/forms/SignUpForm';
+import withTracker from './components/tracking/withTracker';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope  } from '@fortawesome/free-solid-svg-icons';
 library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope);
+
 
 class App extends Component {
   constructor(props){
@@ -65,7 +67,7 @@ class App extends Component {
       <div id="main-container">
         <Header isSignedIn={this.state.isSignedIn} onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
         <div id="main-content">
-          <Route component={Routes}/>
+          <Route component={withTracker(Routes, { /* additional attributes */ })}/>
         </div>
         <Footer />
 
