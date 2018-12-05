@@ -19,6 +19,7 @@ class EditorPage extends Component {
       currentLog: "Press PLAY to generate your first game.",
       currentReplayFileBase64: "",
       generatingGame: false,
+      gameKey: 0,
       isLoadingCode: true,
       editor: null,
       lastPlay: null,
@@ -75,7 +76,9 @@ class EditorPage extends Component {
     }
     // Let the user know that the game is being generated
     this.setState({
+      currentReplayFileBase64: "",
       generatingGame: true,
+      gameKey: this.state.gameKey + 1,
     });
 
     // Set if tracking is enabled
@@ -119,6 +122,7 @@ class EditorPage extends Component {
           this.setState({
             currentReplayFileBase64: json2['game']['replay'],
             generatingGame: false,
+            gameKey: this.state.gameKey + 1,
             lastPlay: new Date(),
             waitRemain: 0
           });
@@ -149,7 +153,17 @@ class EditorPage extends Component {
   }
 
   render() {
-    const { code, currentLang, generatingGame, isLoadingCode, showWaitAlert, waitRemain } = this.state;
+    const {
+      code,
+      currentLang,
+      currentLog,
+      currentReplayFileBase64,
+      generatingGame,
+      gameKey,
+      isLoadingCode,
+      showWaitAlert,
+      waitRemain
+    } = this.state;
     const highlighting = programmingLanguages[currentLang].highlighting;
 
     const options = {
@@ -203,8 +217,8 @@ class EditorPage extends Component {
               .
             </div>
             {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
-            <div id="editor-cont-replay" key={this.state.currentReplayFileBase64}>
-              { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
+            <div id="editor-cont-replay" key={gameKey}>
+              <Replay containerId="player" number={ 0 } replayFileBase64={ currentReplayFileBase64 } />
               {generatingGame &&
                 <div id="editor-loader-overlay">
                   <div id="cont-loader">
@@ -221,7 +235,7 @@ class EditorPage extends Component {
             <div id="editor-cont-log" className="editor-cont-bottom">
               <FormControl
                 componentClass="textarea"
-                value={this.state.currentLog}
+                value={currentLog}
                 inputRef={ref => { this.textLog = ref; }}
                 readOnly
                 bsClass="form-control editor-input"
