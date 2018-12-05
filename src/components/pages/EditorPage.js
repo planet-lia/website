@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, ButtonToolbar, SplitButton, MenuItem, Modal, FormControl } from 'react-bootstrap';
+import { Button, FormControl } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
 
@@ -62,13 +62,13 @@ class EditorPage extends Component {
 
   generateGame = async () => {
     const { lastPlay } = this.state;
-    const newPlay = new Date();
+    const currentTime = new Date();
     const delayMiliSec = 15000;
 
-    if(lastPlay && (newPlay - lastPlay) < delayMiliSec){
+    if(lastPlay && (currentTime - lastPlay) < delayMiliSec){
       this.setState({
         showWaitAlert: true,
-        waitRemain: Math.ceil( (delayMiliSec - Number(newPlay - lastPlay)) /1000 )
+        waitRemain: Math.ceil( (delayMiliSec - Number(currentTime - lastPlay)) /1000 )
       })
       return;
     }
@@ -103,8 +103,6 @@ class EditorPage extends Component {
       const json2 = await response.json();
 
       // Update current logs
-      // TODO append Generating a new game. This may take up to 20 seconds...
-      // if fetch always returns full log: YES
       this.setState({ currentLog: json2['game']['log'] });
       this.scrollToBottom();
 
@@ -114,7 +112,8 @@ class EditorPage extends Component {
           this.setState({
             currentReplayFileBase64: json2['game']['replay'],
             generatingGame: false,
-            lastPlay: new Date()
+            lastPlay: new Date(),
+            waitRemain: 0
           });
           return;
       }
@@ -143,7 +142,6 @@ class EditorPage extends Component {
   }
 
   render() {
-    // TODO beautify this
     const { code, currentLang, generatingGame, isLoadingCode, showWaitAlert, waitRemain } = this.state;
     const highlighting = programmingLanguages[currentLang].highlighting;
 
@@ -203,6 +201,18 @@ class EditorPage extends Component {
               {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
               <div id="editor-cont-replay" key={this.state.currentReplayFileBase64}>
                 { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
+                {generatingGame &&
+                  <div id="editor-loader-overlay">
+                    <div id="cont-loader">
+                      <Loader
+                        type="Triangle"
+                        color="#018e6a"
+                        height="100"
+                        width="100"
+                      />
+                    </div>
+                  </div>
+                }
               </div>
               <div id="editor-cont-log" className="editor-cont-bottom">
                 <FormControl
@@ -213,18 +223,6 @@ class EditorPage extends Component {
                   bsClass="form-control editor-input"
                 />
               </div>
-              {generatingGame &&
-                <div id="editor-loader-overlay">
-                  <div id="cont-loader">
-                    <Loader
-                      type="Triangle"
-                      color="#018e6a"
-                      height="100"
-                      width="100"
-                    />
-                  </div>
-                </div>
-              }
             </div>
           </div>
         </div>
@@ -235,7 +233,7 @@ class EditorPage extends Component {
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
           heading="Please wait"
-          buttonText="Ok"
+          buttonText="OK"
         >
           <WaitAlert wait={waitRemain}/>
         </Popup>
