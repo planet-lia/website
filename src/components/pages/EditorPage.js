@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, ButtonToolbar, SplitButton, MenuItem, Modal, FormControl } from 'react-bootstrap';
+import { Button, FormControl } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
@@ -63,13 +63,13 @@ class EditorPage extends Component {
 
   generateGame = async () => {
     const { lastPlay } = this.state;
-    const newPlay = new Date();
+    const currentTime = new Date();
     const delayMiliSec = 15000;
 
-    if(lastPlay && (newPlay - lastPlay) < delayMiliSec){
+    if(lastPlay && (currentTime - lastPlay) < delayMiliSec){
       this.setState({
         showWaitAlert: true,
-        waitRemain: Math.ceil( (delayMiliSec - Number(newPlay - lastPlay)) /1000 )
+        waitRemain: Math.ceil( (delayMiliSec - Number(currentTime - lastPlay)) /1000 )
       })
       return;
     }
@@ -110,8 +110,6 @@ class EditorPage extends Component {
       const json2 = await response.json();
 
       // Update current logs
-      // TODO append Generating a new game. This may take up to 20 seconds...
-      // if fetch always returns full log: YES
       this.setState({ currentLog: json2['game']['log'] });
       this.scrollToBottom();
 
@@ -121,7 +119,8 @@ class EditorPage extends Component {
           this.setState({
             currentReplayFileBase64: json2['game']['replay'],
             generatingGame: false,
-            lastPlay: new Date()
+            lastPlay: new Date(),
+            waitRemain: 0
           });
           return;
       }
@@ -150,7 +149,6 @@ class EditorPage extends Component {
   }
 
   render() {
-    // TODO beautify this
     const { code, currentLang, generatingGame, isLoadingCode, showWaitAlert, waitRemain } = this.state;
     const highlighting = programmingLanguages[currentLang].highlighting;
 
@@ -165,61 +163,48 @@ class EditorPage extends Component {
 
     return (
       <div>
-        <div className="cont-fullpage">
-          <div className="editor-notification">
-            {"This is just a demo. For full experience "}
-            <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">download SDK</a>
-            .
-          </div>
-          <div className="editor-cont-page">
-            <div id="editor-left">
-              <div id="cont-editor">
-                <MonacoEditor
-                  width="100%"
-                  height="100%"
-                  language={highlighting}
-                  theme="vs-dark"
-                  value={code}
-                  options={options}
-                  onChange={this.onChange}
-                />
+        <div className="cont-fullpage editor-cont-page">
+          <div id="editor-left">
+            <div id="editor-cont-ui">
+              <div id="editor-lang">
+                <FormControl componentClass="select" onChange={this.onChangeLanguage} disabled={isLoadingCode} bsClass="form-control editor-input" bsSize="small">
+                  <option value="python3">Python3</option>
+                  <option value="java">Java</option>
+                  <option value="kotlin">Kotlin</option>
+                </FormControl>
               </div>
-              <div id="editor-cont-ui" className="editor-cont-bottom">
-                <div>
-                  <div id="editor-lang">
-                    <FormControl componentClass="select" dropup={"true"} onChange={this.onChangeLanguage} disabled={isLoadingCode} bsClass="form-control editor-input">
-                      <option value="python3">Python3</option>
-                      <option value="java">Java</option>
-                      <option value="kotlin">Kotlin</option>
-                    </FormControl>
-                  </div>
-                  <div id="editor-cont-links">
-                    Links:
-                    <a href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</a>
-                    <a href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</a>
-                    <a href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</a>
-                    <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download SDK</a>
-                  </div>
-                </div>
-                <div id="editor-play">
-                  <Button bsClass="btn custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>PLAY</Button>
-                </div>
+              <div id="editor-play">
+                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>PLAY</Button>
               </div>
             </div>
-            <div id="editor-right">
-              {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
-              <div id="editor-cont-replay" key={this.state.currentReplayFileBase64}>
-                { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
-              </div>
-              <div id="editor-cont-log" className="editor-cont-bottom">
-                <FormControl
-                  componentClass="textarea"
-                  value={this.state.currentLog}
-                  inputRef={ref => { this.textLog = ref; }}
-                  readOnly
-                  bsClass="form-control editor-input"
-                />
-              </div>
+            <div id="cont-editor">
+              <MonacoEditor
+                width="100%"
+                height="100%"
+                language={highlighting}
+                theme="vs-dark"
+                value={code}
+                options={options}
+                onChange={this.onChange}
+              />
+            </div>
+            <div id="editor-cont-links" className="editor-cont-bottom">
+              Links:
+              <a href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</a>
+              <a href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</a>
+              <a href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</a>
+              <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download SDK</a>
+            </div>
+          </div>
+          <div id="editor-right">
+            <div id="editor-notification">
+              {"This is just a demo. For full experience "}
+              <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">download SDK</a>
+              .
+            </div>
+            {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
+            <div id="editor-cont-replay" key={this.state.currentReplayFileBase64}>
+              { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
               {generatingGame &&
                 <div id="editor-loader-overlay">
                   <div id="cont-loader">
@@ -233,6 +218,15 @@ class EditorPage extends Component {
                 </div>
               }
             </div>
+            <div id="editor-cont-log" className="editor-cont-bottom">
+              <FormControl
+                componentClass="textarea"
+                value={this.state.currentLog}
+                inputRef={ref => { this.textLog = ref; }}
+                readOnly
+                bsClass="form-control editor-input"
+              />
+            </div>
           </div>
         </div>
 
@@ -242,7 +236,7 @@ class EditorPage extends Component {
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
           heading="Please wait"
-          buttonText="Ok"
+          buttonText="OK"
         >
           <WaitAlert wait={waitRemain}/>
         </Popup>
