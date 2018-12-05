@@ -269,6 +269,19 @@ textarea {
     color: #ddd;
 }
 
+.btn-rel {
+  position: relative;
+}
+
+.btn-subtext {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.1em;
+  font-size: 0.45em;
+  text-align: center;
+}
+
 /* Landing Page */
 #land-pic {
   width: 100%;
