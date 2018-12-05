@@ -572,6 +572,11 @@ a.land-contact-logo {
   height: 100%;
 }
 
+#editor-size-msg {
+  font-size: 1.5em;
+  padding: 25px 0;
+}
+
 /* Editor Page Overwrites*/
 
 .form-control.editor-input {

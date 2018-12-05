@@ -189,7 +189,7 @@ class EditorPage extends Component {
 
     return (
       <div>
-        <div className="cont-fullpage editor-cont-page">
+        <div className="cont-fullpage editor-cont-page hidden-xs hidden-sm">
           <div id="editor-left">
             <div id="editor-cont-ui">
               <div id="editor-lang">
@@ -254,6 +254,9 @@ class EditorPage extends Component {
               />
             </div>
           </div>
+        </div>
+        <div id="editor-size-msg" className="visible-xs visible-sm text-center">
+          <span>Editor is not supported for small window sizes</span>
         </div>
 
         <Popup
