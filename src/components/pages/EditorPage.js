@@ -29,6 +29,11 @@ class EditorPage extends Component {
   }
 
   componentDidMount = () => {
+    window.addEventListener('fullscreenchange', this.scrollToBottom);
+    window.addEventListener('webkitfullscreenchange', this.scrollToBottom);
+    window.addEventListener('mozfullscreenchange', this.scrollToBottom);
+    window.addEventListener('MSFullscreenChange', this.scrollToBottom);
+
     const langData = programmingLanguages[this.state.currentLang];
 
     fetch(langData.baseBotUrl)
@@ -37,6 +42,13 @@ class EditorPage extends Component {
         code: text,
         isLoadingCode: false
       }) );
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('fullscreenchange', this.scrollToBottom);
+    window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
+    window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
+    window.removeEventListener('MSFullscreenChange', this.scrollToBottom);
   }
 
 
