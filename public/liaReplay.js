@@ -92362,8 +92362,9 @@ function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToB
     app.forceUpdate = function() {
         app.ticker.update()
     }
+    app.resize = resize
 
-    return app
+  return app
 }
 
 

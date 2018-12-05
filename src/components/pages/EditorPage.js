@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, ButtonToolbar, SplitButton, MenuItem, Modal } from 'react-bootstrap';
+import { Row, Col, Button, ButtonToolbar, SplitButton, MenuItem, Modal, FormControl } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
+import Loader from 'react-loader-spinner'
 
 import Replay from '../views/Replay';
+import Popup from '../views/Popup';
+import WaitAlert from '../forms/WaitAlert';
 import { programmingLanguages } from '../../utils/constants/programmingLanguages';
 
 
@@ -12,15 +15,26 @@ class EditorPage extends Component {
     this.state = {
       code: '',
       currentLang: "python3",
-      currentLog: "",
+      currentLog: "Press PLAY to generate your first game.",
       currentReplayFileBase64: "",
       generatingGame: false,
+      isLoadingCode: true,
       editor: null,
+      lastPlay: null,
+      showWaitAlert: false,
+      waitRemain: 0
     };
   }
 
   componentDidMount = () => {
-    this.changeLanguage(this.state.currentLang);
+    const langData = programmingLanguages[this.state.currentLang];
+
+    fetch(langData.baseBotUrl)
+      .then((resp)=>{ return resp.text() })
+      .then( (text) => this.setState({
+        code: text,
+        isLoadingCode: false
+      }) );
   }
 
 
@@ -28,24 +42,40 @@ class EditorPage extends Component {
     this.setState({ code: newValue });
   }
 
-  changeLanguage = (lang) => {
-    let langData = programmingLanguages[lang];
+  onChangeLanguage = (event) => {
+    const lang = event.target.value;
+    const langData = programmingLanguages[lang];
 
     // Store current language
-    this.setState({ currentLang: lang});
+    this.setState({
+      currentLang: lang,
+      isLoadingCode: true
+    });
 
-    //ASK what does the return do
     fetch(langData.baseBotUrl)
       .then((resp)=>{ return resp.text() })
-      .then((text)=>{
-          this.setState({ code: text });
-      });
+      .then( (text) => this.setState({
+        code: text,
+        isLoadingCode: false
+      }) );
   };
 
   generateGame = async () => {
+    const { lastPlay } = this.state;
+    const newPlay = new Date();
+    const delayMiliSec = 15000;
+
+    if(lastPlay && (newPlay - lastPlay) < delayMiliSec){
+      this.setState({
+        showWaitAlert: true,
+        waitRemain: Math.ceil( (delayMiliSec - Number(newPlay - lastPlay)) /1000 )
+      })
+      return;
+    }
     // Let the user know that the game is being generated
     this.setState({
-      generatingGame: true
+      generatingGame: true,
+      lastPlay: newPlay
     });
 
     // Generate replay
@@ -77,6 +107,8 @@ class EditorPage extends Component {
       // TODO apend Generating a new game. This may take up to 20 seconds...
       // if fetch always returns full log: YES
       this.setState({ currentLog: json2['game']['log'] });
+      this.scrollToBottom();
+
 
       if (json2['game']['finished']) {
           // Display new replay file
@@ -98,69 +130,116 @@ class EditorPage extends Component {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
+  scrollToBottom = () => {
+    if(this.textLog){
+      this.textLog.scrollTop = this.textLog.scrollHeight;
+    }
+  };
+
+  onPopupClose = () => {
+    this.setState({
+      showWaitAlert: false
+    })
+  }
+
   render() {
     // TODO beautify this
-    const { code, currentLang, generatingGame } = this.state;
+    const { code, currentLang, generatingGame, isLoadingCode, showWaitAlert, waitRemain } = this.state;
     const highlighting = programmingLanguages[currentLang].highlighting;
 
     const options = {
       selectOnLineNumbers: true,
       fontSize: 12,
-      scrollBeyondLastLine: false
+      scrollBeyondLastLine: false,
+      minimap: {
+        enabled: false
+      },
     };
 
     return (
       <div>
-        <div>
-          <Row>
-            <Col md={6}>
-              <Row>
-              <MonacoEditor
-                width="100%"
-                height="800"
-                language={highlighting}
-                theme="vs-dark"
-                value={code}
-                options={options}
-                onChange={this.onChange}
-              />
-              </Row>
-              <Row>
-                <Col md={2}>
-                  <ButtonToolbar>
-                    <SplitButton title={currentLang} dropup id="split-button-dropup">
-                      <MenuItem eventKey="1" bsStyle="primary" onClick={() => this.changeLanguage("python3")} type="button">Python3</MenuItem>
-                      <MenuItem eventKey="2" bsStyle="primary" onClick={() => this.changeLanguage("java")} type="button">Java</MenuItem>
-                      <MenuItem eventKey="3" bsStyle="primary" onClick={() => this.changeLanguage("kotlin")} type="button">Kotlin</MenuItem>
-                    </SplitButton>
-                  </ButtonToolbar>
-                </Col>
-                <Col md={10}>
-                  <Button bsStyle="success" onClick={() => this.generateGame()} type="button">PLAY</Button>
-                </Col>
-              </Row>
-            </Col>
-            <Col md={6}>
+        <div className="cont-fullpage">
+          <div className="editor-notification">
+            {"This is just a demo. For full experience "}
+            <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">download SDK</a>
+            .
+          </div>
+          <div className="editor-cont-page">
+            <div id="editor-left">
+              <div id="cont-editor">
+                <MonacoEditor
+                  width="100%"
+                  height="100%"
+                  language={highlighting}
+                  theme="vs-dark"
+                  value={code}
+                  options={options}
+                  onChange={this.onChange}
+                />
+              </div>
+              <div id="editor-cont-ui" className="editor-cont-bottom">
+                <div>
+                  <div id="editor-lang">
+                    <FormControl componentClass="select" dropup={"true"} onChange={this.onChangeLanguage} disabled={isLoadingCode} bsClass="form-control editor-input">
+                      <option value="python3">Python3</option>
+                      <option value="java">Java</option>
+                      <option value="kotlin">Kotlin</option>
+                    </FormControl>
+                  </div>
+                  <div id="editor-cont-links">
+                    Links:
+                    <a href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</a>
+                    <a href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</a>
+                    <a href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</a>
+                    <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download SDK</a>
+                  </div>
+                </div>
+                <div id="editor-play">
+                  <Button bsClass="btn custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>PLAY</Button>
+                </div>
+              </div>
+            </div>
+            <div id="editor-right">
               {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
-              <div key={this.state.currentReplayFileBase64}>
+              <div id="editor-cont-replay" key={this.state.currentReplayFileBase64}>
                 { this.state.currentReplayFileBase64!=="" ? <Replay containerId="player" number={ 1 } replayFileBase64={ this.state.currentReplayFileBase64 } /> : null }
               </div>
-            </Col>
-            <Row>
-              {/* Prints out currentLog while also replacing new lines with breaks; TODO use textbox*/}
-              <Modal.Body style={{'maxHeight': 'calc(100vh - 210px)', 'overflowY': 'auto'}}>
-                {this.state.currentLog.split('\n').map(function(item, key) {
-                  return (
-                    <span key={key}>
-                      {item}<br/>
-                    </span>
-                  )
-                })}.
-                {generatingGame && <img width="150" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt=""/>}
-              </Modal.Body>
-            </Row>
-          </Row>
+              <div id="editor-cont-log" className="editor-cont-bottom">
+                <FormControl
+                  componentClass="textarea"
+                  value={this.state.currentLog}
+                  inputRef={ref => { this.textLog = ref; }}
+                  readOnly
+                  bsClass="form-control editor-input"
+                />
+              </div>
+              {generatingGame &&
+                <div id="editor-loader-overlay">
+                  <div id="cont-loader">
+                    <Loader
+                      type="Triangle"
+                      color="#018e6a"
+                      height="100"
+                      width="100"
+                    />
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
         </div>
+
+        <Popup
+          dialogClassName="custom-popup pop-text"
+          show={showWaitAlert}
+          onHide={this.onPopupClose}
+          onButtonClick={this.onPopupClose}
+          heading="Please wait"
+          buttonText="Ok"
+        >
+          <WaitAlert wait={waitRemain}/>
+        </Popup>
+
       </div>
     );
   }
