@@ -75,7 +75,6 @@ class EditorPage extends Component {
     // Let the user know that the game is being generated
     this.setState({
       generatingGame: true,
-      lastPlay: newPlay
     });
 
     // Generate replay
@@ -104,7 +103,7 @@ class EditorPage extends Component {
       const json2 = await response.json();
 
       // Update current logs
-      // TODO apend Generating a new game. This may take up to 20 seconds...
+      // TODO append Generating a new game. This may take up to 20 seconds...
       // if fetch always returns full log: YES
       this.setState({ currentLog: json2['game']['log'] });
       this.scrollToBottom();
@@ -114,7 +113,8 @@ class EditorPage extends Component {
           // Display new replay file
           this.setState({
             currentReplayFileBase64: json2['game']['replay'],
-            generatingGame: false
+            generatingGame: false,
+            lastPlay: new Date()
           });
           return;
       }
