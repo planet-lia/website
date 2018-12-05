@@ -5,7 +5,7 @@ class EditorTracking extends Component {
   constructor(props) {
     super(props);
     const cookies = new Cookies();
-    cookies.set('editor-tracking', false, { path: '/' });
+    cookies.set('editor-tracking', "false", { path: '/' });
   }
 
   render(){

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Button, ButtonToolbar, SplitButton, MenuItem, Modal, FormControl } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
+import Cookies from 'universal-cookie';
 
 import Replay from '../views/Replay';
 import Popup from '../views/Popup';
@@ -77,8 +78,14 @@ class EditorPage extends Component {
       generatingGame: true,
     });
 
+    // Set if tracking is enabled
+    const cookies = new Cookies();
+    let isTrackingOn = cookies.get('editor-tracking') !== "false";
+
+    console.log(isTrackingOn + "  " + cookies.get('editor-tracking'));
+
     // Generate replay
-    const response = await fetch('https://editor.cloud1.liagame.com/generate', {
+    const response = await fetch('https://editor.cloud1.liagame.com/generate?tracking=' + isTrackingOn, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
