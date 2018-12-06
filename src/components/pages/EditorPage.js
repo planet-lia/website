@@ -155,9 +155,6 @@ class EditorPage extends Component {
   };
 
   resizePlayer = (width, height) => {
-    if(width < 384){  // half of min width: 768/2
-      width = 383;
-    }
     this.setState({editorW: width, editorH: height});
   }
 
