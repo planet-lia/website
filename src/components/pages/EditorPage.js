@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button, FormControl } from 'react-bootstrap';
+import { Button, FormControl, Glyphicon } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
+import ReactResizeDetector from 'react-resize-detector';
 
 import Replay from '../views/Replay';
 import Popup from '../views/Popup';
@@ -16,12 +17,13 @@ class EditorPage extends Component {
     this.state = {
       code: '',
       currentLang: "python3",
-      currentLog: "Press PLAY to generate your first game.",
+      currentLog: "Press RUN to generate a game.",
       currentReplayFileBase64: "",
       generatingGame: false,
       gameKey: 0,
       isLoadingCode: true,
-      editor: null,
+      editorW: "100%",
+      editorH: "100%",
       lastPlay: null,
       showWaitAlert: false,
       waitRemain: 0
@@ -152,6 +154,10 @@ class EditorPage extends Component {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
+  resizePlayer = (width, height) => {
+    this.setState({editorW: width, editorH: height});
+  }
+
   scrollToBottom = () => {
     if(this.textLog){
       this.textLog.scrollTop = this.textLog.scrollHeight;
@@ -173,6 +179,8 @@ class EditorPage extends Component {
       generatingGame,
       gameKey,
       isLoadingCode,
+      editorW,
+      editorH,
       showWaitAlert,
       waitRemain
     } = this.state;
@@ -189,7 +197,7 @@ class EditorPage extends Component {
 
     return (
       <div>
-        <div className="cont-fullpage editor-cont-page hidden-xs hidden-sm">
+        <div className="cont-fullpage editor-cont-page">
           <div id="editor-left">
             <div id="editor-cont-ui">
               <div id="editor-lang">
@@ -199,27 +207,34 @@ class EditorPage extends Component {
                   <option value="kotlin">Kotlin</option>
                 </FormControl>
               </div>
-              <div id="editor-play">
-                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>PLAY</Button>
+              <div id="editor-cont-links">
+                <div>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
+                </div>
+                <div>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
+                </div>
+              </div>
+              <div id="editor-btn-run">
+                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
+                  <Glyphicon glyph="cog" />
+                  {" RUN"}
+                </Button>
               </div>
             </div>
             <div id="cont-editor">
               <MonacoEditor
-                width="100%"
-                height="100%"
+                width={editorW}
+                height={editorH}
                 language={highlighting}
                 theme="vs-dark"
                 value={code}
                 options={options}
                 onChange={this.onChange}
               />
-            </div>
-            <div id="editor-cont-links" className="editor-cont-bottom">
-              Links:
-              <a href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</a>
-              <a href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</a>
-              <a href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</a>
-              <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download SDK</a>
+              <ReactResizeDetector handleWidth handleHeight onResize={(width, height) => this.resizePlayer(width, height)} />
             </div>
           </div>
           <div id="editor-right">
@@ -244,7 +259,7 @@ class EditorPage extends Component {
                 </div>
               }
             </div>
-            <div id="editor-cont-log" className="editor-cont-bottom">
+            <div id="editor-cont-log">
               <FormControl
                 componentClass="textarea"
                 value={currentLog}
@@ -254,9 +269,6 @@ class EditorPage extends Component {
               />
             </div>
           </div>
-        </div>
-        <div id="editor-size-msg" className="visible-xs visible-sm text-center">
-          <span>Editor is not supported for small window sizes</span>
         </div>
 
         <Popup
