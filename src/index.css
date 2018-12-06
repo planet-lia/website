@@ -611,7 +611,7 @@ a.land-contact-logo {
   border-radius: 0;
 }
 
-@media screen and (max-width: 951px) {
+@media screen and (max-width: 971px) {
   #editor-cont-links > div {
     display: block;
     margin-bottom: 0;

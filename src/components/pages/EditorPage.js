@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormControl } from 'react-bootstrap';
+import { Button, FormControl, Glyphicon } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
@@ -17,7 +17,7 @@ class EditorPage extends Component {
     this.state = {
       code: '',
       currentLang: "python3",
-      currentLog: "Press PLAY to generate your first game.",
+      currentLog: "Press RUN to generate a game.",
       currentReplayFileBase64: "",
       generatingGame: false,
       gameKey: 0,
@@ -218,7 +218,10 @@ class EditorPage extends Component {
                 </div>
               </div>
               <div id="editor-btn-run">
-                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>RUN</Button>
+                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
+                  <Glyphicon glyph="cog" />
+                  {" RUN"}
+                </Button>
               </div>
             </div>
             <div id="cont-editor">
