@@ -24,7 +24,7 @@ class WaitAlert extends Component {
     return (
       <div>
         <p>
-          You have to wait 15 seconds before you can play a new game.
+          You have to wait 15 seconds before you can run a new game.
         </p>
         <p>
           {this.state.wait + " seconds remaining."}
