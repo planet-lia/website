@@ -24,7 +24,7 @@ class LandingPage extends Component {
   }
 
   onTryNow = () => {
-    window.open("https://docs.liagame.com/", "_blank");
+    window.open("/editor", "_self");
   }
 
   onPopupClose = () => {
@@ -42,7 +42,7 @@ class LandingPage extends Component {
             <div className="land-slogan">Competitive</div>
             <div className="land-slogan">Programming Game</div>
             <div id="land-desc">Bring your code to life</div>
-            <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Try Alpha</Button>
+            <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Play Online<div className="btn-subtext">Without registration</div></Button>
             <Button className="land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
           </div>
         </div>
@@ -82,9 +82,9 @@ class LandingPage extends Component {
           <div className="container" id="land-cont-watch">
             <Row>
               <Col id="land-cont-player">
-                { this.state.gameId===1 ? <Replay containerId="player1" number={ this.state.gameId } /> : null }
-                { this.state.gameId===2 ? <Replay containerId="player1" number={ this.state.gameId } /> : null }
-                { this.state.gameId===3 ? <Replay containerId="player1" number={ this.state.gameId } /> : null }
+                { this.state.gameId===1 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                { this.state.gameId===2 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                { this.state.gameId===3 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
               </Col>
             </Row>
             <Row>
@@ -140,8 +140,9 @@ class LandingPage extends Component {
           show={this.state.showTryNowPopup}
           onHide={this.onPopupClose}
           onButtonClick={this.onTryNow}
-          heading="Try Alpha"
-          buttonText="Go To Docs"
+          heading="Play Online"
+          buttonText="Online Editor"
+          center={true}
         >
           <TryOut />
         </Popup>

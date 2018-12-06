@@ -15,7 +15,7 @@ class GameReplay extends Component {
           <Col md={2} mdOffset={4}>{Math.floor(gameProps.duration/60) + ":" + gameProps.duration%60}</Col>
           <Col md={2}>{gameProps.date}</Col>
         </div>
-        <Replay containerId="gameView" number={gameNum}/>
+        <Replay containerId="gameView" replayFileBase64="" number={gameNum}/>
       </div>
     )
   }

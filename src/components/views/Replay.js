@@ -30,7 +30,9 @@ class Replay extends Component {
     window.addEventListener('mozfullscreenchange', this.resizeReplay);
     window.addEventListener('MSFullscreenChange', this.resizeReplay);
     this.updateReplayWidth();
-    this.checkAndRun();
+    if(this.props.number || this.props.replayFileBase64){
+      this.checkAndRun();
+    }
   }
 
   componentWillUnmount = () => {
@@ -74,6 +76,7 @@ class Replay extends Component {
           this.props.containerId,
           "/assets/",
           "/assets/replays/replay_" + this.props.number + ".lia",
+          this.props.replayFileBase64,
           "/assets/banned-words.txt",
           this.setGameDuration,
           this.setTime
@@ -93,6 +96,8 @@ class Replay extends Component {
   }
 
   onChangeTime = (event) => {
+    if(this.state.replay===null) return;
+
     if(this.state.replay){
         this.state.replay.changeTime(event.target.value);
       if(this.state.isPlaying===false){
@@ -105,6 +110,8 @@ class Replay extends Component {
   }
 
   onTogglePlay = () => {
+    if(this.state.replay===null) return;
+
     if(this.state.isPlaying===true){
       if(this.state.replay){
         this.state.replay.pause();
@@ -127,6 +134,8 @@ class Replay extends Component {
   }
 
   onResetSpeed = () => {
+    if(this.state.replay===null) return;
+
     if(this.state.replay){
       this.state.replay.changeSpeed(1);
     }
@@ -137,6 +146,8 @@ class Replay extends Component {
   }
 
   onSpeedChange = (event) => {
+    if(this.state.replay===null) return;
+
     if(this.state.replay){
       this.state.replay.changeSpeed(event.target.value);
     }
@@ -146,7 +157,9 @@ class Replay extends Component {
     });
   }
 
-  onCamChange(camId){
+  onCamChange = (camId) => {
+    if(this.state.replay===null) return;
+
     if(this.state.replay){
       this.state.replay.changeCamera(camId);
       if(this.state.isPlaying===false){
@@ -157,6 +170,8 @@ class Replay extends Component {
   }
 
   goFull = () => {
+    if(this.state.replay===null) return;
+    
     let goFullScreen;
 
     if(this.state.isFull===true){
@@ -175,7 +190,7 @@ class Replay extends Component {
         enabled={this.state.isFull}
         onChange={isFull => this.setState({isFull})}
       >
-        <div className="cont-player">
+        <div className={this.state.replay===null ? "cont-player no-replay" : "cont-player"}>
           <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
               <div id={ this.props.containerId } style={{width: (this.state.isFull ? this.state.forceReplayWidth : "100%") }}></div>
               <div className="player-overlay"></div>
@@ -205,7 +220,7 @@ class Replay extends Component {
                   <div className="pui-btn pui-btn-wide">
                     <span className="pui-text">{this.state.speed + "x"}</span>
                   </div>
-                  {(this.state.insideSpeedSlider ||  this.state.speedSliderTabId>0) ? (
+                  {(this.state.replay!==null) && (this.state.insideSpeedSlider ||  this.state.speedSliderTabId>0) ? (
                     <div className="pui-speed-slider"
                       tabIndex={ this.state.speedSliderTabId }
                       onBlur={
@@ -238,7 +253,7 @@ class Replay extends Component {
               </div>
               <div className="pui-btns-right">
                 <div className="pui-cont" onMouseEnter={() => this.setState({showCameras: true})} onMouseLeave={() => this.setState({showCameras: false})}>
-                  {this.state.showCameras ? (
+                  {(this.state.replay!==null) && this.state.showCameras ? (
                     <div className="pui-cont pui-cameras">
                       <div className="pui-btn" onClick={() => this.onCamChange(0)} style={this.state.camera===1 ? {color: "#facd3b"} : {}}>
                         <Glyphicon glyph="facetime-video" />

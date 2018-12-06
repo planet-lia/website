@@ -37,9 +37,9 @@ class SubscriptionPopup extends Component {
         </Modal.Body>
         <Modal.Footer>
           {this.state.allowEmailsChecked ? (
-            <label className="btn custom-btn" htmlFor="mc-embedded-subscribe" onClick={this.props.onButtonClick}>{this.props.buttonText}</label>
+            <label className="btn custom-btn custom-btn-lg" htmlFor="mc-embedded-subscribe" onClick={this.props.onButtonClick}>{this.props.buttonText}</label>
           ) : (
-            <Button bsClass="btn custom-btn" title="You have to check the box agreeing you would like to subscribe" disabled>{this.props.buttonText}</Button>
+            <Button bsClass="btn custom-btn custom-btn-lg" title="You have to check the box agreeing you would like to subscribe" disabled>{this.props.buttonText}</Button>
           )}
         </Modal.Footer>
       </Modal>

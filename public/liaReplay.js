@@ -91962,7 +91962,7 @@ function pValueString(value) {
 }
 
 
-function prepare(bannedWordsListPath, pathToReplay, logicAdapter, callbackFun) {
+function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapter, callbackFun) {
 
     if (bannedWordsListPath.length === 0) {
         readReplay(pathToReplay, logicAdapter, [], callbackFun)
@@ -91983,7 +91983,7 @@ function prepare(bannedWordsListPath, pathToReplay, logicAdapter, callbackFun) {
                         bannedWordsMapping.push(mapping)
                     })
 
-                    readReplay(pathToReplay, logicAdapter, bannedWordsMapping, callbackFun)
+                    readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping, callbackFun)
                 }
             }
         }
@@ -91991,143 +91991,155 @@ function prepare(bannedWordsListPath, pathToReplay, logicAdapter, callbackFun) {
     }
 }
 
-function readReplay(pathToReplay, logicAdapter, bannedWordsMapping, callbackFun) {
-    let xhr = new XMLHttpRequest()
-    xhr.open(
-        "GET",
-        pathToReplay
-    );
-    xhr.responseType = "arraybuffer"
-    xhr.onload = function(evt) {
-        let reader = protobufMin.Reader.create(new Uint8Array(xhr.response))
+function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping, callbackFun) {
+    // If there is already a base64 encoded replay file then use it
+    if (replayFileBase64.length > 0) {
+        let replayData = convertBase64ToUint8Array(replayFileBase64)
+        parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun)
+    }
+    else {
+        let xhr = new XMLHttpRequest()
+        xhr.open(
+            "GET",
+            pathToReplay
+        );
+        xhr.responseType = "arraybuffer"
+        xhr.onload = function(evt) {
+            let replayData = new Uint8Array(xhr.response)
+            parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun)
+        }
+        xhr.send(null);
+    }
+}
 
-        let curatedTextsDict = {}
+function parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun) {
+    let reader = protobufMin.Reader.create(replayData)
 
-        while (reader.pos < reader.len) {
-            let msg = protobuf.curves.Element.decodeDelimited(reader)
-            let m = protobuf.curves.Element.toObject(msg)
+    let curatedTextsDict = {}
 
-            let e = null
+    while (reader.pos < reader.len) {
+        let msg = protobuf.curves.Element.decodeDelimited(reader)
+        let m = protobuf.curves.Element.toObject(msg)
 
-            if (m.hasOwnProperty("initialDataEvent")) {
-                m = m.initialDataEvent
-                e = new curvesDb.events.InitialDataEvent(
-                    m.mapWidth, m.mapHeight, m.username1, m.username2, m.gameDuration, m.health,
-                    m.viewingAreaLength, m.viewingAreaWidth, m.viewingAreaOffset,
-                    new curvesDb.CurveColor(m.background.r, m.background.g, m.background.b, m.background.a),
-                    m.nBulletsInMagazine
-                )
+        let e = null
+
+        if (m.hasOwnProperty("initialDataEvent")) {
+            m = m.initialDataEvent
+            e = new curvesDb.events.InitialDataEvent(
+                m.mapWidth, m.mapHeight, m.username1, m.username2, m.gameDuration, m.health,
+                m.viewingAreaLength, m.viewingAreaWidth, m.viewingAreaOffset,
+                new curvesDb.CurveColor(m.background.r, m.background.g, m.background.b, m.background.a),
+                m.nBulletsInMagazine
+            )
+        }
+        else if (m.hasOwnProperty("createEntityEvent")) {
+            m = m.createEntityEvent
+            e = new curvesDb.events.CreateEntityEvent(m.eid, m.team, m.type)
+        }
+        else if (m.hasOwnProperty("curve")) {
+            m = m.curve
+            logicAdapter.setCurveIdGenerator(m.id - 1)
+
+            let protoCurveTypes = protobuf.curves.Curve.CurveType
+            let curveTypes = curvesDb.curves
+
+            if (m.ctype === protoCurveTypes.CIRCULAR_LINEAR_CURVE) {
+                e = new curveTypes.CircularLinearCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("createEntityEvent")) {
-                m = m.createEntityEvent
-                e = new curvesDb.events.CreateEntityEvent(m.eid, m.team, m.type)
+            else if (m.ctype === protoCurveTypes.COLOR_CURVE) {
+                e = new curveTypes.ColorCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("curve")) {
-                m = m.curve
-                logicAdapter.setCurveIdGenerator(m.id - 1)
-
-                let protoCurveTypes = protobuf.curves.Curve.CurveType
-                let curveTypes = curvesDb.curves
-
-                if (m.ctype === protoCurveTypes.CIRCULAR_LINEAR_CURVE) {
-                    e = new curveTypes.CircularLinearCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.COLOR_CURVE) {
-                    e = new curveTypes.ColorCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.LINEAR_CURVE) {
-                    e = new curveTypes.LinearCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.LINEAR_VECTOR_CURVE) {
-                    e = new curveTypes.LinearVectorCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.PULSE_CURVE) {
-                    e = new curveTypes.PulseCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.STEP_CURVE) {
-                    e = new curveTypes.StepCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.STEP_VECTOR_CURVE) {
-                    e = new curveTypes.StepVectorCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.MESSAGE_CURVE) {
-                    e = new curveTypes.MessageCurve(m.eid, m.type)
-                }
-                else if (m.ctype === protoCurveTypes.TEXT_BUBBLE_CURVE) {
-                    e = new curveTypes.TextBubbleCurve(m.eid, m.type)
-                }
-                else {
-                    throw "Unknown curve type. " + m
-                }
+            else if (m.ctype === protoCurveTypes.LINEAR_CURVE) {
+                e = new curveTypes.LinearCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("pulsePoint")) {
-                m = m.pulsePoint
-                e = new curvesDb.points.PulsePoint(pValueInt(m.t), pValueInt(m.cid))
+            else if (m.ctype === protoCurveTypes.LINEAR_VECTOR_CURVE) {
+                e = new curveTypes.LinearVectorCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("circularLinearPoint")) {
-                m = m.circularLinearPoint
-
-                let types = curvesDb.curves.CircularLinearCurve.CircularLinearType
-                let protoTypes = protobuf.curves.CircularLinearPoint.CircularLinearType
-
-                let type = types.C
-                if (m.type === protoTypes.CM) {
-                    type = types.CM
-                }
-                else if (m.type === protoTypes.CMC) {
-                    type = types.CMC
-                }
-                else if (m.type === protoTypes.L) {
-                    type = types.L
-                }
-
-                e = new curvesDb.points.CircularLinearPoint(pValueInt(m.t), pValueInt(m.cid), pValueInt(m.x),
-                    pValueInt(m.y), type)
+            else if (m.ctype === protoCurveTypes.PULSE_CURVE) {
+                e = new curveTypes.PulseCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("colorPoint")) {
-                m = m.colorPoint
-                e = new curvesDb.points.ColorPoint(pValueInt(m.t), pValueInt(m.cid),
-                    new curvesDb.CurveColor(pValueInt(m.c.r), pValueInt(m.c.g), pValueInt(m.c.b), pValueInt(m.c.a)))
+            else if (m.ctype === protoCurveTypes.STEP_CURVE) {
+                e = new curveTypes.StepCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("basicPoint")) {
-                m = m.basicPoint
-                e = new curvesDb.points.BasicPoint(pValueInt(m.t), pValueInt(m.cid), pValueInt(m.x))
+            else if (m.ctype === protoCurveTypes.STEP_VECTOR_CURVE) {
+                e = new curveTypes.StepVectorCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("vectorPoint")) {
-                m = m.vectorPoint
-                e = new curvesDb.points.VectorPoint(pValueInt(m.t), pValueInt(m.cid), pValueInt(m.x), pValueInt(m.y))
+            else if (m.ctype === protoCurveTypes.MESSAGE_CURVE) {
+                e = new curveTypes.MessageCurve(m.eid, m.type)
             }
-            else if (m.hasOwnProperty("messagePoint")) {
-                m = m.messagePoint
-                e = new curvesDb.points.MessagePoint(pValueInt(m.t), pValueInt(m.cid), pValueString(m.msg))
-            }
-            else if (m.hasOwnProperty("textBubblePoint")) {
-                m = m.textBubblePoint
-
-                let msg = pValueString(m.msg)
-                msg = (msg === "") ? msg : filterText(msg, bannedWordsMapping, curatedTextsDict)
-
-                e = new curvesDb.points.TextBubblePoint(pValueInt(m.t), pValueInt(m.cid),  msg,
-                    pValueInt(m.align), pValueInt(m.x), pValueInt(m.y))
-            }
-            else if (m.hasOwnProperty("gameOverEvent")) {
-                m = m.gameOverEvent
-                let winner = shared.Team.TEAM_1
-                if (m.winner !== protobuf.curves.GameOverEvent.Team.TEAM_1) {
-                    winner = shared.Team.TEAM_2
-                }
-                e = new curvesDb.events.GameOverEvent(pValueInt(m.t), winner, pValueInt(m.bot1CrashTime), pValueInt(m.bot2CrashTime))
+            else if (m.ctype === protoCurveTypes.TEXT_BUBBLE_CURVE) {
+                e = new curveTypes.TextBubbleCurve(m.eid, m.type)
             }
             else {
-                throw "Element is not recognized. " + m
+                throw "Unknown curve type. " + m
+            }
+        }
+        else if (m.hasOwnProperty("pulsePoint")) {
+            m = m.pulsePoint
+            e = new curvesDb.points.PulsePoint(pValueInt(m.t), pValueInt(m.cid))
+        }
+        else if (m.hasOwnProperty("circularLinearPoint")) {
+            m = m.circularLinearPoint
+
+            let types = curvesDb.curves.CircularLinearCurve.CircularLinearType
+            let protoTypes = protobuf.curves.CircularLinearPoint.CircularLinearType
+
+            let type = types.C
+            if (m.type === protoTypes.CM) {
+                type = types.CM
+            }
+            else if (m.type === protoTypes.CMC) {
+                type = types.CMC
+            }
+            else if (m.type === protoTypes.L) {
+                type = types.L
             }
 
-            logicAdapter.insertIntoCurvesDB(e)
+            e = new curvesDb.points.CircularLinearPoint(pValueInt(m.t), pValueInt(m.cid), pValueInt(m.x),
+                pValueInt(m.y), type)
+        }
+        else if (m.hasOwnProperty("colorPoint")) {
+            m = m.colorPoint
+            e = new curvesDb.points.ColorPoint(pValueInt(m.t), pValueInt(m.cid),
+                new curvesDb.CurveColor(pValueInt(m.c.r), pValueInt(m.c.g), pValueInt(m.c.b), pValueInt(m.c.a)))
+        }
+        else if (m.hasOwnProperty("basicPoint")) {
+            m = m.basicPoint
+            e = new curvesDb.points.BasicPoint(pValueInt(m.t), pValueInt(m.cid), pValueInt(m.x))
+        }
+        else if (m.hasOwnProperty("vectorPoint")) {
+            m = m.vectorPoint
+            e = new curvesDb.points.VectorPoint(pValueInt(m.t), pValueInt(m.cid), pValueInt(m.x), pValueInt(m.y))
+        }
+        else if (m.hasOwnProperty("messagePoint")) {
+            m = m.messagePoint
+            e = new curvesDb.points.MessagePoint(pValueInt(m.t), pValueInt(m.cid), pValueString(m.msg))
+        }
+        else if (m.hasOwnProperty("textBubblePoint")) {
+            m = m.textBubblePoint
+
+            let msg = pValueString(m.msg)
+            msg = (msg === "") ? msg : filterText(msg, bannedWordsMapping, curatedTextsDict)
+
+            e = new curvesDb.points.TextBubblePoint(pValueInt(m.t), pValueInt(m.cid),  msg,
+                pValueInt(m.align), pValueInt(m.x), pValueInt(m.y))
+        }
+        else if (m.hasOwnProperty("gameOverEvent")) {
+            m = m.gameOverEvent
+            let winner = shared.Team.TEAM_1
+            if (m.winner !== protobuf.curves.GameOverEvent.Team.TEAM_1) {
+                winner = shared.Team.TEAM_2
+            }
+            e = new curvesDb.events.GameOverEvent(pValueInt(m.t), winner, pValueInt(m.bot1CrashTime), pValueInt(m.bot2CrashTime))
+        }
+        else {
+            throw "Element is not recognized. " + m
         }
 
-        callbackFun()
+        logicAdapter.insertIntoCurvesDB(e)
     }
-    xhr.send(null);
+
+    callbackFun()
 }
 
 function filterText(text, bannedWordsMapping, curatedTextsDict) {
@@ -92147,7 +92159,18 @@ function filterText(text, bannedWordsMapping, curatedTextsDict) {
 
     curatedTextsDict[text] = newText
 
+
     return newText
+}
+
+function convertBase64ToUint8Array(base64) {
+    var binary_string =  window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array( len );
+    for (var i = 0; i < len; i++)        {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes;
 }
 
 module.exports = {
@@ -92157,7 +92180,7 @@ module.exports = {
 (function (global){
 
 
-function playReplay(divId, pathToAssets, pathToReplay, pathToBannedWordsList, setGameDuration, setTime) {
+function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToBannedWordsList, setGameDuration, setTime) {
     global.kotlin = require('kotlin')
     let pixi = require('pixi.js')
     let Sprite = pixi.Sprite
@@ -92234,7 +92257,7 @@ function playReplay(divId, pathToAssets, pathToReplay, pathToBannedWordsList, se
     }
 
     // Load replay
-    ReplayReader.prepare(pathToBannedWordsList, pathToReplay, logicAdapter, runGame)
+    ReplayReader.prepare(pathToBannedWordsList, pathToReplay, replayFileBase64, logicAdapter, runGame)
 
     function gameLoop(delta) {
         let scaledDelta = calculateNewTime(delta)
@@ -92339,8 +92362,9 @@ function playReplay(divId, pathToAssets, pathToReplay, pathToBannedWordsList, se
     app.forceUpdate = function() {
         app.ticker.update()
     }
+    app.resize = resize
 
-    return app
+  return app
 }
 
 

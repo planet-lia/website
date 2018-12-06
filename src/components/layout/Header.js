@@ -47,6 +47,9 @@ class Header extends Component {
                   <Link to="/games">Games</Link>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
+                  <Link to="/editor">Online Editor</Link>
+                </li>
+                <li role="presentation" onClick={this.onSelectNavItem}>
                   <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>
                 </li>
               </ul>

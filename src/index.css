@@ -28,6 +28,10 @@ a:hover {
   color: #34C4A2;
 }
 
+textarea {
+  resize: none;
+}
+
 #root {
   height: 100%;
 }
@@ -55,12 +59,23 @@ a:hover {
 /* Layout */
 
 #main-container {
-   min-height: 100%;
-   position: relative;
+  min-height: 100%;
+  position: relative;
 }
 
-#main-content {
+.main-content {
   padding-bottom: 7.6em;
+}
+
+.main-content.no-footer {
+  padding-bottom: 0;
+}
+
+.cont-fullpage {
+  width: 100%;
+  height: calc(100vh - 50px - 0.6em - 1.8px);
+  position: relative;
+
 }
 
 #main-header {
@@ -238,8 +253,11 @@ a:hover {
   border-radius: 0;
   background-color: #018e6a; /*#03965c*/
   color: #ddd;
-  font-size: 16px;
   font-weight: bold;
+}
+
+.custom-btn-lg {
+  font-size: 16px;
 }
 
 .custom-btn:hover {
@@ -251,7 +269,11 @@ a:hover {
     color: #ddd;
 }
 
-/* Landing Page*/
+.btn-subtext {
+  font-size: 0.5em;
+}
+
+/* Landing Page */
 #land-pic {
   width: 100%;
   background-color: #333;
@@ -299,6 +321,8 @@ a:hover {
 .land-btn.btn-try {
   background-color: #018e6a; /*#03965c*/
   color: #ddd;
+  font-size: 1.5em;
+  padding: 0.316em 1.2em;
 }
 
 .land-btn.btn-try:hover {
@@ -443,6 +467,131 @@ a.land-contact-logo {
   margin: 0.4em 0;
 }
 
+/* Editor Page */
+
+.editor-cont-page {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #1e1e1e;
+}
+
+.editor-cont-page > div {
+  flex-grow: 1;
+  width: calc(50vw - 1px);
+  border-top: 1px solid #333;
+}
+
+.editor-cont-page > #editor-left {
+  border-right: 1px solid #333;
+}
+
+.editor-cont-page > #editor-right {
+  border-left: 1px solid #333;
+}
+
+.editor-cont-page > div > div{
+  width: 100%;
+}
+
+.editor-cont-page > div > .editor-cont-bottom {
+  width: inherit;
+  position: absolute;
+  bottom: 0;
+  border-bottom: 1px solid #333;
+  border-top: 1px solid #333;
+}
+
+#editor-cont-ui {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 5px;
+  border-bottom: 1px solid #333;
+}
+
+#editor-lang > select {
+  width: 7.5em;
+  background-color: #333;
+  color: #ddd;
+  border: 1px solid #333;
+}
+
+#editor-play {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.editor-cont-page > div > #cont-editor {
+  width: inherit;
+  position: absolute;
+  top: 42px;
+  bottom: 42px;
+}
+
+#editor-cont-links {
+  color: #666;
+  padding: 10px;
+}
+
+#editor-cont-links > a {
+  margin-left: 10px;
+}
+
+#editor-notification {
+  text-align: center;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #333;
+  color: #666;
+}
+
+#editor-cont-replay {
+  position: relative;
+  height: calc(28.125vw + 2.7em);
+}
+
+#editor-loader-overlay {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.1);
+}
+
+#cont-loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+#editor-cont-log {
+  top: calc(28.125vw + 2.7em + 1px + 41px);
+}
+
+#editor-cont-log > textarea {
+  width: 100%;
+  height: 100%;
+}
+
+#editor-size-msg {
+  font-size: 1.5em;
+  padding: 25px 0;
+}
+
+/* Editor Page Overwrites*/
+
+.form-control.editor-input {
+  color: #666;
+  background-color: #1e1e1e;
+  border: none;
+  border-radius: 0;
+}
+
 /* Replay Thumbnail */
 
 .cont-thumb {
@@ -492,6 +641,7 @@ a.land-contact-logo {
 /* Player */
 .cont-player {
   background-color: #1c1c1a;
+  overflow: hidden;
 }
 
 .cont-player > .row-replay {
@@ -502,6 +652,19 @@ a.land-contact-logo {
 .cont-player > .row-replay > div {
   font-size: 0;
   margin: 0 auto;
+}
+
+.cont-player.no-replay > .row-replay {
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+
+.cont-player.no-replay > .row-replay > div {
+  position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .cont-player > .row-replay > .player-overlay {
@@ -578,6 +741,10 @@ a.land-contact-logo {
   cursor: pointer;
 }
 
+.no-replay .pui-buttons .pui-btn {
+  cursor: not-allowed;
+}
+
 .pui-buttons .pui-cont {
   display: inline-block;
   height: inherit;
@@ -645,6 +812,11 @@ a.land-contact-logo {
   cursor: pointer;
 }
 
+.no-replay .pui-timeline > .slider,
+.no-replay .slider > .slider-track{
+  cursor: not-allowed;
+}
+
 .pui-timeline > .slider > .slider-track {
   top: 0;
   padding: 0;
@@ -666,6 +838,12 @@ a.land-contact-logo {
   filter: alpha(opacity=100);
   opacity: 1;
   transition-delay: 0s;
+}
+
+.no-replay .pui-timeline > .slider:hover > .slider-handle,
+.no-replay .pui-timeline > .slider > .slider-handle:active {
+  filter: alpha(opacity=0);
+  opacity: 0;
 }
 
 .pui-speed-slider > .slider {
