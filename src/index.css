@@ -472,10 +472,14 @@ a.land-contact-logo {
 .editor-cont-page {
   width: 100%;
   min-width: 768px;
-  min-height: calc(28.125vw + 2.7em + 1px + 41px + 6em);
+  min-height: calc(28.125vw + 2.7em + 1px + 41px + 8em);
   display: flex;
   flex-wrap: nowrap;
   background-color: #1e1e1e;
+}
+
+.editor-cont-page.editor-overflow {
+  min-height: calc(15.42em + 2.7em + 1px + 41px + 8em);  /* minwidth * half of 16:9, 768 * 0.28125 */
 }
 
 .editor-cont-page > div {
