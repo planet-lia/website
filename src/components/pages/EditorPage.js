@@ -156,7 +156,7 @@ class EditorPage extends Component {
 
   resizePlayer = (width, height) => {
     if(width < 384){  // half of min width: 768/2
-      width = 384;
+      width = 383;
     }
     this.setState({editorW: width, editorH: height});
   }
@@ -200,7 +200,7 @@ class EditorPage extends Component {
 
     return (
       <div>
-        <div className={editorW===384 ? "cont-fullpage editor-cont-page editor-overflow" : "cont-fullpage editor-cont-page"}>
+        <div className="cont-fullpage editor-cont-page">
           <div id="editor-left">
             <div id="editor-cont-ui">
               <div id="editor-lang">
@@ -210,8 +210,18 @@ class EditorPage extends Component {
                   <option value="kotlin">Kotlin</option>
                 </FormControl>
               </div>
-              <div id="editor-play">
-                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>PLAY</Button>
+              <div id="editor-cont-links">
+                <div>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
+                </div>
+                <div>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
+                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
+                </div>
+              </div>
+              <div id="editor-btn-run">
+                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>RUN</Button>
               </div>
             </div>
             <div id="cont-editor">
@@ -225,13 +235,6 @@ class EditorPage extends Component {
                 onChange={this.onChange}
               />
               <ReactResizeDetector handleWidth handleHeight onResize={(width, height) => this.resizePlayer(width, height)} />
-            </div>
-            <div id="editor-cont-links" className="editor-cont-bottom">
-              Links:
-              <a href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</a>
-              <a href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</a>
-              <a href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</a>
-              <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download SDK</a>
             </div>
           </div>
           <div id="editor-right">
@@ -256,7 +259,7 @@ class EditorPage extends Component {
                 </div>
               }
             </div>
-            <div id="editor-cont-log" className="editor-cont-bottom">
+            <div id="editor-cont-log">
               <FormControl
                 componentClass="textarea"
                 value={currentLog}

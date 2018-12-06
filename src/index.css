@@ -472,25 +472,19 @@ a.land-contact-logo {
 .editor-cont-page {
   width: 100%;
   min-width: 768px;
-  min-height: calc(28.125vw + 2.7em + 1px + 41px + 8em);
+  min-height: calc(28.125vw + 2.7em - 4px + 41px + 8em);
   display: flex;
   flex-wrap: nowrap;
   background-color: #1e1e1e;
-}
+  border-top: 1px solid #333;
 
-.editor-cont-page.editor-overflow {
-  min-height: calc(15.42em + 2.7em + 1px + 41px + 8em);  /* minwidth * half of 16:9, 768 * 0.28125 */
 }
 
 .editor-cont-page > div {
   position: relative;
   flex-grow: 1;
-  width: calc(50vw - 1px);
-  border-top: 1px solid #333;
-}
-
-.editor-cont-page.editor-overflow > div {
-  margin-bottom: 19px
+  width: calc(50% - 1px);
+  border-bottom: 1px solid #333;
 }
 
 .editor-cont-page > #editor-left {
@@ -505,20 +499,22 @@ a.land-contact-logo {
   width: 100%;
 }
 
-.editor-cont-page > div > .editor-cont-bottom {
+.editor-cont-page > div > div:last-child {
   position: absolute;
   right: 0;
   left: 0;
   bottom: 0;
-  border-bottom: 1px solid #333;
-  border-top: 1px solid #333;
 }
 
 #editor-cont-ui {
   display: flex;
   flex-wrap: nowrap;
-  padding: 5px;
   border-bottom: 1px solid #333;
+}
+#editor-lang,
+#editor-btn-run {
+  margin: 5px;
+  align-self: center
 }
 
 #editor-lang > select {
@@ -528,25 +524,40 @@ a.land-contact-logo {
   border: 1px solid #333;
 }
 
-#editor-play {
+#editor-cont-links {
+  color: #666;
+}
+
+#editor-cont-links > div {
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#editor-cont-links a {
+  position: relative;
+  top: 1px;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+#editor-btn-run {
   flex-grow: 1;
   text-align: right;
 }
 
+#editor-btn-run > button {
+  position: relative;
+  top: 1px;
+  margin-left: 20px;
+}
+
 .editor-cont-page > div > #cont-editor {
-  width: inherit;
+  width: 100%;
   position: absolute;
-  top: 42px;
-  bottom: 42px;
-}
-
-#editor-cont-links {
-  color: #666;
-  padding: 10px;
-}
-
-#editor-cont-links > a {
-  margin-left: 10px;
+  top: 41px;
+  bottom: 24px;
+  border-bottom: 1px solid #333;
 }
 
 #editor-notification {
@@ -559,7 +570,7 @@ a.land-contact-logo {
 
 #editor-cont-replay {
   position: relative;
-  height: calc(28.125vw + 2.7em);
+  height: calc(28.125vw + 2.7em - 4px);
 }
 
 #editor-loader-overlay {
@@ -582,11 +593,8 @@ a.land-contact-logo {
 }
 
 #editor-cont-log {
-  top: calc(28.125vw + 2.7em + 1px + 41px);
-}
-
-.editor-overflow #editor-cont-log {
-  top: calc(15.42em + 2.7em + 1px + 41px);  /* minwidth * half of 16:9, 768 * 0.28125 */
+  top: calc(28.125vw + 2.7em - 4px + 41px);
+  border-top: 1px solid #333;
 }
 
 #editor-cont-log > textarea {
@@ -601,6 +609,34 @@ a.land-contact-logo {
   background-color: #1e1e1e;
   border: none;
   border-radius: 0;
+}
+
+@media screen and (max-width: 951px) {
+  #editor-cont-links > div {
+    display: block;
+    margin-bottom: 0;
+  }
+  #editor-cont-links > div:last-child {
+    margin-bottom: 5px;
+  }
+
+  .editor-cont-page > div > #cont-editor {
+    top: 72px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .editor-cont-page {
+    min-height: calc(15.42em + 2.7em - 4px + 41px + 8em);  /* minwidth * half of 16:9, 768 * 0.28125 */
+  }
+
+  .editor-cont-page > div {
+    margin-bottom: 19px
+  }
+
+  #editor-cont-log {
+    top: calc(15.42em + 2.7em - 4px + 41px);  /* minwidth * half of 16:9, 768 * 0.28125 */
+  }
 }
 
 /* Replay Thumbnail */
