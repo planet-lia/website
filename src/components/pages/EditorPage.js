@@ -3,6 +3,7 @@ import { Button, FormControl } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
+import ReactResizeDetector from 'react-resize-detector';
 
 import Replay from '../views/Replay';
 import Popup from '../views/Popup';
@@ -21,7 +22,8 @@ class EditorPage extends Component {
       generatingGame: false,
       gameKey: 0,
       isLoadingCode: true,
-      editor: null,
+      editorW: "100%",
+      editorH: "100%",
       lastPlay: null,
       showWaitAlert: false,
       waitRemain: 0
@@ -152,6 +154,13 @@ class EditorPage extends Component {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
+  resizePlayer = (width, height) => {
+    if(width < 384){  // half of min width: 768/2
+      width = 384;
+    }
+    this.setState({editorW: width, editorH: height});
+  }
+
   scrollToBottom = () => {
     if(this.textLog){
       this.textLog.scrollTop = this.textLog.scrollHeight;
@@ -173,6 +182,8 @@ class EditorPage extends Component {
       generatingGame,
       gameKey,
       isLoadingCode,
+      editorW,
+      editorH,
       showWaitAlert,
       waitRemain
     } = this.state;
@@ -189,7 +200,7 @@ class EditorPage extends Component {
 
     return (
       <div>
-        <div className="cont-fullpage editor-cont-page hidden-xs hidden-sm">
+        <div className={editorW===384 ? "cont-fullpage editor-cont-page editor-overflow" : "cont-fullpage editor-cont-page"}>
           <div id="editor-left">
             <div id="editor-cont-ui">
               <div id="editor-lang">
@@ -205,14 +216,15 @@ class EditorPage extends Component {
             </div>
             <div id="cont-editor">
               <MonacoEditor
-                width="100%"
-                height="100%"
+                width={editorW}
+                height={editorH}
                 language={highlighting}
                 theme="vs-dark"
                 value={code}
                 options={options}
                 onChange={this.onChange}
               />
+              <ReactResizeDetector handleWidth handleHeight onResize={(width, height) => this.resizePlayer(width, height)} />
             </div>
             <div id="editor-cont-links" className="editor-cont-bottom">
               Links:
@@ -254,9 +266,6 @@ class EditorPage extends Component {
               />
             </div>
           </div>
-        </div>
-        <div id="editor-size-msg" className="visible-xs visible-sm text-center">
-          <span>Editor is not supported for small window sizes</span>
         </div>
 
         <Popup
