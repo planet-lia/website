@@ -14,7 +14,8 @@ class SignInForm extends Component {
       username: "",
       usernameError: null,
       password: "",
-      passwordError: null
+      passwordError: null,
+      responseError: null
     }
   }
 
@@ -22,15 +23,33 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const {username, password} = this.state;
-    const {dispatch} = this.props;
+    const {dispatch, closePopup} = this.props;
 
     this.setState({
       usernameError: null,
-      passwordError: null
+      passwordError: null,
+      responseError: null
     });
 
     if(this.validateForm()){
-      await dispatch(authActions.login(username, password)).then(() => console.log("dispatch"));
+      const respLogin = await dispatch(authActions.login(username, password));
+      if(respLogin.username){
+        closePopup();
+        this.setState({
+          username: "",
+          usernameError: null,
+          password: "",
+          passwordError: null,
+          responseError: null
+        });
+
+      } else if(respLogin.error){
+        this.setState({responseError: respLogin.error});
+        console.log(respLogin.error);
+      } else {
+        this.setState({responseError: "Error"});
+      }
+
     }
   }
 
@@ -63,12 +82,7 @@ class SignInForm extends Component {
   }
 
   render(){
-    const {username, usernameError, password, passwordError, showLogingInerror} = this.state;
-    const {isLoggingIn, isAuthenticated, error, closePopup} = this.props;
-
-    if(isAuthenticated){
-      closePopup();
-    }
+    const {username, usernameError, password, passwordError, responseError} = this.state;
 
     return (
       <form onSubmit={this.formSubmit} noValidate>
@@ -95,9 +109,9 @@ class SignInForm extends Component {
           {passwordError && <HelpBlock>{passwordError}</HelpBlock>}
         </FormGroup>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
-        {(isLoggingIn!==true && usernameError===null && passwordError===null && error)
+        {responseError
           ? (<FormGroup validationState="error">
-              <HelpBlock>{error.toString()}</HelpBlock>
+              <HelpBlock>{responseError}</HelpBlock>
             </FormGroup>)
           : null
         }
@@ -108,11 +122,9 @@ class SignInForm extends Component {
 }
 
 function mapStateToProps(state) {
-    const { isLoggingIn, isAuthenticated, error } = state.authentication;
+    const { isLoggingIn } = state.authentication;
     return {
-        isLoggingIn,
-        isAuthenticated,
-        error
+        isLoggingIn
     };
 }
 

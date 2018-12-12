@@ -11,6 +11,8 @@ import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-
 import { faEnvelope  } from '@fortawesome/free-solid-svg-icons';
 library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope);
 
+
+
 class App extends Component {
   constructor(props){
 		super(props);
@@ -20,20 +22,28 @@ class App extends Component {
     };
   }
   onNavSignClick = (signingMode) => {
-    if(signingMode===1){
-      this.setState({
-        showSignInPopup: true,
-        showSignUpPopup: false
-      });
-    } else if(signingMode===2){
-      this.setState({
-        showSignInPopup: false,
-        showSignUpPopup: true
-      });
+    if(this.props.isAuthenticated){
+      this.closePopups();
+    } else {
+      if(signingMode===1){
+        this.setState({
+          showSignInPopup: true,
+          showSignUpPopup: false
+        });
+      } else if(signingMode===2){
+        this.setState({
+          showSignInPopup: false,
+          showSignUpPopup: true
+        });
+      }
     }
   }
 
   onSignPopupClose = () => {
+    this.closePopups();
+  }
+
+  closePopups = () => {
     this.setState({
       showSignInPopup: false,
       showSignUpPopup: false

@@ -18,11 +18,11 @@ function login(username, password) {
       const decoded = jwtDecode(respLogin.token);
       localStorage.setItem("token", respLogin.token);
       setAuthHeader(respLogin.token);
-      dispatch(success( decoded.data.username ));
+      return dispatch(success( decoded.data.username ));
     } catch(err) {
       localStorage.removeItem("token");
       setAuthHeader();
-      dispatch(failure(err.toString()));
+      return dispatch(failure(err.toString()));
     }
   }
   function request(username) { return {type: actionTypesAuth.LOGIN_REQUEST, username} }
@@ -50,11 +50,11 @@ function confirmEmail(code) {
       const decoded = jwtDecode(respConfirm.token);
       localStorage.setItem("token", respConfirm.token);
       setAuthHeader(respConfirm.token);
-      dispatch(success( decoded.data.username ));
+      return dispatch(success( decoded.data.username ));
     } catch(err) {
       localStorage.removeItem("user");
       setAuthHeader();
-      dispatch(failure(err.toString()));
+      return dispatch(failure(err.toString()));
     }
   }
   function request() { return {type: actionTypesAuth.CONFIRM_EMAIL_REQUEST} }
