@@ -10,10 +10,23 @@ class GameReplay extends Component {
     var gameProps = data.find(function (obj) { return obj.gameNum === gameNum; });
     return (
       <div>
+
         <div className="cont-game-title">
-          <div className="game-title">{gameProps.player1 + " vs " + gameProps.player2}</div>
-          <Col md={2} mdOffset={4}>{Math.floor(gameProps.duration/60) + ":" + gameProps.duration%60}</Col>
-          <Col md={2}>{gameProps.date}</Col>
+          <div className="game-stats text-center">{gameProps.date}</div>
+          <div className="game-title">
+            <div className="text-right">
+              {gameProps.player1}
+            </div>
+            <div>
+              vs
+            </div>
+            <div className="text-left">
+              {gameProps.player2}
+            </div>
+          </div>
+          <div className="game-stats text-center">
+            {"Duration: " + Math.floor(gameProps.duration/60) + ":" + gameProps.duration%60}
+          </div>
         </div>
         <Replay containerId="gameView" replayFileBase64="" number={gameNum}/>
       </div>

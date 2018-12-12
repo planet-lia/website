@@ -80,22 +80,25 @@ class LandingPage extends Component {
             <div className="land-subtext">Grab popcorn and watch bots fight each other.</div>
           </div>
           <div className="container" id="land-cont-watch">
+            { this.state.gameId
+              ? (<Row>
+                  <Col id="land-cont-player">
+                    { this.state.gameId===1 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                    { this.state.gameId===2 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                    { this.state.gameId===3 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
+                  </Col>
+                </Row>)
+              : null
+            }
             <Row>
-              <Col id="land-cont-player">
-                { this.state.gameId===1 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
-                { this.state.gameId===2 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
-                { this.state.gameId===3 ? <Replay containerId="player1" replayFileBase64="" number={ this.state.gameId } /> : null }
-              </Col>
-            </Row>
-            <Row>
               <Col md={4}>
-                <Scrollchor to="#land-cont-player"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="Ninja7 vs SuperGit" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="Ninja7 vs SuperGit" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-player"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-player"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
               </Col>
             </Row>
           </div>
