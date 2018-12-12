@@ -22,20 +22,16 @@ class App extends Component {
     };
   }
   onNavSignClick = (signingMode) => {
-    if(this.props.isAuthenticated){
-      this.closePopups();
-    } else {
-      if(signingMode===1){
-        this.setState({
-          showSignInPopup: true,
-          showSignUpPopup: false
-        });
-      } else if(signingMode===2){
-        this.setState({
-          showSignInPopup: false,
-          showSignUpPopup: true
-        });
-      }
+    if(signingMode===1){
+      this.setState({
+        showSignInPopup: true,
+        showSignUpPopup: false
+      });
+    } else if(signingMode===2){
+      this.setState({
+        showSignInPopup: false,
+        showSignUpPopup: true
+      });
     }
   }
 
