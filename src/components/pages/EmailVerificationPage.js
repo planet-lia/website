@@ -10,20 +10,24 @@ class EmailVerificationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      codeExists: false,
-      isAlreadyAuth: false
+      isCheckingForCode: true,
+      codeExists: false
     }
   }
 
   componentDidMount = () => {
     const parms = queryString.parse(this.props.location.search)
-    if(this.isAuthenticated){
-      this.setState({isAlreadyAuth: true});
+    if(parms.code){
+      this.setState({
+        codeExists: true,
+        isCheckingForCode: false
+      });
+      this.confirmEmailFromCode(parms.code);
     } else {
-      if(parms.code){
-        this.setState({codeExists: true});
-        this.confirmEmailFromCode(parms.code);
-      }
+      this.setState({
+        codeExists: false,
+        isCheckingForCode: false
+      });
     }
   }
 
@@ -32,33 +36,35 @@ class EmailVerificationPage extends Component {
   }
 
   getMessage = () => {
-    const { isAlreadyAuth } = this.state;
+    const { isCheckingForCode } = this.state;
     const { isVerifing, isAuthenticated, error } = this.props;
+    let msg = "";
 
-    if(isAlreadyAuth){
-      return "Your email was already verified. You are logged in.";
-    }
-    if(isVerifing){
-      return "Verifing...";
+    if(isVerifing || isCheckingForCode){
+      msg = "Verifing...";
     } else {
-      if(isAuthenticated){
-        return "Your email was successfully verified!";
+      if(error){
+        msg = "Verification failed, with error: " + error;
+
+      } else if(isAuthenticated){
+        msg = "Your email was successfully verified!";
       } else {
-        return ("Verification failed, with error: " + error);
+        msg = "Something went wrong.";
       }
     }
+    return msg;
 
   }
 
   render(){
+    const { isCheckingForCode, codeExists } = this.state;
     return (
-      this.state.codeExists
-        ? (
-          <div className="container">
-            <div className="text-center">{this.getMessage}</div>
-          </div>
-        )
-        : (<Redirect to="/" />)
+      <div className="container">
+        {(codeExists || isCheckingForCode)
+          ? (<div className="text-center">{this.getMessage()}</div>)
+          : (<Redirect to="/" />)
+        }
+      </div>
     );
   }
 }

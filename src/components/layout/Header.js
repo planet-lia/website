@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { authActions } from '../../utils/actions/authActions'
+
+import { connect } from 'react-redux';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +31,10 @@ class Header extends Component {
     this.setState({ isExpanded: false });
   }
 
+  logout = async () => {
+    await this.props.dispatch(authActions.logout());
+  }
+
   render(){
     return (
       <div id="main-header">
@@ -50,9 +58,9 @@ class Header extends Component {
                   <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>
                 </li>
               </ul>
-              {this.props.isSignedIn ? (
+              {this.props.isAuthenticated ? (
                 <Nav pullRight>
-                  <NavItem onClick={() => this.onSelectNavSignItem(0)}>
+                  <NavItem onClick={this.logout}>
                     Sign Out
                   </NavItem>
                 </Nav>
@@ -75,4 +83,12 @@ class Header extends Component {
 
 }
 
-export default Header;
+function mapStateToProps(state) {
+  const { isAuthenticated, username } = state.authentication;
+  return {
+      isAuthenticated,
+      username
+  };
+}
+
+export default connect(mapStateToProps)(Header);

@@ -17,7 +17,6 @@ class App extends Component {
     this.state = {
       showSignInPopup: false,
       showSignUpPopup: false,
-      isSignedIn: false,
     };
   }
   onNavSignClick = (signingMode) => {
@@ -31,8 +30,6 @@ class App extends Component {
         showSignInPopup: false,
         showSignUpPopup: true
       });
-    } else {
-      this.setState({isSignedIn: false});
     }
   }
 
@@ -46,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <div id="main-container">
-        <Header isSignedIn={this.state.isSignedIn} onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
+        <Header onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
         <div id="main-content">
           <Route component={Routes}/>
         </div>

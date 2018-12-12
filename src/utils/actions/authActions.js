@@ -18,7 +18,7 @@ function login(username, password) {
       const decoded = jwtDecode(respLogin.token);
       localStorage.setItem("token", respLogin.token);
       setAuthHeader(respLogin.token);
-      dispatch(success( decoded.username ));
+      dispatch(success( decoded.data.username ));
     } catch(err) {
       localStorage.removeItem("token");
       setAuthHeader();
@@ -39,7 +39,7 @@ function logout() {
 function authenticate(token) {
   const decoded = jwtDecode(token);
   setAuthHeader(token);
-  return { type: actionTypesAuth.SET_AUTH, username: decoded.username };
+  return { type: actionTypesAuth.SET_AUTH, username: decoded.data.username };
 }
 
 function confirmEmail(code) {
@@ -50,7 +50,7 @@ function confirmEmail(code) {
       const decoded = jwtDecode(respConfirm.token);
       localStorage.setItem("token", respConfirm.token);
       setAuthHeader(respConfirm.token);
-      dispatch(success( decoded.username ));
+      dispatch(success( decoded.data.username ));
     } catch(err) {
       localStorage.removeItem("user");
       setAuthHeader();

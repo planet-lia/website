@@ -26,16 +26,16 @@ export function authentication(state = initialState, action) {
       isAuthenticated: true,
       username: action.username
     };
-  case actionTypesAuth.EMAIL_CONFIRM_REQUEST:
+  case actionTypesAuth.CONFIRM_EMAIL_REQUEST:
     return {
       isVerifing: true,
     };
-  case actionTypesAuth.EMAIL_CONFIRM_SUCCESS:
+  case actionTypesAuth.CONFIRM_EMAIL_SUCCESS:
     return {
       isAuthenticated: true,
       username: action.username
     };
-  case actionTypesAuth.EMAIL_CONFIRM_FAILURE:
+  case actionTypesAuth.CONFIRM_EMAIL_FAILURE:
     return {
       error: action.error
     };
