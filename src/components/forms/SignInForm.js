@@ -14,8 +14,7 @@ class SignInForm extends Component {
       username: "",
       usernameError: null,
       password: "",
-      passwordError: null,
-      error: null
+      passwordError: null
     }
   }
 
@@ -23,30 +22,15 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const {username, password} = this.state;
-    const {closePopup, dispatch, isAuthenticated, error} = this.props;
+    const {dispatch} = this.props;
 
     this.setState({
       usernameError: null,
-      passwordError: null,
-      error: null
+      passwordError: null
     });
 
     if(this.validateForm()){
-      await dispatch(authActions.login(username, password));
-      if(isAuthenticated){
-        closePopup();
-
-        this.setState({
-          username: "",
-          usernameError: null,
-          password: "",
-          passwordError: null,
-          error: null
-        });
-      } else {
-        this.setState({error: "Error"});
-        console.log(error);
-      }
+      await dispatch(authActions.login(username, password)).then(() => console.log("dispatch"));
     }
   }
 
@@ -79,7 +63,13 @@ class SignInForm extends Component {
   }
 
   render(){
-    const {username, usernameError, password, passwordError, error} = this.state;
+    const {username, usernameError, password, passwordError, showLogingInerror} = this.state;
+    const {isLoggingIn, isAuthenticated, error, closePopup} = this.props;
+
+    if(isAuthenticated){
+      closePopup();
+    }
+
     return (
       <form onSubmit={this.formSubmit} noValidate>
         <FormGroup validationState={usernameError ? "error" : null}>
@@ -105,11 +95,12 @@ class SignInForm extends Component {
           {passwordError && <HelpBlock>{passwordError}</HelpBlock>}
         </FormGroup>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
-        {error && (
-          <FormGroup validationState="error">
-            <HelpBlock>{error}</HelpBlock>
-          </FormGroup>
-        )}
+        {(isLoggingIn!==true && usernameError===null && passwordError===null && error)
+          ? (<FormGroup validationState="error">
+              <HelpBlock>{error.toString()}</HelpBlock>
+            </FormGroup>)
+          : null
+        }
       </form>
     );
   }

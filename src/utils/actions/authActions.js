@@ -22,7 +22,7 @@ function login(username, password) {
     } catch(err) {
       localStorage.removeItem("token");
       setAuthHeader();
-      dispatch(failure(err));
+      dispatch(failure(err.toString()));
     }
   }
   function request(username) { return {type: actionTypesAuth.LOGIN_REQUEST, username} }
@@ -54,7 +54,7 @@ function confirmEmail(code) {
     } catch(err) {
       localStorage.removeItem("user");
       setAuthHeader();
-      dispatch(failure(err));
+      dispatch(failure(err.toString()));
     }
   }
   function request() { return {type: actionTypesAuth.CONFIRM_EMAIL_REQUEST} }
