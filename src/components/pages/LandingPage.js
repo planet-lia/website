@@ -40,7 +40,7 @@ class LandingPage extends Component {
         <div id="land-pic">
           <div id="land-cont-title">
             <div className="land-slogan">Competitive</div>
-            <div className="land-slogan">Programming Game</div>
+            <div className="land-slogan">Coding Game</div>
             <div id="land-desc">Bring your code to life</div>
             <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Live Demo<div className="btn-subtext">Without registration</div></Button>
             <Button className="land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
