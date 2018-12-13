@@ -5,7 +5,7 @@ import Table from '../views/Table';
 import Popup from '../views/Popup';
 import UploadBotForm from '../forms/UploadBotForm';
 
-import data from '../../assets/LeaderboardData';
+//import data from '../../assets/LeaderboardData';
 
 class LeaderboardPage extends Component {
   constructor(props){
@@ -57,7 +57,8 @@ class LeaderboardPage extends Component {
       <div className="container">
         <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload bot</Button>
         <h2>Leaderboard</h2>
-        <Table data={data} columns={leaderboardColumns} keyField="username" />
+        <Table data={[]} columns={leaderboardColumns} keyField="username" />
+        <div className="text-center">COMMING SOON</div>
 
         <Popup
           dialogClassName="custom-popup upload-bot"

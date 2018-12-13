@@ -360,7 +360,7 @@ textarea {
 }
 
 .land-cont-title {
-  margin-bottom: 5em;
+  margin-bottom: 8em;
 }
 
 .land-title {
@@ -403,9 +403,20 @@ iframe {
 
 #land-cont-contact {
   max-width: 17em;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+
+  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -416,16 +427,24 @@ a.land-contact-logo {
 }
 
 @media screen and (max-width: 991.98px) {
+  .land-section {
+    padding: 6em 0;
+  }
+  .land-cont-title {
+    margin-bottom: 6em;
+  }
   .land-what-title {
     text-align: center;
-    margin-top: 3.5em;
+    margin-top: 1.5em;
   }
   .land-what-text {
     text-align: center;
   }
   #land-cont-contact {
-    justify-content: space-around;
     margin: 0 auto;
+
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
   }
 }
 
@@ -473,18 +492,25 @@ a.land-contact-logo {
   width: 100%;
   min-width: 768px;
   min-height: calc(28.125vw + 2.7em - 4px + 41px + 8em);
-  display: flex;
-  flex-wrap: nowrap;
   background-color: #1e1e1e;
   border-top: 1px solid #333;
 
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 .editor-cont-page > div {
   position: relative;
-  flex-grow: 1;
   width: calc(50% - 1px);
   border-bottom: 1px solid #333;
+
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .editor-cont-page > #editor-left {
@@ -507,9 +533,14 @@ a.land-contact-logo {
 }
 
 #editor-cont-ui {
-  display: flex;
-  flex-wrap: nowrap;
   border-bottom: 1px solid #333;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 #editor-lang,
 #editor-btn-run {
@@ -542,8 +573,11 @@ a.land-contact-logo {
 }
 
 #editor-btn-run {
-  flex-grow: 1;
   text-align: right;
+
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 #editor-btn-run > button {
@@ -677,12 +711,15 @@ a.land-contact-logo {
 /* Game Title */
 .cont-game-title {
   text-align: center;
-  font-size: 1.5em;
   margin: 2em 0;
 }
 
 .game-title {
   font-size: x-large;
+}
+
+.game-stats {
+  font-size: small;
 }
 
 /* Player */
@@ -761,15 +798,22 @@ a.land-contact-logo {
 .row-pui > .pui-buttons {
   width: inherit;
   height: 2em;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   padding: 0 0.6em;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 .pui-buttons > .pui-btns-left {
-  flex: 1;
   height: inherit;
+
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .pui-buttons > .pui-btns-right {

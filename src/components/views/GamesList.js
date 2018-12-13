@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Table from './Table';
-import data from '../../assets/GamesData';
+//import data from '../../assets/GamesData';
 
 class GamesList extends Component {
 
@@ -43,7 +43,8 @@ class GamesList extends Component {
     return (
       <div>
         <h2>Games</h2>
-        <Table data={data} columns={gamesColumns} keyField="date" />
+        <Table data={[]} columns={gamesColumns} keyField="date" />
+        <div className="text-center">COMMING SOON</div>
       </div>
     )
   }
