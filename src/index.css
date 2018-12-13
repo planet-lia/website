@@ -717,29 +717,6 @@ a.land-contact-logo {
 
 .game-title {
   font-size: x-large;
-  margin: 10px 0;
-
-display: -webkit-box;
-display: -ms-flexbox;
-display: flex;
-
--ms-flex-wrap: nowrap;
-flex-wrap: nowrap;
-
--webkit-box-pack: center;
--ms-flex-pack: center;
-justify-content: center;
-}
-
-.game-title > div {
-  margin: 0 10px;
-}
-
-.game-title > div:first-child,
-.game-title > div:last-child{
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .game-stats {

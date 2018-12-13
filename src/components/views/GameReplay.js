@@ -11,20 +11,12 @@ class GameReplay extends Component {
     return (
       <div>
 
-        <div className="cont-game-title">
-          <div className="game-stats text-center">{gameProps.date}</div>
+        <div className="cont-game-title text-center">
           <div className="game-title">
-            <div className="text-right">
-              {gameProps.player1}
-            </div>
-            <div>
-              vs
-            </div>
-            <div className="text-left">
-              {gameProps.player2}
-            </div>
+            {gameProps.player1 + " vs " + gameProps.player2}
           </div>
-          <div className="game-stats text-center">
+          <div className="game-stats">{gameProps.date}</div>
+          <div className="game-stats">
             {"Duration: " + Math.floor(gameProps.duration/60) + ":" + gameProps.duration%60}
           </div>
         </div>
