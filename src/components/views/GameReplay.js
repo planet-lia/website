@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Col } from 'react-bootstrap';
 
 import Replay from './Replay';
 import data from '../../assets/GamesData';
