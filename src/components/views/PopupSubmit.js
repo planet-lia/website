@@ -31,7 +31,7 @@ class PopupSubmit extends Component {
           {this.getForm()}
         </Modal.Body>
         <Modal.Footer>
-          <label className="btn custom-btn" htmlFor={this.state.formSubmitButtonId}>{this.props.buttonText}</label>
+          <label className="btn custom-btn custom-btn-lg" htmlFor={this.state.formSubmitButtonId}>{this.props.buttonText}</label>
         </Modal.Footer>
       </Modal>
     )

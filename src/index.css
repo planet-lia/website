@@ -270,11 +270,7 @@ select.placeholder > option {
 
 .custom-btn:hover {
   background-color: #007e5a;
-  color: #ddd;
-}
-
-.custom-btn:focus, .custom-btn:active {
-    color: #ddd;
+  color: #ccc;
 }
 
 .btn-subtext {
@@ -335,7 +331,7 @@ select.placeholder > option {
 
 .land-btn.btn-try:hover {
   background-color: #007e5a;
-  color: #ddd;
+  color: #ccc;
 }
 
 .land-btn.btn-sub {
@@ -345,7 +341,7 @@ select.placeholder > option {
 
 .land-btn.btn-sub:hover {
   background-color: #555;
-  color: #ddd;
+  color: #ccc;
 }
 
 @media screen and (max-width: 575.98px) {
