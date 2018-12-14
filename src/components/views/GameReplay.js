@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Replay from './Replay';
+import Replay from '../elems/Replay';
 import data from '../../assets/GamesData';
 
 class GameReplay extends Component {

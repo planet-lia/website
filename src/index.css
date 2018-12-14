@@ -56,6 +56,14 @@ textarea {
   color: #019170;
 }
 
+select.placeholder, select.placeholder > option[value=""], select > option[value=""] {
+  color: #999;
+}
+
+select.placeholder > option {
+  color: #555;
+}
+
 /* Layout */
 
 #main-container {

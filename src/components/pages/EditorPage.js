@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
 import ReactResizeDetector from 'react-resize-detector';
 
-import Replay from '../views/Replay';
+import Replay from '../elems/Replay';
 import Popup from '../views/Popup';
 import WaitAlert from '../forms/WaitAlert';
 import { programmingLanguages } from '../../utils/constants/programmingLanguages';
