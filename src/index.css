@@ -318,21 +318,10 @@ select.placeholder > option {
   margin: 20px 0;
 }
 
-#tour-cont-logo {
-  margin: 20px 0 0 0;
-}
-
 .tour-logo {
+  width: 175px;
   vertical-align: bottom;
-  margin: 0 20px
-}
-
-#logo-fri {
-  height: 70px;
-}
-
-#logo-garaza {
-  height: 40px;
+  margin: 20px 20px 0;
 }
 
 /* Landing Page */

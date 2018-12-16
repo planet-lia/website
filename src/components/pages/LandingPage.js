@@ -58,7 +58,7 @@ class LandingPage extends Component {
             </p>
             <h3 className="land-title tour-date">18.2. - 15.3.</h3>
             <Button bsClass="btn custom-btn custom-btn-xl center-block">Tournament Page</Button>
-            <div id="tour-cont-logo">
+            <div>
               <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
               <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
             </div>
