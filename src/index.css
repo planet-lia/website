@@ -397,7 +397,7 @@ select.placeholder > option {
     font-size: 0.65em;
   }
 
-  .land-btn {
+  .land-btn, .land-btn.btn-sub:hover {
     font-size: initial;
   }
 }
