@@ -209,16 +209,16 @@ class EditorPage extends Component {
               </div>
               <div id="editor-cont-links">
                 <div>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
                 </div>
                 <div>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
                 </div>
               </div>
               <div id="editor-btn-run">
-                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
+                <Button bsClass="btn btn-sm custom-btn btn-on-dark" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
                   <Glyphicon glyph="cog" />
                   {" RUN"}
                 </Button>

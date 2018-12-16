@@ -12,6 +12,8 @@ import SubscriptionPopup from '../views/SubscriptionPopup';
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
 import thumb3 from '../../assets/thumb3.jpg';
+import logoFri from '../../assets/logo_fri.png';
+import logoGaraza from '../../assets/logo_garaza.png';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -42,11 +44,27 @@ class LandingPage extends Component {
             <div className="land-slogan">Competitive</div>
             <div className="land-slogan">Coding Game</div>
             <div id="land-desc">Bring your code to life</div>
-            <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Live Demo<div className="btn-subtext">Without registration</div></Button>
-            <Button className="land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
+            <Button bsClass="btn land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Live Demo<div className="btn-subtext">Without registration</div></Button>
+            <Button bsClass="btn land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
           </div>
         </div>
-        <div className="land-section sec-gray">
+        <div className="custom-section sec-banner">
+          <div className="container text-center">
+            <h2 className="land-title">Slovenian Lia Turnament 2019</h2>
+            <p>
+              Are you a university or high school student from Slovenia and know
+              a little bit of programming?<br />
+              Join Lia and battle for the coding glory!
+            </p>
+            <h3 className="land-title tour-date">18.2. - 15.3.</h3>
+            <Button bsClass="btn custom-btn custom-btn-xl center-block">Tournament Page</Button>
+            <div id="tour-cont-logo">
+              <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
+              <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
+            </div>
+          </div>
+        </div>
+        <div className="custom-section sec-gray">
           <div className="container">
             <Row>
               <Col md={7}>
@@ -74,7 +92,7 @@ class LandingPage extends Component {
             </Row>
           </div>
         </div>
-        <div className="land-section">
+        <div className="custom-section">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
             <div className="land-subtext">Grab popcorn and watch bots fight each other.</div>
@@ -103,7 +121,7 @@ class LandingPage extends Component {
             </Row>
           </div>
         </div>
-        <div className="land-section sec-gray">
+        <div className="custom-section sec-gray">
           <div className="land-cont-title">
             <h2 className="land-title">COMPETE</h2>
             <div className="land-subtext">Build, test, battle. Create the ultimate bot.</div>

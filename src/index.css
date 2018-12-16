@@ -129,6 +129,27 @@ select.placeholder > option {
   margin: 0 0.5em;
 }
 
+.custom-section {
+  padding: 8em 0;
+}
+
+.sec-gray {
+  background-color: #f3f3f3
+}
+
+.custom-section.sec-banner {
+  padding: 4em 0;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-section {
+    padding: 6em 0;
+  }
+  .custom-section.sec-banner {
+    padding: 3em 0;
+  }
+}
+
 /* Layout Overwrites */
 #custom-navbar span, #custom-navbar a {
   color: #ddd;
@@ -256,25 +277,62 @@ select.placeholder > option {
   margin: 20px auto;
 }
 
-.custom-btn {
+.custom-btn,
+.btn.custom-btn:active,
+.btn.custom-btn:focus {
   border: none;
   border-radius: 0;
   background-color: #018e6a; /*#03965c*/
+  color: #eee;
+}
+
+.custom-btn.btn-on-dark,
+.btn.custom-btn.btn-on-dark:active,
+.btn.custom-btn.btn-on-dark:focus {
   color: #ddd;
-  font-weight: bold;
 }
 
 .custom-btn-lg {
   font-size: 16px;
 }
 
-.custom-btn:hover {
+.custom-btn-xl {
+  font-size: 20px;
+}
+
+.btn.custom-btn:hover {
   background-color: #007e5a;
+  color: #e6e6e6;
+}
+
+.btn.custom-btn.btn-on-dark:hover {
   color: #ccc;
 }
 
 .btn-subtext {
   font-size: 0.5em;
+}
+
+/* Tournament Landing Page*/
+.land-title.tour-date {
+  margin: 20px 0;
+}
+
+#tour-cont-logo {
+  margin: 20px 0 0 0;
+}
+
+.tour-logo {
+  vertical-align: bottom;
+  margin: 0 20px
+}
+
+#logo-fri {
+  height: 70px;
+}
+
+#logo-garaza {
+  height: 40px;
 }
 
 /* Landing Page */
@@ -322,7 +380,7 @@ select.placeholder > option {
   color: #ddd;
 }
 
-.land-btn.btn-try {
+.land-btn.btn-try, .btn.btn-try:active{
   background-color: #018e6a; /*#03965c*/
   color: #ddd;
   font-size: 1.5em;
@@ -334,7 +392,7 @@ select.placeholder > option {
   color: #ccc;
 }
 
-.land-btn.btn-sub {
+.land-btn.btn-sub, .btn.btn-sub:active {
   background-color: #666;
   color: #ddd;
 }
@@ -355,14 +413,6 @@ select.placeholder > option {
   }
 }
 
-.land-section {
-  padding: 8em 0;
-}
-
-.sec-gray {
-  background-color: #f3f3f3
-}
-
 .land-cont-title {
   margin-bottom: 8em;
 }
@@ -370,6 +420,7 @@ select.placeholder > option {
 .land-title {
   text-align: center;
   font-weight: bold;
+  margin-top: 0;
 }
 
 .land-subtext {
@@ -431,9 +482,6 @@ a.land-contact-logo {
 }
 
 @media screen and (max-width: 991.98px) {
-  .land-section {
-    padding: 6em 0;
-  }
   .land-cont-title {
     margin-bottom: 6em;
   }
