@@ -22,10 +22,12 @@ body {
 a, a:focus, a:active {
   color: #019170;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 a:hover {
   color: #34C4A2;
+  cursor: pointer;
 }
 
 textarea {
