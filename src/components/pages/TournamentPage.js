@@ -46,14 +46,14 @@ const TournamentPage = () => {
                 <div className="tour-cont-icon-lg">
                   <FontAwesomeIcon icon="trophy" />
                 </div>
-                <Link to="/leaderboard" className="btn custom-btn">Leaderboard</Link>
+                <Link to="/leaderboard" className="btn custom-btn custom-btn-lg">Leaderboard</Link>
               </div>
               <div className="tour-cont-link text-center">
                 <div className="tour-cont-icon-lg position-relative">
                   <FontAwesomeIcon icon="desktop" />
                   <FontAwesomeIcon id="tour-desktop-play" icon="play" />
                 </div>
-                <Link to="/games" className="btn custom-btn">Watch Games</Link>
+                <Link to="/games" className="btn custom-btn custom-btn-lg">Watch Games</Link>
               </div>
             </Col>
             <Col md={4} mdOffset={0} sm={5} smOffset={0} xs={10} xsOffset={1}>
