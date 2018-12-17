@@ -85,7 +85,7 @@ class LeaderboardPage extends Component {
           <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload bot</Button>
           <h2>Leaderboard</h2>
           <Table data={[]} columns={leaderboardColumns} keyField="username" />
-          <div className="text-center">COMMING SOON</div>
+          <div className="text-center">COMING SOON</div>
 
           <Popup
             dialogClassName="custom-popup upload-bot"

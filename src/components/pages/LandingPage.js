@@ -51,17 +51,21 @@ class LandingPage extends Component {
         </div>
         <div className="custom-section sec-short">
           <div className="container text-center">
-            <h2 className="tour-title">Slovenian Lia Turnament 2019</h2>
+            <h2 className="tour-title">Slovenian Lia Tournament 2019</h2>
             <p>
               Are you a university or high school student from Slovenia and know
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <h3 className="tour-title tour-date">18.2. - 15.3.</h3>
+            <h3 className="tour-title tour-date">18 Feb - 15 Mar</h3>
             <Link to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <div>
-              <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
-              <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
+              <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
+                <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
+              </a>
+              <a href="https://fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
+                <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
+              </a>
             </div>
           </div>
         </div>
@@ -76,9 +80,9 @@ class LandingPage extends Component {
               <Col md={5}>
                   <h2 className="land-what-title">What is Lia?</h2>
                   <p className="land-what-text">
-                    Lia is a competitive programming game where your goal is
+                    Lia is a competitive coding game where your goal is
                     to lead your units to victory by using your awesome
-                    programming skills. Create your bot and put it to the
+                    coding skills. Create your bot and put it to the
                     test. Our aim is to create an environment where you can
                     compete with your friends and programmers from all around
                     the world.

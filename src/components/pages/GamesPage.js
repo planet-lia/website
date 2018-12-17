@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import GamesList from '../views/GamesList';
 import GameReplay from '../views/GameReplay';
@@ -8,11 +9,18 @@ class GamesPage extends Component {
 
   render(){
     return (
-      <div className="container">
-        <Switch>
-          <Route exact path='/games' component={GamesList} />
-          <Route path='/games/:number' component={GameReplay} />
-        </Switch>
+      <div>
+        <div className="custom-notification">
+          <div className="container text-center">
+            Game page is currently in use for <Link to="/tournament">Slovenian Lia turnament 2019</Link>.
+          </div>
+        </div>
+        <div className="container">
+          <Switch>
+            <Route exact path='/games' component={GamesList} />
+            <Route path='/games/:number' component={GameReplay} />
+          </Switch>
+        </div>
       </div>
     )
   }

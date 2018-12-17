@@ -15,15 +15,15 @@ const TournamentPage = () => {
         <div className="container text-center">
           <Col md={8} mdOffset={2} xs={10} xsOffset={1}>
             <div id="tour-lang">ENG | SLO</div>
-            <h2 className="tour-title">Slovenian Lia Turnament 2019</h2>
+            <h2 className="tour-title">Slovenian Lia Tournament 2019</h2>
             <p>
               Are you a university or high school student from Slovenia and know
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <h3 className="tour-title tour-date">18 February - 15 March</h3>
+            <h3 className="tour-title tour-date">18 Feb - 15 Mar</h3>
             <Button bsClass="btn custom-btn custom-btn-xl center-block" disabled>Register Early</Button>
-            <div id="tour-what">What is Lia?</div>
+            <div id="tour-what"><Link to="/">What is Lia?</Link></div>
           </Col>
         </div>
       </div>
@@ -166,8 +166,12 @@ const TournamentPage = () => {
             </Col>
           </Row>
           <div>
-            <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
-            <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
+            <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
+            </a>
+            <a href="https://fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
+            </a>
           </div>
         </div>
       </div>
