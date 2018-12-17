@@ -290,6 +290,13 @@ select.placeholder > option {
   color: #eee;
 }
 
+a.custom-btn,
+a.btn.custom-btn:active,
+a.btn.custom-btn:focus,
+a.btn.custom-btn:hover {
+  text-decoration: none;
+}
+
 .custom-btn.btn-on-dark,
 .btn.custom-btn.btn-on-dark:active,
 .btn.custom-btn.btn-on-dark:focus {
@@ -315,6 +322,25 @@ select.placeholder > option {
 
 .btn-subtext {
   font-size: 0.5em;
+}
+
+/* Notifications */
+.custom-notification {
+  background-color: #018e6a;
+  color: #eee;
+  padding: 8px 0;
+  margin-top: 10px;
+}
+
+.custom-notification a,
+.custom-notification a:focus,
+.custom-notification a:active {
+  color: #eee;
+  font-weight: bold;
+}
+
+.custom-notification a:hover {
+  color: #ddd;
 }
 
 /* Tournament */
@@ -406,6 +432,10 @@ select.placeholder > option {
   padding: 15px 10px;
   border: 1px solid #bbb;
   margin-top: 15px;
+}
+
+.tour-lb-sponsors {
+  margin: 2em 0 3em;
 }
 
 @media screen and (max-width: 767.98px) {
@@ -712,7 +742,6 @@ a.land-contact-logo {
 #editor-cont-links a {
   position: relative;
   top: 1px;
-  text-decoration: none;
   margin-right: 5px;
 }
 

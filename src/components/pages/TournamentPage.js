@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 import Prize from '../elems/Prize';
 
@@ -21,7 +22,7 @@ const TournamentPage = () => {
               Join Lia and battle for the coding glory!
             </p>
             <h3 className="tour-title tour-date">18 February - 15 March</h3>
-            <Button bsClass="btn custom-btn custom-btn-xl center-block">Register Early</Button>
+            <Button bsClass="btn custom-btn custom-btn-xl center-block" disabled>Register Early</Button>
             <div id="tour-what">What is Lia?</div>
           </Col>
         </div>
@@ -41,18 +42,18 @@ const TournamentPage = () => {
           </Row>
           <Row>
             <Col md={4} mdOffset={2} sm={5} xs={10} xsOffset={1}>
-              <div className="tour-cont-link">
-                <div className="tour-cont-icon-lg text-center">
+              <div className="tour-cont-link text-center">
+                <div className="tour-cont-icon-lg">
                   <FontAwesomeIcon icon="trophy" />
                 </div>
-                <Button bsClass="btn custom-btn center-block">Leaderboard</Button>
+                <Link to="/leaderboard" className="btn custom-btn">Leaderboard</Link>
               </div>
-              <div className="tour-cont-link">
-                <div className="tour-cont-icon-lg text-center position-relative">
+              <div className="tour-cont-link text-center">
+                <div className="tour-cont-icon-lg position-relative">
                   <FontAwesomeIcon icon="desktop" />
                   <FontAwesomeIcon id="tour-desktop-play" icon="play" />
                 </div>
-                <Button bsClass="btn custom-btn center-block">Watch Games</Button>
+                <Link to="/games" className="btn custom-btn">Watch Games</Link>
               </div>
             </Col>
             <Col md={4} mdOffset={0} sm={5} smOffset={0} xs={10} xsOffset={1}>
@@ -148,19 +149,19 @@ const TournamentPage = () => {
           <h3 className="tour-title">Sponsors & Partners</h3>
           <p>This tournament is only possible thanks to our great sponsors.</p>
           <Row>
-            <Col md={2} mdOffset={1} sm={4} smOffset={0} xs={5} xsOffset={1}>
+            <Col md={2} mdOffset={1} sm={4} xs={6}>
               <div className="tour-company">Your logo here</div>
             </Col>
-            <Col md={2} sm={4} xs={5}>
+            <Col md={2} sm={4} xs={6}>
               <div className="tour-company">Your logo here</div>
             </Col>
             <Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>
               <div className="tour-company">Your logo here</div>
             </Col>
-            <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={5} xsOffset={1}>
+            <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>
               <div className="tour-company">Your logo here</div>
             </Col>
-            <Col md={2} sm={4} xs={5}>
+            <Col md={2} sm={4} xs={6}>
               <div className="tour-company">Your logo here</div>
             </Col>
           </Row>

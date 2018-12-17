@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
+import { Link } from 'react-router-dom';
 
 import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
@@ -57,7 +58,7 @@ class LandingPage extends Component {
               Join Lia and battle for the coding glory!
             </p>
             <h3 className="tour-title tour-date">18.2. - 15.3.</h3>
-            <Button bsClass="btn custom-btn custom-btn-xl center-block">Tournament Page</Button>
+            <Link to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <div>
               <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
               <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
