@@ -40,6 +40,10 @@ textarea {
   text-align: center;
 }
 
+.position-relative {
+  position: relative;
+}
+
 .clr-fb:hover {
   color: #3e5b99;
 }
@@ -137,7 +141,7 @@ select.placeholder > option {
   background-color: #f3f3f3
 }
 
-.custom-section.sec-banner {
+.custom-section.sec-short {
   padding: 4em 0;
 }
 
@@ -145,7 +149,7 @@ select.placeholder > option {
   .custom-section {
     padding: 6em 0;
   }
-  .custom-section.sec-banner {
+  .custom-section.sec-short {
     padding: 3em 0;
   }
 }
@@ -313,8 +317,17 @@ select.placeholder > option {
   font-size: 0.5em;
 }
 
-/* Tournament Landing Page*/
-.land-title.tour-date {
+/* Tournament */
+.tour-row-padding{
+  padding-bottom: 4em;
+}
+
+.tour-title {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.tour-title.tour-date {
   margin: 20px 0;
 }
 
@@ -322,6 +335,96 @@ select.placeholder > option {
   width: 175px;
   vertical-align: bottom;
   margin: 20px 20px 0;
+}
+
+#tour-lang {
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+#tour-what {
+  margin-top: 10px;
+}
+
+.tour-cont-link {
+  width: 50%;
+  display: inline-block;
+}
+
+.tour-cont-icon-lg {
+  font-size: 3em;
+}
+
+.tour-cont-icon-sm {
+  font-size: 2em;
+}
+
+#tour-desktop-play {
+  font-size: small;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  -ms-transform: translate(-40%,-80%);
+  -webkit-transform: translate(-40%,-80%);
+  transform: translate(-40%,-80%);
+}
+
+.table.tour-agenda {
+  margin: 25px 0 0 0;
+}
+
+.table.tour-agenda > tbody > tr > td:first-child {
+  width: 8em;
+  font-weight: bold;
+  font-size: larger;
+  color: #018e6a;
+}
+
+.tour-cont-prize > div{
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 15px;
+}
+
+.tour-prize-icon {
+  margin-right: 15px;
+}
+
+.tour-prize-text {
+  font-weight: bold;
+  font-size: 1.12em;
+}
+
+.tour-prize-subtext {
+  font-size: small;
+}
+
+.tour-company {
+  font-size: large;
+  color: #bbb;
+  padding: 15px 10px;
+  border: 1px solid #bbb;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 767.98px) {
+  .tour-cont-prize {
+    text-align: center;
+  }
+  .tour-cont-prize > div{
+    display: block;
+    vertical-align: baseline;
+    margin-top: 0;
+  }
+  .tour-cont-prize .tour-prize-icon {
+    margin-top: 20px;
+    margin-right: 0;
+  }
+
+  .tour-cont-link {
+    margin-bottom: 20px;
+  }
 }
 
 /* Landing Page */

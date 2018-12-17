@@ -48,15 +48,15 @@ class LandingPage extends Component {
             <Button bsClass="btn land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
           </div>
         </div>
-        <div className="custom-section sec-banner">
+        <div className="custom-section sec-short">
           <div className="container text-center">
-            <h2 className="land-title">Slovenian Lia Turnament 2019</h2>
+            <h2 className="tour-title">Slovenian Lia Turnament 2019</h2>
             <p>
               Are you a university or high school student from Slovenia and know
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <h3 className="land-title tour-date">18.2. - 15.3.</h3>
+            <h3 className="tour-title tour-date">18.2. - 15.3.</h3>
             <Button bsClass="btn custom-btn custom-btn-xl center-block">Tournament Page</Button>
             <div>
               <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
