@@ -44,7 +44,7 @@ class GamesList extends Component {
       <div>
         <h2>Games</h2>
         <Table data={[]} columns={gamesColumns} keyField="date" />
-        <div className="text-center">COMMING SOON</div>
+        <div className="text-center">COMING SOON</div>
       </div>
     )
   }
