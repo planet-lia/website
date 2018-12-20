@@ -58,7 +58,7 @@ const tournamentPageEng = {
   txtSubPrize4: "Reward not yet decided",
   txtPrize5: "Biggest clutch game comeback",
   txtSubPrize5: "Reward not yet decided",
-  txtPrize6: "Tournament best spectator award",
+  txtPrize6: "Best spectator award",
   txtSubPrize6: "Reward not yet decided",
 
   titleSponsors: "Sponsors & Partners",

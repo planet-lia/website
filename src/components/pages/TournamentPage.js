@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { languageConst } from '../../utils/constants/languageConst'
 
 import Prize from '../elems/Prize';
 
@@ -19,9 +20,9 @@ class TournamentPage extends Component {
   }
 
   onLanguageChange = (language) => {
-    if(language==="ENG"){
+    if(language===languageConst.ENGLISH){
       this.setState({content: textEng})
-    } else if(language==="SLO"){
+    } else if(language===languageConst.SLOVENIAN){
       this.setState({content: textSlo})
     }
 
@@ -33,11 +34,11 @@ class TournamentPage extends Component {
       <div>
         <div className="custom-section sec-short">
           <div className="container text-center">
-            <Col md={8} mdOffset={2} xs={10} xsOffset={1}>
+            <Col>
               <div id="tour-lang">
-                <a onClick={() => this.onLanguageChange("ENG")}>ENG</a>
+                <a onClick={() => this.onLanguageChange(languageConst.ENGLISH)}>ENG</a>
                 <span> | </span>
-                <a onClick={() => this.onLanguageChange("SLO")}>SLO</a>
+                <a onClick={() => this.onLanguageChange(languageConst.SLOVENIAN)}>SLO</a>
               </div>
               <h2 className="tour-title">{content.titleTour}</h2>
               <p>{content.txtBanner}</p>
@@ -51,15 +52,15 @@ class TournamentPage extends Component {
         <div className="custom-section sec-gray sec-short">
           <div className="container">
             <Row className="tour-row-padding">
-              <Col md={4} mdOffset={2} sm={5} xs={10} xsOffset={1}>
+              <Col sm={6}>
                 <h3 className="tour-title">{content.titleWant}</h3>
                 <p>{content.txtWant}</p>
               </Col>
-              <Col md={4} mdOffset={0} sm={5} smOffset={0} xs={10} xsOffset={1}>
+              <Col sm={6}>
               </Col>
             </Row>
             <Row>
-              <Col md={4} mdOffset={2} sm={5} xs={10} xsOffset={1}>
+              <Col sm={6}>
                 <div className="tour-cont-link text-center">
                   <div className="tour-cont-icon-lg">
                     <FontAwesomeIcon icon="trophy" />
@@ -74,7 +75,7 @@ class TournamentPage extends Component {
                   <Link to="/games" className="btn custom-btn custom-btn-lg">{content.btnWatch}</Link>
                 </div>
               </Col>
-              <Col md={4} mdOffset={0} sm={5} smOffset={0} xs={10} xsOffset={1}>
+              <Col sm={6}>
                 <h3 className="tour-title">{content.titleCheck}</h3>
                 <p>{content.txtCheck}</p>
               </Col>
@@ -85,7 +86,7 @@ class TournamentPage extends Component {
         <div className="custom-section sec-short">
           <div className="container">
             <Row className="tour-row-padding">
-              <Col md={8} mdOffset={2} xs={10} xsOffset={1}>
+              <Col lg={10} lgOffset={1} md={12}>
                 <h3 className="tour-title text-center">{content.titleAgenda}</h3>
                 <Table bsClass="table tour-agenda">
                   <tbody>
@@ -112,7 +113,7 @@ class TournamentPage extends Component {
               </Col>
             </Row>
             <Row>
-              <Col md={8} mdOffset={2}>
+              <Col lg={10} lgOffset={1} md={12}>
                 <h3 className="tour-title text-center">{content.titlePrizes}</h3>
                 <Row>
                   <Col sm={6}>

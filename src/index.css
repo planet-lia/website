@@ -34,6 +34,14 @@ textarea {
   resize: none;
 }
 
+p {
+  font-size: 1.3em;
+}
+
+td {
+  font-size: 1.2em;
+}
+
 #root {
   height: 100%;
 }
@@ -367,7 +375,6 @@ a.btn.custom-btn:hover {
 
 #tour-lang {
   margin-bottom: 10px;
-  font-size: large;
 }
 
 #tour-what {
@@ -380,22 +387,22 @@ a.btn.custom-btn:hover {
 }
 
 .tour-cont-icon-lg {
-  font-size: 3em;
+  font-size: 4.5em;
 }
 
 .tour-cont-icon-sm {
-  font-size: 2em;
+  font-size: 3em;
 }
 
 #tour-desktop-play {
-  font-size: small;
+  font-size: 0.3em;
   position: absolute;
   top: 50%;
   left: 50%;
 
-  -ms-transform: translate(-40%,-80%);
-  -webkit-transform: translate(-40%,-80%);
-  transform: translate(-40%,-80%);
+  -ms-transform: translate(-40%,-85%);
+  -webkit-transform: translate(-40%,-85%);
+  transform: translate(-40%,-85%);
 }
 
 .table.tour-agenda {
@@ -421,11 +428,7 @@ a.btn.custom-btn:hover {
 
 .tour-prize-text {
   font-weight: bold;
-  font-size: 1.12em;
-}
-
-.tour-prize-subtext {
-  font-size: small;
+  font-size: 1.3em;
 }
 
 .tour-company {
