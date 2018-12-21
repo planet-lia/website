@@ -140,15 +140,10 @@ class TournamentPage extends Component {
                     </tr>
                   </tbody>
                 </Table>
+                <p className="text-center">{content.txtRules + content.linkRules + "."}</p>
               </Col>
             </Row>
-            <Row className="tour-row-padding text-center">
-              <Col lg={10} lgOffset={1} md={12}>
-                <h3 className="tour-title">{content.titleRules}</h3>
-                <p>{content.txtRules + content.linkRules + "."}</p>
-              </Col>
-            </Row>
-            <Row>
+            <Row className="tour-row-padding">
               <Col lg={10} lgOffset={1} md={12}>
                 <h3 className="tour-title text-center">{content.titlePrizes}</h3>
                 <Row>

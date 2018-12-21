@@ -35,7 +35,6 @@ const tournamentPageEng = {
       Information Science. Free food, drinks and loads of fun!
     </span>
   ],
-  titleRules: "Rules",
   txtRules: "To get detailed rules and other information about the tournament go ",
   linkRules: "here",
   titlePrizes: "Prizes",

@@ -391,7 +391,7 @@ a.btn.custom-btn:hover {
 }
 
 .tour-plang-logo {
-  margin: 0 10px 10px;
+  margin: 0 20px 10px;
 }
 
 #logo-python {
@@ -401,12 +401,10 @@ a.btn.custom-btn:hover {
 
 #logo-java {
   height: 60px;
-  margin-top: 12px;
 }
 
 #logo-kotlin {
   height: 29px;
-  margin-top: 12px;
 }
 
 .tour-cont-link {
@@ -434,7 +432,7 @@ a.btn.custom-btn:hover {
 }
 
 .table.tour-agenda {
-  margin: 25px 0 0 0;
+  margin: 25px 0 30px;
 }
 
 .table.tour-agenda > tbody > tr > td:first-child {
@@ -442,6 +440,10 @@ a.btn.custom-btn:hover {
   font-weight: bold;
   font-size: larger;
   color: #018e6a;
+}
+
+.table.tour-agenda > tbody > tr:last-child > td {
+  border-bottom: 1px solid #ddd;
 }
 
 .tour-cont-prize > div{
@@ -475,24 +477,37 @@ a.btn.custom-btn:hover {
   #tour-cont-plang {
     min-height: 150px;
   }
+  #logo-python {
+    height: 40px;
+    margin-top: 12px;
+  }
+
+  #logo-java {
+    height: 55px;
+  }
+
+  #logo-kotlin {
+    height: 24px;
+  }
 }
 
 @media screen and (max-width: 991.98px) {
+  .tour-plang-logo {
+    margin: 0 15px 10px;
+  }
   #logo-python {
-    height: 35px;
+    height: 34px;
   }
   #logo-java {
-    height: 50px;
-    margin-top: 12px;
+    height: 49px;
   }
   #logo-kotlin {
-    height: 19px;
-    margin-top: 12px;
+    height: 18px;
   }
 }
 
 @media screen and (max-width: 767.98px) {
-  .tour-row-padding.tour-row-xs-padding{
+  .tour-row-padding.tour-row-xs-padding {
     padding-bottom: 1.5em;
   }
   #tour-cont-plang {
