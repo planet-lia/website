@@ -33,7 +33,7 @@ const tournamentPageSlo = {
       Ljubljani. Hrana, pijača in zabava zagotovljena!
     </span>
   ],
-  txtRules: "Za natanjčnejša pravila in ostale informacije o turnirju klikni ",
+  txtRules: "Za natančnejše informacije in pravila o turnirju klikni ",
   linkRules: "tukaj",
   titlePrizes: "Nagrade",
   txtPrize1: "1. mesto na zaključnem turnirju",
