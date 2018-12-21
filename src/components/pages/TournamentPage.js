@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { languageConst } from '../../utils/constants/languageConst'
+import queryString from 'query-string';
 
 import Prize from '../elems/Prize';
 
-import textEng from '../../assets/texts/tournamentPageEng'
-import textSlo from '../../assets/texts/tournamentPageSlo'
+import { languageConst } from '../../utils/constants/languageConst';
+import textEng from '../../assets/texts/tournamentPageEng';
+import textSlo from '../../assets/texts/tournamentPageSlo';
+import logoPython from '../../assets/logo1.png';
+import logoJava from '../../assets/logo2.png';
+import logoKotlin from '../../assets/logo3.png';
 import logoFri from '../../assets/logo_fri.png';
 import logoGaraza from '../../assets/logo_garaza.png';
 
@@ -19,11 +23,25 @@ class TournamentPage extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const parms = queryString.parse(this.props.location.search)
+    if(parms.lang){
+      this.onLanguageChange(parms.lang);
+    } else {
+      const lang = localStorage.getItem("tourLang");
+      if(lang){
+        this.onLanguageChange(lang);
+      }
+    }
+  }
+
   onLanguageChange = (language) => {
-    if(language===languageConst.ENGLISH){
-      this.setState({content: textEng})
-    } else if(language===languageConst.SLOVENIAN){
+    if(language===languageConst.SLOVENIAN){
+      localStorage.setItem("tourLang", languageConst.SLOVENIAN);
       this.setState({content: textSlo})
+    } else {
+      localStorage.setItem("tourLang", languageConst.ENGLISH);
+      this.setState({content: textEng})
     }
 
   }
@@ -36,9 +54,9 @@ class TournamentPage extends Component {
           <div className="container text-center">
             <Col>
               <div id="tour-lang">
-                <a onClick={() => this.onLanguageChange(languageConst.ENGLISH)}>ENG</a>
+                <Link to={"/tournament?lang=" + languageConst.ENGLISH}>ENG</Link>
                 <span> | </span>
-                <a onClick={() => this.onLanguageChange(languageConst.SLOVENIAN)}>SLO</a>
+                <Link to={"/tournament?lang=" + languageConst.SLOVENIAN}>SLO</Link>
               </div>
               <h2 className="tour-title">{content.titleTour}</h2>
               <p>{content.txtBanner}</p>
@@ -51,16 +69,31 @@ class TournamentPage extends Component {
 
         <div className="custom-section sec-gray sec-short">
           <div className="container">
-            <Row className="tour-row-padding">
+            <Row className="tour-row-padding tour-row-xs-padding">
               <Col sm={6}>
                 <h3 className="tour-title">{content.titleWant}</h3>
                 <p>{content.txtWant}</p>
               </Col>
               <Col sm={6}>
+                <div id="tour-cont-plang">
+                  <div>
+                    <img id="logo-python" className="tour-plang-logo" src={ logoPython } alt="Python" />
+                  </div>
+                  <div>
+                    <img id="logo-java" className="tour-plang-logo" src={ logoJava } alt="Java" />
+                  </div>
+                  <div>
+                    <img id="logo-kotlin" className="tour-plang-logo" src={ logoKotlin } alt="Kotlin" />
+                  </div>
+                </div>
               </Col>
             </Row>
             <Row>
-              <Col sm={6}>
+              <Col sm={6} smPush={6}>
+                <h3 className="tour-title">{content.titleCheck}</h3>
+                <p>{content.txtCheck}</p>
+              </Col>
+              <Col sm={6} smPull={6}>
                 <div className="tour-cont-link text-center">
                   <div className="tour-cont-icon-lg">
                     <FontAwesomeIcon icon="trophy" />
@@ -74,10 +107,6 @@ class TournamentPage extends Component {
                   </div>
                   <Link to="/games" className="btn custom-btn custom-btn-lg">{content.btnWatch}</Link>
                 </div>
-              </Col>
-              <Col sm={6}>
-                <h3 className="tour-title">{content.titleCheck}</h3>
-                <p>{content.txtCheck}</p>
               </Col>
             </Row>
           </div>
@@ -110,6 +139,12 @@ class TournamentPage extends Component {
                     </tr>
                   </tbody>
                 </Table>
+              </Col>
+            </Row>
+            <Row className="tour-row-padding text-center">
+              <Col lg={10} lgOffset={1} md={12}>
+                <h3 className="tour-title">{content.titleRules}</h3>
+                <p>{content.txtRules + content.linkRules + "."}</p>
               </Col>
             </Row>
             <Row>

@@ -26,13 +26,16 @@ const tournamentPageSlo = {
     <br key="1"/>,
     <span key="2">Prijave odprte za vse slovenske študente in dijake!</span>
   ],
-  txtAgenda2: "Zadnje izboljšave botov udeležencev, ki so se uvrstili na zaključni turnir.",
+  txtAgenda2: "Zadnje izboljšave botov najboljših 16 udeležencev, ki so se uvrstili na zaključni turnir.",
   txtAgenda3: [
     <strong key="0">Zaključni turnir</strong>,
     <span key="1"> na Fakulteti za računalništvo in informatiko Univerze v
       Ljubljani. Hrana, pijača in zabava zagotovljena!
     </span>
   ],
+  titleRules: "Pravila",
+  txtRules: "Za natanjčnejša pravila in ostale informacije o turnirju klikni ",
+  linkRules: "tukaj",
   titlePrizes: "Nagrade",
   txtPrize1: "1. mesto na zaključnem turnirju",
   txtSubPrize1: "Nagrada še ni določena",

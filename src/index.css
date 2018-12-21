@@ -381,6 +381,34 @@ a.btn.custom-btn:hover {
   margin-top: 10px;
 }
 
+#tour-cont-plang {
+  min-height: 125px;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tour-plang-logo {
+  margin: 0 10px 10px;
+}
+
+#logo-python {
+  height: 45px;
+  margin-top: 12px;
+}
+
+#logo-java {
+  height: 60px;
+  margin-top: 12px;
+}
+
+#logo-kotlin {
+  height: 29px;
+  margin-top: 12px;
+}
+
 .tour-cont-link {
   width: 50%;
   display: inline-block;
@@ -443,7 +471,36 @@ a.btn.custom-btn:hover {
   margin: 2em 0 3em;
 }
 
+@media screen and (max-width: 1199.98px) {
+  #tour-cont-plang {
+    min-height: 150px;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  #logo-python {
+    height: 35px;
+  }
+  #logo-java {
+    height: 50px;
+    margin-top: 12px;
+  }
+  #logo-kotlin {
+    height: 19px;
+    margin-top: 12px;
+  }
+}
+
 @media screen and (max-width: 767.98px) {
+  .tour-row-padding.tour-row-xs-padding{
+    padding-bottom: 1.5em;
+  }
+  #tour-cont-plang {
+    min-height: 80px;
+  }
+  .tour-cont-link {
+    margin-top: 10px;
+  }
   .tour-cont-prize {
     text-align: center;
   }
@@ -455,10 +512,6 @@ a.btn.custom-btn:hover {
   .tour-cont-prize .tour-prize-icon {
     margin-top: 20px;
     margin-right: 0;
-  }
-
-  .tour-cont-link {
-    margin-bottom: 20px;
   }
 }
 
