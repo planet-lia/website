@@ -69,7 +69,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <div className="custom-section sec-gray">
+        <div id="what-is-lia" className="custom-section sec-gray">
           <div className="container">
             <Row>
               <Col md={7}>

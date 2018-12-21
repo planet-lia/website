@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import queryString from 'query-string';
 
 import Prize from '../elems/Prize';
@@ -62,7 +63,7 @@ class TournamentPage extends Component {
               <p>{content.txtBanner}</p>
               <h3 className="tour-title tour-date">{content.tourDate}</h3>
               <Button bsClass="btn custom-btn custom-btn-xl center-block" disabled>{content.btnRegisterEarly}</Button>
-              <div id="tour-what"><Link to="/">{content.lnkWhat}</Link></div>
+              <div id="tour-what"><HashLink to="/#what-is-lia">{content.lnkWhat}</HashLink></div>
             </Col>
           </div>
         </div>
