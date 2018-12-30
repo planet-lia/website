@@ -406,11 +406,12 @@ a.btn.custom-btn:hover {
 
 #logo-python {
   height: 45px;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 #logo-java {
-  height: 60px;
+  height: 55px;
+  margin-top: 8px;
 }
 
 #logo-kotlin {
@@ -441,8 +442,29 @@ a.btn.custom-btn:hover {
   transform: translate(-40%,-85%);
 }
 
+.tour-cont-unit > img {
+  height: 3em;
+  margin: 1.5em 0;
+}
+
+#yellow-unit {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+#green-unit {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
 .table.tour-agenda {
-  margin: 25px 0 30px;
+  margin: 25px 0 0;
 }
 
 .table.tour-agenda > tbody > tr > td:first-child {
@@ -489,11 +511,10 @@ a.btn.custom-btn:hover {
   }
   #logo-python {
     height: 40px;
-    margin-top: 12px;
   }
 
   #logo-java {
-    height: 55px;
+    height: 50px;
   }
 
   #logo-kotlin {
@@ -506,10 +527,10 @@ a.btn.custom-btn:hover {
     margin: 0 15px 10px;
   }
   #logo-python {
-    height: 34px;
+    height: 33px;
   }
   #logo-java {
-    height: 49px;
+    height: 43px;
   }
   #logo-kotlin {
     height: 18px;

@@ -18,6 +18,10 @@ const tournamentPageEng = {
   btnWatch: "Watch Games",
   titleCheck: "Check current leaders.",
   txtCheck: "Follow our public leaderboard and find out how your classmates are doing or watch games played by the best Lia players.",
+  titleGetStarted: "Get started within minutes.",
+  txtGetStarted: "Try out Lia via our online editor or get a full featured experience by downloading Lia-SDK and start developing your bot locally.",
+  btnEditor: "Online Editor",
+  btnGetStarted: "Develop Locally",
 
   titleAgenda: "Agenda",
   txtAgenda1: [
@@ -35,8 +39,6 @@ const tournamentPageEng = {
       Information Science. Free food, drinks and loads of fun!
     </span>
   ],
-  txtRules: "To get detailed information & rules about the tournament go ",
-  linkRules: "here",
   titlePrizes: "Prizes",
   txtPrize1: [
     <span key="0">Final tournament 1</span>,
@@ -62,6 +64,9 @@ const tournamentPageEng = {
   txtSubPrize5: "Reward not yet decided",
   txtPrize6: "Best spectator award",
   txtSubPrize6: "Reward not yet decided",
+  titleRules: "Rules",
+  txtRules: "To get detailed information & rules about the tournament go ",
+  linkRules: "here",
 
   titleSponsors: "Sponsors & Partners",
   txtSponsors: "This tournament is only possible thanks to our great sponsors.",

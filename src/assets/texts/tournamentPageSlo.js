@@ -18,6 +18,10 @@ const tournamentPageSlo = {
   btnWatch: "Glej igre",
   titleCheck: "Preveri stanje na lestvici.",
   txtCheck: "Sledi rezultatom svojih sošolcev in prijateljev ali pa si oglej igre najboljših igralcev Lia.",
+  titleGetStarted: "Začni v le nekaj minutah.",
+  txtGetStarted: "Preizkusi igro Lia preko spletnega urejevalnika ali pa si za popolno Lia izkušnjo prenesi Lia-SDK in začni razvijati svojega bota lokalno.",
+  btnEditor: "Spletni Urejevalnik",
+  btnGetStarted: "Razvijaj Lokalno",
 
   titleAgenda: "Spored",
   txtAgenda1: [
@@ -33,8 +37,6 @@ const tournamentPageSlo = {
       Ljubljani. Hrana, pijača in zabava zagotovljena!
     </span>
   ],
-  txtRules: "Za natančnejše informacije in pravila o turnirju klikni ",
-  linkRules: "tukaj",
   titlePrizes: "Nagrade",
   txtPrize1: "1. mesto na zaključnem turnirju",
   txtSubPrize1: "Nagrada še ni določena",
@@ -48,6 +50,9 @@ const tournamentPageSlo = {
   txtSubPrize5: "Nagrada še ni določena",
   txtPrize6: "Najboljši gledalec turnirja",
   txtSubPrize6: "Nagrada še ni določena",
+  titleRules: "Pravila",
+  txtRules: "Za natančnejše informacije in pravila o turnirju klikni ",
+  linkRules: "tukaj",
 
   titleSponsors: "Sponzorji in partnerji",
   txtSponsors: "Turnir ne bi bil mogoč brez naših sponzorjev.",

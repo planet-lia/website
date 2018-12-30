@@ -89,7 +89,7 @@ class TournamentPage extends Component {
                 </div>
               </Col>
             </Row>
-            <Row>
+            <Row className="tour-row-padding">
               <Col sm={6} smPush={6}>
                 <h3 className="tour-title">{content.titleCheck}</h3>
                 <p>{content.txtCheck}</p>
@@ -107,6 +107,26 @@ class TournamentPage extends Component {
                     <FontAwesomeIcon id="tour-desktop-play" icon="play" />
                   </div>
                   <Link to="/games" className="btn custom-btn custom-btn-lg">{content.btnWatch}</Link>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={6}>
+                <h3 className="tour-title">{content.titleGetStarted}</h3>
+                <p>{content.txtGetStarted}</p>
+              </Col>
+              <Col sm={6}>
+                <div className="tour-cont-link text-center">
+                  <div className="tour-cont-unit">
+                    <img id="yellow-unit" src="/assets/unit1.png" alt="yellow unit"/>
+                  </div>
+                  <Link to="/editor" className="btn custom-btn custom-btn-lg">{content.btnEditor}</Link>
+                </div>
+                <div className="tour-cont-link text-center">
+                <div className="tour-cont-unit">
+                  <img id="green-unit" src="/assets/unit2.png" alt="green unit"/>
+                </div>
+                  <Button bsClass="btn custom-btn custom-btn-lg" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">{content.btnGetStarted}</Button>
                 </div>
               </Col>
             </Row>
@@ -140,7 +160,6 @@ class TournamentPage extends Component {
                     </tr>
                   </tbody>
                 </Table>
-                <p className="text-center">{content.txtRules + content.linkRules + "."}</p>
               </Col>
             </Row>
             <Row className="tour-row-padding">
@@ -182,6 +201,12 @@ class TournamentPage extends Component {
                     />
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h3 className="tour-title text-center">{content.titleAgenda}</h3>
+                <p className="text-center">{content.txtRules + content.linkRules + "."}</p>
               </Col>
             </Row>
           </div>
