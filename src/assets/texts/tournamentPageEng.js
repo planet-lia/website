@@ -70,8 +70,33 @@ const tournamentPageEng = {
 
   titleSponsors: "Sponsors & Partners",
   txtSponsors: "This tournament is only possible thanks to our great sponsors.",
-  txtLogoHere: "Your logo here"
+  txtLogoHere: "Your logo here",
 
+  txtRlsMain: "This are the rules of Slovenian Lia Tournament 2019.",
+  titleRls1: "Lia version",
+  txtRls1: "In this tournament we will use the Lia-SDK version v1.0.x which we will publish before the tournament begins. The gameplay in this version will contain a unique twist that will make bots from our early access testers fairly obsolete and will thus provide a similar starting point for all of the tournament participants. Register to get an email revealing the twist!",
+  titleRls2: "Documentation & examples",
+  txtRls2: "Documentation & examples will be available at our official documentation site when the Lia-SDK v1.0.0 goes live.",
+  titleRls3: "Cheating",
+  txtRls3: "Uploading a code from another Lia user is forbidden and will result in disqualification from the tournament. Same goes for trying to bring down our servers or other malicious attempts. We are trying to make a fun event for programming community so please be reasonable. :)",
+  titleRls4: "Online leaderboard (18 Feb - 9 Mar)",
+  txtRls4: "During this period an online leaderboard will be live. Every high school or university student from Slovenia will be able to register and upload his bots. When a bot is uploaded it is automatically matched against bots from other players and is according to its skill properly ranked on the leaderboard. The rank is calculated using TrueSkill library. Registrations will be opened until the very last day.",
+  titleRls5: "Preparations for the final tournament  (10 Mar - 13 Mar)",
+  txtRls5: "Top 16 players from the online leaderboard get to play on the final tournament that will be hosted on the 14 of March. In the period in between they have a chance to make the final tweaks to their bots and upload them to our website. The opponents are known in advance based on the leaderboard ranking so the players can make a specific preparations for the bots they will battle as the final tournament.",
+  titleRls6: "Final tournament  (14 Mar)",
+  txtRls6: [
+    <span key="0">Final tournament will be held at Faculty of Computer and
+      Information Science (FRI) of University of Ljubljana at Večna pot 113,
+      1000 Ljubljana. The exact time is not determined yet. The final tournament
+      will feature a top 16 players competing between each other. It is yet to
+      decide how exactly the battles will look like, but we will update the
+      rules well in advanced.</span>,
+    <br key="1"/>,
+    <span key="2">Lia team will stream the games on the big canvas. After the
+      final tournament all the games from all rounds will be available online
+      for everyone to view.</span>
+  ],
+  btnBack: "Back"
 }
 
 export default tournamentPageEng;
