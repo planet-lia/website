@@ -354,8 +354,8 @@ a.btn.custom-btn:hover {
 }
 
 /* Tournament */
-.tour-row-padding{
-  padding-bottom: 4em;
+.tour-row-padding {
+  padding-bottom: 6em;
 }
 
 .tour-title {
@@ -443,7 +443,7 @@ a.btn.custom-btn:hover {
 }
 
 .tour-cont-unit > img {
-  height: 3em;
+  height: 3.5em;
   margin: 1.5em 0;
 }
 
@@ -538,6 +538,9 @@ a.btn.custom-btn:hover {
 }
 
 @media screen and (max-width: 767.98px) {
+  .tour-row-padding {
+    padding-bottom: 4em;
+  }
   .tour-row-padding.tour-row-xs-padding {
     padding-bottom: 1.5em;
   }
