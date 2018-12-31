@@ -12,25 +12,8 @@ class LeaderboardPage extends Component {
   constructor(props){
 		super(props);
     this.state = {
-      showUploadPopup: false,
+      
     };
-  }
-
-  onBotUploadClick = () => {
-    this.setState({
-      showUploadPopup: true
-    });
-  }
-  onBotUploadClose = () => {
-    this.setState({
-      showUploadPopup: false
-    });
-  }
-
-  onBotUpload = () => {
-    this.setState({
-      showUploadPopup: false
-    });
   }
 
   render(){
@@ -56,6 +39,7 @@ class LeaderboardPage extends Component {
 
     return (
       <div>
+
         <div className="custom-notification">
           <div className="container text-center">
             Leaderboard is currently in use for <Link to="/tournament">Slovenian Lia turnament 2019</Link>.
@@ -82,21 +66,9 @@ class LeaderboardPage extends Component {
               </Col>
             </Row>
           </div>
-          <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload bot</Button>
           <h2>Leaderboard</h2>
           <Table data={[]} columns={leaderboardColumns} keyField="username" />
           <div className="text-center">COMING SOON</div>
-
-          <Popup
-            dialogClassName="custom-popup upload-bot"
-            show={this.state.showUploadPopup}
-            onHide={this.onBotUploadClose}
-            onButtonClick={this.onBotUpload}
-            heading="Upload Bot"
-            buttonText="Upload"
-          >
-            <UploadBotForm />
-          </Popup>
         </div>
 
       </div>
