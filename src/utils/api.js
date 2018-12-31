@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "https://staging.cloud1.liagame.com";
 
 export default {
   user: {
@@ -44,12 +44,19 @@ export default {
       axios.get(API_BASE_URL + "/user/username-available/?username=" + encodeURI(username))
         .then((response) => response.data),
   },
+
   codes: {
     getCountries: () =>
       axios.get(API_BASE_URL + "/country/").then((response) => response.data),
     getLevels: () =>
       axios.get(API_BASE_URL + "/level/").then((response) => response.data)
   },
+
+  game: {
+    getLeaderboard: () =>
+      axios.get(API_BASE_URL + "/game/leaderboard/").then((response) => response.data),
+  },
+
   other: {
     getOrganizations: () =>
       axios.get(API_BASE_URL + "/suggestion/organization/").then((response) => response.data),

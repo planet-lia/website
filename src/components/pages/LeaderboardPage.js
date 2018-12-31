@@ -1,22 +1,51 @@
 import React, { Component } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Table from '../elems/Table';
-import Popup from '../views/Popup';
-import UploadBotForm from '../forms/UploadBotForm';
 
 //import data from '../../assets/LeaderboardData';
+import api from '../../utils/api'
 
 class LeaderboardPage extends Component {
   constructor(props){
 		super(props);
     this.state = {
-      
+      leaderboardData: [],
+      error: null
     };
   }
 
+  componentDidMount = () => {
+    this.loadLeaderboard();
+  }
+
+  loadLeaderboard = async () => {
+    try {
+      const respLeaderboard = await api.game.getLeaderboard();
+      this.setLeaderboardData(respLeaderboard.leaderboard)
+    } catch(err) {
+      this.setState({error: "Network Error"});
+      console.log(err.message);
+    }
+  }
+
+  setLeaderboardData = (respLeaderboard) => {
+    const leaderboard = respLeaderboard.map(
+      (leaderboard) => ({
+        rank: leaderboard.rank,
+        username: leaderboard.user.username,
+        rating: leaderboard.rankDetails.rating,
+        tier: leaderboard.user.level,
+        organization: leaderboard.user.organization,
+        language: leaderboard.bot.language
+      })
+    );
+    this.setState({leaderboardData: leaderboard});
+  }
+
   render(){
+    const leaderboardData = this.state.leaderboardData;
     const leaderboardColumns = [{
       dataField: 'rank',
 			text: 'Rank'
@@ -24,8 +53,8 @@ class LeaderboardPage extends Component {
       dataField: 'username',
 			text: 'Username'
     }, {
-      dataField: 'elo',
-			text: 'Elo'
+      dataField: 'rating',
+			text: 'Rating'
     }, {
       dataField: 'tier',
 			text: 'Tier'
@@ -67,7 +96,7 @@ class LeaderboardPage extends Component {
             </Row>
           </div>
           <h2>Leaderboard</h2>
-          <Table data={[]} columns={leaderboardColumns} keyField="username" />
+          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" />
           <div className="text-center">COMING SOON</div>
         </div>
 
