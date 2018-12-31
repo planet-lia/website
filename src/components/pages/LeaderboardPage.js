@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Table from '../elems/Table';
 
-//import data from '../../assets/LeaderboardData';
 import api from '../../utils/api'
 
 class LeaderboardPage extends Component {
