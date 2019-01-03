@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { authActions } from '../../utils/actions/authActions'
 
@@ -10,7 +10,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: null
+      isExpanded: null,
+      activeNav: 0,
     }
   }
 
@@ -49,16 +50,16 @@ class Header extends Component {
             <Navbar.Collapse>
               <ul className="nav navbar-nav">
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/tournament">Tournament</Link>
+                  <NavLink to="/tournament" activeClassName="nav-link-active">Tournament</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/leaderboard">Leaderboard</Link>
+                  <NavLink to="/leaderboard" activeClassName="nav-link-active">Leaderboard</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/games">Games</Link>
+                  <NavLink to="/games" activeClassName="nav-link-active">Games</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/editor">Online Editor</Link>
+                  <NavLink to="/editor" activeClassName="nav-link-active">Online Editor</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
                   <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>

@@ -6,6 +6,8 @@ Colors
 #1f1f1d - Player dark yellow
 #bdbdbd - Player font gray
 #facd3b - Player yellow
+
+#019170 - highlight green
 */
 
 html {
@@ -174,6 +176,10 @@ select.placeholder > option {
   color: #019170;
 }
 
+#custom-navbar a.nav-link-active {
+  color: #019170;
+}
+
 /* Popups */
 .custom-popup {
   margin: 0 auto;
@@ -296,7 +302,7 @@ select.placeholder > option {
 .btn.custom-btn:focus {
   border: none;
   border-radius: 0;
-  background-color: #018e6a; /*#03965c*/
+  background-color: #019170; /*#03965c*/
   color: #eee;
 }
 
@@ -336,7 +342,7 @@ a.btn.custom-btn:hover {
 
 /* Notifications */
 .custom-notification {
-  background-color: #018e6a;
+  background-color: #019170;
   color: #eee;
   padding: 8px 0;
   margin-top: 10px;
@@ -471,7 +477,7 @@ a.btn.custom-btn:hover {
   width: 8em;
   font-weight: bold;
   font-size: larger;
-  color: #018e6a;
+  color: #019170;
 }
 
 .table.tour-agenda > tbody > tr:last-child > td {
@@ -610,7 +616,7 @@ a.btn.custom-btn:hover {
 }
 
 .land-btn.btn-try, .btn.btn-try:active{
-  background-color: #018e6a; /*#03965c*/
+  background-color: #019170; /*#03965c*/
   color: #ddd;
   font-size: 1.5em;
   padding: 0.316em 1.2em;
@@ -755,7 +761,7 @@ a.land-contact-logo {
 }
 
 .land-glyph {
-  background-color: #018e6a;
+  background-color: #019170;
   color: #eee;
   font-size: 5em;
   padding: 0.5em;
