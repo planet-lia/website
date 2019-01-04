@@ -57,7 +57,7 @@ class LandingPage extends Component {
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <h3 className="tour-title tour-date">18 Feb - 15 Mar</h3>
+            <h3 className="tour-title tour-date">18 Feb - 14 Mar</h3>
             <Link to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <div>
               <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
