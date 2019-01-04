@@ -37,7 +37,6 @@ export default {
           password: password,
           level: "university",
           organization: organization,
-          yearOfStudy: yearOfStudy,
           levelOfStudy: levelOfStudy,
           allowPublicationToGlobalLeaderboard: allowGlobal,
           countryAlpha2Code: country

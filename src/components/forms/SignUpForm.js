@@ -17,7 +17,6 @@ class SignUpForm extends Component {
       repeat: "",
       country: "",
       organization: "",
-      yearOfStudy: "",
       levelOfStudy: "",
       allowGlobal: false,
 
@@ -64,7 +63,6 @@ class SignUpForm extends Component {
             this.state.password,
             this.state.country,
             this.state.organization,
-            this.state.yearOfStudy,
             this.state.levelOfStudy,
             this.state.allowGlobal
           );
@@ -78,7 +76,6 @@ class SignUpForm extends Component {
             repeat: "",
             country: "",
             organization: "",
-            yearOfStudy: "",
             levelOfStudy: "",
             allowGlobal: false,
             error: null,
@@ -147,7 +144,7 @@ class SignUpForm extends Component {
       <form onSubmit={this.formSubmit} noValidate>
         <Row>
           <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Name</ControlLabel>
+            <ControlLabel>Name*</ControlLabel>
             <FormControl
               type="text"
               name="firstName"
@@ -157,7 +154,7 @@ class SignUpForm extends Component {
             />
           </Col>
           <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Last Name</ControlLabel>
+            <ControlLabel>Last Name*</ControlLabel>
             <FormControl
               type="text"
               name="lastName"
@@ -169,7 +166,7 @@ class SignUpForm extends Component {
         </Row>
         <Row>
           <Col componentClass={FormGroup} md={12}>
-            <ControlLabel>Email</ControlLabel>
+            <ControlLabel>Email*</ControlLabel>
             <FormControl
             type="email"
             name="email"
@@ -182,7 +179,7 @@ class SignUpForm extends Component {
         <Row>
           <Col componentClass={FormGroup} md={6}>
             <div className="form-group">
-              <ControlLabel>Username</ControlLabel>
+              <ControlLabel>Username*</ControlLabel>
               <FormControl
                 type="text"
                 name="username"
@@ -193,7 +190,7 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Password</ControlLabel>
+              <ControlLabel>Password*</ControlLabel>
               <FormControl
                 type="password"
                 name="password"
@@ -203,7 +200,7 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Repeat Password</ControlLabel>
+              <ControlLabel>Repeat Password*</ControlLabel>
               <FormControl
                 type="password"
                 name="repeat"
@@ -231,16 +228,6 @@ class SignUpForm extends Component {
                 name="organization"
                 placeholder="Organization"
                 value={this.state.organization}
-                onChange={this.onChange}
-              />
-            </div>
-            <div className="form-group">
-              <ControlLabel>Year of Study</ControlLabel>
-              <FormControl
-                type="text"
-                name="yearOfStudy"
-                placeholder="E.g. 1st year"
-                value={this.state.yearOfStudy}
                 onChange={this.onChange}
               />
             </div>
