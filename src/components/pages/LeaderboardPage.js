@@ -39,6 +39,7 @@ class LeaderboardPage extends Component {
       (leaderboard) => ({
         rank: leaderboard.rank,
         username: leaderboard.user.username,
+        userId: leaderboard.user.userId,
         rating: leaderboard.rankDetails.rating,
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
@@ -51,14 +52,19 @@ class LeaderboardPage extends Component {
     });
   }
 
+  linkFormatter = (cell, row, rowIndex) => {
+    return (<Link to={"/user/" + row.userId}>{row.username}</Link>);
+  }
+
   render(){
     const { leaderboardData, loadingData } = this.state;
     const leaderboardColumns = [{
       dataField: 'rank',
 			text: 'Rank'
     }, {
-      dataField: 'username',
-			text: 'Username'
+      dataField: 'no1',
+			text: 'Username',
+      formatter: this.linkFormatter
     }, {
       dataField: 'rating',
 			text: 'Rating'
