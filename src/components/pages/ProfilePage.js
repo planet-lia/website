@@ -54,7 +54,7 @@ class ProfilePage extends Component {
         player2: gamesList.bots[1].user.username,
         result: (gamesList.bots[0].isWinner ? 1 : 2),
         duration: gamesList.duration,
-        unitsRemain: Math.floor( (gamesList.bots[0].unitsLeft + gamesList.bots[1].unitsLeft) / 32 * 100 ) + "%"
+        unitsRemain: Math.max(gamesList.bots[0].unitsLeft, 0) + " - " + Math.max(gamesList.bots[1].unitsLeft, 0)
       })
     );
     this.setState({
@@ -84,6 +84,7 @@ class ProfilePage extends Component {
               <h2>{username}</h2>
             </Col>
             <Col sm={4}>
+              <b>Rank details</b>
               <div>
                 {"Rank: " + rank}
               </div>
@@ -98,6 +99,9 @@ class ProfilePage extends Component {
               </div>
             </Col>
             <Col sm={4}>
+              <div>
+                <b>All time results</b>
+              </div>
               <div>
                 {"Wins: " + wins}
               </div>
