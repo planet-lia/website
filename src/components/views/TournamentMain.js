@@ -1,8 +1,6 @@
 import React from 'react';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
 
 import Prize from '../elems/Prize';
 
@@ -47,14 +45,18 @@ const TournamentMain = (props) => {
                 <div className="tour-cont-icon-lg">
                   <FontAwesomeIcon icon="trophy" />
                 </div>
-                <Link to="/leaderboard" className="btn custom-btn custom-btn-lg">{content.btnLeaderboard}</Link>
+                <a href="/leaderboard" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
+                  {content.btnLeaderboard}
+                </a>
               </div>
               <div className="tour-cont-link text-center">
                 <div className="tour-cont-icon-lg position-relative">
                   <FontAwesomeIcon icon="desktop" />
                   <FontAwesomeIcon id="tour-desktop-play" icon="play" />
                 </div>
-                <Link to="/games" className="btn custom-btn custom-btn-lg">{content.btnWatch}</Link>
+                <a href="/games" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
+                  {content.btnWatch}
+                </a>
               </div>
             </Col>
           </Row>
@@ -68,7 +70,9 @@ const TournamentMain = (props) => {
                 <div className="tour-cont-unit">
                   <img id="yellow-unit" src="/assets/unit1.png" alt="yellow unit"/>
                 </div>
-                <Link to="/editor" className="btn custom-btn custom-btn-lg">{content.btnEditor}</Link>
+                <a href="/editor" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
+                  {content.btnEditor}
+                </a>
               </div>
               <div className="tour-cont-link text-center">
               <div className="tour-cont-unit">
@@ -89,19 +93,19 @@ const TournamentMain = (props) => {
               <Table bsClass="table tour-agenda">
                 <tbody>
                   <tr>
-                    <td>18.2. - 10.3.</td>
+                    <td>18.2. - 9.3.</td>
                     <td>
                       {content.txtAgenda1}
                     </td>
                   </tr>
                   <tr>
-                    <td>11.3. - 14.3.</td>
+                    <td>10.3. - 13.3.</td>
                     <td>
                       {content.txtAgenda2}
                     </td>
                   </tr>
                   <tr>
-                    <td>15.3.</td>
+                    <td>14.3.</td>
                     <td>
                       {content.txtAgenda3}
                     </td>
@@ -152,9 +156,15 @@ const TournamentMain = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col id="rules">
+            <Col>
               <h3 className="tour-title text-center">{content.titleRules}</h3>
-              <p className="text-center">{content.txtRules}<HashLink to="/tournament/rules#top">{content.linkRules}</HashLink>.</p>
+              <p className="text-center">
+                {content.txtRules}
+                <a href="/tournament/rules" target="_blank" rel="noopener noreferrer">
+                  {content.linkRules}
+                </a>
+                .
+              </p>
             </Col>
           </Row>
         </div>

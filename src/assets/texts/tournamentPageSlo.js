@@ -8,7 +8,7 @@ const tournamentPageSlo = {
     <br key="1"/>,
     <span key="2">Pridruži se Lia in se poteguj za nagrade!</span>
   ],
-  tourDate: "18. Feb - 15. Mar",
+  tourDate: "18. Feb - 14. Mar",
   btnRegisterEarly: "Predčasna prijava",
   lnkWhat: "Kaj je Lia?",
 

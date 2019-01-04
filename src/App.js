@@ -50,6 +50,7 @@ class App extends Component {
     const isEditor = (window.location.pathname.split("/")[1]==="editor");
     return (
       <div id="main-container">
+        <div id="top"></div>
         <Header onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
         <div className={isEditor ? "main-content no-footer" : "main-content"}>
           <Route component={withTracker(Routes, { /* additional attributes */ })}/>

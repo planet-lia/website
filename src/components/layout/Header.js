@@ -50,16 +50,16 @@ class Header extends Component {
             <Navbar.Collapse>
               <ul className="nav navbar-nav">
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <NavLink to="/tournament" activeClassName="nav-link-active">Tournament</NavLink>
+                  <NavLink to="/tournament" exact activeClassName="nav-link-active">Tournament</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <NavLink to="/leaderboard" activeClassName="nav-link-active">Leaderboard</NavLink>
+                  <NavLink to="/leaderboard" exact activeClassName="nav-link-active">Leaderboard</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <NavLink to="/games" activeClassName="nav-link-active">Games</NavLink>
+                  <NavLink to="/games" exact activeClassName="nav-link-active">Games</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <NavLink to="/editor" activeClassName="nav-link-active">Online Editor</NavLink>
+                  <NavLink to="/editor" exact activeClassName="nav-link-active">Online Editor</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
                   <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>

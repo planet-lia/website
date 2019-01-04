@@ -8,7 +8,7 @@ const tournamentPageEng = {
     <br key="1"/>,
     <span key="2">Join Lia and battle for the coding glory!</span>
   ],
-  tourDate: "18 Feb - 15 Mar",
+  tourDate: "18 Feb - 14 Mar",
   btnRegisterEarly: "Register Early",
   lnkWhat: "What is Lia?",
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
 import queryString from 'query-string';
 import { Switch, Route } from 'react-router-dom';
 
@@ -47,7 +46,7 @@ class TournamentPage extends Component {
     const { content } = this.state;
     const currentPath= this.props.location.pathname;
     return (
-      <div id="top">
+      <div>
         <div className="custom-section sec-short">
           <div className="container text-center">
             <Col>
@@ -63,7 +62,7 @@ class TournamentPage extends Component {
                     <p>{content.txtBanner}</p>
                     <h3 className="tour-title tour-date">{content.tourDate}</h3>
                     <Button bsClass="btn custom-btn custom-btn-xl center-block" disabled>{content.btnRegisterEarly}</Button>
-                    <div id="tour-what"><HashLink to="/#what-is-lia">{content.lnkWhat}</HashLink></div>
+                    <div id="tour-what"><a href="/#what-is-lia" target="_blank" rel="noopener noreferrer">{content.lnkWhat}</a></div>
                   </div>
                 )
                 : null

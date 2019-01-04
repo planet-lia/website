@@ -87,6 +87,11 @@ select.placeholder > option {
   position: relative;
 }
 
+#top, #bottom {
+  height: 0;
+  font-size: 0;
+}
+
 .main-content {
   padding-bottom: 7.6em;
 }
