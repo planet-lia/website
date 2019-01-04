@@ -42,7 +42,8 @@ class GamesList extends Component {
         player2: gamesList.bots[1].user.username,
         result: (gamesList.bots[0].isWinner ? 1 : 2),
         duration: gamesList.duration,
-        unitsRemain: Math.max(gamesList.bots[0].unitsLeft, 0) + " - " + Math.max(gamesList.bots[1].unitsLeft, 0)
+        unitsRemain1: Math.max(gamesList.bots[0].unitsLeft, 0),
+        unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0)
       })
     );
     this.setState({
