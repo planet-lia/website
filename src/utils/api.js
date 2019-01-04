@@ -68,6 +68,12 @@ export default {
     getGame: (matchId) =>
       axios.get(API_BASE_URL + "/game/match/" + matchId + "/")
         .then((response => response.data)),
+    getUserPublic: (userId) =>
+      axios.get(API_BASE_URL + "/game/user/" + userId + "/")
+        .then((response => response.data)),
+    getUserGames: (userId) =>
+      axios.get(API_BASE_URL + "/game/user/" + userId + "/matches/")
+        .then((response => response.data)),
   },
 
   other: {

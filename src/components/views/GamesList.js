@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-import Table from '../elems/Table';
+import GamesTable from '../elems/GamesTable';
 
 import api from '../../utils/api';
 
@@ -52,57 +51,13 @@ class GamesList extends Component {
     });
   }
 
-  linkFormatter = (cell, row, rowIndex) => {
-    const date = (
-      Number(row.date.substring(8,10)) + "-" +
-      Number(row.date.substring(5,7)) + "-" +
-      Number(row.date.substring(0,4))
-    )
-    return (
-      <Link to={{
-        pathname: "/games/" + row.matchId,
-        state: row
-      }}>
-        {date}
-      </Link>
-    );
-  }
-
-  playersFormatter = (cell, row, rowIndex) => {
-    if(row.result===1){
-      return (<span><strong>{row.player1}</strong>{" vs " + row.player2}</span>)
-    } else if (row.result===2) {
-      return (<span>{row.player1 + " vs "}<strong>{row.player2}</strong></span>)
-    }
-  }
-
-  durationFormatter = (cell, row, rowIndex) => {
-    return (Math.floor(row.duration/60) + ":" + Math.round(row.duration%60));
-  }
-
   render(){
     const { gamesData, loadingData } = this.state;
-    const gamesColumns = [{
-      dataField: 'no1',
-			text: 'Date',
-      formatter: this.linkFormatter
-    }, {
-      dataField: 'no2',
-			text: 'Players',
-      formatter: this.playersFormatter
-    }, {
-      dataField: 'no3',
-			text: 'Duration',
-      formatter: this.durationFormatter
-    }, {
-      dataField: 'unitsRemain',
-			text: 'Remaining Units'
-    }];
 
     return (
       <div>
         <h2>Games</h2>
-        <Table data={gamesData} columns={gamesColumns} keyField="matchId" loading={loadingData}/>
+        <GamesTable data={gamesData} loading={loadingData}/>
       </div>
     )
   }

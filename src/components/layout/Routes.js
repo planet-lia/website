@@ -9,6 +9,7 @@ import GamesPage from '../pages/GamesPage';
 import EditorPage from "../pages/EditorPage";
 import EditorTracking from "../pages/EditorTracking";
 import EmailVerificationPage from '../pages/EmailVerificationPage';
+import ProfilePage from '../pages/ProfilePage';
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
       <Route path="/editor/tracking" component={EditorTracking} />
       <Route path="/editor" component={EditorPage} />
       <Route path="/account/verify" component={EmailVerificationPage} />
+      <Route path="/user/:username" component={ProfilePage} />
     </Switch>
   );
 }

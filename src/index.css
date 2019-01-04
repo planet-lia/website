@@ -975,6 +975,12 @@ a.land-contact-logo {
   }
 }
 
+/* Profile Page */
+
+#prof-cont-data {
+  margin: 2em 0;
+}
+
 /* Replay Thumbnail */
 
 .cont-thumb {
