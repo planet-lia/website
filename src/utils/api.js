@@ -47,14 +47,20 @@ export default {
 
   codes: {
     getCountries: () =>
-      axios.get(API_BASE_URL + "/country/").then((response) => response.data),
+      axios.get(API_BASE_URL + "/country/")
+        .then((response) => response.data),
     getLevels: () =>
-      axios.get(API_BASE_URL + "/level/").then((response) => response.data)
+      axios.get(API_BASE_URL + "/level/")
+        .then((response) => response.data)
   },
 
   game: {
     getLeaderboard: () =>
-      axios.get(API_BASE_URL + "/game/leaderboard/").then((response) => response.data),
+      axios.get(API_BASE_URL + "/game/leaderboard/")
+        .then((response) => response.data),
+    getGamesList: (offset = 0) =>
+      axios.get(API_BASE_URL + "/game/match/latest/?offset=" + encodeURI(offset))
+        .then((response => response.data)),
   },
 
   other: {
