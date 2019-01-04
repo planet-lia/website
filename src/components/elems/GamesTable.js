@@ -18,7 +18,7 @@ const GamesTable = (props) => {
     formatter: durationFormatter
   }, {
     dataField: 'unitsRemain',
-    text: 'Remaining Units'
+    text: 'Remaining Units (max 16 - 16)'
   }];
 
   return (
@@ -55,5 +55,6 @@ function playersFormatter(cell, row, rowIndex) {
 }
 
 function durationFormatter(cell, row, rowIndex) {
-  return (Math.floor(row.duration/60) + ":" + Math.round(row.duration%60));
+  let seconds = Math.round(row.duration%60);
+  return (Math.floor(row.duration/60) + ":" + ((seconds < 10) ? "0" + seconds : seconds));
 }

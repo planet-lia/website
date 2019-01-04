@@ -100,7 +100,7 @@ class LandingPage extends Component {
         <div className="custom-section">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
-            <div className="land-subtext">Grab popcorn and watch bots fight each other.</div>
+            <div className="land-subtext">Watch programmers battle each other.</div>
           </div>
           <div className="container" id="land-cont-watch">
             { this.state.gameId
@@ -129,7 +129,7 @@ class LandingPage extends Component {
         <div className="custom-section sec-gray">
           <div className="land-cont-title">
             <h2 className="land-title">COMPETE</h2>
-            <div className="land-subtext">Build, test, battle. Create the ultimate bot.</div>
+            <div className="land-subtext">Code, fight, win. And have fun!</div>
           </div>
           <div className="container">
             <Col className="land-funs" md={4}>
@@ -138,7 +138,7 @@ class LandingPage extends Component {
               </div>
               <div className="land-subtitle center-text">Develop bots</div>
               <div className="center-text">
-                Use Java, Python or Kotlin alongside your favourite IDE to create unbeatable bots that can fight on their own.
+                Use Java, Python3 or Kotlin to create your very own bot.
               </div>
             </Col>
             <Col className="land-funs" md={4}>
@@ -147,7 +147,7 @@ class LandingPage extends Component {
               </div>
               <div className="land-subtitle center-text">Join the leaderboard</div>
               <div className="center-text">
-                Join the global leaderboard and compete for fame and glory.
+                Join the global leaderboard and compete for coding fame and glory.
               </div>
             </Col>
             <Col className="land-funs" md={4}>

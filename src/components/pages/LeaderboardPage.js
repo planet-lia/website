@@ -43,7 +43,8 @@ class LeaderboardPage extends Component {
         rating: leaderboard.rankDetails.rating,
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
-        language: leaderboard.bot.language
+        language: leaderboard.bot.language,
+        version: leaderboard.bot.version
       })
     );
     this.setState({
@@ -77,6 +78,9 @@ class LeaderboardPage extends Component {
     }, {
       dataField: 'language',
       text: 'Language'
+    }, {
+      dataField: 'version',
+      text: 'Bot version'
     }];
 
     return (
