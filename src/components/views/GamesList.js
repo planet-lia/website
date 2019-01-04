@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Table from '../elems/Table';
 
-import api from '../../utils/api'
+import api from '../../utils/api';
 
 class GamesList extends Component {
   constructor(props){
@@ -58,7 +58,14 @@ class GamesList extends Component {
       Number(row.date.substring(5,7)) + "-" +
       Number(row.date.substring(0,4))
     )
-    return date;
+    return (
+      <Link to={{
+        pathname: "/games/" + row.matchId,
+        state: row
+      }}>
+        {date}
+      </Link>
+    );
   }
 
   playersFormatter = (cell, row, rowIndex) => {

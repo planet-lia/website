@@ -61,6 +61,9 @@ export default {
     getGamesList: (offset = 0) =>
       axios.get(API_BASE_URL + "/game/match/latest/?offset=" + encodeURI(offset))
         .then((response => response.data)),
+    getGame: (matchId) =>
+      axios.get(API_BASE_URL + "/game/match/" + matchId + "/")
+        .then((response => response.data)),
   },
 
   other: {
