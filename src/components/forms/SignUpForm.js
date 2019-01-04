@@ -143,7 +143,6 @@ class SignUpForm extends Component {
   }
 
   render(){
-    console.log(this.state.allowGlobal);
     return (
       <form onSubmit={this.formSubmit} noValidate>
         <Row>
