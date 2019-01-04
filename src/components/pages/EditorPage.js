@@ -248,7 +248,7 @@ class EditorPage extends Component {
               <Replay containerId="player" number={ 0 } replayFileBase64={ currentReplayFileBase64 } />
               {generatingGame &&
                 <div id="editor-loader-overlay">
-                  <div id="cont-loader">
+                  <div className="cont-loader">
                     <Loader
                       type="Triangle"
                       color="#018e6a"

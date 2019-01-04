@@ -11,6 +11,7 @@ class LeaderboardPage extends Component {
 		super(props);
     this.state = {
       leaderboardData: [],
+      loadingData: false,
       error: null
     };
   }
@@ -20,11 +21,15 @@ class LeaderboardPage extends Component {
   }
 
   loadLeaderboard = async () => {
+    this.setState({loadingData: true});
     try {
       const respLeaderboard = await api.game.getLeaderboard();
       this.setLeaderboardData(respLeaderboard.leaderboard)
     } catch(err) {
-      this.setState({error: "Network Error"});
+      this.setState({
+        loadingData: false,
+        error: "Network Error"
+      });
       console.log(err.message);
     }
   }
@@ -40,11 +45,14 @@ class LeaderboardPage extends Component {
         language: leaderboard.bot.language
       })
     );
-    this.setState({leaderboardData: leaderboard});
+    this.setState({
+      leaderboardData: leaderboard,
+      loadingData: false
+    });
   }
 
   render(){
-    const leaderboardData = this.state.leaderboardData;
+    const { leaderboardData, loadingData } = this.state;
     const leaderboardColumns = [{
       dataField: 'rank',
 			text: 'Rank'
@@ -95,8 +103,7 @@ class LeaderboardPage extends Component {
             </Row>
           </div>
           <h2>Leaderboard</h2>
-          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" />
-          <div className="text-center">COMING SOON</div>
+          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
         </div>
 
       </div>

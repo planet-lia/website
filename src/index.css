@@ -162,12 +162,32 @@ select.placeholder > option {
   padding: 4em 0;
 }
 
+.cont-table-loader {
+  position: relative;
+  min-height: 100px;
+  min-width: 100px;
+  margin: 4em 0;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.cont-loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
 @media screen and (max-width: 991.98px) {
   .custom-section {
     padding: 6em 0;
   }
   .custom-section.sec-short {
     padding: 3em 0;
+  }
+  .cont-table-loader {
+    margin: 3em 0;
   }
 }
 
@@ -906,15 +926,6 @@ a.land-contact-logo {
   bottom: 0;
   left: 0;
   background-color: rgba(255,255,255,0.1);
-}
-
-#cont-loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
 }
 
 #editor-cont-log {
