@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap';
+import {Row, Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap';
 
 import Select from '../elems/Select';
 import { validators } from '../../utils/helpers/validators';
@@ -16,6 +16,10 @@ class SignUpForm extends Component {
       password: "",
       repeat: "",
       country: "",
+      organization: "",
+      yearOfStudy: "",
+      levelOfStudy: "",
+      allowGlobal: false,
 
       countriesList: [],
 
@@ -58,7 +62,11 @@ class SignUpForm extends Component {
             this.state.firstName,
             this.state.lastName,
             this.state.password,
-            this.state.country
+            this.state.country,
+            this.state.organization,
+            this.state.yearOfStudy,
+            this.state.levelOfStudy,
+            this.state.allowGlobal
           );
           this.props.closePopup();
           this.setState({
@@ -69,6 +77,10 @@ class SignUpForm extends Component {
             password: "",
             repeat: "",
             country: "",
+            organization: "",
+            yearOfStudy: "",
+            levelOfStudy: "",
+            allowGlobal: false,
             error: null,
             errorUn: null
           })
@@ -126,7 +138,12 @@ class SignUpForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  onCheckboxChange = (event) => {
+    this.setState({ [event.target.name]: event.target.checked });
+  }
+
   render(){
+    console.log(this.state.allowGlobal);
     return (
       <form onSubmit={this.formSubmit} noValidate>
         <Row>
@@ -208,6 +225,47 @@ class SignUpForm extends Component {
                 onChange={this.onChange}
               />
             </div>
+            <div className="form-group">
+              <ControlLabel>Organization</ControlLabel>
+              <FormControl
+                type="text"
+                name="organization"
+                placeholder="Organization"
+                value={this.state.organization}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className="form-group">
+              <ControlLabel>Year of Study</ControlLabel>
+              <FormControl
+                type="text"
+                name="yearOfStudy"
+                placeholder="E.g. 1st year"
+                value={this.state.yearOfStudy}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className="form-group">
+              <ControlLabel>Level of Study</ControlLabel>
+              <FormControl
+                type="text"
+                name="levelOfStudy"
+                placeholder="E.g. Bachelor's degree"
+                value={this.state.levelOfStudy}
+                onChange={this.onChange}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col componentClass={FormGroup} md={12}>
+            <Checkbox
+              name="allowGlobal"
+              checked={this.state.allowGlobal}
+              onChange={this.onCheckboxChange}
+            >
+              Allow us to add your bot to the global leaderboard after the tournament
+            </Checkbox>
           </Col>
         </Row>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
