@@ -75,7 +75,7 @@ class Header extends Component {
                     </NavLink>
                   </li>
                   <li role="presentation" onClick={this.logout}>
-                    Sign Out
+                    <a role="button" href="#">Sign Out</a>
                   </li>
                 </ul>
               ) : (
