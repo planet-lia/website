@@ -1289,3 +1289,21 @@ a.land-contact-logo {
   position: absolute;
   bottom: 0;
 }
+
+
+/* TODO @aljaz's css, fix if needed */
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+  background-color: #019170;
+  border-color: #019170;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+  color: #019170;
+}

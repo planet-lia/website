@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ReactPaginate from 'react-paginate';
 import GamesTable from '../elems/GamesTable';
 
 import api from '../../utils/api';
@@ -10,19 +10,21 @@ class GamesList extends Component {
     this.state = {
       gamesData: [],
       loadingData: false,
+      pageCount: 0,
+      nGamesPerPage: 0,
       error: null
     };
   }
 
   componentDidMount = () => {
-    this.loadGames();
+    this.loadGames(0);
   }
 
-  loadGames = async () => {
+  loadGames = async (offset) => {
     this.setState({loadingData: true});
     try {
-      const respGames = await api.game.getGamesList();
-      this.setGamesData(respGames.matches)
+      const respGames = await api.game.getGamesList(offset);
+      this.setGamesData(respGames)
     } catch(err) {
       this.setState({
         loadingData: false,
@@ -33,7 +35,7 @@ class GamesList extends Component {
   }
 
   setGamesData = (respGames) => {
-    const gamesList = respGames.map(
+    const gamesList = respGames.matches.map(
       (gamesList) => ({
         matchId: gamesList.matchId,
         replayUrl: gamesList.replayUrl,
@@ -46,20 +48,46 @@ class GamesList extends Component {
         unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0)
       })
     );
+    let pageCount = this.state.pageCount;
+    if (pageCount === 0) {
+      pageCount = Math.ceil(respGames.pagination.total / respGames.pagination.count)
+    }
+
     this.setState({
       gamesData: gamesList,
+      nGamesPerPage: respGames.pagination.count,
+      pageCount: pageCount,
       loadingData: false
     });
   }
 
+  handlePageClick = (data) => {
+    let selected = data.selected;
+    console.log(this.state.nGamesPerPage)
+    let offset = Math.ceil(selected * this.state.nGamesPerPage);
+
+    this.loadGames(offset);
+  };
+
   render(){
-    const { gamesData, loadingData } = this.state;
+    const { gamesData, loadingData, pageCount } = this.state;
 
     return (
       <div>
         <h2>Games</h2>
         <p>To watch a game click the date.</p>
         <GamesTable data={gamesData} loading={loadingData}/>
+        <ReactPaginate previousLabel={"<"}
+                       nextLabel={">"}
+                       breakLabel={"..."}
+                       breakClassName={"break-me"}
+                       pageCount={pageCount}
+                       marginPagesDisplayed={1}
+                       pageRangeDisplayed={5}
+                       onPageChange={this.handlePageClick}
+                       containerClassName={"pagination"}
+                       subContainerClassName={"pages pagination"}
+                       activeClassName={"active"} />
       </div>
     )
   }
