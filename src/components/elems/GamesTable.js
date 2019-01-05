@@ -8,20 +8,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const GamesTable = (props) => {
   const gamesColumns = [{
     dataField: 'no1',
-    text: 'Date',
-    formatter: linkFormatter
-  }, {
-    dataField: 'no2',
     text: 'Players',
     formatter: playersFormatter
   }, {
-    dataField: 'no3',
+    dataField: 'no2',
     text: 'Duration',
     formatter: durationFormatter
   }, {
-    dataField: 'no4',
-    text: 'Remaining Units (max 16 - 16)',
+    dataField: 'no3',
+    text: 'Remaining Units',
     formatter: unitsRemainFormatter
+  }, {
+    dataField: 'no4',
+    text: 'Date',
+    formatter: dateFormatter
+  },{
+    dataField: 'no5',
+    text: 'Game',
+    formatter: linkFormatter
   }];
 
   return (
@@ -34,33 +38,41 @@ const GamesTable = (props) => {
 export default GamesTable;
 
 function linkFormatter(cell, row, rowIndex) {
-  const d = new Date(row.date);
-  const date = d.toLocaleString();
+  const textStyle = {color: "#9A3F1B"};
   return (
     <span>
       <Link to={{
         pathname: "/games/" + row.matchId,
         state: row
       }} style={{ textDecoration: 'none' }}>
-        <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
         &nbsp;&nbsp;
-        <FontAwesomeIcon icon="tv" color={"#CCCCCC"}/>
+        <FontAwesomeIcon icon="tv" color={"#9A3F1B"}/>
+        <span style={textStyle}>&nbsp; Watch now</span>
       </Link>
     </span>
   );
 }
+
+function dateFormatter(cell, row, rowIndex) {
+  const d = new Date(row.date);
+  const date = d.toLocaleString();
+  return (
+    <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
+  );
+}
+
 
 function playersFormatter(cell, row, rowIndex) {
 
   const player1 = usernameToProfileLink(row.player1);
   const player2 = usernameToProfileLink(row.player2);
 
-  const trophyIcon = <FontAwesomeIcon icon="medal" color={"#FACD3B"}/>;
+  const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
 
   if(row.result===1){
-    return (<span>{trophyIcon}&nbsp;<strong>{player1}</strong> vs {player2}</span>)
+    return (<span>{trophyIcon}&nbsp;<strong>{player1}</strong> vs. {player2}</span>)
   } else if (row.result===2) {
-    return (<span>{player1} vs <strong>{player2}</strong>&nbsp;{trophyIcon}</span>)
+    return (<span>{player1} vs. <strong>{player2}</strong>&nbsp;{trophyIcon}</span>)
   }
 }
 
