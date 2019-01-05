@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 
 import api from '../../utils/api';
 import {connect} from "react-redux";
-import isEmpty from "lodash/isEmpty";
 
 class ProfilePage extends Component {
   constructor(props){
@@ -23,6 +22,7 @@ class ProfilePage extends Component {
       losses: 0,
       total: 0,
       playing: 0,
+      activeBotId: "",
       activeBotWins: 0,
       activeBotLosses: 0,
       activeBotTotal: 0,
@@ -39,6 +39,7 @@ class ProfilePage extends Component {
       newBotProcessingLogs: "",
       newBotTestMatchLogs: "",
       newBotTestMatchGameEngineLog: "",
+      hasActiveBot: true,
       loadingData: false,
       error: null
     }
@@ -57,23 +58,28 @@ class ProfilePage extends Component {
       const userId = respUserId.userId;
 
       const respUser = await api.game.getUserPublic(userId);
+
+      let hasActiveBot = respUser.user.activeBot !== null;
+      this.setState({hasActiveBot: hasActiveBot});
       this.setUserData(respUser.user);
+      if (hasActiveBot) {
+        const activeBotStats = respUser.user.stats.match.activeBot;
+        this.setActiveBotData(respUser.user.activeBot, activeBotStats);
+      }
 
       if (isPrivate) {
-        const respBotActive = await api.game.getActiveBot();
-        if(!isEmpty(respBotActive.bot)){
-          const respBot = await api.game.getBot(respBotActive.bot.botId);
+        try{
           const respBotLatest = await api.game.getLatestBot();
-
-          this.setBotData(respBot.bot, respBotActive.bot, respBotLatest.bot);
-        } else {
-          this.setState({ loadingData: false });
+          this.setLatestBotData(respBotLatest.bot);
+        }
+        catch(err) {
+          // Do nothing, if 404 latest bot does not exist
         }
       }
 
       this.loadGames(userId, 0);
-
-    } catch(err) {
+    }
+    catch(err) {
       this.setState({
         loadingData: false,
         error: "Network Error"
@@ -82,12 +88,8 @@ class ProfilePage extends Component {
     }
   }
 
-  setBotData = (respBotFull, respBotActive, respBotLatest) => {
+  setLatestBotData = (respBotLatest) => {
     this.setState({
-      activeBotId: respBotActive.botId,
-      version: respBotActive.version,
-      language: respBotFull.language,
-      uploadTime: respBotActive.uploaded,
       latestBotId: respBotLatest.botId,
       newBotUploadTime: respBotLatest.uploaded,
       newBotStatus: respBotLatest.status,
@@ -147,8 +149,6 @@ class ProfilePage extends Component {
 
   setUserData = (respUser) => {
     this.setState({
-      userId: respUser.userId,
-      username: respUser.username,
       rank: respUser.stats.leaderboard.rank,
       rating: respUser.stats.leaderboard.rating,
       mu: respUser.stats.leaderboard.mu,
@@ -156,11 +156,20 @@ class ProfilePage extends Component {
       wins: respUser.stats.match.allTime.wins,
       losses: respUser.stats.match.allTime.losses,
       total: respUser.stats.match.allTime.total,
-      playing: respUser.stats.match.allTime.playing,
-      activeBotWins: respUser.stats.match.activeBot.wins,
-      activeBotLosses: respUser.stats.match.activeBot.losses,
-      activeBotTotal: respUser.stats.match.activeBot.total,
-      activeBotPlaying: respUser.stats.match.activeBot.playing,
+      playing: respUser.stats.match.allTime.playing
+    });
+  }
+
+  setActiveBotData = (activeBot, activeBotStats) => {
+    this.setState({
+      activeBotId: activeBot.botId,
+      version: activeBot.version,
+      language: activeBot.language,
+      uploadTime: activeBot.uploaded,
+      activeBotWins: activeBotStats.wins,
+      activeBotLosses: activeBotStats.losses,
+      activeBotTotal: activeBotStats.total,
+      activeBotPlaying: activeBotStats.playing,
     });
   }
 
@@ -201,7 +210,7 @@ class ProfilePage extends Component {
             </Col>
             <Col sm={3}>
               <h4>Current bot</h4>
-              {(this.state.isPrivate)
+              {(this.state.hasActiveBot)
                 ? (
                   <span>
                     <div>
@@ -216,7 +225,7 @@ class ProfilePage extends Component {
                     </div>
                   </span>
                 )
-                : null
+                : <div>You don't have any bots.</div>
               }
               {(this.state.isPrivate)
                 ? (
@@ -234,15 +243,18 @@ class ProfilePage extends Component {
                           <div>
                             {"Status: " + newBotStatus}
                           </div>
-                           <div>
-                            {"Processing logs: "} {this.logToDownloadLink(newBotProcessingLogs)}
-                          </div>
-                          <div>
-                            {"Test match logs: "} {this.logToDownloadLink(newBotTestMatchLogs)}
-                          </div>
-                          <div>
-                            {"Test match engine logs: "} {this.logToDownloadLink(newBotTestMatchGameEngineLog)}
-                          </div>
+                          {(newBotProcessingLogs !== "")
+                            ? <div>{"Processing logs: "} {this.logToDownloadLink(newBotProcessingLogs)}</div>
+                            : null
+                          }
+                          {(newBotTestMatchLogs !== "")
+                            ? <div>{"Test match logs: "} {this.logToDownloadLink(newBotTestMatchLogs)}</div>
+                            : null
+                          }
+                          {(newBotTestMatchGameEngineLog !== "")
+                            ? <div>{"Test match engine logs: "} {this.logToDownloadLink(newBotTestMatchGameEngineLog)}</div>
+                            : null
+                          }
                         </span>
                       ) : "New bot is now current."
                     }
