@@ -180,7 +180,7 @@ class SignUpForm extends Component {
       <form onSubmit={this.formSubmit} noValidate>
         <Row>
           <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Name*</ControlLabel>
+            <ControlLabel>Name</ControlLabel>*
             <FormControl
               type="text"
               name="firstName"
@@ -190,7 +190,7 @@ class SignUpForm extends Component {
             />
           </Col>
           <Col componentClass={FormGroup} md={6}>
-            <ControlLabel>Last Name*</ControlLabel>
+            <ControlLabel>Last Name</ControlLabel>*
             <FormControl
               type="text"
               name="lastName"
@@ -202,7 +202,7 @@ class SignUpForm extends Component {
         </Row>
         <Row>
           <Col componentClass={FormGroup} md={12}>
-            <ControlLabel>Email*</ControlLabel>
+            <ControlLabel>Email</ControlLabel>*
             <FormControl
             type="email"
             name="email"
@@ -215,7 +215,7 @@ class SignUpForm extends Component {
         <Row>
           <Col componentClass={FormGroup} md={6}>
             <div className="form-group">
-              <ControlLabel>Username*</ControlLabel>
+              <ControlLabel>Username</ControlLabel>*
               <FormControl
                 type="text"
                 name="username"
@@ -226,7 +226,7 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Password*</ControlLabel>
+              <ControlLabel>Password</ControlLabel>*
               <FormControl
                 type="password"
                 name="password"
@@ -236,7 +236,7 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Repeat Password*</ControlLabel>
+              <ControlLabel>Repeat Password</ControlLabel>*
               <FormControl
                 type="password"
                 name="repeat"
@@ -248,7 +248,7 @@ class SignUpForm extends Component {
           </Col>
           <Col componentClass={FormGroup} md={6}>
             <div className="form-group">
-              <ControlLabel>Level*</ControlLabel>
+              <ControlLabel>Level</ControlLabel>*
               <Select
                 options={this.state.levelsList}
                 placeholder="Your level"
