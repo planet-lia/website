@@ -25,9 +25,8 @@ class GameReplay extends Component {
   componentDidMount = () => {
     if(this.props.location.state){
       this.setState(this.props.location.state);
-    } else {
-      this.loadGame(this.props.match.params.number)
     }
+    this.loadGame(this.props.match.params.number)
   }
 
   loadGame = async (matchId) => {

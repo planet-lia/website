@@ -70,7 +70,7 @@ class Header extends Component {
               {this.props.isAuthenticated ? (
                 <ul className="nav navbar-nav navbar-right">
                   <li role="presentation" onClick={this.onSelectNavItem}>
-                    <NavLink to="/profile" exact activeClassName="nav-link-active">
+                    <NavLink to={"/user/" + this.props.username} exact activeClassName="nav-link-active">
                         <div><FontAwesomeIcon icon="user" /> {this.props.username}</div>
                     </NavLink>
                   </li>

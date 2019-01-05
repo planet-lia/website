@@ -63,7 +63,6 @@ class GamesList extends Component {
 
   handlePageClick = (data) => {
     let selected = data.selected;
-    console.log(this.state.nGamesPerPage)
     let offset = Math.ceil(selected * this.state.nGamesPerPage);
 
     this.loadGames(offset);

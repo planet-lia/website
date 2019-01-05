@@ -1,7 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-
-import PrivateRoute from './PrivateRoute';
+import {Route, Switch} from 'react-router-dom';
 import LandingPage from '../pages/LandingPage';
 import TournamentPage from '../pages/TournamentPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
@@ -11,7 +9,6 @@ import EditorTracking from "../pages/EditorTracking";
 import EmailVerificationPage from '../pages/EmailVerificationPage';
 import ProfilePage from '../pages/ProfilePage';
 import RegistrationEmailPage from '../pages/RegistrationEmailPage';
-import PrivateProfilePage from '../pages/PrivateProfilePage';
 
 const Routes = () => {
   return (
@@ -25,7 +22,6 @@ const Routes = () => {
       <Route path="/account/verify" component={EmailVerificationPage} />
       <Route path="/user/:username" component={ProfilePage} />
       <Route path="/registration" component={RegistrationEmailPage} />
-      <PrivateRoute path="/profile" component={PrivateProfilePage} />
     </Switch>
   );
 }
