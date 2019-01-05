@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = "https://staging.cloud1.liagame.com";
+const API_BASE_URL = "https://dev.cloud1.liagame.com";
 
 export default {
   user: {
