@@ -39,18 +39,26 @@ function linkFormatter(cell, row, rowIndex) {
     <Link to={{
       pathname: "/games/" + row.matchId,
       state: row
-    }}>
+    }} style={{ textDecoration: 'none' }}>
       <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
     </Link>
   );
 }
 
 function playersFormatter(cell, row, rowIndex) {
+
+  const player1 = usernameToProfileLink(row.player1);
+  const player2 = usernameToProfileLink(row.player2);
+
   if(row.result===1){
-    return (<span><strong>{row.player1}</strong>{" vs " + row.player2}</span>)
+    return (<span><strong>{player1}</strong> vs {player2}</span>)
   } else if (row.result===2) {
-    return (<span>{row.player1 + " vs "}<strong>{row.player2}</strong></span>)
+    return (<span>{player1} vs <strong>{player2}</strong></span>)
   }
+}
+
+function usernameToProfileLink(username) {
+  return (<Link to={"/user/" + username} style={{ textDecoration: 'none' }}>{username}</Link>);
 }
 
 function durationFormatter(cell, row, rowIndex) {

@@ -58,6 +58,7 @@ class GamesList extends Component {
     return (
       <div>
         <h2>Games</h2>
+        <p>To watch a game click the date.</p>
         <GamesTable data={gamesData} loading={loadingData}/>
       </div>
     )

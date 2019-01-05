@@ -47,6 +47,10 @@ export default {
     usernameAvalible: (username) =>
       axios.get(API_BASE_URL + "/user/username-available/?username=" + encodeURI(username))
         .then((response) => response.data),
+
+    getUsernameToUserId: (username) =>
+      axios.get(API_BASE_URL + "/user/" + username + "/userid/")
+        .then((response) => response.data),
   },
 
   codes: {

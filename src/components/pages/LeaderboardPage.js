@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import { timeSince } from '../../utils/helpers/time';
 import Table from '../elems/Table';
 
 import api from '../../utils/api'
@@ -55,38 +55,11 @@ class LeaderboardPage extends Component {
   }
 
   botVersionFormatter = (uploaded) => {
-    return this.timeSince(new Date(uploaded)) + " ago";
-  }
-
-  timeSince =(date) => {
-    let seconds = Math.floor((new Date() - date) / 1000);
-
-    let interval = Math.floor(seconds / 31536000);
-
-    if (interval > 1) {
-      return interval + " years";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-      return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-      return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-      return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-      return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
+    return timeSince(new Date(uploaded)) + " ago";
   }
 
   linkFormatter = (cell, row, rowIndex) => {
-    return (<Link to={"/user/" + row.userId}>{row.username}</Link>);
+    return (<Link to={"/user/" + row.username} style={{ textDecoration: 'none' }}>{row.username}</Link>);
   }
 
   render(){
@@ -148,6 +121,8 @@ class LeaderboardPage extends Component {
             </Row>
           </div>
           <h2>Leaderboard</h2>
+          {/* TODO sorry for that ugly hack, put it in CSS. :) */}
+          <span>&nbsp;&nbsp;</span>
           <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
         </div>
 

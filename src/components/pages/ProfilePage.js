@@ -30,10 +30,13 @@ class ProfilePage extends Component {
   }
 
   loadData = async (username) => {
-    this.setState({loadingData: true});
+    this.setState({loadingData: true, username: username});
     try {
-      const respUser = await api.game.getUserPublic(username);
-      const respGames = await api.game.getUserGames(username);
+      const respUserId = await api.user.getUsernameToUserId(username);
+      const userId = respUserId.userId;
+
+      const respUser = await api.game.getUserPublic(userId);
+      const respGames = await api.game.getUserGames(userId);
       this.setData(respUser.user, respGames.matches)
     } catch(err) {
       this.setState({
