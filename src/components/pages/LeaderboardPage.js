@@ -44,6 +44,7 @@ class LeaderboardPage extends Component {
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
         language: leaderboard.bot.language,
+        lastChange: this.botVersionFormatter(leaderboard.bot.uploaded),
         version: leaderboard.bot.version
       })
     );
@@ -51,6 +52,37 @@ class LeaderboardPage extends Component {
       leaderboardData: leaderboard,
       loadingData: false
     });
+  }
+
+  botVersionFormatter = (uploaded) => {
+    return this.timeSince(new Date(uploaded)) + " ago";
+  }
+
+  timeSince =(date) => {
+    let seconds = Math.floor((new Date() - date) / 1000);
+
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+      return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+      return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
   }
 
   linkFormatter = (cell, row, rowIndex) => {
@@ -79,8 +111,11 @@ class LeaderboardPage extends Component {
       dataField: 'language',
       text: 'Language'
     }, {
+      dataField: 'lastChange',
+      text: 'Last change'
+    }, {
       dataField: 'version',
-      text: 'Bot version'
+      text: 'Version'
     }];
 
     return (

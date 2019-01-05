@@ -158,7 +158,7 @@ class PrivateProfilePage extends Component {
                 ? null
                 : (
                   <div>
-                    {"New bot version: " + newVersion + " " + newBotStatus}
+                    {"New bot version: " + newBotStatus}
                   </div>
                 )
               }

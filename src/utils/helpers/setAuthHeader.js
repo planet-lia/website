@@ -6,5 +6,4 @@ export default (token = null) => {
   } else {
     delete axios.defaults.headers.common['Authorization'];
   }
-
 }

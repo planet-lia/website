@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
+import Moment from 'react-moment';
 import Replay from '../elems/Replay';
-
+import { seconds2time } from '../../utils/helpers/time';
 import api from '../../utils/api';
 
 class GameReplay extends Component {
@@ -15,6 +15,7 @@ class GameReplay extends Component {
       player2: "",
       result: "",
       duration: "",
+      mapSeed: "",
       unitsRemain: "",
       loadingData: false,
       error: null
@@ -42,6 +43,7 @@ class GameReplay extends Component {
         player2: matchData.bots[1].user.username,
         result: (matchData.bots[0].isWinner ? 1 : 2),
         duration: matchData.duration,
+        mapSeed: matchData.mapSeed,
         unitsRemain: Math.floor( (matchData.bots[0].unitsLeft + matchData.bots[1].unitsLeft) / 32 * 100 ) + "%",
         loadingData: false
       });
@@ -55,13 +57,7 @@ class GameReplay extends Component {
   }
 
   render(){
-    const { player1, player2, date, duration, replayUrl } = this.state;
-    const formatedDate = (
-      Number(date.substring(8,10)) + "-" +
-      Number(date.substring(5,7)) + "-" +
-      Number(date.substring(0,4))
-    );
-    const formatedDuration = Math.floor(duration/60) + ":" + Math.round(duration%60);
+    const { player1, player2, date, duration, mapSeed, replayUrl } = this.state;
 
     return (
       <div>
@@ -69,9 +65,12 @@ class GameReplay extends Component {
           <div className="game-title">
             {player1 + " vs " + player2}
           </div>
-          <div className="game-stats">{formatedDate}</div>
+          <div className="game-stats"><Moment format="DD/MM/YYYY HH:mm">{date}</Moment></div>
           <div className="game-stats">
-            {"Duration: " + formatedDuration}
+            {"Duration: " + seconds2time(duration)}
+          </div>
+          <div className="game-stats">
+            {"Map seed: " + mapSeed}
           </div>
         </div>
         <div key={this.state.matchId}>

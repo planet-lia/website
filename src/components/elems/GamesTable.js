@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Moment from 'react-moment';
+import { seconds2time } from '../../utils/helpers/time';
 import Table from '../elems/Table';
 
 const GamesTable = (props) => {
@@ -32,17 +33,14 @@ const GamesTable = (props) => {
 export default GamesTable;
 
 function linkFormatter(cell, row, rowIndex) {
-  const date = (
-    Number(row.date.substring(8,10)) + "-" +
-    Number(row.date.substring(5,7)) + "-" +
-    Number(row.date.substring(0,4))
-  )
+  const d = new Date(row.date);
+  const date = d.toLocaleString();
   return (
     <Link to={{
       pathname: "/games/" + row.matchId,
       state: row
     }}>
-      {date}
+      <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
     </Link>
   );
 }
@@ -56,8 +54,7 @@ function playersFormatter(cell, row, rowIndex) {
 }
 
 function durationFormatter(cell, row, rowIndex) {
-  let seconds = Math.round(row.duration%60);
-  return (Math.floor(row.duration/60) + ":" + ((seconds < 10) ? "0" + seconds : seconds));
+  return seconds2time(row.duration);
 }
 
 function unitsRemainFormatter(cell, row, rowIndex) {
