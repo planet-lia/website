@@ -56,7 +56,7 @@ class ProfilePage extends Component {
     try {
       const respUserId = await api.user.getUsernameToUserId(username);
       const userId = respUserId.userId;
-
+      this.setState({userId: userId});
       const respUser = await api.game.getUserPublic(userId);
 
       let hasActiveBot = respUser.user.activeBot !== null;
