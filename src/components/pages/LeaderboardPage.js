@@ -3,8 +3,9 @@ import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { timeSince } from '../../utils/helpers/time';
 import Table from '../elems/Table';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from '../../utils/api'
+import Moment from 'react-moment';
 
 class LeaderboardPage extends Component {
   constructor(props){
@@ -12,6 +13,7 @@ class LeaderboardPage extends Component {
     this.state = {
       leaderboardData: [],
       loadingData: false,
+      lastUpdated: "",
       error: null
     };
   }
@@ -24,7 +26,8 @@ class LeaderboardPage extends Component {
     this.setState({loadingData: true});
     try {
       const respLeaderboard = await api.game.getLeaderboard();
-      this.setLeaderboardData(respLeaderboard.leaderboard)
+      this.setLeaderboardData(respLeaderboard.leaderboard);
+      this.setState({lastUpdated: respLeaderboard.leaderboardMisc.updated});
     } catch(err) {
       this.setState({
         loadingData: false,
@@ -44,7 +47,7 @@ class LeaderboardPage extends Component {
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
         language: leaderboard.bot.language,
-        lastChange: this.botVersionFormatter(leaderboard.bot.uploaded),
+        lastChange: timeSince(new Date(leaderboard.bot.uploaded)) + " ago",
         version: leaderboard.bot.version
       })
     );
@@ -54,19 +57,27 @@ class LeaderboardPage extends Component {
     });
   }
 
-  botVersionFormatter = (uploaded) => {
-    return timeSince(new Date(uploaded)) + " ago";
-  }
 
   linkFormatter = (cell, row, rowIndex) => {
     return (<Link to={"/user/" + row.username} style={{ textDecoration: 'none' }}>{row.username}</Link>);
   }
 
+
+  rankFormatter = (cell, row, rowIndex) => {
+    switch (row.rank) {
+      case 1: return (<span><FontAwesomeIcon icon="trophy" color={"#C1AF09"}/></span>);
+      case 2: return (<span><FontAwesomeIcon icon="trophy" color={"#9B9B92"}/></span>);
+      case 3: return (<span><FontAwesomeIcon icon="trophy" color={"#9A3F1B"}/></span>);
+      default: return row.rank;
+    }
+  }
+
   render(){
-    const { leaderboardData, loadingData } = this.state;
+    const { leaderboardData, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
       dataField: 'rank',
-			text: 'Rank'
+			text: 'Rank',
+      formatter: this.rankFormatter
     }, {
       dataField: 'no1',
 			text: 'Username',
@@ -90,6 +101,8 @@ class LeaderboardPage extends Component {
       dataField: 'version',
       text: 'Version'
     }];
+
+    const leaderboardUpdatedTextStype = {color: "#FFFFFF"};
 
     return (
       <div>
@@ -124,6 +137,7 @@ class LeaderboardPage extends Component {
           {/* TODO sorry for that ugly hack, put it in CSS. :) */}
           <span>&nbsp;&nbsp;</span>
           <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
+          <Moment format="DD/MM/YYYY HH:mm" style={leaderboardUpdatedTextStype}>{lastUpdated}</Moment>
         </div>
 
       </div>
