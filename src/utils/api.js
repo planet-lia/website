@@ -1,6 +1,35 @@
 import axios from 'axios';
 
-const API_BASE_URL = "https://staging.cloud1.liagame.com";
+const API_BASE_URL = (() => {
+
+  let apis = {
+    "dev": "https://dev.cloud1.liagame.com",
+    "staging": "https://staging.cloud1.liagame.com",
+    // TODO - "prod": "https://prod.cloud1.liagame.com"
+    "prod": "https://staging.cloud1.liagame.com",
+  };
+
+  let hostname = window.location.hostname;
+  let lastSubdomain = hostname.split(".")[0];
+
+  let apiUrlLog = (apiUrl) => {
+    console.log("Using Lia API: " + apiUrl);
+    return apiUrl;
+  };
+
+  switch (lastSubdomain) {
+    case "dev":
+      return apiUrlLog(apis["dev"]);
+    case "staging":
+      return apiUrlLog(apis["staging"]);
+    case "www":
+      return apiUrlLog(apis["prod"]);
+    case "localhost":
+      return apiUrlLog(apis["staging"]);
+    default:
+      return apiUrlLog(apis["prod"]);
+  }
+})();
 
 export default {
   user: {

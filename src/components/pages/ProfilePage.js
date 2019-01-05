@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import GamesTable from '../elems/GamesTable';
 import Moment from 'react-moment';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from '../../utils/api';
 import {connect} from "react-redux";
 
@@ -100,7 +101,7 @@ class ProfilePage extends Component {
   }
 
   loadGames = async (userId, offset) => {
-    this.setState({loadingData: true});
+    this.setState({loadingData: true, gamesData: []});
     try {
       const respGames = await api.game.getUserGames(userId, offset);
       this.setGamesData(respGames)
@@ -116,7 +117,6 @@ class ProfilePage extends Component {
   handlePageClick = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected * this.state.nGamesPerPage);
-
     this.loadGames(this.state.userId, offset);
   };
 
@@ -192,6 +192,9 @@ class ProfilePage extends Component {
             <Col sm={3}>
               <h2>{username}</h2>
               {(this.state.isPrivate) ? "Your profile" : null}
+              <div className="tour-cont-icon-lg">
+                <FontAwesomeIcon icon="robot" color={"#019170"}/>
+              </div>
             </Col>
             <Col sm={3}>
               <h4>Rank details</h4>

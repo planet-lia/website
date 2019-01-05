@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { seconds2time } from '../../utils/helpers/time';
 import Table from '../elems/Table';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GamesTable = (props) => {
   const gamesColumns = [{
@@ -36,12 +37,16 @@ function linkFormatter(cell, row, rowIndex) {
   const d = new Date(row.date);
   const date = d.toLocaleString();
   return (
-    <Link to={{
-      pathname: "/games/" + row.matchId,
-      state: row
-    }} style={{ textDecoration: 'none' }}>
-      <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
-    </Link>
+    <span>
+      <Link to={{
+        pathname: "/games/" + row.matchId,
+        state: row
+      }} style={{ textDecoration: 'none' }}>
+        <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
+        &nbsp;&nbsp;
+        <FontAwesomeIcon icon="tv" color={"#CCCCCC"}/>
+      </Link>
+    </span>
   );
 }
 
@@ -50,10 +55,12 @@ function playersFormatter(cell, row, rowIndex) {
   const player1 = usernameToProfileLink(row.player1);
   const player2 = usernameToProfileLink(row.player2);
 
+  const trophyIcon = <FontAwesomeIcon icon="medal" color={"#FACD3B"}/>;
+
   if(row.result===1){
-    return (<span><strong>{player1}</strong> vs {player2}</span>)
+    return (<span>{trophyIcon}&nbsp;<strong>{player1}</strong> vs {player2}</span>)
   } else if (row.result===2) {
-    return (<span>{player1} vs <strong>{player2}</strong></span>)
+    return (<span>{player1} vs <strong>{player2}</strong>&nbsp;{trophyIcon}</span>)
   }
 }
 

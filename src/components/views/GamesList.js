@@ -21,7 +21,7 @@ class GamesList extends Component {
   }
 
   loadGames = async (offset) => {
-    this.setState({loadingData: true});
+    this.setState({loadingData: true, gamesData: []});
     try {
       const respGames = await api.game.getGamesList(offset);
       this.setGamesData(respGames)
@@ -74,7 +74,6 @@ class GamesList extends Component {
     return (
       <div>
         <h2>Games</h2>
-        <p>To watch a game click the date.</p>
         <GamesTable data={gamesData} loading={loadingData}/>
         <ReactPaginate previousLabel={"<"}
                        nextLabel={">"}
