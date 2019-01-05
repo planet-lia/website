@@ -18,7 +18,7 @@ function login(username, password) {
       const decoded = jwtDecode(respLogin.token);
       localStorage.setItem("token", respLogin.token);
       setAuthHeader(respLogin.token);
-      return dispatch(success( decoded.data.username ));
+      return dispatch(success( decoded.data.username, decoded.data.userId ));
     } catch(err) {
       localStorage.removeItem("token");
       setAuthHeader();
@@ -26,7 +26,7 @@ function login(username, password) {
     }
   }
   function request(username) { return {type: actionTypesAuth.LOGIN_REQUEST, username} }
-  function success(username) { return {type: actionTypesAuth.LOGIN_SUCCESS, username} }
+  function success(username, userId) { return {type: actionTypesAuth.LOGIN_SUCCESS, username, userId} }
   function failure(error) { return {type: actionTypesAuth.LOGIN_FAILURE, error} }
 }
 
@@ -39,7 +39,7 @@ function logout() {
 function authenticate(token) {
   const decoded = jwtDecode(token);
   setAuthHeader(token);
-  return { type: actionTypesAuth.SET_AUTH, username: decoded.data.username };
+  return { type: actionTypesAuth.SET_AUTH, username: decoded.data.username, userId: decoded.data.userId };
 }
 
 function confirmEmail(code) {
@@ -50,7 +50,7 @@ function confirmEmail(code) {
       const decoded = jwtDecode(respConfirm.token);
       localStorage.setItem("token", respConfirm.token);
       setAuthHeader(respConfirm.token);
-      return dispatch(success( decoded.data.username ));
+      return dispatch(success( decoded.data.username, decoded.data.userId ));
     } catch(err) {
       localStorage.removeItem("user");
       setAuthHeader();
@@ -58,6 +58,6 @@ function confirmEmail(code) {
     }
   }
   function request() { return {type: actionTypesAuth.CONFIRM_EMAIL_REQUEST} }
-  function success(username) { return {type: actionTypesAuth.CONFIRM_EMAIL_SUCCESS, username} }
+  function success(username, userId) { return {type: actionTypesAuth.CONFIRM_EMAIL_SUCCESS, username, userId} }
   function failure(error) { return {type: actionTypesAuth.CONFIRM_EMAIL_FAILURE, error} }
 }

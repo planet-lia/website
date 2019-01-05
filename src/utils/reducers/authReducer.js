@@ -13,7 +13,8 @@ export function authentication(state = initialState, action) {
   case actionTypesAuth.LOGIN_SUCCESS:
     return {
       isAuthenticated: true,
-      username: action.username
+      username: action.username,
+      userId: action.userId
     };
   case actionTypesAuth.LOGIN_FAILURE:
     return {
@@ -24,7 +25,8 @@ export function authentication(state = initialState, action) {
   case actionTypesAuth.SET_AUTH:
     return {
       isAuthenticated: true,
-      username: action.username
+      username: action.username,
+      userId: action.userId
     };
   case actionTypesAuth.CONFIRM_EMAIL_REQUEST:
     return {
@@ -33,7 +35,8 @@ export function authentication(state = initialState, action) {
   case actionTypesAuth.CONFIRM_EMAIL_SUCCESS:
     return {
       isAuthenticated: true,
-      username: action.username
+      username: action.username,
+      userId: action.userId
     };
   case actionTypesAuth.CONFIRM_EMAIL_FAILURE:
     return {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { authActions } from '../../utils/actions/authActions'
 
@@ -33,6 +34,7 @@ class Header extends Component {
   }
 
   logout = async () => {
+    this.onSelectNavItem();
     await this.props.dispatch(authActions.logout());
   }
 
@@ -66,11 +68,16 @@ class Header extends Component {
                 </li>
               </ul>
               {this.props.isAuthenticated ? (
-                <Nav pullRight>
-                  <NavItem onClick={this.logout}>
+                <ul className="nav navbar-nav navbar-right">
+                  <li role="presentation" onClick={this.onSelectNavItem}>
+                    <NavLink to="/profile" exact activeClassName="nav-link-active">
+                        <div><FontAwesomeIcon icon="user" /> {this.props.username}</div>
+                    </NavLink>
+                  </li>
+                  <li role="presentation" onClick={this.logout}>
                     Sign Out
-                  </NavItem>
-                </Nav>
+                  </li>
+                </ul>
               ) : (
                 <Nav pullRight>
                   <NavItem onClick={() => this.onSelectNavSignItem(2)}>

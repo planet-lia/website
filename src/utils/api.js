@@ -74,6 +74,15 @@ export default {
     getUserGames: (userId) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/matches/")
         .then((response => response.data)),
+    getActiveBot: () =>
+      axios.get(API_BASE_URL + "/game/bot/active/")
+        .then((response => response.data)),
+    getLatestBot: () =>
+      axios.get(API_BASE_URL + "/game/bot/latest/")
+        .then((response => response.data)),
+    getBot: (botId) =>
+      axios.get(API_BASE_URL + "/game/bot/" + botId + "/")
+        .then((response => response.data)),
   },
 
   other: {

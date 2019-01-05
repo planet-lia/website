@@ -65,10 +65,10 @@ class ProfilePage extends Component {
       rating: respUser.stats.leaderboard.rating,
       mu: respUser.stats.leaderboard.mu,
       sigma: respUser.stats.leaderboard.sigma,
-      wins: respUser.stats.match.wins,
-      losses: respUser.stats.match.losses,
-      total: respUser.stats.match.total,
-      playing: respUser.stats.match.playing,
+      wins: respUser.stats.match.allTime.wins,
+      losses: respUser.stats.match.allTime.losses,
+      total: respUser.stats.match.allTime.total,
+      playing: respUser.stats.match.allTime.playing,
       gamesData: gamesList,
       loadingData: false
     });

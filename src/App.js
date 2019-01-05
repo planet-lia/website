@@ -9,8 +9,8 @@ import PopupSubmit from './components/views/PopupSubmit';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faTrophy, faDesktop, faPlay } from '@fortawesome/free-solid-svg-icons';
-library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy, faDesktop, faPlay);
+import { faEnvelope, faTrophy, faDesktop, faPlay, faUser } from '@fortawesome/free-solid-svg-icons';
+library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy, faDesktop, faPlay, faUser);
 
 
 class App extends Component {
