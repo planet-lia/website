@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {Row, Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import {Typeahead} from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 import Select from '../elems/Select';
 import { validators } from '../../utils/helpers/validators';
 import api from '../../utils/api';
+import Link from "react-router-dom/es/Link";
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -22,12 +25,15 @@ class SignUpForm extends Component {
       allowGlobal: false,
       allowTournament: false,
       allowMarketing: false,
+      agreeToTerms: false,
 
       countriesList: [],
       levelsList: [],
+      organizationsList: [],
 
       error: null,
       errorUn: null,
+      message: null,
 
       isLoading: false,
       isSuccess: false
@@ -44,6 +50,8 @@ class SignUpForm extends Component {
       this.setCountriesList(respCountries.countries);
       const respLevels = await api.codes.getLevels();
       this.setLevelsList(respLevels.levels);
+      // const respOrganizations = await api.other.getOrganizations();
+      // this.setOrganizationsList(respOrganizations.organizations);
     } catch(err) {
       this.setState({error: "Network Error"});
       console.log(err.message);
@@ -68,12 +76,22 @@ class SignUpForm extends Component {
     this.setState({levelsList: levels});
   }
 
+  setOrganizationsList = (respOrganizations) => {
+    const organizations = respOrganizations.map(
+      (organization) => (
+        {value: organization[0], label: organization[1]}
+      )
+    );
+    this.setState({organizationsList: organizations});
+  }
+
   formSubmit = async (event) => {
     event.preventDefault();
     this.setState({isLoading: true, error: null});
 
     if(this.validateForm()) {
       try {
+        this.setState({message: "Signing you up..."});
         await api.user.register(
             this.state.username,
             this.state.email,
@@ -123,11 +141,11 @@ class SignUpForm extends Component {
         }
       }
     }
-    this.setState({isLoading: false});
+    this.setState({isLoading: false, message: null});
   }
 
   validateForm = () => {
-    const {firstName, lastName, username, email, password, repeat, level} = this.state;
+    const {firstName, lastName, username, email, password, repeat, level, agreeToTerms} = this.state;
 
     if( !(firstName && validators.length(firstName, 30)) ) {this.setState({error: "Invalid Name length"}); return false;}
     if( !(lastName && validators.length(lastName, 50)) ) {this.setState({error: "Invalid Last Name length"}); return false;}
@@ -138,6 +156,7 @@ class SignUpForm extends Component {
     if( !validators.emailRegex(email) ) {this.setState({error: "Invalid email format"}); return false;}
     if( !validators.passwordWithRepeat(password, repeat) ){this.setState({error: "Passwords don't match"}); return false;}
     if( !(level) ) {this.setState({error: "Level not set"}); return false;}
+    if( !(agreeToTerms) ) {this.setState({error: "You need to agree to Lia Terms and Conditions and Privacy Policy."}); return false;}
 
     if( !this.isUsernameAvalible() ) {this.setState({error: "Username is not available"}); return false;}
 
@@ -259,12 +278,17 @@ class SignUpForm extends Component {
             </div>
             <div className="form-group">
               <ControlLabel>Organization</ControlLabel>
-              <FormControl
+              <Typeahead
                 type="text"
                 name="organization"
                 placeholder="Organization"
-                value={this.state.organization}
-                onChange={this.onChange}
+                onInputChange={(selected) => {
+                  this.setState({organization: selected})
+                }}
+                onChange={(selected) => {
+                  this.setState({organization: selected[0]})
+                }}
+                options={this.state.organizationsList}
               />
             </div>
             <div className="form-group">
@@ -286,14 +310,14 @@ class SignUpForm extends Component {
               checked={this.state.allowGlobal}
               onChange={this.onCheckboxChange}
             >
-              I want you to add my account to the global leaderboard after the tournament
+              I want you to add my account to the global leaderboard after the Slovenian Lia tournament 2019
             </Checkbox>
             <Checkbox
               name="allowTournament"
               checked={this.state.allowTournament}
               onChange={this.onCheckboxChange}
             >
-              I want to receive emails about Lia Tournament 2019
+              I want to receive emails about Slovenian Lia Tournament 2019
             </Checkbox>
             <Checkbox
               name="allowMarketing"
@@ -304,7 +328,23 @@ class SignUpForm extends Component {
             </Checkbox>
           </Col>
         </Row>
+        <Row>
+          <Col componentClass={FormGroup} md={12}>
+            <Checkbox
+              name="agreeToTerms"
+              checked={this.state.agreeToTerms}
+              onChange={this.onCheckboxChange}
+            >
+              I agree to Lia &nbsp;
+              <Link to={"/terms-and-conditions"} target={"_blank"}>Terms and Conditions</Link>
+              &nbsp; and &nbsp;
+              <Link to={"/privacy-policy"} target={"_blank"}>Privacy Policy</Link>
+              .
+            </Checkbox>
+          </Col>
+        </Row>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden" disabled={this.state.isLoading}></Button>
+        <span className="text-info">{this.state.message}</span>
         <span className="text-danger">{this.state.error}</span>
         <span className="text-danger">{this.state.errorUn}</span>
       </form>

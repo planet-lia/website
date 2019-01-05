@@ -21,7 +21,6 @@ const TournamentRules = (props) => {
         <h3>{content.titleRls6}</h3>
         <p>{content.txtRls6}</p>
       </div>
-      <HashLink to="/tournament#top" className="btn custom-btn custom-btn-lg">{content.btnBack}</HashLink>
     </div>
   )
 }

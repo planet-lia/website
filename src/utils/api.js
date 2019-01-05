@@ -88,7 +88,7 @@ export default {
         .then((response) => response.data),
     getLevels: () =>
       axios.get(API_BASE_URL + "/level/")
-        .then((response) => response.data)
+        .then((response) => response.data),
   },
 
   game: {
@@ -119,7 +119,8 @@ export default {
   },
 
   other: {
-    getOrganizations: () =>
-      axios.get(API_BASE_URL + "/suggestion/organization/").then((response) => response.data),
+    getOrganizations: (organization) =>
+      axios.get(API_BASE_URL + "/suggestion/organization/?organization=" + encodeURI(organization))
+        .then((response) => response.data),
   }
 }
