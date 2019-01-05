@@ -15,12 +15,15 @@ class SignUpForm extends Component {
       username: "",
       password: "",
       repeat: "",
-      country: "",
+      level: "",
       organization: "",
-      levelOfStudy: "",
+      country: "",
       allowGlobal: false,
+      allowTournament: false,
+      allowMarketing: false,
 
       countriesList: [],
+      levelsList: [],
 
       error: null,
       errorUn: null
@@ -34,7 +37,9 @@ class SignUpForm extends Component {
   loadCodes = async () => {
     try {
       const respCountries = await api.codes.getCountries();
-      this.setCountriesList(respCountries.countries)
+      this.setCountriesList(respCountries.countries);
+      const respLevels = await api.codes.getLevels();
+      this.setLevelsList(respLevels.levels);
     } catch(err) {
       this.setState({error: "Network Error"});
       console.log(err.message);
@@ -50,6 +55,15 @@ class SignUpForm extends Component {
     this.setState({countriesList: countries});
   }
 
+  setLevelsList = (respLevels) => {
+    const levels = respLevels.map(
+      (level) => (
+        {value: level[0], label: level[1]}
+      )
+    );
+    this.setState({levelsList: levels});
+  }
+
   formSubmit = async (event) => {
     event.preventDefault();
 
@@ -61,10 +75,12 @@ class SignUpForm extends Component {
             this.state.firstName,
             this.state.lastName,
             this.state.password,
-            this.state.country,
+            this.state.level,
             this.state.organization,
-            this.state.levelOfStudy,
-            this.state.allowGlobal
+            this.state.allowGlobal,
+            this.state.allowMarketing,
+            this.state.allowTournament,
+            this.state.country
           );
           this.props.closePopup();
           this.setState({
@@ -74,10 +90,12 @@ class SignUpForm extends Component {
             username: "",
             password: "",
             repeat: "",
-            country: "",
+            level: "",
             organization: "",
-            levelOfStudy: "",
+            country: "",
             allowGlobal: false,
+            allowTournament: false,
+            allowMarketing: false,
             error: null,
             errorUn: null
           })
@@ -96,7 +114,7 @@ class SignUpForm extends Component {
   }
 
   validateForm = () => {
-    const {firstName, lastName, username, email, password, repeat} = this.state;
+    const {firstName, lastName, username, email, password, repeat, level} = this.state;
 
     if( !(firstName && validators.length(firstName, 30)) ) return false;
     if( !(lastName && validators.length(lastName, 50)) )return false;
@@ -106,6 +124,7 @@ class SignUpForm extends Component {
     if( !validators.usernameRegex(username) ) return false;
     if( !validators.emailRegex(email) ) return false;
     if( !validators.passwordWithRepeat(password, repeat) ) return false;
+    if( !(level && true) ) return false;
 
     if( !this.isUsernameAvalible ) return false;
 
@@ -212,12 +231,12 @@ class SignUpForm extends Component {
           </Col>
           <Col componentClass={FormGroup} md={6}>
             <div className="form-group">
-              <ControlLabel>Country</ControlLabel>
+              <ControlLabel>Level*</ControlLabel>
               <Select
-                options={this.state.countriesList}
-                placeholder="Your country"
-                name="country"
-                value={this.state.country}
+                options={this.state.levelsList}
+                placeholder="Your level"
+                name="level"
+                value={this.state.level}
                 onChange={this.onChange}
               />
             </div>
@@ -232,12 +251,12 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Level of Study</ControlLabel>
-              <FormControl
-                type="text"
-                name="levelOfStudy"
-                placeholder="E.g. Bachelor's degree"
-                value={this.state.levelOfStudy}
+              <ControlLabel>Country</ControlLabel>
+              <Select
+                options={this.state.countriesList}
+                placeholder="Your country"
+                name="country"
+                value={this.state.country}
                 onChange={this.onChange}
               />
             </div>
@@ -250,7 +269,21 @@ class SignUpForm extends Component {
               checked={this.state.allowGlobal}
               onChange={this.onCheckboxChange}
             >
-              Allow us to add your bot to the global leaderboard after the tournament
+              I want you to add my account to the global leaderboard after the tournament
+            </Checkbox>
+            <Checkbox
+              name="allowTournament"
+              checked={this.state.allowTournament}
+              onChange={this.onCheckboxChange}
+            >
+              I want to receive emails about Lia Tournament 2019
+            </Checkbox>
+            <Checkbox
+              name="allowMarketing"
+              checked={this.state.allowMarketing}
+              onChange={this.onCheckboxChange}
+            >
+              I want to receive general Lia emails (Newsletter, etc.)
             </Checkbox>
           </Col>
         </Row>

@@ -27,7 +27,7 @@ export default {
       axios.post(API_BASE_URL + "/auth/", {username, password})
         .then((response) => response.data),
 
-    register: (username, email, firstName, lastName, password, country, organization, yearOfStudy, levelOfStudy, allowGlobal) =>
+    register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country ) =>
       axios.post(API_BASE_URL + "/user/register/",
         {
           username: username,
@@ -35,10 +35,11 @@ export default {
           firstName: firstName,
           lastName: lastName,
           password: password,
-          level: "university",
+          level: level,
           organization: organization,
-          levelOfStudy: levelOfStudy,
           allowPublicationToGlobalLeaderboard: allowGlobal,
+          allowMarketingEmails: allowMarketing,
+          allowTournament2019Emails: allowTournament,
           countryAlpha2Code: country
         }
       ).then((response) => response.data),
