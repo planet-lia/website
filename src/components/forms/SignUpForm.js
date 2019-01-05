@@ -70,7 +70,7 @@ class SignUpForm extends Component {
 
   formSubmit = async (event) => {
     event.preventDefault();
-    this.setState({isLoading: true});
+    this.setState({isLoading: true, error: null});
 
     if(this.validateForm()) {
       try {
@@ -108,38 +108,38 @@ class SignUpForm extends Component {
           })
       } catch(err) {
         if(err.response){
+          const field = err.response.data.errors[0].field;
+          const msg = err.response.data.errors[0].msg;
           this.setState({
-            error: "Cannot register; server (REG) error",
+            error: field + ": " + msg,
             isLoading: false
           });
           //set up errors for each field
         } else {
           this.setState({
-            error: "Network Error",
+            error: "Network Error: ",
             isLoading: false
         });
         }
       }
-
-    } else {
-      this.setState({error: "FrontEnd Error: validation failed"});
     }
+    this.setState({isLoading: false});
   }
 
   validateForm = () => {
     const {firstName, lastName, username, email, password, repeat, level} = this.state;
 
-    if( !(firstName && validators.length(firstName, 30)) ) return false;
-    if( !(lastName && validators.length(lastName, 50)) )return false;
-    if( !(validators.usernameLength(username)) ) return false;
-    if( !(email && validators.emailLength(email)) ) return false;
-    if( !validators.passwordLength(password) ) return false;
-    if( !validators.usernameRegex(username) ) return false;
-    if( !validators.emailRegex(email) ) return false;
-    if( !validators.passwordWithRepeat(password, repeat) ) return false;
-    if( !(level && true) ) return false;
+    if( !(firstName && validators.length(firstName, 30)) ) {this.setState({error: "Invalid Name length"}); return false;}
+    if( !(lastName && validators.length(lastName, 50)) ) {this.setState({error: "Invalid Last Name length"}); return false;}
+    if( !(validators.usernameLength(username)) ) {this.setState({error: "Invalid username length"}); return false;}
+    if( !(email && validators.emailLength(email)) ) {this.setState({error: "Invalid email length"}); return false;}
+    if( !validators.passwordLength(password) ) {this.setState({error: "Invalid password length"}); return false;}
+    if( !validators.usernameRegex(username) ) {this.setState({error: "Invalid username format"}); return false;}
+    if( !validators.emailRegex(email) ) {this.setState({error: "Invalid email format"}); return false;}
+    if( !validators.passwordWithRepeat(password, repeat) ){this.setState({error: "Passwords don't match"}); return false;}
+    if( !(level) ) {this.setState({error: "Level not set"}); return false;}
 
-    if( !this.isUsernameAvalible ) return false;
+    if( !this.isUsernameAvalible() ) {this.setState({error: "Username is not available"}); return false;}
 
     return true;
   }
