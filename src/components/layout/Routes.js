@@ -10,6 +10,7 @@ import EditorPage from "../pages/EditorPage";
 import EditorTracking from "../pages/EditorTracking";
 import EmailVerificationPage from '../pages/EmailVerificationPage';
 import ProfilePage from '../pages/ProfilePage';
+import RegistrationEmailPage from '../pages/RegistrationEmailPage';
 
 const Routes = () => {
   return (
@@ -22,6 +23,7 @@ const Routes = () => {
       <Route path="/editor" component={EditorPage} />
       <Route path="/account/verify" component={EmailVerificationPage} />
       <Route path="/user/:username" component={ProfilePage} />
+      <Route path="/registration" component={RegistrationEmailPage} />
     </Switch>
   );
 }

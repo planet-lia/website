@@ -61,7 +61,7 @@ class EmailVerificationPage extends Component {
     return (
       <div className="container">
         {(codeExists || isCheckingForCode)
-          ? (<div className="text-center">{this.getMessage()}</div>)
+          ? (<div className="custom-message text-center"><p>{this.getMessage()}</p></div>)
           : (<Redirect to="/" />)
         }
       </div>

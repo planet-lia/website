@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 import Select from '../elems/Select';
 import { validators } from '../../utils/helpers/validators';
@@ -26,7 +27,10 @@ class SignUpForm extends Component {
       levelsList: [],
 
       error: null,
-      errorUn: null
+      errorUn: null,
+
+      isLoading: false,
+      isSuccess: false
     }
   }
 
@@ -66,6 +70,7 @@ class SignUpForm extends Component {
 
   formSubmit = async (event) => {
     event.preventDefault();
+    this.setState({isLoading: true});
 
     if(this.validateForm()) {
       try {
@@ -97,14 +102,22 @@ class SignUpForm extends Component {
             allowTournament: false,
             allowMarketing: false,
             error: null,
-            errorUn: null
+            errorUn: null,
+            isSuccess: true,
+            isLoading: false
           })
       } catch(err) {
         if(err.response){
-          this.setState({error: "Cannot register; server (REG) error"});
+          this.setState({
+            error: "Cannot register; server (REG) error",
+            isLoading: false
+          });
           //set up errors for each field
         } else {
-          this.setState({error: "Network Error"});
+          this.setState({
+            error: "Network Error",
+            isLoading: false
+        });
         }
       }
 
@@ -159,6 +172,10 @@ class SignUpForm extends Component {
   }
 
   render(){
+    if (this.state.isSuccess === true) {
+      return <Redirect to="/registration" />
+    }
+
     return (
       <form onSubmit={this.formSubmit} noValidate>
         <Row>
@@ -287,7 +304,7 @@ class SignUpForm extends Component {
             </Checkbox>
           </Col>
         </Row>
-        <Button id={this.props.submitButtonId} type="submit" bsClass="hidden"></Button>
+        <Button id={this.props.submitButtonId} type="submit" bsClass="hidden" disabled={this.state.isLoading}></Button>
         <span className="text-danger">{this.state.error}</span>
         <span className="text-danger">{this.state.errorUn}</span>
       </form>

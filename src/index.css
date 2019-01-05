@@ -384,6 +384,10 @@ a.btn.custom-btn:hover {
   color: #ddd;
 }
 
+.custom-message {
+  margin: 3em 0;
+}
+
 /* Tournament */
 .tour-row-padding {
   padding-bottom: 6em;
