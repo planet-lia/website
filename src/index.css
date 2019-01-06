@@ -439,6 +439,12 @@ a.btn.custom-btn:hover {
   margin: 0 20px 10px;
 }
 
+.footer-element,
+.footer-element:focus,
+.footer-element:active {
+  color: #ddd;
+}
+
 .tour-lia-logo {
   height: 60px;
   margin: 0 0 30px;
