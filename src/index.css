@@ -643,7 +643,14 @@ a.btn.custom-btn:hover {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1.2em;
   margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+}
+
+#land-subscribe {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 1.5em;
 }
 
 .land-btn, .land-btn:hover {
@@ -655,7 +662,7 @@ a.btn.custom-btn:hover {
   color: #ddd;
 }
 
-.land-btn.btn-try, .btn.btn-try:active{
+.land-btn.btn-try, .btn.btn-try:active {
   background-color: #019170; /*#03965c*/
   color: #ddd;
   font-size: 1.5em;
@@ -674,6 +681,16 @@ a.btn.custom-btn:hover {
 
 .land-btn.btn-sub:hover {
   background-color: #555;
+  color: #ccc;
+}
+
+.land-btn.btn-get-started, .btn.btn-sub:active {
+  background-color: #019170;
+  color: #ddd;
+}
+
+.land-btn.get-started:hover {
+  background-color: #007e5a;
   color: #ccc;
 }
 

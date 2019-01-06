@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
+import { Row, Col, Glyphicon, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
@@ -26,8 +26,12 @@ class LandingPage extends Component {
     }
   }
 
-  onTryNow = () => {
-    window.open("/editor", "_self");
+  redirectToLiveDemo = () => {
+    window.open("/editor", "_blank");
+  }
+
+  redirectToGettingStarted = () => {
+    window.open("https://docs-dev.liagame.com/getting-started/", "_blank");
   }
 
   onPopupClose = () => {
@@ -45,8 +49,10 @@ class LandingPage extends Component {
             <div className="land-slogan">Competitive</div>
             <div className="land-slogan">Coding Game</div>
             <div id="land-desc">Bring your code to life</div>
-            <Button bsClass="btn land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Live Demo<div className="btn-subtext">Without registration</div></Button>
-            <Button bsClass="btn land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
+            <div id="land-subscribe"><a to="" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</a></div>
+
+            <Button bsClass="btn land-btn btn-try" onClick={() => this.redirectToLiveDemo()}>&nbsp;&nbsp;&nbsp;Live Demo&nbsp;&nbsp;&nbsp;<div className="btn-subtext">Without registration</div></Button>
+            <Button bsClass="btn land-btn btn-get-started" onClick={() => this.redirectToGettingStarted()}>Start playing</Button>
           </div>
         </div>
         <div className="custom-section sec-short">
@@ -161,17 +167,6 @@ class LandingPage extends Component {
             </Col>
           </div>
         </div>
-        <Popup
-          dialogClassName="custom-popup pop-text"
-          show={this.state.showTryNowPopup}
-          onHide={this.onPopupClose}
-          onButtonClick={this.onTryNow}
-          heading="Live Demo"
-          buttonText="Online Editor"
-          center={true}
-        >
-          <TryOut />
-        </Popup>
         <SubscriptionPopup
           dialogClassName="custom-popup pop-sub pop-text"
           show={this.state.showSubscribePopup}
