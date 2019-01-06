@@ -3,6 +3,8 @@ import Moment from 'react-moment';
 import Replay from '../elems/Replay';
 import { seconds2time } from '../../utils/helpers/time';
 import api from '../../utils/api';
+import Link from "react-router-dom/es/Link";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 class GameReplay extends Component {
   constructor(props){
@@ -56,13 +58,13 @@ class GameReplay extends Component {
   }
 
   render(){
-    const { player1, player2, date, duration, mapSeed, replayUrl } = this.state;
+    const { player1, player2, date, duration, mapSeed, replayUrl, result } = this.state;
 
     return (
       <div>
         <div className="cont-game-title text-center">
           <div className="game-title">
-            {player1 + " vs " + player2}
+            {usernameFormatter(player1, result === 1)} vs {usernameFormatter(player2, result === 2)}
           </div>
           <div className="game-stats"><Moment format="DD/MM/YYYY HH:mm">{date}</Moment></div>
           <div className="game-stats">
@@ -78,6 +80,14 @@ class GameReplay extends Component {
       </div>
     )
   }
+}
+
+function usernameFormatter(username, isWinner) {
+  let trophy = "";
+  if (isWinner) {
+    trophy = (<span>&nbsp;<FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>&nbsp;</span>);
+  }
+  return (<span><Link to={"/user/" + username} style={{ textDecoration: 'none' }}>{username}</Link>{trophy}</span>);
 }
 
 export default GameReplay;
