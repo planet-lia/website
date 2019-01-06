@@ -6,10 +6,18 @@ import Table from '../elems/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GamesTable = (props) => {
-  const gamesColumns = [{
+  const gamesColumns = [  {
+    dataField: 'no6',
+    text: 'Game',
+    formatter: watchNowFormatter
+  },{
     dataField: 'no1',
     text: 'Opponents',
     formatter: playersFormatter
+  },{
+    dataField: 'no7',
+    text: 'Leaderboard Ranks',
+    formatter: playerRanksFormatter
   }, {
     dataField: 'no3',
     text: 'Remaining Units',
@@ -22,10 +30,6 @@ const GamesTable = (props) => {
     dataField: 'no5',
     text: 'Date',
     formatter: dateFormatter
-  },{
-    dataField: 'no6',
-    text: 'Game',
-    formatter: linkFormatter
   }];
 
   return (
@@ -37,7 +41,7 @@ const GamesTable = (props) => {
 
 export default GamesTable;
 
-function linkFormatter(cell, row, rowIndex) {
+function watchNowFormatter(cell, row, rowIndex) {
   const textStyle = {color: "#9A3F1B"};
   return (
     <span>
@@ -47,7 +51,7 @@ function linkFormatter(cell, row, rowIndex) {
       }} style={{ textDecoration: 'none' }}>
         &nbsp;&nbsp;
         <FontAwesomeIcon icon="tv" color={"#9A3F1B"}/>
-        <span style={textStyle}>&nbsp; Watch now</span>
+        <span style={textStyle}>&nbsp; Watch</span>
       </Link>
     </span>
   );
@@ -61,23 +65,19 @@ function dateFormatter(cell, row, rowIndex) {
   );
 }
 
-
 function playersFormatter(cell, row, rowIndex) {
 
   const player1 = usernameToProfileLink(row.player1);
   const player2 = usernameToProfileLink(row.player2);
 
-  const player1Rank = row.player1Rank;
-  const player2Rank = row.player2Rank;
 
   const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
 
   if(row.result===1){
-    return (<span><strong>{player1}</strong><small>&nbsp;({player1Rank})&nbsp;{trophyIcon}</small> - {player2}
-    <small>&nbsp;({player2Rank})</small></span>)
+    return (<span><strong>{player1}</strong>&nbsp;{trophyIcon} - {player2}</span>)
   } else if (row.result===2) {
-    return (<span>{player1}<small>&nbsp;({player1Rank})</small> - <strong>
-      {player2}</strong><small>&nbsp;({player2Rank})</small>&nbsp;{trophyIcon}</span>)
+    return (<span>{player1} - <strong>
+      {player2}</strong>&nbsp;{trophyIcon}</span>)
   }
 }
 
@@ -90,7 +90,7 @@ function durationFormatter(cell, row, rowIndex) {
 }
 
 function playerRanksFormatter(cell, row, rowIndex) {
-  return (row.player1Rank + " - " + row.player2Rank);
+  return (<span> {row.player1Rank} - {row.player2Rank}</span>);
 }
 
 

@@ -20,8 +20,8 @@ const tournamentPageSlo = {
   txtCheck: "Sledi rezultatom svojih sošolcev in prijateljev ali pa si oglej igre najboljših igralcev Lia.",
   titleGetStarted: "Začni v le nekaj minutah.",
   txtGetStarted: "Preizkusi igro Lia preko spletnega urejevalnika ali pa si za popolno Lia izkušnjo prenesi Lia-SDK in začni razvijati svojega bota lokalno.",
-  btnEditor: "Spletni Urejevalnik",
-  btnGetStarted: "Razvijaj Lokalno",
+  btnEditor: "Spletni urejevalnik",
+  btnGetStarted: "Razvijaj lokalno",
 
   titleAgenda: "Spored",
   txtAgenda1: [
