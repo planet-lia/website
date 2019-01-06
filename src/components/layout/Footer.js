@@ -10,10 +10,16 @@ const Footer = () => {
         <Col md={4}></Col>
         <Col md={4} id="foot-right">
           <span>
-            <Link to={"/privacy-policy"} target={"_blank"} style={{ textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link className="footer-element" to={"/privacy-policy"} target={"_blank"}
+                  style={{ textDecoration: 'none' }}>
+              Privacy Policy
+            </Link>
           </span>
           <span>
-            <Link to={"/terms-and-conditions"} target={"_blank"} style={{ textDecoration: 'none' }}>Terms and Conditions</Link>
+            <Link className="footer-element" to={"/terms-and-conditions"} target={"_blank"}
+                  style={{ textDecoration: 'none' }}>
+              Terms and Conditions
+            </Link>
         </span>
         </Col>
       </div>
