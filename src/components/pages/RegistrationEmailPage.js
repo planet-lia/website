@@ -4,7 +4,7 @@ const RegistrationEmailPage = () => {
   return (
     <div className="container">
       <div className="custom-message text-center">
-        <p>A conformation link was sent to your email. Please follow the link to finish your registration.</p>
+        <p>A confirmation link was sent to your email. Please follow the link to finish your registration.</p>
       </div>
     </div>
   );
