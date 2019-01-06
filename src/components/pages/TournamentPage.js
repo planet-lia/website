@@ -11,6 +11,8 @@ import { languageConst } from '../../utils/constants/languageConst';
 import textEng from '../../assets/texts/tournamentPageEng';
 import textSlo from '../../assets/texts/tournamentPageSlo';
 
+import liaLogo from '../../assets/logotip_border1024.png';
+
 class TournamentPage extends Component {
   constructor(props){
 		super(props);
@@ -50,6 +52,10 @@ class TournamentPage extends Component {
         <div className="custom-section sec-short">
           <div className="container text-center">
             <Col>
+
+              <div>
+                <img id="logo-lia" className="tour-lia-logo" src={ liaLogo } alt="Lia" />
+              </div>
               <div id="tour-lang">
                 <Link to={currentPath + "?lang=" + languageConst.ENGLISH}>ENG</Link>
                 <span> | </span>
@@ -60,7 +66,7 @@ class TournamentPage extends Component {
                 ? (
                   <div>
                     <p>{content.txtBanner}</p>
-                    <h3 className="tour-title tour-date">{content.tourDate}</h3>
+                    <h4 className="tour-title tour-date">{content.tourDate}</h4>
                     <Button bsClass="btn custom-btn custom-btn-xl center-block" disabled>{content.btnRegisterEarly}</Button>
                     <div id="tour-what"><a href="/#what-is-lia" target="_blank" rel="noopener noreferrer">{content.lnkWhat}</a></div>
                   </div>
