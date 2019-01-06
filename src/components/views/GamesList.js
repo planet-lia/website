@@ -42,6 +42,8 @@ class GamesList extends Component {
         date: gamesList.completed,
         player1: gamesList.bots[0].user.username,
         player2: gamesList.bots[1].user.username,
+        player1Rank: gamesList.bots[0].user.rank,
+        player2Rank: gamesList.bots[1].user.rank,
         result: (gamesList.bots[0].isWinner ? 1 : 2),
         duration: gamesList.duration,
         unitsRemain1: Math.max(gamesList.bots[0].unitsLeft, 0),

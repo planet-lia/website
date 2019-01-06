@@ -25,7 +25,7 @@ const API_BASE_URL = (() => {
     case "www":
       return apiUrlLog(apis["prod"]);
     case "localhost":
-      return apiUrlLog(apis["staging"]);
+      return apiUrlLog(apis["dev"]);
     default:
       return apiUrlLog(apis["prod"]);
   }
@@ -119,8 +119,8 @@ export default {
   },
 
   other: {
-    getOrganizations: (organization) =>
-      axios.get(API_BASE_URL + "/suggestion/organization/?organization=" + encodeURI(organization))
+    getOrganizations: () =>
+      axios.get(API_BASE_URL + "/organizations/")
         .then((response) => response.data),
   }
 }
