@@ -128,6 +128,8 @@ class ProfilePage extends Component {
         date: gamesList.completed,
         player1: gamesList.bots[0].user.username,
         player2: gamesList.bots[1].user.username,
+        player1Rank: gamesList.bots[0].user.rank,
+        player2Rank: gamesList.bots[1].user.rank,
         result: (gamesList.bots[0].isWinner ? 1 : 2),
         duration: gamesList.duration,
         unitsRemain1: Math.max(gamesList.bots[0].unitsLeft, 0),
@@ -199,16 +201,16 @@ class ProfilePage extends Component {
             <Col sm={3}>
               <h4>Rank details</h4>
               <div>
-                {"Rank: " + rank}
+                {"Rank: "} <strong>{rank}</strong>
               </div>
               <div>
-                {"Rating: " + rating}
+                {"Rating: "} <strong>{rating}</strong>
               </div>
               <div>
-                {"Mu: " + mu}
+                {"Mu: "} <strong>{mu}</strong>
               </div>
               <div>
-                {"Sigma: " + sigma}
+                {"Sigma: "} <strong>{sigma}</strong>
               </div>
             </Col>
             <Col sm={3}>
@@ -217,14 +219,14 @@ class ProfilePage extends Component {
                 ? (
                   <span>
                     <div>
-                      {"Version: " + version}
+                      {"Version: "} <strong>{version}</strong>
                     </div>
                     <div>
-                      {"Language: " + language}
+                      {"Language: "}  <strong>{language}</strong>
                     </div>
                     <div>
                       {"Upload time: "}
-                      {(uploadTime === "") ? "" : <Moment format="DD/MM/YYYY HH:mm">{uploadTime}</Moment>}
+                      {(uploadTime === "") ? "" : <strong><Moment format="DD/MM/YYYY HH:mm">{uploadTime}</Moment></strong>}
                     </div>
                   </span>
                 )
@@ -241,21 +243,22 @@ class ProfilePage extends Component {
                         <span>
                           <div>
                             {"Upload time: "}
-                                  {(newBotUploadTime === "") ? "" : <Moment format="DD/MM/YYYY HH:mm">{newBotUploadTime}</Moment>}
+                                  {(newBotUploadTime === "") ? ""
+                                    : <strong><Moment format="DD/MM/YYYY HH:mm">{newBotUploadTime}</Moment></strong>}
                           </div>
                           <div>
-                            {"Status: " + newBotStatus}
+                            {"Status: "} <span style={{color: "#FF0000"}}><strong>{newBotStatus}</strong></span>
                           </div>
                           {(newBotProcessingLogs !== "")
-                            ? <div>{"Processing logs: "} {this.logToDownloadLink(newBotProcessingLogs)}</div>
+                            ? <div>{"Processing logs: "} <strong>{this.logToDownloadLink(newBotProcessingLogs)}</strong></div>
                             : null
                           }
                           {(newBotTestMatchLogs !== "")
-                            ? <div>{"Test match logs: "} {this.logToDownloadLink(newBotTestMatchLogs)}</div>
+                            ? <div>{"Test match logs: "} <strong>{this.logToDownloadLink(newBotTestMatchLogs)}</strong></div>
                             : null
                           }
                           {(newBotTestMatchGameEngineLog !== "")
-                            ? <div>{"Test match engine logs: "} {this.logToDownloadLink(newBotTestMatchGameEngineLog)}</div>
+                            ? <div>{"Test match engine logs: "}<strong>{this.logToDownloadLink(newBotTestMatchGameEngineLog)}</strong></div>
                             : null
                           }
                         </span>
@@ -269,32 +272,32 @@ class ProfilePage extends Component {
             <Col sm={3}>
               <h4>Current bot results</h4>
               <div>
-                {"Wins: " + activeBotWins}
+                {"Wins: "} <strong>{activeBotWins}</strong>
               </div>
               <div>
-                {"Losses: " + activeBotLosses}
+                {"Losses: "} <strong>{activeBotLosses}</strong>
               </div>
               <div>
-                {"Total: " + activeBotTotal}
+                {"Total: "} <strong>{activeBotTotal}</strong>
               </div>
               <div>
-                {"Playing: " + activeBotPlaying}
+                {"Playing: "} <strong>{activeBotPlaying}</strong>
               </div>
               <div>&nbsp;&nbsp;</div>
               <div>
                 <h4>All time results</h4>
               </div>
               <div>
-                {"Wins: " + wins}
+                {"Wins: "} <strong>{wins}</strong>
               </div>
               <div>
-                {"Losses: " + losses}
+                {"Losses: "} <strong>{losses}</strong>
               </div>
               <div>
-                {"Total: " + total}
+                {"Total: "} <strong>{total}</strong>
               </div>
               <div>
-                {"Playing: " + playing}
+                {"Playing: "} <strong>{playing}</strong>
               </div>
             </Col>
           </Row>

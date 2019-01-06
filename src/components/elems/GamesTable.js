@@ -8,22 +8,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const GamesTable = (props) => {
   const gamesColumns = [{
     dataField: 'no1',
-    text: 'Players',
+    text: 'Opponents',
     formatter: playersFormatter
-  }, {
-    dataField: 'no2',
-    text: 'Duration',
-    formatter: durationFormatter
   }, {
     dataField: 'no3',
     text: 'Remaining Units',
     formatter: unitsRemainFormatter
   }, {
     dataField: 'no4',
+    text: 'Duration',
+    formatter: durationFormatter
+  }, {
+    dataField: 'no5',
     text: 'Date',
     formatter: dateFormatter
   },{
-    dataField: 'no5',
+    dataField: 'no6',
     text: 'Game',
     formatter: linkFormatter
   }];
@@ -67,12 +67,17 @@ function playersFormatter(cell, row, rowIndex) {
   const player1 = usernameToProfileLink(row.player1);
   const player2 = usernameToProfileLink(row.player2);
 
+  const player1Rank = row.player1Rank;
+  const player2Rank = row.player2Rank;
+
   const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
 
   if(row.result===1){
-    return (<span>{trophyIcon}&nbsp;<strong>{player1}</strong> vs. {player2}</span>)
+    return (<span><strong>{player1}</strong><small>&nbsp;({player1Rank})&nbsp;{trophyIcon}</small> - {player2}
+    <small>&nbsp;({player2Rank})</small></span>)
   } else if (row.result===2) {
-    return (<span>{player1} vs. <strong>{player2}</strong>&nbsp;{trophyIcon}</span>)
+    return (<span>{player1}<small>&nbsp;({player1Rank})</small> - <strong>
+      {player2}</strong><small>&nbsp;({player2Rank})</small>&nbsp;{trophyIcon}</span>)
   }
 }
 
@@ -83,6 +88,11 @@ function usernameToProfileLink(username) {
 function durationFormatter(cell, row, rowIndex) {
   return seconds2time(row.duration);
 }
+
+function playerRanksFormatter(cell, row, rowIndex) {
+  return (row.player1Rank + " - " + row.player2Rank);
+}
+
 
 function unitsRemainFormatter(cell, row, rowIndex) {
   return (row.unitsRemain1 + " - " + row.unitsRemain2);

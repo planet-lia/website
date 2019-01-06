@@ -50,8 +50,8 @@ class SignUpForm extends Component {
       this.setCountriesList(respCountries.countries);
       const respLevels = await api.codes.getLevels();
       this.setLevelsList(respLevels.levels);
-      // const respOrganizations = await api.other.getOrganizations();
-      // this.setOrganizationsList(respOrganizations.organizations);
+      const respOrganizations = await api.other.getOrganizations();
+      this.setOrganizationsList(respOrganizations.organizations);
     } catch(err) {
       this.setState({error: "Network Error"});
       console.log(err.message);
@@ -77,12 +77,7 @@ class SignUpForm extends Component {
   }
 
   setOrganizationsList = (respOrganizations) => {
-    const organizations = respOrganizations.map(
-      (organization) => (
-        {value: organization[0], label: organization[1]}
-      )
-    );
-    this.setState({organizationsList: organizations});
+    this.setState({organizationsList: respOrganizations});
   }
 
   formSubmit = async (event) => {
@@ -126,8 +121,13 @@ class SignUpForm extends Component {
           })
       } catch(err) {
         if(err.response){
-          const field = err.response.data.errors[0].field;
-          const msg = err.response.data.errors[0].msg;
+          let field = "";
+          let msg = JSON.stringify(err.response.data);
+          try {
+            field = err.response.data.errors[0].field;
+            msg = err.response.data.errors[0].msg;
+          } catch (exception) {}
+
           this.setState({
             error: field + ": " + msg,
             isLoading: false
