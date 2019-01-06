@@ -7,27 +7,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GamesTable = (props) => {
   const gamesColumns = [  {
-    dataField: 'no6',
+    dataField: 'no1',
     text: 'Game',
     formatter: watchNowFormatter
   },{
-    dataField: 'no1',
-    text: 'Opponents',
-    formatter: playersFormatter
+    dataField: 'no2',
+    text: 'Player [rank]',
+    formatter: player1Formatter
   },{
     dataField: 'no7',
-    text: 'Leaderboard Ranks',
-    formatter: playerRanksFormatter
+    text: 'Player [rank]',
+    formatter: player2Formatter
   }, {
-    dataField: 'no3',
+    dataField: 'no4',
     text: 'Remaining Units',
     formatter: unitsRemainFormatter
   }, {
-    dataField: 'no4',
+    dataField: 'no5',
     text: 'Duration',
     formatter: durationFormatter
   }, {
-    dataField: 'no5',
+    dataField: 'no6',
     text: 'Date',
     formatter: dateFormatter
   }];
@@ -70,7 +70,6 @@ function playersFormatter(cell, row, rowIndex) {
   const player1 = usernameToProfileLink(row.player1);
   const player2 = usernameToProfileLink(row.player2);
 
-
   const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
 
   if(row.result===1){
@@ -78,6 +77,34 @@ function playersFormatter(cell, row, rowIndex) {
   } else if (row.result===2) {
     return (<span>{player1} - <strong>
       {player2}</strong>&nbsp;{trophyIcon}</span>)
+  }
+}
+
+
+function player1Formatter(cell, row, rowIndex) {
+  return playerFormatter(cell, row, rowIndex, 1)
+}
+
+function player2Formatter(cell, row, rowIndex) {
+  return playerFormatter(cell, row, rowIndex, 2)
+}
+
+function playerFormatter(cell, row, rowIndex, playerIndex) {
+  let player = usernameToProfileLink(row.player1);
+  let rank = row.player1Rank;
+  let isWinner = row.result === 1;
+  if (playerIndex === 2) {
+    player = usernameToProfileLink(row.player2);
+    rank = row.player2Rank;
+    isWinner = row.result === 2;
+  }
+
+  const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
+  const rankField = <span style={{color: "#CCCCCC"}}><small> [{rank}] </small></span>;
+  if(isWinner){
+    return (<span><strong>{player}</strong>{rankField}&nbsp;{trophyIcon}</span>)
+  } else {
+    return (<span>{player}{rankField}</span>)
   }
 }
 
