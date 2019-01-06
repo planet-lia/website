@@ -6,6 +6,8 @@ Colors
 #1f1f1d - Player dark yellow
 #bdbdbd - Player font gray
 #facd3b - Player yellow
+
+#019170 - highlight green
 */
 
 html {
@@ -22,14 +24,24 @@ body {
 a, a:focus, a:active {
   color: #019170;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 a:hover {
   color: #34C4A2;
+  cursor: pointer;
 }
 
 textarea {
   resize: none;
+}
+
+p {
+  font-size: 1.3em;
+}
+
+td {
+  font-size: 1.2em;
 }
 
 #root {
@@ -38,6 +50,10 @@ textarea {
 
 .center-text {
   text-align: center;
+}
+
+.position-relative {
+  position: relative;
 }
 
 .clr-fb:hover {
@@ -56,11 +72,24 @@ textarea {
   color: #019170;
 }
 
+select.placeholder, select.placeholder > option[value=""], select > option[value=""] {
+  color: #999;
+}
+
+select.placeholder > option {
+  color: #555;
+}
+
 /* Layout */
 
 #main-container {
   min-height: 100%;
   position: relative;
+}
+
+#top, #bottom {
+  height: 0;
+  font-size: 0;
 }
 
 .main-content {
@@ -121,6 +150,47 @@ textarea {
   margin: 0 0.5em;
 }
 
+.custom-section {
+  padding: 8em 0;
+}
+
+.sec-gray {
+  background-color: #f3f3f3
+}
+
+.custom-section.sec-short {
+  padding: 4em 0;
+}
+
+.cont-table-loader {
+  position: relative;
+  min-height: 100px;
+  min-width: 100px;
+  margin: 4em 0;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.cont-loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-section {
+    padding: 6em 0;
+  }
+  .custom-section.sec-short {
+    padding: 3em 0;
+  }
+  .cont-table-loader {
+    margin: 3em 0;
+  }
+}
+
 /* Layout Overwrites */
 #custom-navbar span, #custom-navbar a {
   color: #ddd;
@@ -128,6 +198,10 @@ textarea {
 }
 
 #custom-navbar a:hover {
+  color: #019170;
+}
+
+#custom-navbar a.nav-link-active {
   color: #019170;
 }
 
@@ -248,29 +322,286 @@ textarea {
   margin: 20px auto;
 }
 
-.custom-btn {
+.custom-btn,
+.btn.custom-btn:active,
+.btn.custom-btn:focus {
   border: none;
   border-radius: 0;
-  background-color: #018e6a; /*#03965c*/
+  background-color: #019170; /*#03965c*/
+  color: #eee;
+}
+
+a.custom-btn,
+a.btn.custom-btn:active,
+a.btn.custom-btn:focus,
+a.btn.custom-btn:hover {
+  text-decoration: none;
+}
+
+.custom-btn.btn-on-dark,
+.btn.custom-btn.btn-on-dark:active,
+.btn.custom-btn.btn-on-dark:focus {
   color: #ddd;
-  font-weight: bold;
 }
 
 .custom-btn-lg {
   font-size: 16px;
 }
 
-.custom-btn:hover {
-  background-color: #007e5a;
-  color: #ddd;
+.custom-btn-xl {
+  font-size: 20px;
 }
 
-.custom-btn:focus, .custom-btn:active {
-    color: #ddd;
+.btn.custom-btn:hover {
+  background-color: #007e5a;
+  color: #e6e6e6;
+}
+
+.btn.custom-btn.btn-on-dark:hover {
+  color: #ccc;
 }
 
 .btn-subtext {
   font-size: 0.5em;
+}
+
+/* Notifications */
+.custom-notification {
+  background-color: #019170;
+  color: #eee;
+  padding: 8px 0;
+  margin-top: 10px;
+}
+
+.custom-notification a,
+.custom-notification a:focus,
+.custom-notification a:active {
+  color: #eee;
+  font-weight: bold;
+}
+
+.custom-notification a:hover {
+  color: #ddd;
+}
+
+.custom-message {
+  margin: 3em 0;
+}
+
+/* Tournament */
+.tour-row-padding {
+  padding-bottom: 6em;
+}
+
+.tour-title {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.tour-title.tour-date {
+  margin: 20px 0;
+}
+
+.tour-logo {
+  width: 175px;
+  vertical-align: bottom;
+  margin: 20px 20px 0;
+}
+
+#tour-lang {
+  margin-bottom: 10px;
+}
+
+#tour-what {
+  margin-top: 10px;
+}
+
+#tour-cont-plang {
+  min-height: 125px;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.tour-plang-logo {
+  margin: 0 20px 10px;
+}
+
+.tour-lia-logo {
+  height: 60px;
+  margin: 0 0 30px;
+}
+
+#logo-python {
+  height: 45px;
+  margin-top: 16px;
+}
+
+#logo-java {
+  height: 55px;
+  margin-top: 8px;
+}
+
+#logo-kotlin {
+  height: 29px;
+}
+
+.tour-cont-link {
+  width: 50%;
+  display: inline-block;
+}
+
+.tour-cont-icon-lg {
+  font-size: 4.5em;
+}
+
+.tour-cont-icon-sm {
+  font-size: 3em;
+}
+
+#tour-desktop-play {
+  font-size: 0.3em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  -ms-transform: translate(-40%,-85%);
+  -webkit-transform: translate(-40%,-85%);
+  transform: translate(-40%,-85%);
+}
+
+.tour-cont-unit > img {
+  height: 3.5em;
+  margin: 1.5em 0;
+}
+
+#yellow-unit {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+#green-unit {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.table.tour-agenda {
+  margin: 25px 0 0;
+}
+
+.table.tour-agenda > tbody > tr > td:first-child {
+  width: 8em;
+  font-weight: bold;
+  font-size: larger;
+  color: #019170;
+}
+
+.table.tour-agenda > tbody > tr:last-child > td {
+  border-bottom: 1px solid #ddd;
+}
+
+.tour-cont-prize > div{
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 15px;
+}
+
+.tour-prize-icon {
+  margin-right: 15px;
+}
+
+.tour-prize-text {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.tour-company {
+  font-size: large;
+  color: #bbb;
+  padding: 15px 10px;
+  border: 1px solid #bbb;
+  margin-top: 15px;
+}
+
+.tour-lb-sponsors {
+  margin: 2em 0 3em;
+}
+
+@media screen and (max-width: 1199.98px) {
+  #tour-cont-plang {
+    min-height: 150px;
+  }
+  #logo-python {
+    height: 40px;
+  }
+
+  #logo-java {
+    height: 50px;
+  }
+
+  #logo-kotlin {
+    height: 24px;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .tour-plang-logo {
+    margin: 0 15px 10px;
+  }
+  #logo-python {
+    height: 33px;
+  }
+  #logo-java {
+    height: 43px;
+  }
+  #logo-kotlin {
+    height: 18px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .tour-row-padding {
+    padding-bottom: 4em;
+  }
+  .tour-row-padding.tour-row-xs-padding {
+    padding-bottom: 1.5em;
+  }
+  #tour-cont-plang {
+    min-height: 80px;
+  }
+  .tour-cont-link {
+    margin-top: 10px;
+  }
+  .tour-cont-prize {
+    text-align: center;
+  }
+  .tour-cont-prize > div{
+    display: block;
+    vertical-align: baseline;
+    margin-top: 0;
+  }
+  .tour-cont-prize .tour-prize-icon {
+    margin-top: 20px;
+    margin-right: 0;
+  }
 }
 
 /* Landing Page */
@@ -318,8 +649,8 @@ textarea {
   color: #ddd;
 }
 
-.land-btn.btn-try {
-  background-color: #018e6a; /*#03965c*/
+.land-btn.btn-try, .btn.btn-try:active{
+  background-color: #019170; /*#03965c*/
   color: #ddd;
   font-size: 1.5em;
   padding: 0.316em 1.2em;
@@ -327,17 +658,17 @@ textarea {
 
 .land-btn.btn-try:hover {
   background-color: #007e5a;
-  color: #ddd;
+  color: #ccc;
 }
 
-.land-btn.btn-sub {
+.land-btn.btn-sub, .btn.btn-sub:active {
   background-color: #666;
   color: #ddd;
 }
 
 .land-btn.btn-sub:hover {
   background-color: #555;
-  color: #ddd;
+  color: #ccc;
 }
 
 @media screen and (max-width: 575.98px) {
@@ -346,17 +677,9 @@ textarea {
     font-size: 0.65em;
   }
 
-  .land-btn {
+  .land-btn, .land-btn.btn-sub:hover {
     font-size: initial;
   }
-}
-
-.land-section {
-  padding: 8em 0;
-}
-
-.sec-gray {
-  background-color: #f3f3f3
 }
 
 .land-cont-title {
@@ -366,6 +689,7 @@ textarea {
 .land-title {
   text-align: center;
   font-weight: bold;
+  margin-top: 0;
 }
 
 .land-subtext {
@@ -427,9 +751,6 @@ a.land-contact-logo {
 }
 
 @media screen and (max-width: 991.98px) {
-  .land-section {
-    padding: 6em 0;
-  }
   .land-cont-title {
     margin-bottom: 6em;
   }
@@ -474,7 +795,7 @@ a.land-contact-logo {
 }
 
 .land-glyph {
-  background-color: #018e6a;
+  background-color: #019170;
   color: #eee;
   font-size: 5em;
   padding: 0.5em;
@@ -568,7 +889,6 @@ a.land-contact-logo {
 #editor-cont-links a {
   position: relative;
   top: 1px;
-  text-decoration: none;
   margin-right: 5px;
 }
 
@@ -617,15 +937,6 @@ a.land-contact-logo {
   background-color: rgba(255,255,255,0.1);
 }
 
-#cont-loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
 #editor-cont-log {
   top: calc(28.125vw + 2.7em - 4px + 41px);
   border-top: 1px solid #333;
@@ -671,6 +982,12 @@ a.land-contact-logo {
   #editor-cont-log {
     top: calc(15.42em + 2.7em - 4px + 41px);  /* minwidth * half of 16:9, 768 * 0.28125 */
   }
+}
+
+/* Profile Page */
+
+#prof-cont-data {
+  margin: 2em 0;
 }
 
 /* Replay Thumbnail */
@@ -976,4 +1293,22 @@ a.land-contact-logo {
 .fullscreen:fullscreen > .cont-player > .row-pui {
   position: absolute;
   bottom: 0;
+}
+
+
+/* TODO @aljaz's css, fix if needed */
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+  background-color: #019170;
+  border-color: #019170;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+  color: #019170;
 }

@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { authActions } from '../../utils/actions/authActions'
+
+import { connect } from 'react-redux';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: null
+      isExpanded: null,
+      activeNav: 0,
     }
   }
 
@@ -27,6 +33,11 @@ class Header extends Component {
     this.setState({ isExpanded: false });
   }
 
+  logout = async () => {
+    this.onSelectNavItem();
+    await this.props.dispatch(authActions.logout());
+  }
+
   render(){
     return (
       <div id="main-header">
@@ -41,30 +52,38 @@ class Header extends Component {
             <Navbar.Collapse>
               <ul className="nav navbar-nav">
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/leaderboard">Leaderboard</Link>
+                  <NavLink to="/tournament" exact activeClassName="nav-link-active">Tournament</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/games">Games</Link>
+                  <NavLink to="/leaderboard" exact activeClassName="nav-link-active">Leaderboard</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <Link to="/editor">Online Editor</Link>
+                  <NavLink to="/games" exact activeClassName="nav-link-active">Games</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
-                  <a href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>
+                  <NavLink to="/editor" exact activeClassName="nav-link-active">Online Editor</NavLink>
+                </li>
+                <li role="presentation" onClick={this.onSelectNavItem}>
+                  <a href="https://docs-dev.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>
                 </li>
               </ul>
-              {this.props.isSignedIn ? (
-                <Nav pullRight>
-                  <NavItem onClick={() => this.onSelectNavSignItem(0)}>
-                    Sign Out
-                  </NavItem>
-                </Nav>
+              {this.props.isAuthenticated ? (
+                <ul className="nav navbar-nav navbar-right">
+                  <li role="presentation" onClick={this.onSelectNavItem}>
+                    <NavLink to={"/user/" + this.props.username} exact activeClassName="nav-link-active">
+                        <div><FontAwesomeIcon icon="user" /> {this.props.username}</div>
+                    </NavLink>
+                  </li>
+                  <li role="presentation" onClick={this.logout}>
+                    <a role="button" href="#">Sign Out</a>
+                  </li>
+                </ul>
               ) : (
                 <Nav pullRight>
-                  <NavItem onClick={() => this.onSelectNavSignItem(2)} disabled>
+                  <NavItem onClick={() => this.onSelectNavSignItem(2)}>
                     Sign Up
                   </NavItem>
-                  <NavItem onClick={() => this.onSelectNavSignItem(1)} disabled>
+                  <NavItem onClick={() => this.onSelectNavSignItem(1)}>
                     Sign In
                   </NavItem>
                 </Nav>
@@ -78,4 +97,12 @@ class Header extends Component {
 
 }
 
-export default Header;
+function mapStateToProps(state) {
+  const { isAuthenticated, username } = state.authentication;
+  return {
+      isAuthenticated,
+      username
+  };
+}
+
+export default connect(mapStateToProps)(Header);

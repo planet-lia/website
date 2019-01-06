@@ -1,47 +1,90 @@
 import React, { Component } from 'react';
-import {Button} from 'react-bootstrap';
-
-import Table from '../views/Table';
-import Popup from '../views/Popup';
-import UploadBotForm from '../forms/UploadBotForm';
-
-//import data from '../../assets/LeaderboardData';
+import { Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { timeSince } from '../../utils/helpers/time';
+import Table from '../elems/Table';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import api from '../../utils/api'
+import Moment from 'react-moment';
 
 class LeaderboardPage extends Component {
   constructor(props){
 		super(props);
     this.state = {
-      showUploadPopup: false,
+      leaderboardData: [],
+      loadingData: false,
+      lastUpdated: "",
+      error: null
     };
   }
 
-  onBotUploadClick = () => {
-    this.setState({
-      showUploadPopup: true
-    });
+  componentDidMount = () => {
+    this.loadLeaderboard();
   }
-  onBotUploadClose = () => {
+
+  loadLeaderboard = async () => {
+    this.setState({loadingData: true});
+    try {
+      const respLeaderboard = await api.game.getLeaderboard();
+      this.setLeaderboardData(respLeaderboard.leaderboard);
+      this.setState({lastUpdated: respLeaderboard.leaderboardMisc.updated});
+    } catch(err) {
+      this.setState({
+        loadingData: false,
+        error: "Network Error"
+      });
+      console.log(err.message);
+    }
+  }
+
+  setLeaderboardData = (respLeaderboard) => {
+    const leaderboard = respLeaderboard.map(
+      (leaderboard) => ({
+        rank: leaderboard.rank,
+        username: leaderboard.user.username,
+        userId: leaderboard.user.userId,
+        rating: leaderboard.rankDetails.rating,
+        tier: leaderboard.user.level,
+        organization: leaderboard.user.organization,
+        language: leaderboard.bot.language,
+        lastChange: timeSince(new Date(leaderboard.bot.uploaded)) + " ago",
+        version: leaderboard.bot.version
+      })
+    );
     this.setState({
-      showUploadPopup: false
+      leaderboardData: leaderboard,
+      loadingData: false
     });
   }
 
-  onBotUpload = () => {
-    this.setState({
-      showUploadPopup: false
-    });
+
+  linkFormatter = (cell, row, rowIndex) => {
+    return (<Link to={"/user/" + row.username} style={{ textDecoration: 'none' }}>{row.username}</Link>);
+  }
+
+
+  rankFormatter = (cell, row, rowIndex) => {
+    switch (row.rank) {
+      case 1: return (<span><FontAwesomeIcon icon="trophy" color={"#C1AF09"}/></span>);
+      case 2: return (<span><FontAwesomeIcon icon="trophy" color={"#9B9B92"}/></span>);
+      case 3: return (<span><FontAwesomeIcon icon="trophy" color={"#9A3F1B"}/></span>);
+      default: return row.rank;
+    }
   }
 
   render(){
+    const { leaderboardData, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
       dataField: 'rank',
-			text: 'Rank'
+			text: 'Rank',
+      formatter: this.rankFormatter
     }, {
-      dataField: 'username',
-			text: 'Username'
+      dataField: 'no1',
+			text: 'Username',
+      formatter: this.linkFormatter
     }, {
-      dataField: 'elo',
-			text: 'Elo'
+      dataField: 'rating',
+			text: 'Rating'
     }, {
       dataField: 'tier',
 			text: 'Tier'
@@ -51,25 +94,52 @@ class LeaderboardPage extends Component {
     }, {
       dataField: 'language',
       text: 'Language'
+    }, {
+      dataField: 'lastChange',
+      text: 'Last change'
+    }, {
+      dataField: 'version',
+      text: 'Version'
     }];
 
-    return (
-      <div className="container">
-        <Button id="btn-upload" bsSize="large" onClick={this.onBotUploadClick}>Upload bot</Button>
-        <h2>Leaderboard</h2>
-        <Table data={[]} columns={leaderboardColumns} keyField="username" />
-        <div className="text-center">COMING SOON</div>
+    const leaderboardUpdatedTextStype = {color: "#FFFFFF"};
 
-        <Popup
-          dialogClassName="custom-popup upload-bot"
-          show={this.state.showUploadPopup}
-          onHide={this.onBotUploadClose}
-          onButtonClick={this.onBotUpload}
-          heading="Upload Bot"
-          buttonText="Upload"
-        >
-          <UploadBotForm />
-        </Popup>
+    return (
+      <div>
+
+        <div className="custom-notification">
+          <div className="container text-center">
+            Leaderboard is currently in use for <Link to="/tournament">Slovenian Lia turnament 2019</Link>.
+          </div>
+        </div>
+        <div className="container">
+          <div className="tour-lb-sponsors text-center">
+            <p>Sponsored by</p>
+            <Row>
+              <Col md={2} mdOffset={1} sm={4} xs={6}>
+                <div className="tour-company">Your logo here</div>
+              </Col>
+              <Col md={2} sm={4} xs={6}>
+                <div className="tour-company">Your logo here</div>
+              </Col>
+              <Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>
+                <div className="tour-company">Your logo here</div>
+              </Col>
+              <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>
+                <div className="tour-company">Your logo here</div>
+              </Col>
+              <Col md={2} sm={4} xs={6}>
+                <div className="tour-company">Your logo here</div>
+              </Col>
+            </Row>
+          </div>
+          <h2>Leaderboard</h2>
+          {/* TODO sorry for that ugly hack, put it in CSS. :) */}
+          <span>&nbsp;&nbsp;</span>
+          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
+          <Moment format="DD/MM/YYYY HH:mm" style={leaderboardUpdatedTextStype}>{lastUpdated}</Moment>
+        </div>
+
       </div>
     )
   }

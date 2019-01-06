@@ -1,50 +1,94 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
+import GamesTable from '../elems/GamesTable';
 
-import Table from './Table';
-//import data from '../../assets/GamesData';
+import api from '../../utils/api';
 
 class GamesList extends Component {
-
-  linkFormatter = (cell, row, rowIndex) => {
-    return (<Link to={"/games/" + row.gameNum}>{row.date}</Link>);
+  constructor(props){
+		super(props);
+    this.state = {
+      gamesData: [],
+      loadingData: false,
+      pageCount: 0,
+      nGamesPerPage: 0,
+      error: null
+    };
   }
 
-  playersFormatter = (cell, row, rowIndex) => {
-    if(row.result===1){
-      return (<span><strong>{row.player1}</strong>{" vs " + row.player2}</span>)
-    } else if (row.result===2) {
-      return (<span>{row.player1 + " vs "}<strong>{row.player2}</strong></span>)
+  componentDidMount = () => {
+    this.loadGames(0);
+  }
+
+  loadGames = async (offset) => {
+    this.setState({loadingData: true, gamesData: []});
+    try {
+      const respGames = await api.game.getGamesList(offset);
+      this.setGamesData(respGames)
+    } catch(err) {
+      this.setState({
+        loadingData: false,
+        error: "Network Error"
+      });
+      console.log(err.message);
     }
   }
 
-  durationFormatter = (cell, row, rowIndex) => {
-    return (Math.floor(row.duration/60) + ":" + row.duration%60);
+  setGamesData = (respGames) => {
+    const gamesList = respGames.matches.map(
+      (gamesList) => ({
+        matchId: gamesList.matchId,
+        replayUrl: gamesList.replayUrl,
+        date: gamesList.completed,
+        player1: gamesList.bots[0].user.username,
+        player2: gamesList.bots[1].user.username,
+        player1Rank: gamesList.bots[0].user.rank,
+        player2Rank: gamesList.bots[1].user.rank,
+        result: (gamesList.bots[0].isWinner ? 1 : 2),
+        duration: gamesList.duration,
+        unitsRemain1: Math.max(gamesList.bots[0].unitsLeft, 0),
+        unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0)
+      })
+    );
+    let pageCount = this.state.pageCount;
+    if (pageCount === 0) {
+      pageCount = Math.ceil(respGames.pagination.total / respGames.pagination.count)
+    }
+
+    this.setState({
+      gamesData: gamesList,
+      nGamesPerPage: respGames.pagination.count,
+      pageCount: pageCount,
+      loadingData: false
+    });
   }
 
+  handlePageClick = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected * this.state.nGamesPerPage);
+
+    this.loadGames(offset);
+  };
+
   render(){
-    const gamesColumns = [{
-      dataField: 'no1',
-			text: 'Date',
-      formatter: this.linkFormatter
-    }, {
-      dataField: 'no2',
-			text: 'Players',
-      formatter: this.playersFormatter
-    }, {
-      dataField: 'no3',
-			text: 'Duration',
-      formatter: this.durationFormatter
-    }, {
-      dataField: 'unitsRemain',
-			text: 'Remaining Units'
-    }];
+    const { gamesData, loadingData, pageCount } = this.state;
 
     return (
       <div>
         <h2>Games</h2>
-        <Table data={[]} columns={gamesColumns} keyField="date" />
         <div className="text-center">COMING SOON</div>
+        <GamesTable data={gamesData} loading={loadingData}/>
+        <ReactPaginate previousLabel={"<"}
+                       nextLabel={">"}
+                       breakLabel={"..."}
+                       breakClassName={"break-me"}
+                       pageCount={pageCount}
+                       marginPagesDisplayed={1}
+                       pageRangeDisplayed={5}
+                       onPageChange={this.handlePageClick}
+                       containerClassName={"pagination"}
+                       subContainerClassName={"pages pagination"}
+                       activeClassName={"active"} />
       </div>
     )
   }

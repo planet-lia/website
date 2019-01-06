@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
 import ReactResizeDetector from 'react-resize-detector';
 
-import Replay from '../views/Replay';
+import Replay from '../elems/Replay';
 import Popup from '../views/Popup';
 import WaitAlert from '../forms/WaitAlert';
 import { programmingLanguages } from '../../utils/constants/programmingLanguages';
@@ -209,16 +209,16 @@ class EditorPage extends Component {
               </div>
               <div id="editor-cont-links">
                 <div>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
                 </div>
                 <div>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
-                  <Button bsClass="btn btn-sm custom-btn" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
+                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
                 </div>
               </div>
               <div id="editor-btn-run">
-                <Button bsClass="btn btn-sm custom-btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
+                <Button bsClass="btn btn-sm custom-btn btn-on-dark" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
                   <Glyphicon glyph="cog" />
                   {" RUN"}
                 </Button>
@@ -248,7 +248,7 @@ class EditorPage extends Component {
               <Replay containerId="player" number={ 0 } replayFileBase64={ currentReplayFileBase64 } />
               {generatingGame &&
                 <div id="editor-loader-overlay">
-                  <div id="cont-loader">
+                  <div className="cont-loader">
                     <Loader
                       type="Triangle"
                       color="#018e6a"

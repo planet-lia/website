@@ -4,15 +4,14 @@ import { Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Routes from './components/layout/Routes';
-import Popup from './components/views/Popup';
-import SignInForm from './components/forms/SignInForm';
-import SignUpForm from './components/forms/SignUpForm';
 import withTracker from './components/tracking/withTracker';
+import PopupSubmit from './components/views/PopupSubmit';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope  } from '@fortawesome/free-solid-svg-icons';
-library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope);
+import { faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot } from '@fortawesome/free-solid-svg-icons';
+library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
+  faTv, faRobot, faMedal, faDesktop, faPlay, faUser);
 
 
 class App extends Component {
@@ -21,7 +20,6 @@ class App extends Component {
     this.state = {
       showSignInPopup: false,
       showSignUpPopup: false,
-      isSignedIn: false,
     };
   }
   onNavSignClick = (signingMode) => {
@@ -35,27 +33,14 @@ class App extends Component {
         showSignInPopup: false,
         showSignUpPopup: true
       });
-    } else {
-      this.setState({isSignedIn: false});
     }
   }
 
   onSignPopupClose = () => {
-    this.setState({
-      showSignInPopup: false,
-      showSignUpPopup: false
-    });
+    this.closePopups();
   }
 
-  onSignIn = () => {
-    this.setState({
-      showSignInPopup: false,
-      showSignUpPopup: false,
-      isSignedIn: true
-    });
-  }
-
-  onSignUp = () => {
+  closePopups = () => {
     this.setState({
       showSignInPopup: false,
       showSignUpPopup: false
@@ -66,32 +51,29 @@ class App extends Component {
     const isEditor = (window.location.pathname.split("/")[1]==="editor");
     return (
       <div id="main-container">
-        <Header isSignedIn={this.state.isSignedIn} onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
+        <div id="top"></div>
+        <Header onNavSignClick={(signingMode) => this.onNavSignClick(signingMode)}/>
         <div className={isEditor ? "main-content no-footer" : "main-content"}>
           <Route component={withTracker(Routes, { /* additional attributes */ })}/>
         </div>
-        { !isEditor && <Footer />}
+        { !isEditor ? (<Footer />) : null}
 
-        <Popup
+        <PopupSubmit
           dialogClassName="custom-popup sign-in"
           show={this.state.showSignInPopup}
           onHide={this.onSignPopupClose}
-          onButtonClick={this.onSignIn}
           heading="Sign In"
           buttonText="Sign In"
-        >
-          <SignInForm />
-        </Popup>
-        <Popup
+          formType="sign-in"
+        />
+        <PopupSubmit
           dialogClassName="custom-popup sign-up"
           show={this.state.showSignUpPopup}
           onHide={this.onSignPopupClose}
-          onButtonClick={this.onSignUp}
           heading="Sign Up"
           buttonText="Sign Up"
-        >
-          <SignUpForm />
-        </Popup>
+          formType="sign-up"
+        />
       </div>
     );
   }

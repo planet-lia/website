@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
+import { Link } from 'react-router-dom';
 
-import Replay from '../views/Replay';
-import ReplayThumb from '../views/ReplayThumb';
+import Replay from '../elems/Replay';
+import ReplayThumb from '../elems/ReplayThumb';
 import Popup from '../views/Popup';
 import TryOut from '../forms/TryOut';
 import SubscriptionPopup from '../views/SubscriptionPopup';
@@ -12,6 +13,8 @@ import SubscriptionPopup from '../views/SubscriptionPopup';
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
 import thumb3 from '../../assets/thumb3.jpg';
+import logoFri from '../../assets/logo_fri.png';
+import logoGaraza from '../../assets/logo_garaza.png';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -42,11 +45,31 @@ class LandingPage extends Component {
             <div className="land-slogan">Competitive</div>
             <div className="land-slogan">Coding Game</div>
             <div id="land-desc">Bring your code to life</div>
-            <Button className="land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Live Demo<div className="btn-subtext">Without registration</div></Button>
-            <Button className="land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
+            <Button bsClass="btn land-btn btn-try" onClick={() => this.setState({showTryNowPopup: true})}>Live Demo<div className="btn-subtext">Without registration</div></Button>
+            <Button bsClass="btn land-btn btn-sub" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</Button>
           </div>
         </div>
-        <div className="land-section sec-gray">
+        <div className="custom-section sec-short">
+          <div className="container text-center">
+            <h2 className="tour-title">Slovenian Lia Tournament 2019</h2>
+            <p>
+              Are you a university or high school student from Slovenia and know
+              a little bit of programming?<br />
+              Join Lia and battle for the coding glory!
+            </p>
+            <h4 className="tour-title tour-date">18 Feb - 14 Mar</h4>
+            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <div>
+              <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
+                <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
+              </a>
+              <a href="https://fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
+                <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div id="what-is-lia" className="custom-section sec-gray">
           <div className="container">
             <Row>
               <Col md={7}>
@@ -57,9 +80,9 @@ class LandingPage extends Component {
               <Col md={5}>
                   <h2 className="land-what-title">What is Lia?</h2>
                   <p className="land-what-text">
-                    Lia is a competitive programming game where your goal is
+                    Lia is a competitive coding game where your goal is
                     to lead your units to victory by using your awesome
-                    programming skills. Create your bot and put it to the
+                    coding skills. Create your bot and put it to the
                     test. Our aim is to create an environment where you can
                     compete with your friends and programmers from all around
                     the world.
@@ -74,10 +97,10 @@ class LandingPage extends Component {
             </Row>
           </div>
         </div>
-        <div className="land-section">
+        <div className="custom-section">
           <div className="land-cont-title">
             <h2 className="land-title">WATCH GAMES</h2>
-            <div className="land-subtext">Grab popcorn and watch bots fight each other.</div>
+            <div className="land-subtext">Watch programmers battle each other.</div>
           </div>
           <div className="container" id="land-cont-watch">
             { this.state.gameId
@@ -103,10 +126,10 @@ class LandingPage extends Component {
             </Row>
           </div>
         </div>
-        <div className="land-section sec-gray">
+        <div className="custom-section sec-gray">
           <div className="land-cont-title">
             <h2 className="land-title">COMPETE</h2>
-            <div className="land-subtext">Build, test, battle. Create the ultimate bot.</div>
+            <div className="land-subtext">Code, fight, win. And have fun!</div>
           </div>
           <div className="container">
             <Col className="land-funs" md={4}>
@@ -115,7 +138,7 @@ class LandingPage extends Component {
               </div>
               <div className="land-subtitle center-text">Develop bots</div>
               <div className="center-text">
-                Use Java, Python or Kotlin alongside your favourite IDE to create unbeatable bots that can fight on their own.
+                Use Java, Python3 or Kotlin to create your very own bot.
               </div>
             </Col>
             <Col className="land-funs" md={4}>
@@ -124,7 +147,7 @@ class LandingPage extends Component {
               </div>
               <div className="land-subtitle center-text">Join the leaderboard</div>
               <div className="center-text">
-                Join the global leaderboard and compete for fame and glory.
+                Join the global leaderboard and compete for coding fame and glory.
               </div>
             </Col>
             <Col className="land-funs" md={4}>

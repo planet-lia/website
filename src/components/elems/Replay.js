@@ -30,7 +30,7 @@ class Replay extends Component {
     window.addEventListener('mozfullscreenchange', this.resizeReplay);
     window.addEventListener('MSFullscreenChange', this.resizeReplay);
     this.updateReplayWidth();
-    if(this.props.number || this.props.replayFileBase64){
+    if(this.props.number || this.props.replayFileBase64 || this.props.replayUrl){
       this.checkAndRun();
     }
   }
@@ -71,11 +71,15 @@ class Replay extends Component {
 
   checkAndRun = () => {
     if(window.liaGame){
+      let replayUrl = "/assets/replays/replay_" + this.props.number + ".lia";
+      if(this.props.replayUrl){
+        replayUrl = this.props.replayUrl;
+      }
       this.setState({
         replay: window.liaGame.playReplay(
           this.props.containerId,
           "/assets/",
-          "/assets/replays/replay_" + this.props.number + ".lia",
+          replayUrl,
           this.props.replayFileBase64,
           "/assets/banned-words.txt",
           this.setGameDuration,
@@ -171,7 +175,7 @@ class Replay extends Component {
 
   goFull = () => {
     if(this.state.replay===null) return;
-    
+
     let goFullScreen;
 
     if(this.state.isFull===true){
