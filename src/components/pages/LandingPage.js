@@ -57,8 +57,8 @@ class LandingPage extends Component {
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <h3 className="tour-title tour-date">18 Feb - 14 Mar</h3>
-            <Link to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <h4 className="tour-title tour-date">18 Feb - 14 Mar</h4>
+            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <div>
               <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
                 <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
