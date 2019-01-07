@@ -278,7 +278,7 @@ class ProfilePage extends Component {
                 {"Losses: "} <strong>{activeBotLosses}</strong>
               </div>
               <div>
-                {"Total: "} <strong>{activeBotTotal}</strong>
+                {"Win %: "} <strong>{winPercentage(activeBotWins, activeBotLosses)}</strong>
               </div>
               <div>
                 {"Playing: "} <strong>{activeBotPlaying}</strong>
@@ -294,7 +294,7 @@ class ProfilePage extends Component {
                 {"Losses: "} <strong>{losses}</strong>
               </div>
               <div>
-                {"Total: "} <strong>{total}</strong>
+                {"Win %: "} <strong>{winPercentage(wins, losses)}</strong>
               </div>
               <div>
                 {"Playing: "} <strong>{playing}</strong>
@@ -325,6 +325,13 @@ class ProfilePage extends Component {
       </div>
     )
   }
+}
+
+function winPercentage(wins, losses) {
+  const p = wins / (wins + losses);
+  if (isNaN(p)) return 0;
+  return Math.round(p * 1000) / 1000
+
 }
 
 function mapStateToProps(state) {
