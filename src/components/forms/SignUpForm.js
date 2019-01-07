@@ -42,6 +42,10 @@ class SignUpForm extends Component {
 
   componentDidMount = () => {
     this.loadCodes();
+    const isTournament = (window.location.pathname.split("/")[1]==="tournament");
+    if(isTournament){
+      this.setState({allowTournament: true})
+    }
   }
 
   loadCodes = async () => {
