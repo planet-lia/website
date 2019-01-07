@@ -69,8 +69,9 @@ const tournamentPageEng = {
   linkRules: "here",
 
   titleSponsors: "Sponsors & Partners",
-  txtSponsors: "This tournament is only possible thanks to our great sponsors.",
+  txtSponsors: "This tournament is only possible thanks to our great sponsors and partners.",
   txtLogoHere: "Your logo here",
+  txtBecomeSponsor: "If you are interested in sponsoring this tournament, write to ",
 
   txtRlsMain: "This are the rules of Slovenian Lia Tournament 2019.",
   titleRls1: "Lia version",

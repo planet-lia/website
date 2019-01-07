@@ -9,6 +9,7 @@ import logoJava from '../../assets/logo2.png';
 import logoKotlin from '../../assets/logo3.png';
 import logoFri from '../../assets/logo_fri.png';
 import logoGaraza from '../../assets/logo_garaza.png';
+import Link from "react-router-dom/es/Link";
 
 const TournamentMain = (props) => {
   const content = props.content;
@@ -174,22 +175,25 @@ const TournamentMain = (props) => {
         <div className="container text-center">
           <h3 className="tour-title">{content.titleSponsors}</h3>
           <p>{content.txtSponsors}</p>
+          <br/>
+          <p>{content.txtBecomeSponsor} <a href="mailto:info@liagame.com">info@liagame.com</a>.</p>
           <Row>
-            <Col md={2} mdOffset={1} sm={4} xs={6}>
-              <div className="tour-company">{content.txtLogoHere}</div>
-            </Col>
-            <Col md={2} sm={4} xs={6}>
-              <div className="tour-company">{content.txtLogoHere}</div>
-            </Col>
-            <Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>
-              <div className="tour-company">{content.txtLogoHere}</div>
-            </Col>
-            <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>
-              <div className="tour-company">{content.txtLogoHere}</div>
-            </Col>
-            <Col md={2} sm={4} xs={6}>
-              <div className="tour-company">{content.txtLogoHere}</div>
-            </Col>
+
+            {/*<Col md={2} mdOffset={1} sm={4} xs={6}>*/}
+              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
+            {/*</Col>*/}
+            {/*<Col md={2} sm={4} xs={6}>*/}
+              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
+            {/*</Col>*/}
+            {/*<Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>*/}
+              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
+            {/*</Col>*/}
+            {/*<Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>*/}
+              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
+            {/*</Col>*/}
+            {/*<Col md={2} sm={4} xs={6}>*/}
+              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
+            {/*</Col>*/}
           </Row>
           <div>
             <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
