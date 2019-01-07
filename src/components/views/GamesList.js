@@ -76,8 +76,8 @@ class GamesList extends Component {
     return (
       <div>
         <h2>Games</h2>
-        <div className="text-center">COMING SOON</div>
         <GamesTable data={gamesData} loading={loadingData}/>
+        <div className="text-center">COMING SOON</div>
         <ReactPaginate previousLabel={"<"}
                        nextLabel={">"}
                        breakLabel={"..."}

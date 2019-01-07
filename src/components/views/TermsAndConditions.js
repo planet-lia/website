@@ -24,13 +24,13 @@ const TermsAndConditions = (props) => {
         <h2>Severability</h2>
         <p>All rights and restrictions contained in this Agreement may be exercised and shall be applicable and binding only to the extent that they do not violate any applicable laws and are intended to be limited to the extent necessary so that they will not render this Agreement illegal, invalid or unenforceable. If any provision or portion of any provision of this Agreement shall be held to be illegal, invalid or unenforceable by a court of competent jurisdiction, it is the intention of the parties that the remaining provisions or portions thereof shall constitute their agreement with respect to the subject matter hereof, and all such remaining provisions or portions thereof shall remain in full force and effect.</p>
         <h2>Changes and amendments</h2>
-        <p>We reserve the right to modify this Agreement or its policies relating to the Website or Services at any time, effective upon posting of an updated version of this Agreement on the Website. When we do, we will revise the updated date at the bottom of this page. Continued use of the Website after any such changes shall constitute your consent to such changes. Policy was created with</p>
+        <p>We reserve the right to modify this Agreement or its policies relating to the Website or Services at any time, effective upon posting of an updated version of this Agreement on the Website. When we do, we will revise the updated date at the bottom of this page. Continued use of the Website after any such changes shall constitute your consent to such changes. With that you agree to review this Agreement periodically when accessing or using our website.</p>
         <h2>Acceptance of these terms</h2>
         <p>You acknowledge that you have read this Agreement and agree to all its terms and conditions. By using the Website or its Services you agree to be bound by this Agreement. If you do not agree to abide by the terms of this Agreement, you are not authorized to use or access the Website and its Services.</p>
         <h2>Contacting us</h2>
         <p>If you have any questions about this Agreement, please contact us.</p>
         <p>This document was last updated on January 2, 2019</p>
-        <p>This Terms and conditions were generated using <a href="https://www.websitepolicies.com" target="_blank">WebsitePolicies.com</a>.</p>
+        <p>The base for this Agreement was generated using <a href="https://www.websitepolicies.com" target="_blank">WebsitePolicies.com</a>.</p>
       </div>
     </div>
   )
