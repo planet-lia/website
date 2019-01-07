@@ -182,9 +182,9 @@ class ProfilePage extends Component {
 
   render(){
     const { gamesData, loadingData, username, rank, rating, mu, sigma,
-      wins, losses, total, playing, pageCount, version, language,
+      wins, losses, playing, pageCount, version, language,
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
-      activeBotPlaying, activeBotTotal, newBotUploadTime, newBotStatus,
+      activeBotPlaying, newBotUploadTime, newBotStatus,
       newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog} = this.state;
 
     return (
@@ -342,4 +342,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(ProfilePage);
-

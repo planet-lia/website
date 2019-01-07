@@ -65,6 +65,7 @@ function dateFormatter(cell, row, rowIndex) {
   );
 }
 
+/*
 function playersFormatter(cell, row, rowIndex) {
 
   const player1 = usernameToProfileLink(row.player1);
@@ -79,7 +80,7 @@ function playersFormatter(cell, row, rowIndex) {
       {player2}</strong>&nbsp;{trophyIcon}</span>)
   }
 }
-
+*/
 
 function player1Formatter(cell, row, rowIndex) {
   return playerFormatter(cell, row, rowIndex, 1)
@@ -116,9 +117,11 @@ function durationFormatter(cell, row, rowIndex) {
   return seconds2time(row.duration);
 }
 
+/*
 function playerRanksFormatter(cell, row, rowIndex) {
   return (<span> {row.player1Rank} - {row.player2Rank}</span>);
 }
+*/
 
 
 function unitsRemainFormatter(cell, row, rowIndex) {

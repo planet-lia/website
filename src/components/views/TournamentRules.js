@@ -1,5 +1,4 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
 
 const TournamentRules = (props) => {
   const content = props.content;

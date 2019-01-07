@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col, Glyphicon, Button, Table } from 'react-bootstrap';
+import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
 
 import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
-import Popup from '../views/Popup';
-import TryOut from '../forms/TryOut';
 import SubscriptionPopup from '../views/SubscriptionPopup';
 
 import thumb1 from '../../assets/thumb1.jpg';

@@ -1,12 +1,11 @@
 import React from 'react';
 
 const TermsAndConditions = (props) => {
-  const content = props.content;
   return (
     <div className="container">
       <div>
         <h1>Terms and conditions</h1>
-        <p>These terms and conditions (&quot;Terms&quot;, &quot;Agreement&quot;) are an agreement between Website Operator (&quot;Website Operator&quot;, &quot;us&quot;, &quot;we&quot; or &quot;our&quot;) and you (&quot;User&quot;, &quot;you&quot; or &quot;your&quot;). This Agreement sets forth the general terms and conditions of your use of the <a target="_blank" rel="nofollow" href="https://www.liagame.com">liagame.com</a> website and any of its products or services (collectively, &quot;Website&quot; or &quot;Services&quot;).</p>
+        <p>These terms and conditions (&quot;Terms&quot;, &quot;Agreement&quot;) are an agreement between Website Operator (&quot;Website Operator&quot;, &quot;us&quot;, &quot;we&quot; or &quot;our&quot;) and you (&quot;User&quot;, &quot;you&quot; or &quot;your&quot;). This Agreement sets forth the general terms and conditions of your use of the <a target="_blank" rel="nofollow noopener noreferrer" href="https://www.liagame.com">liagame.com</a> website and any of its products or services (collectively, &quot;Website&quot; or &quot;Services&quot;).</p>
         <h2>Accounts and membership</h2>
         <p>If you create an account on the Website, you are responsible for maintaining the security of your account and you are fully responsible for all activities that occur under the account and any other actions taken in connection with it. Providing false contact information of any kind may result in the termination of your account. You must immediately notify us of any unauthorized uses of your account or any other breaches of security. We will not be liable for any acts or omissions by you, including any damages of any kind incurred as a result of such acts or omissions. We may suspend, disable, or delete your account (or any part thereof) if we determine that you have violated any provision of this Agreement or that your conduct or content would tend to damage our reputation and goodwill. If we delete your account for the foregoing reasons, you may not re-register for our Services. We may block your email address and Internet protocol address to prevent further registration.</p>
         <h2>User content</h2>
@@ -30,7 +29,7 @@ const TermsAndConditions = (props) => {
         <h2>Contacting us</h2>
         <p>If you have any questions about this Agreement, please contact us.</p>
         <p>This document was last updated on January 2, 2019</p>
-        <p>The base for this Agreement was generated using <a href="https://www.websitepolicies.com" target="_blank">WebsitePolicies.com</a>.</p>
+        <p>The base for this Agreement was generated using <a href="https://www.websitepolicies.com" target="_blank" rel="noopener noreferrer">WebsitePolicies.com</a>.</p>
       </div>
     </div>
   )
