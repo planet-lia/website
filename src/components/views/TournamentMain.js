@@ -177,8 +177,7 @@ const TournamentMain = (props) => {
           <p>{content.txtSponsors}</p>
           <br/>
           <p>{content.txtBecomeSponsor} <a href="mailto:info@liagame.com">info@liagame.com</a>.</p>
-          <Row>
-
+          {/*<Row>*/}
             {/*<Col md={2} mdOffset={1} sm={4} xs={6}>*/}
               {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
             {/*</Col>*/}
@@ -194,7 +193,7 @@ const TournamentMain = (props) => {
             {/*<Col md={2} sm={4} xs={6}>*/}
               {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
             {/*</Col>*/}
-          </Row>
+          {/*</Row>*/}
           <div>
             <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
               <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
