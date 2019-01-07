@@ -40,10 +40,15 @@ class EditorPage extends Component {
 
     fetch(langData.baseBotUrl)
       .then((resp)=>{ return resp.text() })
-      .then( (text) => this.setState({
-        code: text,
-        isLoadingCode: false
-      }) );
+      .then( (text) =>{
+        this.setState({
+          code: text,
+          isLoadingCode: false
+        });
+        this.generateGame();
+      });
+
+
   }
 
   componentWillUnmount = () => {
@@ -219,7 +224,7 @@ class EditorPage extends Component {
               </div>
               <div id="editor-btn-run">
                 <Button bsClass="btn btn-sm custom-btn btn-on-dark" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
-                  <Glyphicon glyph="cog" />
+                  <Glyphicon glyph="play" />
                   {" RUN"}
                 </Button>
               </div>
