@@ -317,14 +317,14 @@ class SignUpForm extends Component {
               checked={this.state.allowTournament}
               onChange={this.onCheckboxChange}
             >
-              I want to receive emails about Slovenian Lia Tournament 2019
+              I want to receive emails about Slovenian Lia Tournament 2019 <sup>[1]</sup>
             </Checkbox>
             <Checkbox
               name="allowMarketing"
               checked={this.state.allowMarketing}
               onChange={this.onCheckboxChange}
             >
-              I want to receive general Lia emails (Newsletter, etc.)
+              I want to receive general Lia emails (Newsletter, etc.) <sup>[1]</sup>
             </Checkbox>
           </Col>
         </Row>
@@ -338,9 +338,14 @@ class SignUpForm extends Component {
               I agree to Lia &nbsp;
               <Link to={"/terms-and-conditions"} target={"_blank"}>Terms and Conditions</Link>
               &nbsp; and &nbsp;
-              <Link to={"/privacy-policy"} target={"_blank"}>Privacy Policy</Link>
-              .
+              <Link to={"/privacy-policy"} target={"_blank"}>Privacy Policy</Link>.
             </Checkbox>
+            <p className="sign-up-footnote">
+              [1] - We use Mailchimp as our marketing platform. By choosing checkboxes marked with <sup>[1]</sup>,
+              you acknowledge that your information will be transferred
+              to Mailchimp for processing. Learn more about Mailchimp's privacy
+              practices <a href="https://mailchimp.com/legal/" target="_blank" rel="noopener noreferrer">here</a>.
+            </p>
           </Col>
         </Row>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden" disabled={this.state.isLoading}></Button>
