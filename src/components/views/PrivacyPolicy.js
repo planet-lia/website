@@ -29,7 +29,7 @@ const PrivacyPolicy = (props) => {
         <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
 
         <ul>
-          <li>Email address</li><li>Your organization</li><li>Cookies and Usage Data</li>
+          <li>First and last name</li><li>Email address</li><li>Organization name</li><li>Country of residence</li><li>Cookies and Usage Data</li>
         </ul>
 
         <h4>Usage Data</h4>
@@ -102,17 +102,15 @@ const PrivacyPolicy = (props) => {
 
 
         <h2>Children's Privacy</h2>
-        <p>Our Service does not address anyone under the age of 18 ("Children").</p>
-        <p>We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your Children has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.</p>
+        <p>Our Service does not address anyone under the age of 18 ("Children") or under the age of 16 if you are located or reside in the European Union. Where the child is below the age of 16 in European Union or 18 elsewhere, such processing shall be lawful only if and to the extent that consent is given or authorised by the holder of parental responsibility over the child.</p>
+        <p>We do not knowingly collect personally identifiable information from anyone under the age of 18 or 16 if they are located or reside in the European Union. If you are a parent or guardian and you are aware that your Children has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.</p>
 
 
         <h2>Changes To This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-        <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
-        <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+        <p>We reserve the right to change these Privacy Policy without notice at any time.</p>
+        <p>Your use of the Site after we post any changes to these Privacy Policy constitutes your agreement to those changes prospectively from the date of such changes.  Upon changes we will update the "effective date" at the top of this Privacy Policy. Changes to this Privacy Policy are effective when they are posted on this page. With that you agree to review this Privacy Policy periodically when accessing or using our website.</p>
 
-
-        <h2>Contact Us</h2>
+          <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, please contact us:</p>
         <ul>
           <li>By email: info@liagame.com</li>
