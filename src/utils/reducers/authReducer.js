@@ -1,7 +1,7 @@
 import { actionTypesAuth } from '../constants/actionTypesAuth';
 
 let user = localStorage.getItem("user");
-const initialState = user ? { loggedIn: true, username: user.username } : {};
+const initialState = user ? { isAuthenticated: true, username: user.username } : {};
 
 export function authentication(state = initialState, action) {
   switch (action.type) {

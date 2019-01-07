@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 import TournamentMain from '../views/TournamentMain'
 import TournamentRules from '../views/TournamentRules'
+
+import { connect } from 'react-redux';
+import { popupsActions } from '../../utils/actions/popupsActions';
 
 import { languageConst } from '../../utils/constants/languageConst';
 import textEng from '../../assets/texts/tournamentPageEng';
@@ -67,7 +70,12 @@ class TournamentPage extends Component {
                   <div>
                     <p>{content.txtBanner}</p>
                     <h4 className="tour-title tour-date">{content.tourDate}</h4>
-                    <Button bsClass="btn custom-btn custom-btn-xl center-block" disabled>{content.btnRegisterEarly}</Button>
+                    <Button
+                      bsClass="btn custom-btn custom-btn-xl center-block"
+                      onClick={() => this.props.dispatch(popupsActions.showEarlyRegistration())}
+                    >
+                      {content.btnRegisterEarly}
+                    </Button>
                     <div id="tour-what"><a href="/#what-is-lia" target="_blank" rel="noopener noreferrer">{content.lnkWhat}</a></div>
                   </div>
                 )
@@ -86,4 +94,4 @@ class TournamentPage extends Component {
   }
 }
 
-export default TournamentPage;
+export default withRouter(connect()(TournamentPage));

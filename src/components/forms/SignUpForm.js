@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import {Typeahead} from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
+import { connect } from 'react-redux';
+
 import Select from '../elems/Select';
 import { validators } from '../../utils/helpers/validators';
 import api from '../../utils/api';
@@ -42,6 +44,9 @@ class SignUpForm extends Component {
 
   componentDidMount = () => {
     this.loadCodes();
+    if(this.props.earlyRegistration){
+      this.setState({allowTournament: true});
+    }
   }
 
   loadCodes = async () => {
@@ -358,4 +363,11 @@ class SignUpForm extends Component {
 
 }
 
-export default SignUpForm;
+function mapStateToProps(state) {
+    const { earlyRegistration } = state.popups;
+    return {
+        earlyRegistration
+    };
+}
+
+export default connect(mapStateToProps)(SignUpForm);

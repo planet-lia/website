@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PrivacyPolicy = (props) => {
-  const content = props.content;
   return (
     <div className="container">
       <div>

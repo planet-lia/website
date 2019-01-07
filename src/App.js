@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Routes from './components/layout/Routes';
 import withTracker from './components/tracking/withTracker';
 import PopupSubmit from './components/views/PopupSubmit';
+
+import { connect } from 'react-redux';
+import { popupsActions } from './utils/actions/popupsActions'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -19,32 +22,24 @@ class App extends Component {
 		super(props);
     this.state = {
       showSignInPopup: false,
-      showSignUpPopup: false,
     };
   }
   onNavSignClick = (signingMode) => {
     if(signingMode===1){
-      this.setState({
-        showSignInPopup: true,
-        showSignUpPopup: false
-      });
-    } else if(signingMode===2){
-      this.setState({
-        showSignInPopup: false,
-        showSignUpPopup: true
-      });
+      this.setState({showSignInPopup: true});
+      this.hideSignUpPopup();
+    } else {
+      this.setState({showSignInPopup: false});
     }
   }
 
-  onSignPopupClose = () => {
-    this.closePopups();
+  closePopups = () => {
+    this.setState({showSignInPopup: false});
+    this.hideSignUpPopup();
   }
 
-  closePopups = () => {
-    this.setState({
-      showSignInPopup: false,
-      showSignUpPopup: false
-    });
+  hideSignUpPopup = async () => {
+    await this.props.dispatch(popupsActions.hideRegistration())
   }
 
   render() {
@@ -61,15 +56,15 @@ class App extends Component {
         <PopupSubmit
           dialogClassName="custom-popup sign-in"
           show={this.state.showSignInPopup}
-          onHide={this.onSignPopupClose}
+          onHide={this.closePopups}
           heading="Sign In"
           buttonText="Sign In"
           formType="sign-in"
         />
         <PopupSubmit
           dialogClassName="custom-popup sign-up"
-          show={this.state.showSignUpPopup}
-          onHide={this.onSignPopupClose}
+          show={this.props.showRegPopup}
+          onHide={this.closePopups}
           heading="Sign Up"
           buttonText="Sign Up"
           formType="sign-up"
@@ -79,4 +74,11 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const { showRegPopup } = state.popups;
+    return {
+        showRegPopup
+    };
+}
+
+export default withRouter(connect(mapStateToProps)(App));
