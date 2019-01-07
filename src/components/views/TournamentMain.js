@@ -78,7 +78,7 @@ const TournamentMain = (props) => {
               <div className="tour-cont-unit">
                 <img id="green-unit" src="/assets/unit2.png" alt="green unit"/>
               </div>
-                <Button bsClass="btn custom-btn custom-btn-lg" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">{content.btnGetStarted}</Button>
+                <Button bsClass="btn custom-btn custom-btn-lg" href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">{content.btnGetStarted}</Button>
               </div>
             </Col>
           </Row>
