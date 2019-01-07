@@ -278,7 +278,7 @@ class ProfilePage extends Component {
                 {"Losses: "} <strong>{activeBotLosses}</strong>
               </div>
               <div>
-                {"Win %: "} <strong>{winPercentage(activeBotWins, activeBotTotal)}</strong>
+                {"Win %: "} <strong>{winPercentage(activeBotWins, activeBotLosses)}</strong>
               </div>
               <div>
                 {"Playing: "} <strong>{activeBotPlaying}</strong>
@@ -294,7 +294,7 @@ class ProfilePage extends Component {
                 {"Losses: "} <strong>{losses}</strong>
               </div>
               <div>
-                {"Win %: "} <strong>{winPercentage(wins, total)}</strong>
+                {"Win %: "} <strong>{winPercentage(wins, losses)}</strong>
               </div>
               <div>
                 {"Playing: "} <strong>{playing}</strong>
@@ -327,8 +327,8 @@ class ProfilePage extends Component {
   }
 }
 
-function winPercentage(wins, total) {
-  const p = wins / total;
+function winPercentage(wins, losses) {
+  const p = wins / (wins + losses);
   if (isNaN(p)) return 0;
   return Math.round(p * 1000) / 1000
 
