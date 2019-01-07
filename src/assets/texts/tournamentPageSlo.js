@@ -57,7 +57,7 @@ const tournamentPageSlo = {
   titleSponsors: "Sponzorji in partnerji",
   txtSponsors: "Turnir ne bi bil mogoč brez naših sponzorjev in partnerjev.",
   txtLogoHere: "Vaš logotip",
-  txtBecomeSponsor: "Če želite postati naši sponzorji, nam pišite na ",
+  txtBecomeSponsor: "Če želite postati naš sponzor, nam pišite na ",
 
   txtRlsMain: "To so pravila slovenskega Lia turnirja 2019.",
   titleRls1: "Lia verzija",
