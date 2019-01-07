@@ -3,7 +3,8 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { authActions } from '../../utils/actions/authActions'
+import { authActions } from '../../utils/actions/authActions';
+import { popupsActions } from '../../utils/actions/popupsActions';
 
 import { connect } from 'react-redux';
 
@@ -31,6 +32,11 @@ class Header extends Component {
   onSelectNavSignItem = (mode) => {
     this.props.onNavSignClick(mode);
     this.setState({ isExpanded: false });
+  }
+
+  showSignUpPopup = async () => {
+    this.onSelectNavItem();
+    await this.props.dispatch(popupsActions.showRegistration());
   }
 
   logout = async () => {
@@ -75,12 +81,12 @@ class Header extends Component {
                     </NavLink>
                   </li>
                   <li role="presentation" onClick={this.logout}>
-                    <a role="button" href="#">Sign Out</a>
+                    <a role="button" onClick={() => {return false}}>Sign Out</a>
                   </li>
                 </ul>
               ) : (
                 <Nav pullRight>
-                  <NavItem onClick={() => this.onSelectNavSignItem(2)}>
+                  <NavItem onClick={this.showSignUpPopup}>
                     Sign Up
                   </NavItem>
                   <NavItem onClick={() => this.onSelectNavSignItem(1)}>
