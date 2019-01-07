@@ -51,7 +51,7 @@ class LandingPage extends Component {
             <div id="land-desc">Bring your code to life</div>
             <div id="land-subscribe"><a to="" onClick={() => this.setState({showSubscribePopup: true})}>Subscribe</a></div>
 
-            <Button bsClass="btn land-btn btn-try" onClick={() => this.redirectToLiveDemo()}>&nbsp;&nbsp;&nbsp;Live Demo&nbsp;&nbsp;&nbsp;<div className="btn-subtext">Without registration</div></Button>
+            <Button bsClass="btn land-btn btn-try" onClick={() => this.redirectToLiveDemo()}>Live Demo<div className="btn-subtext">Without registration</div></Button>
             <Button bsClass="btn land-btn btn-get-started" onClick={() => this.redirectToGettingStarted()}>Start playing</Button>
           </div>
         </div>
