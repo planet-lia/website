@@ -45,25 +45,25 @@ const tournamentPageEng = {
     <sup key="1">st</sup>,
     <span key="2"> place</span>
   ],
-  txtSubPrize1: "Reward not yet decided",
+  txtSubPrize1: "Prize will be revealed in February",
   txtPrize2: [
     <span key="0">Final tournament 2</span>,
     <sup key="1">nd</sup>,
     <span key="2"> place</span>
   ],
-  txtSubPrize2: "Reward not yet decided",
+  txtSubPrize2: "Prize will be revealed in February",
   txtPrize3: [
     <span key="0">Final tournament 3</span>,
     <sup key="1">rd</sup>,
     <span key="2"> place</span>
   ],
-  txtSubPrize3: "Reward not yet decided",
+  txtSubPrize3: "Prize will be revealed in February",
   txtPrize4: "Leaderboard winners week 1 to 3",
-  txtSubPrize4: "Reward not yet decided",
+  txtSubPrize4: "Prize will be revealed in February",
   txtPrize5: "Biggest clutch game comeback",
-  txtSubPrize5: "Reward not yet decided",
+  txtSubPrize5: "Prize will be revealed in February",
   txtPrize6: "Best spectator award",
-  txtSubPrize6: "Reward not yet decided",
+  txtSubPrize6: "Prize will be revealed in February",
   titleRules: "Rules",
   txtRules: "To get detailed information & rules about the tournament go ",
   linkRules: "here",
