@@ -12,7 +12,7 @@ class GamesPage extends Component {
       <div>
         <div className="custom-notification">
           <div className="container text-center">
-            Game page is currently in use for <Link to="/tournament">Slovenian Lia turnament 2019</Link>.
+            Game page is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.
           </div>
         </div>
         <div className="container">
