@@ -3,9 +3,12 @@ import { Row, Col } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import GamesTable from '../elems/GamesTable';
 import Moment from 'react-moment';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import ChallengeButton from '../elems/ChallengeButton';
+
 import api from '../../utils/api';
+
 import {connect} from "react-redux";
 
 class ProfilePage extends Component {
@@ -197,6 +200,7 @@ class ProfilePage extends Component {
               <div className="tour-cont-icon-lg">
                 <FontAwesomeIcon icon="robot" color={"#019170"}/>
               </div>
+              {(this.state.isPrivate) ? ("Challenges left: " + "TODO") : <ChallengeButton />}
             </Col>
             <Col sm={3}>
               <h4>Rank details</h4>

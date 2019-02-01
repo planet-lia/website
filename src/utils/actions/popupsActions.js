@@ -3,7 +3,9 @@ import { actionTypesPopups } from '../constants/actionTypesPopups';
 export const popupsActions = {
   showRegistration,
   showEarlyRegistration,
-  hideRegistration
+  showSignIn,
+  showChallenge,
+  hidePopups
 };
 
 function showRegistration() {
@@ -13,6 +15,14 @@ function showEarlyRegistration() {
   return { type: actionTypesPopups.REGISTRATION_EARLY_SHOW};
 }
 
-function hideRegistration() {
-  return { type: actionTypesPopups.REGISTRATION_HIDE};
+function showSignIn() {
+  return { type: actionTypesPopups.SIGNIN_SHOW};
+}
+
+function showChallenge(opponent, opponentId) {
+  return { type: actionTypesPopups.CHALLENGE_SHOW, opponent, opponentId};
+}
+
+function hidePopups() {
+  return { type: actionTypesPopups.POPUPS_HIDE};
 }

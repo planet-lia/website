@@ -56,6 +56,10 @@ td {
   position: relative;
 }
 
+.no-underline {
+  text-decoration: none !important;
+}
+
 .clr-fb:hover {
   color: #3e5b99;
 }

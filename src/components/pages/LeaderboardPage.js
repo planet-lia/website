@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from '../../utils/api'
 import Moment from 'react-moment';
 
+import ChallengeButton from '../elems/ChallengeButton'
+
 class LeaderboardPage extends Component {
   constructor(props){
 		super(props);
@@ -58,7 +60,7 @@ class LeaderboardPage extends Component {
 
 
   linkFormatter = (cell, row, rowIndex) => {
-    return (<Link to={"/user/" + row.username} style={{ textDecoration: 'none' }}>{row.username}</Link>);
+    return (<Link to={"/user/" + row.username} className="no-underline">{row.username}</Link>);
   }
 
 
@@ -71,22 +73,30 @@ class LeaderboardPage extends Component {
     }
   }
 
+  challengeFormatter = (cell, row, rowIndex) => {
+    return <ChallengeButton opponent={row.username} opponentId={row.userId} />
+  }
+
   render(){
     const { leaderboardData, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
-      dataField: 'rank',
+      dataField: 'no1',
 			text: 'Rank',
       formatter: this.rankFormatter
     }, {
-      dataField: 'no1',
+      dataField: 'no2',
 			text: 'Username',
       formatter: this.linkFormatter
     }, {
       dataField: 'rating',
 			text: 'Rating'
     }, {
+      dataField: 'no3',
+			text: 'Challenge',
+      formatter: this.challengeFormatter
+    }, {
       dataField: 'tier',
-			text: 'Tier'
+      text: 'Tier'
     }, {
       dataField: 'organization',
       text: 'Organization'

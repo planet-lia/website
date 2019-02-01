@@ -12,8 +12,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: null,
-      activeNav: 0,
+      isExpanded: false
     }
   }
 
@@ -29,14 +28,13 @@ class Header extends Component {
     this.setState({ isExpanded: false });
   }
 
-  onSelectNavSignItem = (mode) => {
-    this.props.onNavSignClick(mode);
-    this.setState({ isExpanded: false });
-  }
-
-  showSignUpPopup = async () => {
+  showSignPopup = async (mode) => {
     this.onSelectNavItem();
-    await this.props.dispatch(popupsActions.showRegistration());
+    if(mode===0){
+      await this.props.dispatch(popupsActions.showSignIn());
+    } else if(mode===1) {
+      await this.props.dispatch(popupsActions.showRegistration());
+    }
   }
 
   logout = async () => {
@@ -86,12 +84,8 @@ class Header extends Component {
                 </ul>
               ) : (
                 <Nav pullRight>
-                  <NavItem onClick={this.showSignUpPopup}>
-                    Sign Up
-                  </NavItem>
-                  <NavItem onClick={() => this.onSelectNavSignItem(1)}>
-                    Sign In
-                  </NavItem>
+                  <NavItem onClick={() => this.showSignPopup(1)}>Sign Up</NavItem>
+                  <NavItem onClick={() => this.showSignPopup(0)}>Sign In</NavItem>
                 </Nav>
               )}
             </Navbar.Collapse>
