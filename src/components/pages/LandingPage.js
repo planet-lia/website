@@ -3,10 +3,12 @@ import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
+import Countdown from 'react-countdown-now';
 
 import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
 import SubscriptionPopup from '../views/SubscriptionPopup';
+import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
@@ -63,6 +65,7 @@ class LandingPage extends Component {
             </p>
             <h4 className="tour-title tour-date">18 Feb - 14 Mar</h4>
             <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <Countdown date={"2019-02-18T15:00:00"} renderer={countdownRenderer}/>
             <div>
               <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
                 <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
@@ -119,13 +122,13 @@ class LandingPage extends Component {
             }
             <Row>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="Ninja7 vs SuperGit" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="pl3027 vs Gnortss" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="jk5494 vs lia-johnson" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="jk5494 vs pl3027" /></Scrollchor>
               </Col>
             </Row>
           </div>
