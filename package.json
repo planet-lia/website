@@ -20,6 +20,7 @@
     "react-bootstrap-slider": "^2.1.5",
     "react-bootstrap-table-next": "^0.1.14",
     "react-bootstrap-typeahead": "^3.2.4",
+    "react-countdown-now": "^2.1.0",
     "react-dom": "^16.4.1",
     "react-dropzone": "^4.2.13",
     "react-full-screen": "^0.2.2",

@@ -3,9 +3,11 @@ import { Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import Countdown from 'react-countdown-now';
 
-import TournamentMain from '../views/TournamentMain'
-import TournamentRules from '../views/TournamentRules'
+import TournamentMain from '../views/TournamentMain';
+import TournamentRules from '../views/TournamentRules';
+import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 
 import { connect } from 'react-redux';
 import { popupsActions } from '../../utils/actions/popupsActions';
@@ -55,7 +57,6 @@ class TournamentPage extends Component {
         <div className="custom-section sec-short">
           <div className="container text-center">
             <Col>
-
               <div>
                 <img id="logo-lia" className="tour-lia-logo" src={ liaLogo } alt="Lia" />
               </div>
@@ -81,6 +82,7 @@ class TournamentPage extends Component {
                 )
                 : null
               }
+              <Countdown date={"2019-02-18T15:00:00"} renderer={countdownRenderer}/>
             </Col>
           </div>
         </div>
