@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TournamentMain from '../views/TournamentMain';
 import TournamentRules from '../views/TournamentRules';
-import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 
 import { connect } from 'react-redux';
 import { popupsActions } from '../../utils/actions/popupsActions';
@@ -49,6 +49,30 @@ class TournamentPage extends Component {
 
   }
 
+  countdownRenderer = ({ days, hours, minutes, seconds }) => {
+    const { content } = this.state;
+    return (
+        <div className="countdown text-center">
+            <div>
+                <div className="cd-num">{days}</div>
+                <div className="cd-title">{content.cdDays}</div>
+            </div>
+            <div>
+                <div className="cd-num">{hours}</div>
+                <div className="cd-title">{content.cdHours}</div>
+            </div>
+            <div>
+                <div className="cd-num">{minutes}</div>
+                <div className="cd-title">{content.cdMinutes}</div>
+            </div>
+            <div>
+                <div className="cd-num">{seconds}</div>
+                <div className="cd-title">{content.cdSeconds}</div>
+            </div>
+        </div>
+    );
+  }
+
   render() {
     const { content } = this.state;
     const currentPath= this.props.location.pathname;
@@ -70,7 +94,9 @@ class TournamentPage extends Component {
                 ? (
                   <div>
                     <p>{content.txtBanner}</p>
-                    <h4 className="tour-title tour-date">{content.tourDate}</h4>
+                    <h4 className="tour-date">{content.tourDate}</h4>
+                    <Countdown date={"2019-02-18T15:00:00"} renderer={this.countdownRenderer}/>
+
                     <Button
                       bsClass="btn custom-btn custom-btn-xl center-block"
                       onClick={() => this.props.dispatch(popupsActions.showEarlyRegistration())}
@@ -78,11 +104,31 @@ class TournamentPage extends Component {
                       {content.btnRegisterEarly}
                     </Button>
                     <div id="tour-what"><a href="/#what-is-lia" target="_blank" rel="noopener noreferrer">{content.lnkWhat}</a></div>
+
+                    <div id="cont-banner-fb">
+                      <a href="https://www.facebook.com/liagame/" target="_blank" rel="noopener noreferrer">
+                        <div id="banner-fb">
+                          <div id="icon-fb" className="clr-fb">
+                            <FontAwesomeIcon icon={["fab", "facebook-square"]} />
+                          </div>
+                          <div className="text-left">
+                            <div>
+                              {content.bnrFBPrizes}
+                              <span className="trophy"><FontAwesomeIcon icon="trophy" /> </span>
+                              <span className="trophy"><FontAwesomeIcon icon="trophy" /></span>
+                              {content.bnrFBUpdates}
+                            </div>
+                            <div>
+                              {content.bnrFBFind}
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 )
                 : null
               }
-              <Countdown date={"2019-02-18T15:00:00"} renderer={countdownRenderer}/>
             </Col>
           </div>
         </div>

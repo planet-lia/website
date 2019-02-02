@@ -120,7 +120,7 @@ const TournamentMain = (props) => {
               <Row>
                 <Col sm={6}>
                   <Prize
-                    color="#c1af09"
+                    color="#d9c72e"
                     mainText={content.txtPrize1}
                     subText={content.txtSubPrize1}
                   />
