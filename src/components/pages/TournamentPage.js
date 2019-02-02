@@ -93,8 +93,8 @@ class TournamentPage extends Component {
               {currentPath==="/tournament"
                 ? (
                   <div>
-                    <p>{content.txtBanner}</p>
                     <h4 className="tour-date">{content.tourDate}</h4>
+                    <p>{content.txtBanner}</p>
                     <Countdown date={"2019-02-18T15:00:00"} renderer={this.countdownRenderer}/>
 
                     <Button
