@@ -66,7 +66,7 @@ class LeaderboardPage extends Component {
 
   rankFormatter = (cell, row, rowIndex) => {
     switch (row.rank) {
-      case 1: return (<span><FontAwesomeIcon icon="trophy" color={"#C1AF09"}/></span>);
+      case 1: return (<span><FontAwesomeIcon icon="trophy" color={"#D9C72E"}/></span>);
       case 2: return (<span><FontAwesomeIcon icon="trophy" color={"#9B9B92"}/></span>);
       case 3: return (<span><FontAwesomeIcon icon="trophy" color={"#9A3F1B"}/></span>);
       default: return row.rank;

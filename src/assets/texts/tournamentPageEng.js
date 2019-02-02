@@ -9,8 +9,19 @@ const tournamentPageEng = {
     <span key="2">Join Lia and battle for the coding glory!</span>
   ],
   tourDate: "18 Feb - 14 Mar",
+  cdDays: "Days",
+  cdHours: "Hours",
+  cdMinutes: "Minutes",
+  cdSeconds: "Seconds",
   btnRegisterEarly: "Register Early",
   lnkWhat: "What is Lia?",
+  bnrFBPrizes: <strong>Prizes reveals </strong>,
+  bnrFBUpdates: [
+    <span key="0"> and other </span>,
+    <strong key="1">updates</strong>,
+    <span key="2">.</span>
+  ],
+  bnrFBFind: "Find us on Facebook.",
 
   titleWant: "Want to have fun and beat your friends at coding?",
   txtWant: "Pick your favourite language and use our prebuilt starting bots to get you going within minutes.",
@@ -73,7 +84,7 @@ const tournamentPageEng = {
   txtLogoHere: "Your logo here",
   txtBecomeSponsor: "If you are interested in sponsoring this tournament, write to ",
 
-  txtRlsMain: "This are the rules of Slovenian Lia Tournament 2019.",
+  txtRlsMain: "These are the rules of Slovenian Lia Tournament 2019.",
   titleRls1: "Lia version",
   txtRls1: "In this tournament we will use the Lia-SDK version v1.0.x which we will publish before the tournament begins. The gameplay in this version will contain a unique twist that will make bots from our early access testers fairly obsolete and will thus provide a similar starting point for all of the tournament participants. Register to get an email revealing the twist!",
   titleRls2: "Documentation & examples",
