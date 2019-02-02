@@ -321,6 +321,12 @@ select.placeholder > option {
   font-size: 0.8em;
 }
 
+.pop-challenge #opponent {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 /* Popups Overwrites*/
 .modal-content {
   border-radius: 0;
