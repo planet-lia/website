@@ -56,7 +56,7 @@ td {
   position: relative;
 }
 
-.clr-fb:hover {
+.clr-fb, .clr-fb:hover {
   color: #3e5b99;
 }
 
@@ -78,6 +78,33 @@ select.placeholder, select.placeholder > option[value=""], select > option[value
 
 select.placeholder > option {
   color: #555;
+}
+
+.countdown {
+    font-weight: bold;
+    margin: 25px 0;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.countdown > div{
+    width: 4.3em;
+    margin: 0 5px;
+}
+
+.countdown .cd-num {
+    background-color: #f3f3f3;
+    font-size: 2em;
+    padding: 10px 0;
 }
 
 /* Layout */
@@ -159,7 +186,7 @@ select.placeholder > option {
 }
 
 .custom-section.sec-short {
-  padding: 4em 0;
+  padding: 6em 0;
 }
 
 .cont-table-loader {
@@ -182,9 +209,6 @@ select.placeholder > option {
 @media screen and (max-width: 991.98px) {
   .custom-section {
     padding: 6em 0;
-  }
-  .custom-section.sec-short {
-    padding: 3em 0;
   }
   .cont-table-loader {
     margin: 3em 0;
@@ -403,8 +427,9 @@ a.btn.custom-btn:hover {
   margin-top: 0;
 }
 
-.tour-title.tour-date {
-  margin: 20px 0;
+.tour-date {
+  font-size: 1.5em;
+  margin: 18px 0;
 }
 
 .tour-logo {
@@ -419,6 +444,44 @@ a.btn.custom-btn:hover {
 
 #tour-what {
   margin-top: 10px;
+}
+
+#cont-banner-fb {
+  display: inline-block;
+  margin-top: 25px;
+}
+
+#cont-banner-fb > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+#banner-fb {
+  font-size: 1.2em;
+  padding: 2px 20px;
+  background-color: #f3f3f3;
+  /*border: 2px solid #f3f3f3;*/
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+#banner-fb #icon-fb {
+  font-size: 3.5em;
+  margin-right: 15px;
+}
+
+#banner-fb .trophy {
+  color: #d9c72e;
 }
 
 #tour-cont-plang {
@@ -589,11 +652,8 @@ a.btn.custom-btn:hover {
 }
 
 @media screen and (max-width: 767.98px) {
-  .tour-row-padding {
-    padding-bottom: 4em;
-  }
   .tour-row-padding.tour-row-xs-padding {
-    padding-bottom: 1.5em;
+    padding-bottom: 3.5em;
   }
   #tour-cont-plang {
     min-height: 80px;

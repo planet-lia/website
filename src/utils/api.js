@@ -5,6 +5,7 @@ const API_BASE_URL = (() => {
   let apis = {
     "dev": "https://dev.cloud1.liagame.com",
     "staging": "https://staging.cloud1.liagame.com",
+    "staging2": "https://staging2.cloud1.liagame.com",
     "prod": "https://prod.cloud1.liagame.com",
   };
 
@@ -21,6 +22,8 @@ const API_BASE_URL = (() => {
       return apiUrlLog(apis["dev"]);
     case "staging":
       return apiUrlLog(apis["staging"]);
+    case "staging2":
+      return apiUrlLog(apis["staging2"]);
     case "www":
       return apiUrlLog(apis["prod"]);
     case "localhost":
