@@ -9,6 +9,7 @@ import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
 import SubscriptionPopup from '../views/SubscriptionPopup';
 import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
+import Supporters from '../elems/Supporters';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
@@ -66,14 +67,7 @@ class LandingPage extends Component {
             </p>
             <Countdown date={"2019-02-18T15:00:00"} renderer={countdownRenderer}/>
             <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
-            <div>
-              <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
-                <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
-              </a>
-              <a href="https://fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
-                <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
-              </a>
-            </div>
+            <Supporters />
           </div>
         </div>
         <div id="what-is-lia" className="custom-section sec-gray">
