@@ -71,7 +71,7 @@ const tournamentPageEng = {
   txtSubPrize3: "Prize will be revealed in February",
   txtPrize4: "Leaderboard winners week 1 to 3",
   txtSubPrize4: "Prize will be revealed in February",
-  txtPrize5: "Biggest clutch game comeback",
+  txtPrize5: "Best game of the tournament",
   txtSubPrize5: "Prize will be revealed in February",
   txtPrize6: "Best spectator award",
   txtSubPrize6: "Prize will be revealed in February",
@@ -81,8 +81,6 @@ const tournamentPageEng = {
 
   titleSponsors: "Sponsors & Partners",
   txtSponsors: "This tournament is only possible thanks to our great sponsors.",
-  txtLogoHere: "Your logo here",
-  txtBecomeSponsor: "If you are interested in sponsoring this tournament, write to ",
 
   txtRlsMain: "These are the rules of Slovenian Lia Tournament 2019.",
   titleRls1: "Lia version",

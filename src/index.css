@@ -437,9 +437,12 @@ a.btn.custom-btn:hover {
 }
 
 .tour-logo {
-  width: 175px;
-  vertical-align: bottom;
-  margin: 20px 20px 0;
+  width: 160px;
+  margin-top: 30px;
+}
+
+#logo-garaza {
+  padding-top: 25px;
 }
 
 #tour-lang {
@@ -612,15 +615,34 @@ a.btn.custom-btn:hover {
 }
 
 .tour-company {
-  font-size: large;
-  color: #bbb;
-  padding: 15px 10px;
-  border: 1px solid #bbb;
+  height: 120px;
   margin-top: 15px;
 }
 
 .tour-lb-sponsors {
-  margin: 2em 0 3em;
+  margin: 2em 0;
+}
+
+.tour-lb-sponsors .tour-company {
+  margin-top: 0;
+}
+
+#logo-styliff,
+#logo-agilcon,
+#logo-outfit7 {
+  padding: 42px 0;
+}
+
+#logo-loop {
+  padding: 39px 0;
+}
+
+#logo-sensum {
+  padding: 0;
+}
+
+#logo-medius {
+  padding: 20px 0;
 }
 
 @media screen and (max-width: 1199.98px) {
