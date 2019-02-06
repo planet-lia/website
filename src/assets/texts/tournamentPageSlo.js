@@ -57,7 +57,7 @@ const tournamentPageSlo = {
   txtSubPrize3: "Nagrada bo objavljena v začetku februarja",
   txtPrize4: "Vodilni po 1., 2. in 3. tednu",
   txtSubPrize4: "Nagrada bo objavljena v začetku februarja",
-  txtPrize5: "Igra z največjim preobratom",
+  txtPrize5: "Najboljša igra turnirja",
   txtSubPrize5: "Nagrada bo objavljena v začetku februarja",
   txtPrize6: "Najboljši gledalec turnirja",
   txtSubPrize6: "Nagrada bo objavljena v začetku februarja",
@@ -67,8 +67,6 @@ const tournamentPageSlo = {
 
   titleSponsors: "Sponzorji in partnerji",
   txtSponsors: "Turnir ne bi bil mogoč brez naših sponzorjev in partnerjev.",
-  txtLogoHere: "Vaš logotip",
-  txtBecomeSponsor: "Če želite postati naš sponzor, nam pišite na ",
 
   txtRlsMain: "To so pravila slovenskega Lia turnirja 2019.",
   titleRls1: "Lia verzija",

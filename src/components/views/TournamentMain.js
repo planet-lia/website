@@ -3,6 +3,8 @@ import { Row, Col, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Prize from '../elems/Prize';
+import Sponsors from '../elems/Sponsors';
+import Supporters from '../elems/Supporters';
 
 import logoPython from '../../assets/logo1.png';
 import logoJava from '../../assets/logo2.png';
@@ -175,33 +177,8 @@ const TournamentMain = (props) => {
         <div className="container text-center">
           <h3 className="tour-title">{content.titleSponsors}</h3>
           <p>{content.txtSponsors}</p>
-          <br/>
-          <p>{content.txtBecomeSponsor} <a href="mailto:info@liagame.com">info@liagame.com</a>.</p>
-          {/*<Row>*/}
-            {/*<Col md={2} mdOffset={1} sm={4} xs={6}>*/}
-              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
-            {/*</Col>*/}
-            {/*<Col md={2} sm={4} xs={6}>*/}
-              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
-            {/*</Col>*/}
-            {/*<Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>*/}
-              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
-            {/*</Col>*/}
-            {/*<Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>*/}
-              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
-            {/*</Col>*/}
-            {/*<Col md={2} sm={4} xs={6}>*/}
-              {/*<div className="tour-company">{content.txtLogoHere}</div>*/}
-            {/*</Col>*/}
-          {/*</Row>*/}
-          <div>
-            <a href="https://garaza.io/" target="_blank" rel="noopener noreferrer">
-              <img id="logo-garaza" className="tour-logo" src={ logoGaraza } alt="Garaža" />
-            </a>
-            <a href="https://fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
-              <img id="logo-fri" className="tour-logo" src={ logoFri } alt="FRI" />
-            </a>
-          </div>
+          <Sponsors />
+          <Supporters />
         </div>
       </div>
     </div>

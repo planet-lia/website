@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { timeSince } from '../../utils/helpers/time';
-import Table from '../elems/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import api from '../../utils/api'
 import Moment from 'react-moment';
+
+import Table from '../elems/Table';
+import Sponsors from '../elems/Sponsors';
+import { timeSince } from '../../utils/helpers/time';
+
+import api from '../../utils/api'
 
 class LeaderboardPage extends Component {
   constructor(props){
@@ -112,26 +115,10 @@ class LeaderboardPage extends Component {
           </div>
         </div>
         <div className="container">
-          {/*<div className="tour-lb-sponsors text-center">*/}
-            {/*<p>Sponsored by</p>*/}
-            {/*<Row>*/}
-              {/*<Col md={2} mdOffset={1} sm={4} xs={6}>*/}
-                {/*<div className="tour-company">Your logo here</div>*/}
-              {/*</Col>*/}
-              {/*<Col md={2} sm={4} xs={6}>*/}
-                {/*<div className="tour-company">Your logo here</div>*/}
-              {/*</Col>*/}
-              {/*<Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>*/}
-                {/*<div className="tour-company">Your logo here</div>*/}
-              {/*</Col>*/}
-              {/*<Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>*/}
-                {/*<div className="tour-company">Your logo here</div>*/}
-              {/*</Col>*/}
-              {/*<Col md={2} sm={4} xs={6}>*/}
-                {/*<div className="tour-company">Your logo here</div>*/}
-              {/*</Col>*/}
-            {/*</Row>*/}
-          {/*</div>*/}
+          <div className="tour-lb-sponsors text-center">
+            <p>Sponsored by</p>
+            <Sponsors />
+          </div>
           <h2>Leaderboard</h2>
           {/* TODO sorry for that ugly hack, put it in CSS. :) */}
           <span>&nbsp;&nbsp;</span>
