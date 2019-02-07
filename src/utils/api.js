@@ -118,6 +118,12 @@ export default {
     getChallengesStats: () =>
       axios.get(API_BASE_URL + "/game/challenges/")
         .then((response) => response.data),
+    getUserChallenges: (userId, offset) =>
+      axios.get(API_BASE_URL + "/game/user/" + userId + "/challenges/?offset=" + encodeURI(offset))
+        .then((response) => response.data),
+    challengeUser: (userId) =>
+      axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
+        .then((response) => response.data),
   },
 
   other: {

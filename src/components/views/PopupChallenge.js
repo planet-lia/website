@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import { numAddEndings } from '../../utils/helpers/numAddEndings'
+import LoadingButton from '../elems/LoadingButton';
+import { miscConst } from '../../utils/constants/miscConst';
 
 import api from '../../utils/api';
 
@@ -14,7 +15,7 @@ class PopupChallenge extends Component {
     this.state = {
       cLeft: 0,
       cTotal: 0,
-      cCount: 0,
+      isSent: false,
       loadingData: false,
       error: null
     };
@@ -33,7 +34,6 @@ class PopupChallenge extends Component {
       this.setState({
         cLeft: respStats.challenges.today,
         cTotal: respStats.challenges.total,
-        cCount: respStats.challenges.total - respStats.challenges.today,
         loadingData: false
       });
     } catch(err) {
@@ -45,8 +45,30 @@ class PopupChallenge extends Component {
     }
   }
 
-  postChallenge = () => {
-    console.log("TODO post challenge");
+  postChallenge = async () => {
+    this.setState({loadingData: true});
+    try {
+      await api.game.challengeUser(this.props.opponentId);
+      this.setState({
+        cLeft: this.state.cLeft-1,
+        isSent: true,
+        loadingData: false,
+        error: null
+      });
+    } catch(err) {
+      if(err.response){
+        this.setState({
+          loadingData: false,
+          error: err.response.data.error
+        });
+      } else {
+        this.setState({
+          loadingData: false,
+          error: "Network Error"
+        });
+        console.log(err.message);
+      }
+    }
   }
 
   showSignPopup = async (mode) => {
@@ -57,29 +79,37 @@ class PopupChallenge extends Component {
     }
   }
 
-  popupStatsText = () => {
-    const { cCount, cLeft, cTotal } = this.state;
-    let res = [];
+  popupMsgText = () => {
+    const { cLeft, cTotal } = this.state;
     let txt = [];
 
-    if(cLeft>0){
-      res.push(<p key="0">This will be your {numAddEndings(cCount+1)} challenge today. After this you will have {cLeft-1} challenges left.</p>);
-      res.push(<p key="1">You will be able to see this challenge on your profile page.</p>);
-    } else {
-      txt.push(<span key="2">You already spent all {cTotal} of your challenges for today. You have to wait until tomorrow to start new challenges</span>);
-      if(cTotal<20){
-        txt.push(<span key="3"> or invite friends to get more daily challenges.</span>);
+    if(cLeft<1){
+      txt.push(<span key="0">You already spent all of your challenges for today. You have to wait until tomorrow to start new challenges</span>);
+      if(cTotal<miscConst.MAX_NUM_CHALLENGES){
+        txt.push(<span key="1"> or invite friends to get more daily challenges.</span>);
       } else {
-        txt.push(<span key="4">.</span>)
+        txt.push(<span key="2">.</span>)
       }
-      res.push(<p key="6">{txt}</p>)
+      return txt;
     }
-    return res;
+  }
+
+  popupChallengeButton = () => {
+    const { cLeft, loadingData, isSent } = this.state;
+    if(loadingData){
+      return <LoadingButton bsClass="btn custom-btn custom-btn-lg">Send Challenge</LoadingButton>
+    } else if(isSent){
+      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={() => this.props.dispatch(popupsActions.hidePopups())}>Ok</Button>
+    } else if(cLeft>0){
+      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.postChallenge}>Send Challenge</Button>
+    } else {
+      return <Button bsClass="btn custom-btn custom-btn-lg" disabled>Send Challenge</Button>
+    }
   }
 
   render(){
     const { show, onHide, isAuthenticated, opponent } = this.props;
-    const { cLeft } = this.state;
+    const { cLeft, isSent, error } = this.state;
     if(isAuthenticated){
       return(
         <Modal dialogClassName="custom-popup pop-challenge pop-text" show={show} onHide={onHide}>
@@ -87,17 +117,20 @@ class PopupChallenge extends Component {
             <Modal.Title>{"Challenge " + opponent}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>You want to challenge:</p>
-            <div id="opponent" className="text-center">{opponent}</div>
-            {this.popupStatsText()}
+            <p>You want to challenge:<span className="challenge-data"> {opponent}</span></p>
+            <p>Challenges left for today:<span className="challenge-data"> {cLeft}</span></p>
+            <p>{this.popupMsgText()}</p>
+            {isSent
+              ? <p className="text-info">The challenge was sent. You can see it on your profile page.</p>
+              : null
+            }
+            {error!==null
+              ? <p className="text-danger">{error}</p>
+              : null}
           </Modal.Body>
           <Modal.Footer>
             <div className="text-center">
-              {cLeft>0
-                ? <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.postChallenge}>Challenge</Button>
-                : <Button bsClass="btn custom-btn custom-btn-lg" disabled>Challenge</Button>
-              }
-              <Button bsClass="btn custom-btn custom-btn-lg" onClick={onHide}>Cancel</Button>
+              {this.popupChallengeButton()}
             </div>
           </Modal.Footer>
         </Modal>
@@ -109,8 +142,7 @@ class PopupChallenge extends Component {
             <Modal.Title>{"Challenge"}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>To challange a player you need to sign up and upload your first bot.</p>
-            <p>If you already have an account, you need to sign in.</p>
+            <p>You need to be signed in to send a challenge! If you do not have an account yet, you need to sign up and upload a bot.</p>
           </Modal.Body>
           <Modal.Footer>
             <div className="text-center">
@@ -128,10 +160,11 @@ class PopupChallenge extends Component {
 
 function mapStateToProps(state) {
     const { isAuthenticated } = state.authentication;
-    const { opponent } = state.popups;
+    const { opponent, opponentId } = state.popups;
     return {
         isAuthenticated,
-        opponent
+        opponent,
+        opponentId
     };
 }
 
