@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import GamesTable from '../elems/GamesTable';
 import Moment from 'react-moment';
@@ -44,6 +44,7 @@ class ProfilePage extends Component {
       newBotTestMatchLogs: "",
       newBotTestMatchGameEngineLog: "",
       hasActiveBot: true,
+      isChallenges: false,
       loadingData: false,
       error: null
     }
@@ -103,10 +104,19 @@ class ProfilePage extends Component {
     });
   }
 
-  loadGames = async (userId, offset) => {
-    this.setState({loadingData: true, gamesData: []});
+  loadGames = async (userId, offset, isChallenges = false) => {
+    this.setState({
+      loadingData: true,
+      gamesData: [],
+      isChallenges: isChallenges
+    });
+    let respGames;
     try {
-      const respGames = await api.game.getUserGames(userId, offset);
+      if(isChallenges){
+        respGames = await api.game.getUserChallenges(userId, offset);
+      } else {
+        respGames = await api.game.getUserGames(userId, offset);
+      }
       this.setGamesData(respGames)
     } catch(err) {
       this.setState({
@@ -120,7 +130,7 @@ class ProfilePage extends Component {
   handlePageClick = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected * this.state.nGamesPerPage);
-    this.loadGames(this.state.userId, offset);
+    this.loadGames(this.state.userId, offset, this.state.isChallenges);
   };
 
   setGamesData = (respGames) => {
@@ -139,10 +149,8 @@ class ProfilePage extends Component {
         unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0)
       })
     );
-    let pageCount = this.state.pageCount;
-    if (pageCount === 0) {
-      pageCount = Math.ceil(respGames.pagination.total / respGames.pagination.count)
-    }
+
+    const pageCount = Math.ceil(respGames.pagination.total / respGames.pagination.count)
 
     this.setState({
       gamesData: gamesList,
@@ -184,7 +192,7 @@ class ProfilePage extends Component {
   }
 
   render(){
-    const { gamesData, loadingData, username, rank, rating, mu, sigma,
+    const { gamesData, loadingData, userId, username, rank, rating, mu, sigma,
       wins, losses, playing, pageCount, version, language,
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
       activeBotPlaying, newBotUploadTime, newBotStatus,
@@ -200,7 +208,7 @@ class ProfilePage extends Component {
               <div className="tour-cont-icon-lg">
                 <FontAwesomeIcon icon="robot" color={"#019170"}/>
               </div>
-              {(this.state.isPrivate) ? ("Challenges left: " + "TODO") : <ChallengeButton />}
+              {(this.state.isPrivate) ? ("Challenges left: " + "TODO") : <ChallengeButton opponent={username} opponentId={userId}/>}
             </Col>
             <Col sm={3}>
               <h4>Rank details</h4>
@@ -307,13 +315,15 @@ class ProfilePage extends Component {
           </Row>
         </div>
         {(this.state.isPrivate)
-          ? <h3>Your Games</h3>
+          ? <h3>Games</h3>
           : (
             <div>
-              <h3>{username + "'s Games"}</h3>
+              <h3>Games</h3>
             </div>
           )
         }
+        <Button onClick={() => this.loadGames(this.state.userId, 0, false)}>Ranked</Button>
+        <Button onClick={() => this.loadGames(this.state.userId, 0, true)}>Challenges</Button>
         <GamesTable data={gamesData} loading={loadingData}/>
         <ReactPaginate previousLabel={"<"}
                        nextLabel={">"}

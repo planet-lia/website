@@ -318,6 +318,11 @@ select.placeholder > option {
   font-size: 0.8em;
 }
 
+.pop-challenge .challenge-data {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /* Popups Overwrites*/
 .modal-content {
   border-radius: 0;
@@ -396,6 +401,22 @@ a.btn.custom-btn:hover {
 
 .btn-subtext {
   font-size: 0.5em;
+}
+
+.btn-loading {
+  color: rgba(238,238,238,0);
+  position: relative;
+}
+
+.btn-loading > .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+
 }
 
 /* Notifications */
