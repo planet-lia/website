@@ -14,8 +14,6 @@ import Supporters from '../elems/Supporters';
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
 import thumb3 from '../../assets/thumb3.jpg';
-import logoFri from '../../assets/logo_fri.png';
-import logoGaraza from '../../assets/logo_garaza.png';
 
 class LandingPage extends Component {
   constructor(props) {
