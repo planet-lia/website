@@ -86,8 +86,8 @@ class Replay extends Component {
           "/assets/banned-words.txt",
           this.setGameDuration,
           this.setTime,
-          this.player1AllowBubbles,
-          this.player2AllowBubbles
+          this.state.player1AllowBubbles,
+          this.state.player2AllowBubbles
         )
       });
     } else {

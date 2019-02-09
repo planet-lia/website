@@ -92848,7 +92848,6 @@ function setGameCamera(cam, num) {
     cam.cameraType= cameraTypes[num]
 }
 
-
 function setupHudCamera(app, cam) {
     cam.x = app.screen.width / 2
     cam.y = app.screen.height / 2
@@ -92958,9 +92957,10 @@ FontHandler.prototype.releaseFonts = function () {
 
 // ParticleEmitterManager ***************************************************
 
-function ParticleEmitterManager(name, app) {
+function ParticleEmitterManager(name, app, pathToAssets) {
     this.name = name
     this.app = app
+    this.pathToAssets = pathToAssets
     this.freeEmitters = []
 }
 
@@ -92974,7 +92974,7 @@ ParticleEmitterManager.prototype.emit = function(x, y, layer) {
 
         emitter = new particles.Emitter(
             container,
-            [PIXI.Texture.fromImage('assets/particle.png')],
+            [PIXI.Texture.fromImage(this.pathToAssets + "/particle.png")],
             particleEffects.effects[this.name]
         );
         emitter.container = container
@@ -93127,7 +93127,7 @@ JsAdapter.prototype.drawRect = function(shapeType,
 
 JsAdapter.prototype.emitParticle = function(name, x, y, layer) {
     if (!(name in this.particleEmitterManagers)) {
-        this.particleEmitterManagers[name] = new ParticleEmitterManager(name, this.app)
+        this.particleEmitterManagers[name] = new ParticleEmitterManager(name, this.app, this.pathToAssets)
     }
 
     let emitterManager = this.particleEmitterManagers[name]
@@ -93854,11 +93854,6 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1Al
 
         logicAdapter.insertIntoCurvesDB(e)
     }
-
-    console.log(Object.keys(team1Entities).length)
-    console.log(Object.keys(team2Entities).length)
-    console.log(Object.keys(team1TextBubbleCurves).length)
-    console.log(Object.keys(team2TextBubbleCurves).length)
 
     callbackFun()
 }
