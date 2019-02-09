@@ -93851,8 +93851,12 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1Al
         else {
             throw "Element is not recognized. " + m
         }
-
-        logicAdapter.insertIntoCurvesDB(e)
+        
+        try {
+            logicAdapter.insertIntoCurvesDB(e)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     callbackFun()
