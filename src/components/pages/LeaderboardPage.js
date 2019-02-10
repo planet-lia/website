@@ -132,7 +132,6 @@ class LeaderboardPage extends Component {
           {/* TODO sorry for that ugly hack, put it in CSS. :) */}
           <span>&nbsp;&nbsp;</span>
           <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
-          <div className="text-center">COMING SOON</div>
           <Moment format="DD/MM/YYYY HH:mm" style={leaderboardUpdatedTextStype}>{lastUpdated}</Moment>
         </div>
 
