@@ -119,13 +119,13 @@ class LandingPage extends Component {
             }
             <Row>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="Ninja7 vs SuperGit" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="lia-general vs lia-miner" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="lia-general vs lia-warrior" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="recursive vs TheStudent" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="lia-miner vs lia-warrior" /></Scrollchor>
               </Col>
             </Row>
           </div>
