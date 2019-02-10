@@ -68,7 +68,7 @@ const TournamentMain = (props) => {
             <Col sm={6}>
               <div className="tour-cont-link text-center">
                 <div className="tour-cont-unit">
-                  <img id="yellow-unit" src="/assets/unit1.png" alt="yellow unit"/>
+                  <img id="yellow-unit" src="/assets/warrior1.png" alt="yellow unit"/>
                 </div>
                 <a href="/editor" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
                   {content.btnEditor}
@@ -76,7 +76,7 @@ const TournamentMain = (props) => {
               </div>
               <div className="tour-cont-link text-center">
               <div className="tour-cont-unit">
-                <img id="green-unit" src="/assets/unit2.png" alt="green unit"/>
+                <img id="green-unit" src="/assets/warrior2.png" alt="green unit"/>
               </div>
                 <Button bsClass="btn custom-btn custom-btn-lg" href="https://docs.liagame.com/" target="_blank" rel="noopener noreferrer">{content.btnGetStarted}</Button>
               </div>
