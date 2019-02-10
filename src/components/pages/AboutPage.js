@@ -10,7 +10,7 @@ const AboutPage = () => {
         <div className="container">
           <Row>
             <Col md={6} sm={12}>
-              <img id="lia-team" src="/lia_team.jpg" alt="Lia Team" />
+              <img id="lia-team" src="/lia_team_s.jpg" alt="Lia Team" />
             </Col>
             <Col md={6} sm={12}>
               <h2>The Team</h2>
