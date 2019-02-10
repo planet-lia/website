@@ -919,8 +919,8 @@ iframe {
   border-bottom: 1px solid #333;
 
   -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 }
 
 .editor-cont-page > #editor-left {
