@@ -47,8 +47,6 @@ class EditorPage extends Component {
         });
         this.generateGame();
       });
-
-
   }
 
   componentWillUnmount = () => {
