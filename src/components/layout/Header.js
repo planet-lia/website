@@ -70,7 +70,13 @@ class Header extends Component {
                   <NavLink to="/editor" exact activeClassName="nav-link-active">Online Editor</NavLink>
                 </li>
                 <li role="presentation" onClick={this.onSelectNavItem}>
+                  <NavLink to="/about" exact activeClassName="nav-link-active">About</NavLink>
+                </li>
+                <li role="presentation" onClick={this.onSelectNavItem}>
                   <a href="https://docs-dev.liagame.com/" target="_blank" rel="noopener noreferrer">Docs</a>
+                </li>
+                <li role="presentation" onClick={this.onSelectNavItem}>
+                  <a href="https://www.reddit.com/r/liagame/" target="_blank" rel="noopener noreferrer">Forum</a>
                 </li>
               </ul>
               {this.props.isAuthenticated ? (

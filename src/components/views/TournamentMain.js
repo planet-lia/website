@@ -9,8 +9,6 @@ import Supporters from '../elems/Supporters';
 import logoPython from '../../assets/logo1.png';
 import logoJava from '../../assets/logo2.png';
 import logoKotlin from '../../assets/logo3.png';
-import logoFri from '../../assets/logo_fri.png';
-import logoGaraza from '../../assets/logo_garaza.png';
 
 const TournamentMain = (props) => {
   const content = props.content;

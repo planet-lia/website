@@ -4,8 +4,9 @@ import LandingPage from '../pages/LandingPage';
 import TournamentPage from '../pages/TournamentPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
 import GamesPage from '../pages/GamesPage';
-import EditorPage from "../pages/EditorPage";
-import EditorTracking from "../pages/EditorTracking";
+import EditorPage from '../pages/EditorPage';
+import EditorTracking from '../pages/EditorTracking';
+import AboutPage from '../pages/AboutPage';
 import EmailVerificationPage from '../pages/EmailVerificationPage';
 import ProfilePage from '../pages/ProfilePage';
 import RegistrationEmailPage from '../pages/RegistrationEmailPage';
@@ -21,6 +22,7 @@ const Routes = () => {
       <Route path="/games" component={GamesPage} />
       <Route path="/editor/tracking" component={EditorTracking} />
       <Route path="/editor" component={EditorPage} />
+      <Route path="/about" component={AboutPage} />
       <Route path="/account/verify" component={EmailVerificationPage} />
       <Route path="/user/:username" component={ProfilePage} />
       <Route path="/registration" component={RegistrationEmailPage} />

@@ -60,6 +60,10 @@ td {
   color: #3e5b99;
 }
 
+.clr-rd:hover {
+  color: #ff4500;
+}
+
 .clr-gh:hover {
   color: #000;
 }
@@ -835,31 +839,6 @@ iframe {
   margin: 1em 0;
 }
 
-#land-cont-contact {
-  max-width: 17em;
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-a.land-contact-logo {
-  color: #333;
-  font-size: 2.5em;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 991.98px) {
   .land-cont-title {
     margin-bottom: 6em;
@@ -871,7 +850,7 @@ a.land-contact-logo {
   .land-what-text {
     text-align: center;
   }
-  #land-cont-contact {
+  #land-cont-contact > div {
     margin: 0 auto;
 
     -ms-flex-pack: distribute;
@@ -1098,6 +1077,29 @@ a.land-contact-logo {
 
 #prof-cont-data {
   margin: 2em 0;
+}
+
+/* About Page */
+
+#lia-team {
+  width: 100%;
+  padding: 52px 0;
+}
+
+#about-cont-contact > div{
+  margin: 30px auto 0;
+}
+
+@media screen and (max-width: 1199.98px) {
+  #lia-team {
+    padding: 112px 0;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  #lia-team {
+    padding: 0;
+  }
 }
 
 /* Replay Thumbnail */
@@ -1405,6 +1407,32 @@ a.land-contact-logo {
   bottom: 0;
 }
 
+/* Contacts */
+
+.cont-contacts {
+  max-width: 20em;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+a.contacts-logo {
+  color: #333;
+  font-size: 2.5em;
+  cursor: pointer;
+}
 
 /* TODO @aljaz's css, fix if needed */
 

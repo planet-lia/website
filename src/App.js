@@ -11,10 +11,10 @@ import { connect } from 'react-redux';
 import { popupsActions } from './utils/actions/popupsActions'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebookSquare, faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookSquare, faGithub, faYoutube, faReddit } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot } from '@fortawesome/free-solid-svg-icons';
 library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
-  faTv, faRobot, faMedal, faDesktop, faPlay, faUser);
+  faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faReddit);
 
 
 class App extends Component {

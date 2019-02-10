@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
@@ -10,12 +9,11 @@ import ReplayThumb from '../elems/ReplayThumb';
 import SubscriptionPopup from '../views/SubscriptionPopup';
 import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 import Supporters from '../elems/Supporters';
+import Contacts from '../elems/Contacts';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
 import thumb3 from '../../assets/thumb3.jpg';
-import logoFri from '../../assets/logo_fri.png';
-import logoGaraza from '../../assets/logo_garaza.png';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -89,10 +87,7 @@ class LandingPage extends Component {
                     the world.
                   </p>
                   <div id="land-cont-contact">
-                    <a className="land-contact-logo clr-fb" href="https://www.facebook.com/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "facebook-square"]} /></a>
-                    <a className="land-contact-logo clr-gh" href="https://github.com/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "github"]} /></a>
-                    <a className="land-contact-logo clr-yt" href="https://www.youtube.com/channel/UC4BFxoC4iBr3m5LQVBxBDzA" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "youtube"]} /></a>
-                    <a className="land-contact-logo clr-em" href="mailto:info@liagame.com" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon="envelope" /></a>
+                    <Contacts />
                   </div>
               </Col>
             </Row>
