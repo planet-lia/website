@@ -29,6 +29,7 @@
   var throwUPAE = Kotlin.throwUPAE;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var getKClass = Kotlin.getKClass;
+  var dropLast = Kotlin.kotlin.text.dropLast_6ic1pp$;
   var numberToInt = Kotlin.numberToInt;
   var getCallableRef = Kotlin.getCallableRef;
   Exception_0.prototype = Object.create(Throwable.prototype);
@@ -51,16 +52,20 @@
   DoesNotExistException.prototype.constructor = DoesNotExistException;
   Log$Level.prototype = Object.create(Enum.prototype);
   Log$Level.prototype.constructor = Log$Level;
+  Curve.prototype = Object.create(Element.prototype);
+  Curve.prototype.constructor = Curve;
+  ArrayCurve.prototype = Object.create(Curve.prototype);
+  ArrayCurve.prototype.constructor = ArrayCurve;
   CircularLinearCurve$FollowerType.prototype = Object.create(Enum.prototype);
   CircularLinearCurve$FollowerType.prototype.constructor = CircularLinearCurve$FollowerType;
   CircularLinearCurve$CircularLinearType.prototype = Object.create(Enum.prototype);
   CircularLinearCurve$CircularLinearType.prototype.constructor = CircularLinearCurve$CircularLinearType;
-  Curve.prototype = Object.create(Element.prototype);
-  Curve.prototype.constructor = Curve;
   CircularLinearCurve.prototype = Object.create(Curve.prototype);
   CircularLinearCurve.prototype.constructor = CircularLinearCurve;
   ColorCurve.prototype = Object.create(Curve.prototype);
   ColorCurve.prototype.constructor = ColorCurve;
+  GameStatsCurve.prototype = Object.create(Curve.prototype);
+  GameStatsCurve.prototype.constructor = GameStatsCurve;
   LinearCurve.prototype = Object.create(Curve.prototype);
   LinearCurve.prototype.constructor = LinearCurve;
   LinearVectorCurve.prototype = Object.create(Curve.prototype);
@@ -85,6 +90,8 @@
   InitialDataEvent.prototype.constructor = InitialDataEvent;
   Point.prototype = Object.create(Element.prototype);
   Point.prototype.constructor = Point;
+  ArrayPoint.prototype = Object.create(Point.prototype);
+  ArrayPoint.prototype.constructor = ArrayPoint;
   BasicPoint.prototype = Object.create(Point.prototype);
   BasicPoint.prototype.constructor = BasicPoint;
   VectorPoint.prototype = Object.create(Point.prototype);
@@ -93,6 +100,8 @@
   CircularLinearPoint.prototype.constructor = CircularLinearPoint;
   ColorPoint.prototype = Object.create(Point.prototype);
   ColorPoint.prototype.constructor = ColorPoint;
+  GameStatsPoint.prototype = Object.create(Point.prototype);
+  GameStatsPoint.prototype.constructor = GameStatsPoint;
   MessagePoint.prototype = Object.create(Point.prototype);
   MessagePoint.prototype.constructor = MessagePoint;
   PulsePoint.prototype = Object.create(Point.prototype);
@@ -109,12 +118,12 @@
   Ammunition.prototype.constructor = Ammunition;
   Color.prototype = Object.create(CurveComponent.prototype);
   Color.prototype.constructor = Color;
+  GameStats.prototype = Object.create(CurveComponent.prototype);
+  GameStats.prototype.constructor = GameStats;
   Health.prototype = Object.create(CurveComponent.prototype);
   Health.prototype.constructor = Health;
   Position.prototype = Object.create(CurveComponent.prototype);
   Position.prototype.constructor = Position;
-  PowerTracker.prototype = Object.create(CurveComponent.prototype);
-  PowerTracker.prototype.constructor = PowerTracker;
   Rotation.prototype = Object.create(CurveComponent.prototype);
   Rotation.prototype.constructor = Rotation;
   ShapeRender$Shape.prototype = Object.create(Enum.prototype);
@@ -141,6 +150,8 @@
   HudSystem.prototype.constructor = HudSystem;
   RenderSystem.prototype = Object.create(SortedIteratingSystem.prototype);
   RenderSystem.prototype.constructor = RenderSystem;
+  ResourcePickupSystem.prototype = Object.create(IteratingSystem.prototype);
+  ResourcePickupSystem.prototype.constructor = ResourcePickupSystem;
   TagManager.prototype = Object.create(EntitySystem.prototype);
   TagManager.prototype.constructor = TagManager;
   VisibilitySystem.prototype = Object.create(IteratingSystem.prototype);
@@ -2708,6 +2719,21 @@
     simpleName: 'PointUnrolledLinkedList',
     interfaces: []
   };
+  function ArrayCurve(eid, type) {
+    if (eid === void 0)
+      eid = -1;
+    if (type === void 0)
+      type = '';
+    Curve.call(this, eid, type);
+  }
+  ArrayCurve.prototype.findPoint_dleff0$ = function (time, delta) {
+    return this.curve.findPoint_mx4ult$(time);
+  };
+  ArrayCurve.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ArrayCurve',
+    interfaces: [Curve]
+  };
   function CircularLinearCurve(eid, type) {
     if (eid === void 0)
       eid = -1;
@@ -2953,6 +2979,21 @@
     kind: Kind_CLASS,
     simpleName: 'Curve',
     interfaces: [Element]
+  };
+  function GameStatsCurve(eid, type) {
+    if (eid === void 0)
+      eid = -1;
+    if (type === void 0)
+      type = '';
+    Curve.call(this, eid, type);
+  }
+  GameStatsCurve.prototype.findPoint_dleff0$ = function (time, delta) {
+    return this.curve.findPoint_mx4ult$(time);
+  };
+  GameStatsCurve.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'GameStatsCurve',
+    interfaces: [Curve]
   };
   function LinearCurve(eid, type) {
     if (eid === void 0)
@@ -3277,6 +3318,42 @@
   InitialDataEvent.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.mapWidth, other.mapWidth) && Kotlin.equals(this.mapHeight, other.mapHeight) && Kotlin.equals(this.username1, other.username1) && Kotlin.equals(this.username2, other.username2) && Kotlin.equals(this.gameDuration, other.gameDuration) && Kotlin.equals(this.health, other.health) && Kotlin.equals(this.viewingAreaLength, other.viewingAreaLength) && Kotlin.equals(this.viewingAreaWidth, other.viewingAreaWidth) && Kotlin.equals(this.viewingAreaOffset, other.viewingAreaOffset) && Kotlin.equals(this.background, other.background) && Kotlin.equals(this.nBulletsInMagazine, other.nBulletsInMagazine)))));
   };
+  function ArrayPoint(t, cid, array) {
+    if (t === void 0)
+      t = -1.0;
+    if (cid === void 0)
+      cid = -1;
+    if (array === void 0)
+      array = [];
+    Point.call(this, t, cid);
+    this.t_qymbv2$_0 = t;
+    this.cid_g3rjhk$_0 = cid;
+    this.array = array;
+  }
+  Object.defineProperty(ArrayPoint.prototype, 't', {
+    get: function () {
+      return this.t_qymbv2$_0;
+    },
+    set: function (t) {
+      this.t_qymbv2$_0 = t;
+    }
+  });
+  Object.defineProperty(ArrayPoint.prototype, 'cid', {
+    get: function () {
+      return this.cid_g3rjhk$_0;
+    },
+    set: function (cid) {
+      this.cid_g3rjhk$_0 = cid;
+    }
+  });
+  ArrayPoint.prototype.toString = function () {
+    return 'VectorPoint(t=' + this.t + ', cid=' + this.cid + ', array=' + this.array + ')';
+  };
+  ArrayPoint.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ArrayPoint',
+    interfaces: [Point]
+  };
   function BasicPoint(t, cid, x) {
     if (t === void 0)
       t = -1.0;
@@ -3432,6 +3509,85 @@
   };
   ColorPoint.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.t, other.t) && Kotlin.equals(this.cid, other.cid) && Kotlin.equals(this.c, other.c)))));
+  };
+  function GameStatsPoint(t, cid, team1, team2) {
+    if (t === void 0)
+      t = -1.0;
+    if (cid === void 0)
+      cid = -1;
+    if (team1 === void 0)
+      team1 = new TeamStats(0, 0, 0, 0);
+    if (team2 === void 0)
+      team2 = new TeamStats(0, 0, 0, 0);
+    Point.call(this, t, cid);
+    this.t_ppj0py$_0 = t;
+    this.cid_caqobo$_0 = cid;
+    this.team1 = team1;
+    this.team2 = team2;
+  }
+  Object.defineProperty(GameStatsPoint.prototype, 't', {
+    get: function () {
+      return this.t_ppj0py$_0;
+    },
+    set: function (t) {
+      this.t_ppj0py$_0 = t;
+    }
+  });
+  Object.defineProperty(GameStatsPoint.prototype, 'cid', {
+    get: function () {
+      return this.cid_caqobo$_0;
+    },
+    set: function (cid) {
+      this.cid_caqobo$_0 = cid;
+    }
+  });
+  GameStatsPoint.prototype.toString = function () {
+    return 'CircularLinearPoint(t=' + this.t + ', cid=' + this.cid + ', team1=' + this.team1 + '. team2=' + this.team2 + ')';
+  };
+  GameStatsPoint.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'GameStatsPoint',
+    interfaces: [Point]
+  };
+  function TeamStats(power, resources, workers, warriors) {
+    this.power = power;
+    this.resources = resources;
+    this.workers = workers;
+    this.warriors = warriors;
+  }
+  TeamStats.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TeamStats',
+    interfaces: []
+  };
+  TeamStats.prototype.component1 = function () {
+    return this.power;
+  };
+  TeamStats.prototype.component2 = function () {
+    return this.resources;
+  };
+  TeamStats.prototype.component3 = function () {
+    return this.workers;
+  };
+  TeamStats.prototype.component4 = function () {
+    return this.warriors;
+  };
+  TeamStats.prototype.copy_tjonv8$ = function (power, resources, workers, warriors) {
+    return new TeamStats(power === void 0 ? this.power : power, resources === void 0 ? this.resources : resources, workers === void 0 ? this.workers : workers, warriors === void 0 ? this.warriors : warriors);
+  };
+  TeamStats.prototype.toString = function () {
+    return 'TeamStats(power=' + Kotlin.toString(this.power) + (', resources=' + Kotlin.toString(this.resources)) + (', workers=' + Kotlin.toString(this.workers)) + (', warriors=' + Kotlin.toString(this.warriors)) + ')';
+  };
+  TeamStats.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.power) | 0;
+    result = result * 31 + Kotlin.hashCode(this.resources) | 0;
+    result = result * 31 + Kotlin.hashCode(this.workers) | 0;
+    result = result * 31 + Kotlin.hashCode(this.warriors) | 0;
+    return result;
+  };
+  TeamStats.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.power, other.power) && Kotlin.equals(this.resources, other.resources) && Kotlin.equals(this.workers, other.workers) && Kotlin.equals(this.warriors, other.warriors)))));
   };
   function MessagePoint(t, cid, message) {
     if (t === void 0)
@@ -4011,17 +4167,24 @@
   function EntityType_initFields() {
     EntityType_initFields = function () {
     };
-    EntityType$UNIT_instance = new EntityType('UNIT', 0);
-    EntityType$BULLET_instance = new EntityType('BULLET', 1);
-    EntityType$OBSTACLE_instance = new EntityType('OBSTACLE', 2);
-    EntityType$WORLD_EDGE_instance = new EntityType('WORLD_EDGE', 3);
-    EntityType$GAME_STATS_instance = new EntityType('GAME_STATS', 4);
+    EntityType$WARRIOR_instance = new EntityType('WARRIOR', 0);
+    EntityType$WORKER_instance = new EntityType('WORKER', 1);
+    EntityType$BULLET_instance = new EntityType('BULLET', 2);
+    EntityType$OBSTACLE_instance = new EntityType('OBSTACLE', 3);
+    EntityType$RESOURCE_instance = new EntityType('RESOURCE', 4);
+    EntityType$WORLD_EDGE_instance = new EntityType('WORLD_EDGE', 5);
+    EntityType$GAME_STATS_instance = new EntityType('GAME_STATS', 6);
     EntityType$Companion_getInstance();
   }
-  var EntityType$UNIT_instance;
-  function EntityType$UNIT_getInstance() {
+  var EntityType$WARRIOR_instance;
+  function EntityType$WARRIOR_getInstance() {
     EntityType_initFields();
-    return EntityType$UNIT_instance;
+    return EntityType$WARRIOR_instance;
+  }
+  var EntityType$WORKER_instance;
+  function EntityType$WORKER_getInstance() {
+    EntityType_initFields();
+    return EntityType$WORKER_instance;
   }
   var EntityType$BULLET_instance;
   function EntityType$BULLET_getInstance() {
@@ -4032,6 +4195,11 @@
   function EntityType$OBSTACLE_getInstance() {
     EntityType_initFields();
     return EntityType$OBSTACLE_instance;
+  }
+  var EntityType$RESOURCE_instance;
+  function EntityType$RESOURCE_getInstance() {
+    EntityType_initFields();
+    return EntityType$RESOURCE_instance;
   }
   var EntityType$WORLD_EDGE_instance;
   function EntityType$WORLD_EDGE_getInstance() {
@@ -4048,12 +4216,16 @@
   }
   EntityType$Companion.prototype.parse_61zpoe$ = function (value) {
     var tmp$;
-    if (equals(value, EntityType$UNIT_getInstance().toString()))
-      tmp$ = EntityType$UNIT_getInstance();
+    if (equals(value, EntityType$WARRIOR_getInstance().toString()))
+      tmp$ = EntityType$WARRIOR_getInstance();
+    else if (equals(value, EntityType$WORKER_getInstance().toString()))
+      tmp$ = EntityType$WORKER_getInstance();
     else if (equals(value, EntityType$BULLET_getInstance().toString()))
       tmp$ = EntityType$BULLET_getInstance();
     else if (equals(value, EntityType$OBSTACLE_getInstance().toString()))
       tmp$ = EntityType$OBSTACLE_getInstance();
+    else if (equals(value, EntityType$RESOURCE_getInstance().toString()))
+      tmp$ = EntityType$RESOURCE_getInstance();
     else if (equals(value, EntityType$WORLD_EDGE_getInstance().toString()))
       tmp$ = EntityType$WORLD_EDGE_getInstance();
     else if (equals(value, EntityType$GAME_STATS_getInstance().toString()))
@@ -4081,17 +4253,21 @@
     interfaces: [Enum]
   };
   function EntityType$values() {
-    return [EntityType$UNIT_getInstance(), EntityType$BULLET_getInstance(), EntityType$OBSTACLE_getInstance(), EntityType$WORLD_EDGE_getInstance(), EntityType$GAME_STATS_getInstance()];
+    return [EntityType$WARRIOR_getInstance(), EntityType$WORKER_getInstance(), EntityType$BULLET_getInstance(), EntityType$OBSTACLE_getInstance(), EntityType$RESOURCE_getInstance(), EntityType$WORLD_EDGE_getInstance(), EntityType$GAME_STATS_getInstance()];
   }
   EntityType.values = EntityType$values;
   function EntityType$valueOf(name) {
     switch (name) {
-      case 'UNIT':
-        return EntityType$UNIT_getInstance();
+      case 'WARRIOR':
+        return EntityType$WARRIOR_getInstance();
+      case 'WORKER':
+        return EntityType$WORKER_getInstance();
       case 'BULLET':
         return EntityType$BULLET_getInstance();
       case 'OBSTACLE':
         return EntityType$OBSTACLE_getInstance();
+      case 'RESOURCE':
+        return EntityType$RESOURCE_getInstance();
       case 'WORLD_EDGE':
         return EntityType$WORLD_EDGE_getInstance();
       case 'GAME_STATS':
@@ -4191,7 +4367,7 @@
     ComponentType$HEALTH_instance = new ComponentType_0('HEALTH', 3);
     ComponentType$VISIBILITY_instance = new ComponentType_0('VISIBILITY', 4);
     ComponentType$ROTATION_instance = new ComponentType_0('ROTATION', 5);
-    ComponentType$POWER_TRACKER_instance = new ComponentType_0('POWER_TRACKER', 6);
+    ComponentType$GAME_STATS_instance = new ComponentType_0('GAME_STATS', 6);
     ComponentType$TEXTURE_NAME_instance = new ComponentType_0('TEXTURE_NAME', 7);
     ComponentType$AMMUNITION_instance = new ComponentType_0('AMMUNITION', 8);
     ComponentType$TEXT_BUBBLE_instance = new ComponentType_0('TEXT_BUBBLE', 9);
@@ -4227,10 +4403,10 @@
     ComponentType_initFields();
     return ComponentType$ROTATION_instance;
   }
-  var ComponentType$POWER_TRACKER_instance;
-  function ComponentType$POWER_TRACKER_getInstance() {
+  var ComponentType$GAME_STATS_instance;
+  function ComponentType$GAME_STATS_getInstance() {
     ComponentType_initFields();
-    return ComponentType$POWER_TRACKER_instance;
+    return ComponentType$GAME_STATS_instance;
   }
   var ComponentType$TEXTURE_NAME_instance;
   function ComponentType$TEXTURE_NAME_getInstance() {
@@ -4264,8 +4440,8 @@
       tmp$ = ComponentType$VISIBILITY_getInstance();
     else if (equals(value, ComponentType$ROTATION_getInstance().toString()))
       tmp$ = ComponentType$ROTATION_getInstance();
-    else if (equals(value, ComponentType$POWER_TRACKER_getInstance().toString()))
-      tmp$ = ComponentType$POWER_TRACKER_getInstance();
+    else if (equals(value, ComponentType$GAME_STATS_getInstance().toString()))
+      tmp$ = ComponentType$GAME_STATS_getInstance();
     else if (equals(value, ComponentType$TEXTURE_NAME_getInstance().toString()))
       tmp$ = ComponentType$TEXTURE_NAME_getInstance();
     else if (equals(value, ComponentType$AMMUNITION_getInstance().toString()))
@@ -4295,7 +4471,7 @@
     interfaces: [Enum]
   };
   function ComponentType$values() {
-    return [ComponentType$POSITION_getInstance(), ComponentType$SIZE_getInstance(), ComponentType$COLOR_getInstance(), ComponentType$HEALTH_getInstance(), ComponentType$VISIBILITY_getInstance(), ComponentType$ROTATION_getInstance(), ComponentType$POWER_TRACKER_getInstance(), ComponentType$TEXTURE_NAME_getInstance(), ComponentType$AMMUNITION_getInstance(), ComponentType$TEXT_BUBBLE_getInstance()];
+    return [ComponentType$POSITION_getInstance(), ComponentType$SIZE_getInstance(), ComponentType$COLOR_getInstance(), ComponentType$HEALTH_getInstance(), ComponentType$VISIBILITY_getInstance(), ComponentType$ROTATION_getInstance(), ComponentType$GAME_STATS_getInstance(), ComponentType$TEXTURE_NAME_getInstance(), ComponentType$AMMUNITION_getInstance(), ComponentType$TEXT_BUBBLE_getInstance()];
   }
   ComponentType_0.values = ComponentType$values;
   function ComponentType$valueOf(name) {
@@ -4312,8 +4488,8 @@
         return ComponentType$VISIBILITY_getInstance();
       case 'ROTATION':
         return ComponentType$ROTATION_getInstance();
-      case 'POWER_TRACKER':
-        return ComponentType$POWER_TRACKER_getInstance();
+      case 'GAME_STATS':
+        return ComponentType$GAME_STATS_getInstance();
       case 'TEXTURE_NAME':
         return ComponentType$TEXTURE_NAME_getInstance();
       case 'AMMUNITION':
@@ -4360,33 +4536,61 @@
   };
   function AssetManager() {
     AssetManager_instance = this;
-    this.unitTeam1_cb1dg7$_0 = this.unitTeam1_cb1dg7$_0;
-    this.unitTeam2_cb1dh2$_0 = this.unitTeam2_cb1dh2$_0;
+    this.warrior1_yisnj6$_0 = this.warrior1_yisnj6$_0;
+    this.warrior2_yisnib$_0 = this.warrior2_yisnib$_0;
+    this.worker1_77mbis$_0 = this.worker1_77mbis$_0;
+    this.worker2_77mbjn$_0 = this.worker2_77mbjn$_0;
     this.cooler_w5m7m1$_0 = this.cooler_w5m7m1$_0;
     this.block_nnbj96$_0 = this.block_nnbj96$_0;
+    this.resource_uktrz3$_0 = this.resource_uktrz3$_0;
     this.bgPatch_lfb54s$_0 = this.bgPatch_lfb54s$_0;
+    this.hudPatch_cqa0ck$_0 = this.hudPatch_cqa0ck$_0;
     this.fontMedium_3mfwi1$_0 = this.fontMedium_3mfwi1$_0;
     this.fontLarge_tdjpx7$_0 = this.fontLarge_tdjpx7$_0;
-    this.fontSpeechBubble_xd4g8g$_0 = this.fontSpeechBubble_xd4g8g$_0;
+    this.fontSmall_wv5uwf$_0 = this.fontSmall_wv5uwf$_0;
+    this.particleHit = 'bulletHitSomething';
+    this.particleResource = 'resourcePickedUp';
+    this.particleUnitDiedTeam1 = 'unitDiedTeam1';
+    this.particleUnitDiedTeam2 = 'unitDiedTeam2';
   }
-  Object.defineProperty(AssetManager.prototype, 'unitTeam1', {
+  Object.defineProperty(AssetManager.prototype, 'warrior1', {
     get: function () {
-      if (this.unitTeam1_cb1dg7$_0 == null)
-        return throwUPAE('unitTeam1');
-      return this.unitTeam1_cb1dg7$_0;
+      if (this.warrior1_yisnj6$_0 == null)
+        return throwUPAE('warrior1');
+      return this.warrior1_yisnj6$_0;
     },
-    set: function (unitTeam1) {
-      this.unitTeam1_cb1dg7$_0 = unitTeam1;
+    set: function (warrior1) {
+      this.warrior1_yisnj6$_0 = warrior1;
     }
   });
-  Object.defineProperty(AssetManager.prototype, 'unitTeam2', {
+  Object.defineProperty(AssetManager.prototype, 'warrior2', {
     get: function () {
-      if (this.unitTeam2_cb1dh2$_0 == null)
-        return throwUPAE('unitTeam2');
-      return this.unitTeam2_cb1dh2$_0;
+      if (this.warrior2_yisnib$_0 == null)
+        return throwUPAE('warrior2');
+      return this.warrior2_yisnib$_0;
     },
-    set: function (unitTeam2) {
-      this.unitTeam2_cb1dh2$_0 = unitTeam2;
+    set: function (warrior2) {
+      this.warrior2_yisnib$_0 = warrior2;
+    }
+  });
+  Object.defineProperty(AssetManager.prototype, 'worker1', {
+    get: function () {
+      if (this.worker1_77mbis$_0 == null)
+        return throwUPAE('worker1');
+      return this.worker1_77mbis$_0;
+    },
+    set: function (worker1) {
+      this.worker1_77mbis$_0 = worker1;
+    }
+  });
+  Object.defineProperty(AssetManager.prototype, 'worker2', {
+    get: function () {
+      if (this.worker2_77mbjn$_0 == null)
+        return throwUPAE('worker2');
+      return this.worker2_77mbjn$_0;
+    },
+    set: function (worker2) {
+      this.worker2_77mbjn$_0 = worker2;
     }
   });
   Object.defineProperty(AssetManager.prototype, 'cooler', {
@@ -4409,6 +4613,16 @@
       this.block_nnbj96$_0 = block;
     }
   });
+  Object.defineProperty(AssetManager.prototype, 'resource', {
+    get: function () {
+      if (this.resource_uktrz3$_0 == null)
+        return throwUPAE('resource');
+      return this.resource_uktrz3$_0;
+    },
+    set: function (resource) {
+      this.resource_uktrz3$_0 = resource;
+    }
+  });
   Object.defineProperty(AssetManager.prototype, 'bgPatch', {
     get: function () {
       if (this.bgPatch_lfb54s$_0 == null)
@@ -4417,6 +4631,16 @@
     },
     set: function (bgPatch) {
       this.bgPatch_lfb54s$_0 = bgPatch;
+    }
+  });
+  Object.defineProperty(AssetManager.prototype, 'hudPatch', {
+    get: function () {
+      if (this.hudPatch_cqa0ck$_0 == null)
+        return throwUPAE('hudPatch');
+      return this.hudPatch_cqa0ck$_0;
+    },
+    set: function (hudPatch) {
+      this.hudPatch_cqa0ck$_0 = hudPatch;
     }
   });
   Object.defineProperty(AssetManager.prototype, 'fontMedium', {
@@ -4439,25 +4663,29 @@
       this.fontLarge_tdjpx7$_0 = fontLarge;
     }
   });
-  Object.defineProperty(AssetManager.prototype, 'fontSpeechBubble', {
+  Object.defineProperty(AssetManager.prototype, 'fontSmall', {
     get: function () {
-      if (this.fontSpeechBubble_xd4g8g$_0 == null)
-        return throwUPAE('fontSpeechBubble');
-      return this.fontSpeechBubble_xd4g8g$_0;
+      if (this.fontSmall_wv5uwf$_0 == null)
+        return throwUPAE('fontSmall');
+      return this.fontSmall_wv5uwf$_0;
     },
-    set: function (fontSpeechBubble) {
-      this.fontSpeechBubble_xd4g8g$_0 = fontSpeechBubble;
+    set: function (fontSmall) {
+      this.fontSmall_wv5uwf$_0 = fontSmall;
     }
   });
   AssetManager.prototype.load_r7nzd6$ = function (platform) {
-    this.unitTeam1 = platform.loadTexture('unit1.png');
-    this.unitTeam2 = platform.loadTexture('unit2.png');
+    this.warrior1 = platform.loadTexture('warrior1.png');
+    this.warrior2 = platform.loadTexture('warrior2.png');
+    this.worker1 = platform.loadTexture('worker1.png');
+    this.worker2 = platform.loadTexture('worker2.png');
     this.bgPatch = platform.loadTexture('bg-patch.png');
+    this.hudPatch = platform.loadTexture('hud-patch.png');
     this.cooler = platform.loadTexture('cooler.png');
     this.block = platform.loadTexture('block.png');
+    this.resource = platform.loadTexture('resource.png');
     this.fontMedium = platform.loadFont('medium.ttf', Config_getInstance().FONT_MEDIUM_SIZE);
     this.fontLarge = platform.loadFont('large.ttf', Config_getInstance().FONT_LARGE_SIZE);
-    this.fontSpeechBubble = platform.loadFont('small-font.ttf', Config_getInstance().FONT_SMALL_SIZE);
+    this.fontSmall = platform.loadFont('small-font.ttf', Config_getInstance().FONT_SMALL_SIZE);
   };
   AssetManager.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4475,13 +4703,14 @@
     Config_instance = this;
     this.SCENE_WIDTH = -1.0;
     this.SCENE_HEIGHT = -1.0;
+    this.MAX_USERNAME_LENGTH = 12;
     this.USERNAME_1 = '';
     this.USERNAME_2 = '';
     this.VIEWPORT_WIDTH = 48.0;
     this.VIEWPORT_HEIGHT = 27.0;
     this.GAME_DURATION = -1.0;
     this.FONT_SMALL_SIZE = 0.5;
-    this.FONT_MEDIUM_SIZE = 0.8;
+    this.FONT_MEDIUM_SIZE = 0.6;
     this.FONT_LARGE_SIZE = 1.5;
     this.VIEW_AREA_LINE_WIDTH = 1.5;
     this.VIEWING_AREA_LENGTH = -1.0;
@@ -4497,6 +4726,7 @@
     this.CAMERA_ZOOM_SPEED = 0.4;
     this.CAMERA_ZOOM_MAX = 1.0;
     this.CAMERA_ZOOM_MIN = 0.6;
+    this.PARTICLE_EFFECTS_MAX_DELTA = 0.05;
     this.BACKGROUND_COLOR_j63kf4$_0 = this.BACKGROUND_COLOR_j63kf4$_0;
     this.COLOR_WHITE = new CurveColor(1.0, 1.0, 1.0, 1.0);
     this.TRANSPARENT_WHITE = new CurveColor(1.0, 1.0, 0.93333, 0.018);
@@ -4513,12 +4743,32 @@
     this.HEALTH_BAR_HEIGHT = 2.0 * 0.08;
     this.HEALTH_BAR_OFFSET = 2.0 * 0.7;
     this.AMMUNITION_BAR_OFFSET = this.HEALTH_BAR_OFFSET + this.HEALTH_BAR_HEIGHT * 2;
-    this.POWER_LEVEL_WIDTH = this.VIEWPORT_WIDTH * 0.95;
+    this.HUD_BACKGROUND_COLOR = new CurveColor(0.1, 0.1, 0.1, 0.7);
+    this.HUD_WIDTH = this.VIEWPORT_WIDTH * 0.42;
+    this.HUD_HEIGHT = this.VIEWPORT_HEIGHT * 0.04;
+    this.HUD_OFFSET_SIDES = this.HUD_WIDTH * 0.01;
+    this.HUD_POSITION = new Vector2((this.VIEWPORT_WIDTH - this.HUD_WIDTH) * 0.5, this.VIEWPORT_HEIGHT - this.HUD_HEIGHT);
+    this.HUD_IMAGE_SIZE = this.HUD_HEIGHT * 0.5;
+    this.HUD_IMAGE_OFFSET = this.HUD_IMAGE_SIZE * 0.5;
+    this.HUD_IMAGE_POSITION_Y = this.HUD_POSITION.y + this.HUD_HEIGHT * 0.5;
+    this.HUD_TEXT_POSITION_Y = this.HUD_POSITION.y + this.HUD_HEIGHT * 0.5;
+    this.HUD_ELEMENT_SIZE = this.HUD_IMAGE_SIZE + this.HUD_IMAGE_OFFSET + this.FONT_SMALL_SIZE * 2;
+    this.POWER_LEVEL_WIDTH = this.HUD_WIDTH;
     this.POWER_LEVEL_HEIGHT = this.VIEWPORT_HEIGHT * 0.005;
-    this.POWER_LEVEL_POSITION = new Vector2((this.VIEWPORT_WIDTH - this.POWER_LEVEL_WIDTH) * 0.5, this.VIEWPORT_HEIGHT - this.POWER_LEVEL_HEIGHT * 4.0);
-    this.USERNAME_1_POSITION = new Vector2(this.POWER_LEVEL_POSITION.x, this.POWER_LEVEL_POSITION.y - this.FONT_MEDIUM_SIZE * 1.3);
-    this.USERNAME_2_POSITION = new Vector2(this.POWER_LEVEL_POSITION.x + this.POWER_LEVEL_WIDTH, this.USERNAME_1_POSITION.y);
-    this.TIME_POSITION = new Vector2(this.POWER_LEVEL_POSITION.x + this.POWER_LEVEL_WIDTH * 0.5, this.USERNAME_1_POSITION.y);
+    this.POWER_LEVEL_POSITION = new Vector2((this.VIEWPORT_WIDTH - this.POWER_LEVEL_WIDTH) * 0.5, this.HUD_POSITION.y - this.POWER_LEVEL_HEIGHT);
+    this.HUD_CENTER_X = this.HUD_POSITION.x + this.HUD_WIDTH * 0.5;
+    this.HUD_COUNTER_SIZE = this.HUD_IMAGE_SIZE * 0.8;
+    this.OFFSET_FROM_TIME_LEFT = this.HUD_OFFSET_SIDES * 2.0;
+    this.OFFSET_FROM_TIME_RIGHT = this.HUD_OFFSET_SIDES * 1.0;
+    this.USERNAME_1_POSITION_X = this.HUD_POSITION.x + this.HUD_OFFSET_SIDES;
+    this.WORKER_1_POSITION_X = this.HUD_CENTER_X - this.HUD_ELEMENT_SIZE * 3 - this.OFFSET_FROM_TIME_LEFT;
+    this.WARRIOR_1_POSITION_X = this.HUD_CENTER_X - this.HUD_ELEMENT_SIZE * 2 - this.OFFSET_FROM_TIME_LEFT;
+    this.RESOURCE_1_POSITION_X = this.HUD_CENTER_X - this.HUD_ELEMENT_SIZE * 1 - this.OFFSET_FROM_TIME_LEFT;
+    this.USERNAME_2_POSITION_X = this.HUD_POSITION.x + this.HUD_WIDTH - this.HUD_IMAGE_OFFSET;
+    this.WORKER_2_POSITION_X = this.HUD_CENTER_X + this.HUD_ELEMENT_SIZE + this.OFFSET_FROM_TIME_RIGHT;
+    this.WARRIOR_2_POSITION_X = this.HUD_CENTER_X + this.HUD_ELEMENT_SIZE * 2 + this.OFFSET_FROM_TIME_RIGHT;
+    this.RESOURCE_2_POSITION_X = this.HUD_CENTER_X + this.HUD_ELEMENT_SIZE * 3 + this.OFFSET_FROM_TIME_RIGHT;
+    this.TIME_POSITION_X = this.HUD_POSITION.x + this.HUD_WIDTH * 0.5;
     this.HUD_LAYER = 100;
     this.WINNING_TEXT_DELAY = 0.6;
   }
@@ -4593,7 +4843,7 @@
   GameLogic.prototype.setup = function () {
     var tmp$;
     AssetManager_getInstance().load_r7nzd6$(this.platform_0);
-    var systems = [new GroupManager(), new VisibilitySystem(this.stopwatch), new HealthBarSystem(this.stopwatch), new AmmunitionBarSystem(this.stopwatch), new RenderSystem(this.platform_0, this.stopwatch), new HudSystem(this, this.actionReporter, this.platform_0, this.stopwatch)];
+    var systems = [new GroupManager(), new VisibilitySystem(this.stopwatch, this.platform_0), new HealthBarSystem(this.stopwatch), new AmmunitionBarSystem(this.stopwatch), new ResourcePickupSystem(this.stopwatch, this.platform_0), new RenderSystem(this.platform_0, this.stopwatch), new HudSystem(this, this.actionReporter, this.platform_0, this.stopwatch)];
     for (tmp$ = 0; tmp$ !== systems.length; ++tmp$) {
       var s = systems[tmp$];
       this.engine.addSystem_85nzav$(s);
@@ -4649,8 +4899,8 @@
   CurvesListener.prototype.initialData_0 = function (e) {
     Config_getInstance().SCENE_WIDTH = e.mapWidth;
     Config_getInstance().SCENE_HEIGHT = e.mapHeight;
-    Config_getInstance().USERNAME_1 = e.username1;
-    Config_getInstance().USERNAME_2 = e.username2;
+    Config_getInstance().USERNAME_1 = parseUsername(e.username1);
+    Config_getInstance().USERNAME_2 = parseUsername(e.username2);
     Config_getInstance().GAME_DURATION = e.gameDuration;
     Config_getInstance().UNIT_HEALTH = e.health;
     Config_getInstance().VIEWING_AREA_LENGTH = e.viewingAreaLength;
@@ -4663,18 +4913,23 @@
   };
   CurvesListener.prototype.newEntity_1cqyqi$ = function (e) {
     var tmp$;
-    switch (EntityType$Companion_getInstance().parse_61zpoe$(e.type).name) {
+    var type = EntityType$Companion_getInstance().parse_61zpoe$(e.type);
+    switch (type.name) {
       case 'OBSTACLE':
         tmp$ = buildObstacle(this.engine_0);
         break;
-      case 'UNIT':
-        tmp$ = buildUnit(this.engine_0, Team$Companion_getInstance().parse_61zpoe$(e.team));
+      case 'WARRIOR':
+      case 'WORKER':
+        tmp$ = buildUnit(this.engine_0, Team$Companion_getInstance().parse_61zpoe$(e.team), type);
         break;
       case 'BULLET':
         tmp$ = buildBullet(this.engine_0);
         break;
       case 'GAME_STATS':
         tmp$ = buildGameStats(this.engine_0);
+        break;
+      case 'RESOURCE':
+        tmp$ = buildResource(this.engine_0);
         break;
       default:throw new Exception_0('CreateEntityEvent for entity type ' + e.type + ' is not handled.');
     }
@@ -4705,8 +4960,8 @@
       case 'ROTATION':
         tmp$ = entity.getComponent_xo1ogr$(getKClass(Rotation));
         break;
-      case 'POWER_TRACKER':
-        tmp$ = entity.getComponent_xo1ogr$(getKClass(PowerTracker));
+      case 'GAME_STATS':
+        tmp$ = entity.getComponent_xo1ogr$(getKClass(GameStats));
         break;
       case 'TEXTURE_NAME':
         tmp$ = entity.getComponent_xo1ogr$(getKClass(TextureName));
@@ -4736,6 +4991,16 @@
     simpleName: 'CurvesListener',
     interfaces: [CurveAdapter$CurveListener]
   };
+  function parseUsername(username) {
+    var tmp$;
+    if (username.length <= Config_getInstance().MAX_USERNAME_LENGTH) {
+      tmp$ = username;
+    }
+     else {
+      tmp$ = dropLast(username, username.length - Config_getInstance().MAX_USERNAME_LENGTH + 3 | 0) + '...';
+    }
+    return tmp$;
+  }
   function Align() {
     Align_instance = this;
     this.center = 1 << 0;
@@ -4771,18 +5036,19 @@
     engine.addEntity_m9h7pi$(obstacle);
     return obstacle;
   }
-  function buildUnit(engine, team) {
-    var tmp$, tmp$_0;
+  function buildUnit(engine, team, type) {
+    var tmp$, tmp$_0, tmp$_1;
     var unit = engine.createEntity();
-    switch (team.name) {
-      case 'TEAM_1':
-        tmp$ = AssetManager_getInstance().unitTeam1;
-        break;
-      case 'TEAM_2':
-        tmp$ = AssetManager_getInstance().unitTeam2;
-        break;
-      default:throw Exception_init('Wrong team: ' + team);
-    }
+    if (team === Team$TEAM_1_getInstance() && type === EntityType$WORKER_getInstance())
+      tmp$ = AssetManager_getInstance().worker1;
+    else if (team === Team$TEAM_2_getInstance() && type === EntityType$WORKER_getInstance())
+      tmp$ = AssetManager_getInstance().worker2;
+    else if (team === Team$TEAM_1_getInstance() && type === EntityType$WARRIOR_getInstance())
+      tmp$ = AssetManager_getInstance().warrior1;
+    else if (team === Team$TEAM_2_getInstance() && type === EntityType$WARRIOR_getInstance())
+      tmp$ = AssetManager_getInstance().warrior2;
+    else
+      throw Exception_init('Wrong team: ' + team);
     var sprite = tmp$;
     var position = new Position();
     var rotation = new Rotation();
@@ -4790,20 +5056,35 @@
     var visibility = new Visibility();
     var ammunition = new Ammunition();
     var textBubble = new TextBubble();
-    var components = [new TextureRender(sprite, 90.0), new Layer(2), new Visible(), new Size(), position, rotation, health, visibility, ammunition, textBubble];
-    for (tmp$_0 = 0; tmp$_0 !== components.length; ++tmp$_0) {
-      var c = components[tmp$_0];
+    var particle = new Particle();
+    switch (team.name) {
+      case 'TEAM_1':
+        tmp$_0 = AssetManager_getInstance().particleUnitDiedTeam1;
+        break;
+      case 'TEAM_2':
+        tmp$_0 = AssetManager_getInstance().particleUnitDiedTeam2;
+        break;
+      case 'NONE':
+        throw Exception_init('team ' + team + ' is invalid');
+      default:tmp$_0 = Kotlin.noWhenBranchMatched();
+        break;
+    }
+    particle.name = tmp$_0;
+    particle.z = 2;
+    var components = [new TextureRender(sprite, 90.0), new Layer(2), new Size(), position, rotation, health, visibility, ammunition, textBubble, particle];
+    for (tmp$_1 = 0; tmp$_1 !== components.length; ++tmp$_1) {
+      var c = components[tmp$_1];
       unit.add_u94k3q$(c);
     }
     engine.getSystem_57mg9w$(getKClass(GroupManager)).register_nubigk$(team.toString(), unit);
     engine.addEntity_m9h7pi$(unit);
     createViewArea(engine, position, rotation, visibility);
-    health.healthBarEntity = createHealthBar(engine, position);
+    health.healthBarEntity = createHealthBar(engine, position, visibility);
     ammunition.ammunitionBarEntity = createAmmunitionBar(engine, position, visibility);
-    createSpeechBubble(engine, position, textBubble);
+    createSpeechBubble(engine, position, textBubble, visibility);
     return unit;
   }
-  function createSpeechBubble(engine, position, textBubble) {
+  function createSpeechBubble(engine, position, textBubble, visibility) {
     var tmp$;
     var speechBubble = engine.createEntity();
     var color = new Color();
@@ -4811,8 +5092,8 @@
     color.curve.addPoint_gonimj$(new ColorPoint(0.0, color.curve.id, Config_getInstance().COLOR_WHITE));
     var offset = new Offset();
     var textRender = new TextRender();
-    textRender.font = AssetManager_getInstance().fontSpeechBubble;
-    var components = [textRender, textBubble, new Layer(6), new Visible(), position, color, offset];
+    textRender.font = AssetManager_getInstance().fontSmall;
+    var components = [textRender, textBubble, new Layer(6), position, visibility, color, offset];
     for (tmp$ = 0; tmp$ !== components.length; ++tmp$) {
       var c = components[tmp$];
       speechBubble.add_u94k3q$(c);
@@ -4820,7 +5101,7 @@
     engine.addEntity_m9h7pi$(speechBubble);
     return speechBubble;
   }
-  function createHealthBar(engine, position) {
+  function createHealthBar(engine, position, visibility) {
     var tmp$;
     var healthBar = engine.createEntity();
     var color = new Color();
@@ -4831,7 +5112,7 @@
     size.curve.addPoint_gonimj$(new VectorPoint(0.0, size.curve.id, Config_getInstance().HEALTH_BAR_WIDTH, Config_getInstance().HEALTH_BAR_HEIGHT));
     var offset = new Offset();
     offset.value.set_dleff0$(Config_getInstance().HEALTH_BAR_WIDTH * 0.5, Config_getInstance().HEALTH_BAR_OFFSET);
-    var components = [new ShapeRender(ShapeRender$Shape$RECT_getInstance(), ShapeType$Filled_getInstance()), new Layer(4), new Visible(), position, color, offset, size];
+    var components = [new ShapeRender(ShapeRender$Shape$RECT_getInstance(), ShapeType$Filled_getInstance()), new Layer(4), visibility, position, color, offset, size];
     for (tmp$ = 0; tmp$ !== components.length; ++tmp$) {
       var c = components[tmp$];
       healthBar.add_u94k3q$(c);
@@ -4885,10 +5166,24 @@
     engine.addEntity_m9h7pi$(bullet);
     return bullet;
   }
+  function buildResource(engine) {
+    var tmp$;
+    var resource = engine.createEntity();
+    var particle = new Particle();
+    particle.name = AssetManager_getInstance().particleResource;
+    particle.z = 1;
+    var components = [new TextureRender(AssetManager_getInstance().resource, 0.0), new Layer(1), new Size(), new Position(), new Visible(), new ResourceRef(), particle];
+    for (tmp$ = 0; tmp$ !== components.length; ++tmp$) {
+      var c = components[tmp$];
+      resource.add_u94k3q$(c);
+    }
+    engine.addEntity_m9h7pi$(resource);
+    return resource;
+  }
   function buildGameStats(engine) {
     var tmp$;
     var gameStats = engine.createEntity();
-    var components = [new PowerTracker()];
+    var components = [new GameStats()];
     for (tmp$ = 0; tmp$ !== components.length; ++tmp$) {
       var c = components[tmp$];
       gameStats.add_u94k3q$(c);
@@ -4963,6 +5258,14 @@
     simpleName: 'CurveComponent',
     interfaces: [Component]
   };
+  function GameStats() {
+    CurveComponent.call(this);
+  }
+  GameStats.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'GameStats',
+    interfaces: [CurveComponent]
+  };
   function Health() {
     CurveComponent.call(this);
     this.healthBarEntity_7sxhve$_0 = this.healthBarEntity_7sxhve$_0;
@@ -5017,6 +5320,25 @@
     simpleName: 'Offset',
     interfaces: [Component]
   };
+  function Particle() {
+    this.name_j5rkv$_0 = this.name_j5rkv$_0;
+    this.z = 1;
+  }
+  Object.defineProperty(Particle.prototype, 'name', {
+    get: function () {
+      if (this.name_j5rkv$_0 == null)
+        return throwUPAE('name');
+      return this.name_j5rkv$_0;
+    },
+    set: function (name) {
+      this.name_j5rkv$_0 = name;
+    }
+  });
+  Particle.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Particle',
+    interfaces: [Component]
+  };
   function Position() {
     CurveComponent.call(this);
   }
@@ -5025,13 +5347,12 @@
     simpleName: 'Position',
     interfaces: [CurveComponent]
   };
-  function PowerTracker() {
-    CurveComponent.call(this);
+  function ResourceRef() {
   }
-  PowerTracker.$metadata$ = {
+  ResourceRef.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'PowerTracker',
-    interfaces: [CurveComponent]
+    simpleName: 'ResourceRef',
+    interfaces: [Component]
   };
   function Rotation() {
     CurveComponent.call(this);
@@ -5259,7 +5580,7 @@
     this.engine = engine;
     this.stopwatch = stopwatch;
     this.mHealth_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Health));
-    this.mPowerTracker_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(PowerTracker));
+    this.mGameStats_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(GameStats));
     this.healthReport_0 = ArrayListCp_init();
   }
   ActionReporter.prototype.getHealth_5yasai$ = function (team) {
@@ -5277,17 +5598,17 @@
     }
     return this.healthReport_0;
   };
-  ActionReporter.prototype.getPower_5yasai$ = function (team) {
+  ActionReporter.prototype.getTeamStats_5yasai$ = function (team) {
     var tmp$;
-    var entities = this.engine.getEntitiesFor_lzpe4l$(FamilyCreator_getInstance().all_gcxcac$([getKClass(PowerTracker)]).get());
-    var powerTracker = ensureNotNull(this.mPowerTracker_0.get_m9h7pi$(entities.get_za3lpa$(0)));
-    var point = ensureNotNull(powerTracker.curve.getPoint_dleff0$(this.stopwatch.time, 0.0));
+    var entities = this.engine.getEntitiesFor_lzpe4l$(FamilyCreator_getInstance().all_gcxcac$([getKClass(GameStats)]).get());
+    var gameStats = ensureNotNull(this.mGameStats_0.get_m9h7pi$(entities.get_za3lpa$(0)));
+    var points = ensureNotNull(gameStats.curve.getPoint_dleff0$(this.stopwatch.time, 0.0));
     switch (team.name) {
       case 'TEAM_1':
-        tmp$ = point.x;
+        tmp$ = points.team1;
         break;
       case 'TEAM_2':
-        tmp$ = point.y;
+        tmp$ = points.team2;
         break;
       case 'NONE':
         throw new Exception_0('Team should be specified.');
@@ -5643,7 +5964,7 @@
     return VisiblePool_instance;
   }
   function AmmunitionBarSystem(stopwatch) {
-    IteratingSystem.call(this, FamilyCreator_getInstance().all_gcxcac$([getKClass(Ammunition)]).get());
+    IteratingSystem.call(this, FamilyCreator_getInstance().all_gcxcac$([getKClass(Ammunition), getKClass(Visible)]).get());
     this.stopwatch = stopwatch;
     this.mAmmunition_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Ammunition));
     this.mSize_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Size));
@@ -5681,7 +6002,7 @@
     interfaces: [EntitySystem]
   };
   function HealthBarSystem(stopwatch) {
-    IteratingSystem.call(this, FamilyCreator_getInstance().all_gcxcac$([getKClass(Health)]).get());
+    IteratingSystem.call(this, FamilyCreator_getInstance().all_gcxcac$([getKClass(Health), getKClass(Visible)]).get());
     this.stopwatch = stopwatch;
     this.mHealth_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Health));
     this.mSize_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Size));
@@ -5706,12 +6027,31 @@
     this.stopwatch_0 = stopwatch;
   }
   HudSystem.prototype.update_mx4ult$ = function (delta) {
-    this.drawPowerLevelBar_0();
+    var team1 = this.actionReporter_0.getTeamStats_5yasai$(Team$TEAM_1_getInstance());
+    var team2 = this.actionReporter_0.getTeamStats_5yasai$(Team$TEAM_2_getInstance());
+    this.drawHudBackground_0();
+    this.drawPowerLevelBar_0(team1.power, team2.power);
     this.drawBotNames_0();
+    this.drawHudElement_0(AssetManager_getInstance().worker1, Config_getInstance().WORKER_1_POSITION_X, Config_getInstance().COLOR_GOLD, team1.workers);
+    this.drawHudElement_0(AssetManager_getInstance().warrior1, Config_getInstance().WARRIOR_1_POSITION_X, Config_getInstance().COLOR_GOLD, team1.warriors);
+    this.drawHudElement_0(AssetManager_getInstance().resource, Config_getInstance().RESOURCE_1_POSITION_X, Config_getInstance().COLOR_GOLD, team1.resources);
+    this.drawHudElement_0(AssetManager_getInstance().worker2, Config_getInstance().WORKER_2_POSITION_X, Config_getInstance().COLOR_UNIT_GREEN, team2.workers);
+    this.drawHudElement_0(AssetManager_getInstance().warrior2, Config_getInstance().WARRIOR_2_POSITION_X, Config_getInstance().COLOR_UNIT_GREEN, team2.warriors);
+    this.drawHudElement_0(AssetManager_getInstance().resource, Config_getInstance().RESOURCE_2_POSITION_X, Config_getInstance().COLOR_UNIT_GREEN, team2.resources);
     this.drawTime_0();
     this.drawBotCrashedText_0(Team$TEAM_1_getInstance());
     this.drawBotCrashedText_0(Team$TEAM_2_getInstance());
     this.drawEndGameAnimation_0();
+  };
+  HudSystem.prototype.drawHudElement_0 = function (asset, x, color, value) {
+    var offset = Config_getInstance().HUD_IMAGE_SIZE * 0.5;
+    this.platform_0.draw(asset, x - Config_getInstance().HUD_IMAGE_OFFSET * 0.5 - offset, Config_getInstance().HUD_IMAGE_POSITION_Y - offset, offset, offset, Config_getInstance().HUD_IMAGE_SIZE, Config_getInstance().HUD_IMAGE_SIZE, 1.0, 1.0, 1.0, 0.0, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawText(AssetManager_getInstance().fontSmall, value.toString(), x + Config_getInstance().HUD_IMAGE_OFFSET * 0.5 + Config_getInstance().HUD_COUNTER_SIZE, Config_getInstance().HUD_TEXT_POSITION_Y, color.r, color.g, color.b, color.a, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
+  };
+  HudSystem.prototype.drawHudBackground_0 = function () {
+    var offsetX = Config_getInstance().HUD_WIDTH * 0.5;
+    var offsetY = Config_getInstance().HUD_HEIGHT * 0.5;
+    this.platform_0.draw(AssetManager_getInstance().hudPatch, Config_getInstance().HUD_POSITION.x, Config_getInstance().HUD_POSITION.y, offsetX, offsetY, Config_getInstance().HUD_WIDTH, Config_getInstance().HUD_HEIGHT, 1.0, 1.0, Config_getInstance().HUD_BACKGROUND_COLOR.a, 0.0, Config_getInstance().HUD_LAYER, true);
   };
   HudSystem.prototype.drawEndGameAnimation_0 = function () {
     var gameOverTime = this.gameLogic_0.gameOverEvent.t;
@@ -5728,9 +6068,7 @@
       }
     }
   };
-  HudSystem.prototype.drawPowerLevelBar_0 = function () {
-    var powerTeam1 = this.actionReporter_0.getPower_5yasai$(Team$TEAM_1_getInstance());
-    var powerTeam2 = this.actionReporter_0.getPower_5yasai$(Team$TEAM_2_getInstance());
+  HudSystem.prototype.drawPowerLevelBar_0 = function (powerTeam1, powerTeam2) {
     var sum = powerTeam1 + powerTeam2;
     var widthTeam1 = powerTeam1 / sum * Config_getInstance().POWER_LEVEL_WIDTH;
     var widthTeam2 = powerTeam2 / sum * Config_getInstance().POWER_LEVEL_WIDTH;
@@ -5738,8 +6076,8 @@
     this.platform_0.drawRect(ShapeType$Filled_getInstance(), 0.0, Config_getInstance().COLOR_UNIT_GREEN.r, Config_getInstance().COLOR_UNIT_GREEN.g, Config_getInstance().COLOR_UNIT_GREEN.b, Config_getInstance().COLOR_UNIT_GREEN.a, Config_getInstance().POWER_LEVEL_POSITION.x + widthTeam1, Config_getInstance().POWER_LEVEL_POSITION.y, widthTeam2, Config_getInstance().POWER_LEVEL_HEIGHT, Config_getInstance().HUD_LAYER, true);
   };
   HudSystem.prototype.drawBotNames_0 = function () {
-    this.platform_0.drawText(AssetManager_getInstance().fontMedium, Config_getInstance().USERNAME_1, Config_getInstance().USERNAME_1_POSITION.x, Config_getInstance().USERNAME_1_POSITION.y, Config_getInstance().COLOR_GOLD.r, Config_getInstance().COLOR_GOLD.g, Config_getInstance().COLOR_GOLD.b, Config_getInstance().COLOR_GOLD.a, Align_getInstance().left, Config_getInstance().HUD_LAYER, true);
-    this.platform_0.drawText(AssetManager_getInstance().fontMedium, Config_getInstance().USERNAME_2, Config_getInstance().USERNAME_2_POSITION.x, Config_getInstance().USERNAME_2_POSITION.y, Config_getInstance().COLOR_UNIT_GREEN.r, Config_getInstance().COLOR_UNIT_GREEN.g, Config_getInstance().COLOR_UNIT_GREEN.b, Config_getInstance().COLOR_UNIT_GREEN.a, Align_getInstance().right, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawText(AssetManager_getInstance().fontSmall, Config_getInstance().USERNAME_1, Config_getInstance().USERNAME_1_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, Config_getInstance().COLOR_GOLD.r, Config_getInstance().COLOR_GOLD.g, Config_getInstance().COLOR_GOLD.b, Config_getInstance().COLOR_GOLD.a, Align_getInstance().left, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawText(AssetManager_getInstance().fontSmall, Config_getInstance().USERNAME_2, Config_getInstance().USERNAME_2_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, Config_getInstance().COLOR_UNIT_GREEN.r, Config_getInstance().COLOR_UNIT_GREEN.g, Config_getInstance().COLOR_UNIT_GREEN.b, Config_getInstance().COLOR_UNIT_GREEN.a, Align_getInstance().right, Config_getInstance().HUD_LAYER, true);
   };
   HudSystem.prototype.drawTime_0 = function () {
     var prefix = numberToInt(this.stopwatch_0.time);
@@ -5751,7 +6089,7 @@
       suffixStr += numberToInt(suffix);
     }
     var time = prefix.toString() + '.' + suffixStr;
-    this.platform_0.drawText(AssetManager_getInstance().fontMedium, time, Config_getInstance().TIME_POSITION.x, Config_getInstance().TIME_POSITION.y, 1.0, 1.0, 1.0, 1.0, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawText(AssetManager_getInstance().fontSmall, time, Config_getInstance().TIME_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, 1.0, 1.0, 1.0, 1.0, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
   };
   HudSystem.prototype.drawBotCrashedText_0 = function (team) {
     var tmp$;
@@ -5833,6 +6171,7 @@
     this.reusableVector_0 = new Vector2();
   }
   RenderSystem.prototype.processEntity_vurp35$ = function (e, delta) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var time = this.stopwatch_0.time;
     var position = ensureNotNull(this.mPosition_0.get_m9h7pi$(e));
     var layer = ensureNotNull(this.mLayer_0.get_m9h7pi$(e));
@@ -5844,8 +6183,8 @@
     var rText = this.mTextRender_0.get_m9h7pi$(e);
     var textBubble = this.mTextBubble_0.get_m9h7pi$(e);
     var positionPoint = ensureNotNull(position.curve.getPoint_dleff0$(time, delta));
-    var offsetX = offset != null ? offset.value.x : 0.0;
-    var offsetY = offset != null ? offset.value.y : 0.0;
+    var offsetX = (tmp$_0 = (tmp$ = offset != null ? offset.value : null) != null ? tmp$.x : null) != null ? tmp$_0 : 0.0;
+    var offsetY = (tmp$_2 = (tmp$_1 = offset != null ? offset.value : null) != null ? tmp$_1.y : null) != null ? tmp$_2 : 0.0;
     if (rShape != null) {
       var sizePoint = ensureNotNull(ensureNotNull(size).curve.getPoint_dleff0$(time, delta));
       var colorPoint = ensureNotNull(ensureNotNull(color).curve.getPoint_dleff0$(time, delta));
@@ -5919,6 +6258,28 @@
     var l2 = Kotlin.isType(tmp$_0 = e2.getComponent_xo1ogr$(getKClass(Layer)), Layer) ? tmp$_0 : throwCCE();
     return l1.z < l2.z;
   }
+  function ResourcePickupSystem(stopwatch, platform) {
+    IteratingSystem.call(this, FamilyCreator_getInstance().all_gcxcac$([getKClass(Particle), getKClass(ResourceRef)]).get());
+    this.stopwatch = stopwatch;
+    this.platform = platform;
+    this.mParticle_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Particle));
+    this.mPosition_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Position));
+  }
+  ResourcePickupSystem.prototype.processEntity_vurp35$ = function (e, delta) {
+    if (delta > Config_getInstance().PARTICLE_EFFECTS_MAX_DELTA)
+      return;
+    var p = ensureNotNull(this.mParticle_0.get_m9h7pi$(e));
+    var prevPoint = ensureNotNull(ensureNotNull(this.mPosition_0.get_m9h7pi$(e)).curve.getPoint_dleff0$(this.stopwatch.time - delta, delta));
+    var currentPoint = ensureNotNull(ensureNotNull(this.mPosition_0.get_m9h7pi$(e)).curve.getPoint_dleff0$(this.stopwatch.time, delta));
+    if (prevPoint.x !== currentPoint.x && prevPoint.y !== currentPoint.y) {
+      this.platform.emitParticle(p.name, prevPoint.x, prevPoint.y, p.z);
+    }
+  };
+  ResourcePickupSystem.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ResourcePickupSystem',
+    interfaces: [IteratingSystem]
+  };
   function TagManager() {
     EntitySystem.call(this);
     this.tags_0 = HashMap_init();
@@ -5934,11 +6295,14 @@
     simpleName: 'TagManager',
     interfaces: [EntitySystem]
   };
-  function VisibilitySystem(stopwatch) {
+  function VisibilitySystem(stopwatch, platform) {
     IteratingSystem.call(this, FamilyCreator_getInstance().all_gcxcac$([getKClass(Visibility)]).get());
     this.stopwatch = stopwatch;
+    this.platform = platform;
     this.mVisibility_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Visibility));
     this.mVisible_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Visible));
+    this.mParticle_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Particle));
+    this.mPosition_0 = ComponentMapper$Companion_getInstance().getFor_e0og7n$(getKClass(Position));
   }
   VisibilitySystem.prototype.processEntity_vurp35$ = function (e, delta) {
     var visibility = this.mVisibility_0.get_m9h7pi$(e);
@@ -5956,6 +6320,14 @@
      else if (point.x === 0.0 && visible != null) {
       e.remove_xo1ogr$(getKClass(Visible));
       VisiblePool_getInstance().free_qpdneu$(visible);
+      if (delta < Config_getInstance().PARTICLE_EFFECTS_MAX_DELTA) {
+        var p = this.mParticle_0.get_m9h7pi$(e);
+        if (p != null) {
+          var positionPoint = ensureNotNull(ensureNotNull(this.mPosition_0.get_m9h7pi$(e)).curve.getPoint_dleff0$(this.stopwatch.time, delta));
+          positionPoint = ensureNotNull(ensureNotNull(this.mPosition_0.get_m9h7pi$(e)).curve.getPoint_dleff0$(positionPoint.t - delta, delta));
+          this.platform.emitParticle(p.name, positionPoint.x, positionPoint.y, p.z);
+        }
+      }
     }
   };
   VisibilitySystem.$metadata$ = {
@@ -6081,6 +6453,8 @@
   });
   PointUnrolledLinkedList.Node = PointUnrolledLinkedList$Node;
   package$curvesdb.PointUnrolledLinkedList = PointUnrolledLinkedList;
+  var package$curves = package$curvesdb.curves || (package$curvesdb.curves = {});
+  package$curves.ArrayCurve = ArrayCurve;
   Object.defineProperty(CircularLinearCurve$CircularLinearType, 'L', {
     get: CircularLinearCurve$CircularLinearType$L_getInstance
   });
@@ -6094,10 +6468,10 @@
     get: CircularLinearCurve$CircularLinearType$CMC_getInstance
   });
   CircularLinearCurve.CircularLinearType = CircularLinearCurve$CircularLinearType;
-  var package$curves = package$curvesdb.curves || (package$curvesdb.curves = {});
   package$curves.CircularLinearCurve = CircularLinearCurve;
   package$curves.ColorCurve = ColorCurve;
   package$curves.Curve = Curve;
+  package$curves.GameStatsCurve = GameStatsCurve;
   package$curves.LinearCurve = LinearCurve;
   package$curves.LinearVectorCurve = LinearVectorCurve;
   package$curves.MessageCurve = MessageCurve;
@@ -6111,9 +6485,12 @@
   package$events.GameOverEvent = GameOverEvent;
   package$events.InitialDataEvent = InitialDataEvent;
   var package$points = package$curvesdb.points || (package$curvesdb.points = {});
+  package$points.ArrayPoint = ArrayPoint;
   package$points.BasicPoint = BasicPoint;
   package$points.CircularLinearPoint = CircularLinearPoint;
   package$points.ColorPoint = ColorPoint;
+  package$points.GameStatsPoint = GameStatsPoint;
+  package$points.TeamStats = TeamStats;
   package$points.MessagePoint = MessagePoint;
   package$points.Point = Point;
   package$points.PulsePoint = PulsePoint;
@@ -6147,14 +6524,20 @@
   package$math.isPointOnTheLine_li6eu1$ = isPointOnTheLine;
   package$math.Rectangle = Rectangle;
   package$math.Vector2 = Vector2;
-  Object.defineProperty(EntityType, 'UNIT', {
-    get: EntityType$UNIT_getInstance
+  Object.defineProperty(EntityType, 'WARRIOR', {
+    get: EntityType$WARRIOR_getInstance
+  });
+  Object.defineProperty(EntityType, 'WORKER', {
+    get: EntityType$WORKER_getInstance
   });
   Object.defineProperty(EntityType, 'BULLET', {
     get: EntityType$BULLET_getInstance
   });
   Object.defineProperty(EntityType, 'OBSTACLE', {
     get: EntityType$OBSTACLE_getInstance
+  });
+  Object.defineProperty(EntityType, 'RESOURCE', {
+    get: EntityType$RESOURCE_getInstance
   });
   Object.defineProperty(EntityType, 'WORLD_EDGE', {
     get: EntityType$WORLD_EDGE_getInstance
@@ -6198,8 +6581,8 @@
   Object.defineProperty(ComponentType_0, 'ROTATION', {
     get: ComponentType$ROTATION_getInstance
   });
-  Object.defineProperty(ComponentType_0, 'POWER_TRACKER', {
-    get: ComponentType$POWER_TRACKER_getInstance
+  Object.defineProperty(ComponentType_0, 'GAME_STATS', {
+    get: ComponentType$GAME_STATS_getInstance
   });
   Object.defineProperty(ComponentType_0, 'TEXTURE_NAME', {
     get: ComponentType$TEXTURE_NAME_getInstance
@@ -6225,29 +6608,33 @@
   package$logic.GameLogic = GameLogic;
   var package$builders = package$logic.builders || (package$logic.builders = {});
   package$builders.CurvesListener = CurvesListener;
+  package$builders.parseUsername_61zpoe$ = parseUsername;
   Object.defineProperty(package$logic, 'Align', {
     get: Align_getInstance
   });
   var package$world = package$logic.world || (package$logic.world = {});
   var package$builders_0 = package$world.builders || (package$world.builders = {});
   package$builders_0.buildObstacle_m9pip3$ = buildObstacle;
-  package$builders_0.buildUnit_ky66xl$ = buildUnit;
-  package$builders_0.createSpeechBubble_c7hz64$ = createSpeechBubble;
-  package$builders_0.createHealthBar_q9ckdt$ = createHealthBar;
+  package$builders_0.buildUnit_d1yr9x$ = buildUnit;
+  package$builders_0.createSpeechBubble_gsw9f2$ = createSpeechBubble;
+  package$builders_0.createHealthBar_2oq91v$ = createHealthBar;
   package$builders_0.createAmmunitionBar_2oq91v$ = createAmmunitionBar;
   package$builders_0.createViewArea_ivxik7$ = createViewArea;
   package$builders_0.buildBullet_m9pip3$ = buildBullet;
+  package$builders_0.buildResource_m9pip3$ = buildResource;
   package$builders_0.buildGameStats_m9pip3$ = buildGameStats;
   package$builders_0.buildMapBackground_m9pip3$ = buildMapBackground;
   var package$components = package$world.components || (package$world.components = {});
   package$components.Ammunition = Ammunition;
   package$components.Color = Color;
   package$components.CurveComponent = CurveComponent;
+  package$components.GameStats = GameStats;
   package$components.Health = Health;
   package$components.Layer = Layer;
   package$components.Offset = Offset;
+  package$components.Particle = Particle;
   package$components.Position = Position;
-  package$components.PowerTracker = PowerTracker;
+  package$components.ResourceRef = ResourceRef;
   package$components.Rotation = Rotation;
   Object.defineProperty(ShapeRender$Shape, 'CIRCLE', {
     get: ShapeRender$Shape$CIRCLE_getInstance
@@ -6303,6 +6690,7 @@
   package$systems_0.HudSystem = HudSystem;
   package$systems_0.RenderSystem = RenderSystem;
   package$systems_0.compareByLayer_s68b0o$ = compareByLayer;
+  package$systems_0.ResourcePickupSystem = ResourcePickupSystem;
   package$systems_0.TagManager = TagManager;
   package$systems_0.VisibilitySystem = VisibilitySystem;
   PI = 3.1415927;
@@ -6313,7 +6701,7 @@
 }(module.exports, require('kotlin')));
 
 },{"kotlin":14}],2:[function(require,module,exports){
-/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
+/*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
 "use strict";
 
 var $protobuf = require("protobufjs/minimal");
@@ -6350,6 +6738,8 @@ $root.curves = (function() {
          * @property {curves.IVectorPoint|null} [vectorPoint] Element vectorPoint
          * @property {curves.IMessagePoint|null} [messagePoint] Element messagePoint
          * @property {curves.ITextBubblePoint|null} [textBubblePoint] Element textBubblePoint
+         * @property {curves.IArrayPoint|null} [arrayPoint] Element arrayPoint
+         * @property {curves.IGameStatsPoint|null} [gameStatsPoint] Element gameStatsPoint
          */
 
         /**
@@ -6455,17 +6845,33 @@ $root.curves = (function() {
          */
         Element.prototype.textBubblePoint = null;
 
+        /**
+         * Element arrayPoint.
+         * @member {curves.IArrayPoint|null|undefined} arrayPoint
+         * @memberof curves.Element
+         * @instance
+         */
+        Element.prototype.arrayPoint = null;
+
+        /**
+         * Element gameStatsPoint.
+         * @member {curves.IGameStatsPoint|null|undefined} gameStatsPoint
+         * @memberof curves.Element
+         * @instance
+         */
+        Element.prototype.gameStatsPoint = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
         /**
          * Element e.
-         * @member {"initialDataEvent"|"createEntityEvent"|"gameOverEvent"|"curve"|"pulsePoint"|"circularLinearPoint"|"colorPoint"|"basicPoint"|"vectorPoint"|"messagePoint"|"textBubblePoint"|undefined} e
+         * @member {"initialDataEvent"|"createEntityEvent"|"gameOverEvent"|"curve"|"pulsePoint"|"circularLinearPoint"|"colorPoint"|"basicPoint"|"vectorPoint"|"messagePoint"|"textBubblePoint"|"arrayPoint"|"gameStatsPoint"|undefined} e
          * @memberof curves.Element
          * @instance
          */
         Object.defineProperty(Element.prototype, "e", {
-            get: $util.oneOfGetter($oneOfFields = ["initialDataEvent", "createEntityEvent", "gameOverEvent", "curve", "pulsePoint", "circularLinearPoint", "colorPoint", "basicPoint", "vectorPoint", "messagePoint", "textBubblePoint"]),
+            get: $util.oneOfGetter($oneOfFields = ["initialDataEvent", "createEntityEvent", "gameOverEvent", "curve", "pulsePoint", "circularLinearPoint", "colorPoint", "basicPoint", "vectorPoint", "messagePoint", "textBubblePoint", "arrayPoint", "gameStatsPoint"]),
             set: $util.oneOfSetter($oneOfFields)
         });
 
@@ -6515,6 +6921,10 @@ $root.curves = (function() {
                 $root.curves.MessagePoint.encode(message.messagePoint, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             if (message.textBubblePoint != null && message.hasOwnProperty("textBubblePoint"))
                 $root.curves.TextBubblePoint.encode(message.textBubblePoint, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+            if (message.arrayPoint != null && message.hasOwnProperty("arrayPoint"))
+                $root.curves.ArrayPoint.encode(message.arrayPoint, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+            if (message.gameStatsPoint != null && message.hasOwnProperty("gameStatsPoint"))
+                $root.curves.GameStatsPoint.encode(message.gameStatsPoint, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             return writer;
         };
 
@@ -6581,6 +6991,12 @@ $root.curves = (function() {
                     break;
                 case 11:
                     message.textBubblePoint = $root.curves.TextBubblePoint.decode(reader, reader.uint32());
+                    break;
+                case 12:
+                    message.arrayPoint = $root.curves.ArrayPoint.decode(reader, reader.uint32());
+                    break;
+                case 13:
+                    message.gameStatsPoint = $root.curves.GameStatsPoint.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6726,6 +7142,26 @@ $root.curves = (function() {
                         return "textBubblePoint." + error;
                 }
             }
+            if (message.arrayPoint != null && message.hasOwnProperty("arrayPoint")) {
+                if (properties.e === 1)
+                    return "e: multiple values";
+                properties.e = 1;
+                {
+                    var error = $root.curves.ArrayPoint.verify(message.arrayPoint);
+                    if (error)
+                        return "arrayPoint." + error;
+                }
+            }
+            if (message.gameStatsPoint != null && message.hasOwnProperty("gameStatsPoint")) {
+                if (properties.e === 1)
+                    return "e: multiple values";
+                properties.e = 1;
+                {
+                    var error = $root.curves.GameStatsPoint.verify(message.gameStatsPoint);
+                    if (error)
+                        return "gameStatsPoint." + error;
+                }
+            }
             return null;
         };
 
@@ -6795,6 +7231,16 @@ $root.curves = (function() {
                 if (typeof object.textBubblePoint !== "object")
                     throw TypeError(".curves.Element.textBubblePoint: object expected");
                 message.textBubblePoint = $root.curves.TextBubblePoint.fromObject(object.textBubblePoint);
+            }
+            if (object.arrayPoint != null) {
+                if (typeof object.arrayPoint !== "object")
+                    throw TypeError(".curves.Element.arrayPoint: object expected");
+                message.arrayPoint = $root.curves.ArrayPoint.fromObject(object.arrayPoint);
+            }
+            if (object.gameStatsPoint != null) {
+                if (typeof object.gameStatsPoint !== "object")
+                    throw TypeError(".curves.Element.gameStatsPoint: object expected");
+                message.gameStatsPoint = $root.curves.GameStatsPoint.fromObject(object.gameStatsPoint);
             }
             return message;
         };
@@ -6866,6 +7312,16 @@ $root.curves = (function() {
                 object.textBubblePoint = $root.curves.TextBubblePoint.toObject(message.textBubblePoint, options);
                 if (options.oneofs)
                     object.e = "textBubblePoint";
+            }
+            if (message.arrayPoint != null && message.hasOwnProperty("arrayPoint")) {
+                object.arrayPoint = $root.curves.ArrayPoint.toObject(message.arrayPoint, options);
+                if (options.oneofs)
+                    object.e = "arrayPoint";
+            }
+            if (message.gameStatsPoint != null && message.hasOwnProperty("gameStatsPoint")) {
+                object.gameStatsPoint = $root.curves.GameStatsPoint.toObject(message.gameStatsPoint, options);
+                if (options.oneofs)
+                    object.e = "gameStatsPoint";
             }
             return object;
         };
@@ -8009,6 +8465,8 @@ $root.curves = (function() {
                 case 7:
                 case 8:
                 case 9:
+                case 10:
+                case 11:
                     break;
                 }
             if (message.type != null && message.hasOwnProperty("type"))
@@ -8074,6 +8532,14 @@ $root.curves = (function() {
             case 9:
                 message.ctype = 9;
                 break;
+            case "ARRAY_CURVE":
+            case 10:
+                message.ctype = 10;
+                break;
+            case "GAME_STATS_CURVE":
+            case 11:
+                message.ctype = 11;
+                break;
             }
             if (object.type != null)
                 message.type = String(object.type);
@@ -8135,6 +8601,8 @@ $root.curves = (function() {
          * @property {number} STEP_VECTOR_CURVE=7 STEP_VECTOR_CURVE value
          * @property {number} MESSAGE_CURVE=8 MESSAGE_CURVE value
          * @property {number} TEXT_BUBBLE_CURVE=9 TEXT_BUBBLE_CURVE value
+         * @property {number} ARRAY_CURVE=10 ARRAY_CURVE value
+         * @property {number} GAME_STATS_CURVE=11 GAME_STATS_CURVE value
          */
         Curve.CurveType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -8148,6 +8616,8 @@ $root.curves = (function() {
             values[valuesById[7] = "STEP_VECTOR_CURVE"] = 7;
             values[valuesById[8] = "MESSAGE_CURVE"] = 8;
             values[valuesById[9] = "TEXT_BUBBLE_CURVE"] = 9;
+            values[valuesById[10] = "ARRAY_CURVE"] = 10;
+            values[valuesById[11] = "GAME_STATS_CURVE"] = 11;
             return values;
         })();
 
@@ -10195,12 +10665,787 @@ $root.curves = (function() {
         return TextBubblePoint;
     })();
 
+    curves.ArrayPoint = (function() {
+
+        /**
+         * Properties of an ArrayPoint.
+         * @memberof curves
+         * @interface IArrayPoint
+         * @property {number|null} [t] ArrayPoint t
+         * @property {number|null} [cid] ArrayPoint cid
+         * @property {Array.<number>|null} [array] ArrayPoint array
+         */
+
+        /**
+         * Constructs a new ArrayPoint.
+         * @memberof curves
+         * @classdesc Represents an ArrayPoint.
+         * @implements IArrayPoint
+         * @constructor
+         * @param {curves.IArrayPoint=} [properties] Properties to set
+         */
+        function ArrayPoint(properties) {
+            this.array = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ArrayPoint t.
+         * @member {number} t
+         * @memberof curves.ArrayPoint
+         * @instance
+         */
+        ArrayPoint.prototype.t = 0;
+
+        /**
+         * ArrayPoint cid.
+         * @member {number} cid
+         * @memberof curves.ArrayPoint
+         * @instance
+         */
+        ArrayPoint.prototype.cid = 0;
+
+        /**
+         * ArrayPoint array.
+         * @member {Array.<number>} array
+         * @memberof curves.ArrayPoint
+         * @instance
+         */
+        ArrayPoint.prototype.array = $util.emptyArray;
+
+        /**
+         * Creates a new ArrayPoint instance using the specified properties.
+         * @function create
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {curves.IArrayPoint=} [properties] Properties to set
+         * @returns {curves.ArrayPoint} ArrayPoint instance
+         */
+        ArrayPoint.create = function create(properties) {
+            return new ArrayPoint(properties);
+        };
+
+        /**
+         * Encodes the specified ArrayPoint message. Does not implicitly {@link curves.ArrayPoint.verify|verify} messages.
+         * @function encode
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {curves.IArrayPoint} message ArrayPoint message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ArrayPoint.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.t != null && message.hasOwnProperty("t"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.t);
+            if (message.cid != null && message.hasOwnProperty("cid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.cid);
+            if (message.array != null && message.array.length) {
+                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                for (var i = 0; i < message.array.length; ++i)
+                    writer.float(message.array[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ArrayPoint message, length delimited. Does not implicitly {@link curves.ArrayPoint.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {curves.IArrayPoint} message ArrayPoint message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ArrayPoint.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ArrayPoint message from the specified reader or buffer.
+         * @function decode
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {curves.ArrayPoint} ArrayPoint
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ArrayPoint.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.curves.ArrayPoint();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.t = reader.float();
+                    break;
+                case 2:
+                    message.cid = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.array && message.array.length))
+                        message.array = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.array.push(reader.float());
+                    } else
+                        message.array.push(reader.float());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ArrayPoint message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {curves.ArrayPoint} ArrayPoint
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ArrayPoint.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ArrayPoint message.
+         * @function verify
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ArrayPoint.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.t != null && message.hasOwnProperty("t"))
+                if (typeof message.t !== "number")
+                    return "t: number expected";
+            if (message.cid != null && message.hasOwnProperty("cid"))
+                if (!$util.isInteger(message.cid))
+                    return "cid: integer expected";
+            if (message.array != null && message.hasOwnProperty("array")) {
+                if (!Array.isArray(message.array))
+                    return "array: array expected";
+                for (var i = 0; i < message.array.length; ++i)
+                    if (typeof message.array[i] !== "number")
+                        return "array: number[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates an ArrayPoint message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {curves.ArrayPoint} ArrayPoint
+         */
+        ArrayPoint.fromObject = function fromObject(object) {
+            if (object instanceof $root.curves.ArrayPoint)
+                return object;
+            var message = new $root.curves.ArrayPoint();
+            if (object.t != null)
+                message.t = Number(object.t);
+            if (object.cid != null)
+                message.cid = object.cid | 0;
+            if (object.array) {
+                if (!Array.isArray(object.array))
+                    throw TypeError(".curves.ArrayPoint.array: array expected");
+                message.array = [];
+                for (var i = 0; i < object.array.length; ++i)
+                    message.array[i] = Number(object.array[i]);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ArrayPoint message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof curves.ArrayPoint
+         * @static
+         * @param {curves.ArrayPoint} message ArrayPoint
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ArrayPoint.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.array = [];
+            if (options.defaults) {
+                object.t = 0;
+                object.cid = 0;
+            }
+            if (message.t != null && message.hasOwnProperty("t"))
+                object.t = options.json && !isFinite(message.t) ? String(message.t) : message.t;
+            if (message.cid != null && message.hasOwnProperty("cid"))
+                object.cid = message.cid;
+            if (message.array && message.array.length) {
+                object.array = [];
+                for (var j = 0; j < message.array.length; ++j)
+                    object.array[j] = options.json && !isFinite(message.array[j]) ? String(message.array[j]) : message.array[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this ArrayPoint to JSON.
+         * @function toJSON
+         * @memberof curves.ArrayPoint
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ArrayPoint.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ArrayPoint;
+    })();
+
+    curves.GameStatsPoint = (function() {
+
+        /**
+         * Properties of a GameStatsPoint.
+         * @memberof curves
+         * @interface IGameStatsPoint
+         * @property {number|null} [t] GameStatsPoint t
+         * @property {number|null} [cid] GameStatsPoint cid
+         * @property {curves.GameStatsPoint.ITeamStats|null} [team1] GameStatsPoint team1
+         * @property {curves.GameStatsPoint.ITeamStats|null} [team2] GameStatsPoint team2
+         */
+
+        /**
+         * Constructs a new GameStatsPoint.
+         * @memberof curves
+         * @classdesc Represents a GameStatsPoint.
+         * @implements IGameStatsPoint
+         * @constructor
+         * @param {curves.IGameStatsPoint=} [properties] Properties to set
+         */
+        function GameStatsPoint(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameStatsPoint t.
+         * @member {number} t
+         * @memberof curves.GameStatsPoint
+         * @instance
+         */
+        GameStatsPoint.prototype.t = 0;
+
+        /**
+         * GameStatsPoint cid.
+         * @member {number} cid
+         * @memberof curves.GameStatsPoint
+         * @instance
+         */
+        GameStatsPoint.prototype.cid = 0;
+
+        /**
+         * GameStatsPoint team1.
+         * @member {curves.GameStatsPoint.ITeamStats|null|undefined} team1
+         * @memberof curves.GameStatsPoint
+         * @instance
+         */
+        GameStatsPoint.prototype.team1 = null;
+
+        /**
+         * GameStatsPoint team2.
+         * @member {curves.GameStatsPoint.ITeamStats|null|undefined} team2
+         * @memberof curves.GameStatsPoint
+         * @instance
+         */
+        GameStatsPoint.prototype.team2 = null;
+
+        /**
+         * Creates a new GameStatsPoint instance using the specified properties.
+         * @function create
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {curves.IGameStatsPoint=} [properties] Properties to set
+         * @returns {curves.GameStatsPoint} GameStatsPoint instance
+         */
+        GameStatsPoint.create = function create(properties) {
+            return new GameStatsPoint(properties);
+        };
+
+        /**
+         * Encodes the specified GameStatsPoint message. Does not implicitly {@link curves.GameStatsPoint.verify|verify} messages.
+         * @function encode
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {curves.IGameStatsPoint} message GameStatsPoint message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameStatsPoint.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.t != null && message.hasOwnProperty("t"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.t);
+            if (message.cid != null && message.hasOwnProperty("cid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.cid);
+            if (message.team1 != null && message.hasOwnProperty("team1"))
+                $root.curves.GameStatsPoint.TeamStats.encode(message.team1, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.team2 != null && message.hasOwnProperty("team2"))
+                $root.curves.GameStatsPoint.TeamStats.encode(message.team2, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameStatsPoint message, length delimited. Does not implicitly {@link curves.GameStatsPoint.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {curves.IGameStatsPoint} message GameStatsPoint message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameStatsPoint.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameStatsPoint message from the specified reader or buffer.
+         * @function decode
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {curves.GameStatsPoint} GameStatsPoint
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameStatsPoint.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.curves.GameStatsPoint();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.t = reader.float();
+                    break;
+                case 2:
+                    message.cid = reader.int32();
+                    break;
+                case 3:
+                    message.team1 = $root.curves.GameStatsPoint.TeamStats.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.team2 = $root.curves.GameStatsPoint.TeamStats.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GameStatsPoint message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {curves.GameStatsPoint} GameStatsPoint
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameStatsPoint.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameStatsPoint message.
+         * @function verify
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameStatsPoint.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.t != null && message.hasOwnProperty("t"))
+                if (typeof message.t !== "number")
+                    return "t: number expected";
+            if (message.cid != null && message.hasOwnProperty("cid"))
+                if (!$util.isInteger(message.cid))
+                    return "cid: integer expected";
+            if (message.team1 != null && message.hasOwnProperty("team1")) {
+                var error = $root.curves.GameStatsPoint.TeamStats.verify(message.team1);
+                if (error)
+                    return "team1." + error;
+            }
+            if (message.team2 != null && message.hasOwnProperty("team2")) {
+                var error = $root.curves.GameStatsPoint.TeamStats.verify(message.team2);
+                if (error)
+                    return "team2." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GameStatsPoint message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {curves.GameStatsPoint} GameStatsPoint
+         */
+        GameStatsPoint.fromObject = function fromObject(object) {
+            if (object instanceof $root.curves.GameStatsPoint)
+                return object;
+            var message = new $root.curves.GameStatsPoint();
+            if (object.t != null)
+                message.t = Number(object.t);
+            if (object.cid != null)
+                message.cid = object.cid | 0;
+            if (object.team1 != null) {
+                if (typeof object.team1 !== "object")
+                    throw TypeError(".curves.GameStatsPoint.team1: object expected");
+                message.team1 = $root.curves.GameStatsPoint.TeamStats.fromObject(object.team1);
+            }
+            if (object.team2 != null) {
+                if (typeof object.team2 !== "object")
+                    throw TypeError(".curves.GameStatsPoint.team2: object expected");
+                message.team2 = $root.curves.GameStatsPoint.TeamStats.fromObject(object.team2);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameStatsPoint message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof curves.GameStatsPoint
+         * @static
+         * @param {curves.GameStatsPoint} message GameStatsPoint
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameStatsPoint.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.t = 0;
+                object.cid = 0;
+                object.team1 = null;
+                object.team2 = null;
+            }
+            if (message.t != null && message.hasOwnProperty("t"))
+                object.t = options.json && !isFinite(message.t) ? String(message.t) : message.t;
+            if (message.cid != null && message.hasOwnProperty("cid"))
+                object.cid = message.cid;
+            if (message.team1 != null && message.hasOwnProperty("team1"))
+                object.team1 = $root.curves.GameStatsPoint.TeamStats.toObject(message.team1, options);
+            if (message.team2 != null && message.hasOwnProperty("team2"))
+                object.team2 = $root.curves.GameStatsPoint.TeamStats.toObject(message.team2, options);
+            return object;
+        };
+
+        /**
+         * Converts this GameStatsPoint to JSON.
+         * @function toJSON
+         * @memberof curves.GameStatsPoint
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameStatsPoint.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        GameStatsPoint.TeamStats = (function() {
+
+            /**
+             * Properties of a TeamStats.
+             * @memberof curves.GameStatsPoint
+             * @interface ITeamStats
+             * @property {number|null} [power] TeamStats power
+             * @property {number|null} [resources] TeamStats resources
+             * @property {number|null} [workers] TeamStats workers
+             * @property {number|null} [warriors] TeamStats warriors
+             */
+
+            /**
+             * Constructs a new TeamStats.
+             * @memberof curves.GameStatsPoint
+             * @classdesc Represents a TeamStats.
+             * @implements ITeamStats
+             * @constructor
+             * @param {curves.GameStatsPoint.ITeamStats=} [properties] Properties to set
+             */
+            function TeamStats(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * TeamStats power.
+             * @member {number} power
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @instance
+             */
+            TeamStats.prototype.power = 0;
+
+            /**
+             * TeamStats resources.
+             * @member {number} resources
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @instance
+             */
+            TeamStats.prototype.resources = 0;
+
+            /**
+             * TeamStats workers.
+             * @member {number} workers
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @instance
+             */
+            TeamStats.prototype.workers = 0;
+
+            /**
+             * TeamStats warriors.
+             * @member {number} warriors
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @instance
+             */
+            TeamStats.prototype.warriors = 0;
+
+            /**
+             * Creates a new TeamStats instance using the specified properties.
+             * @function create
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {curves.GameStatsPoint.ITeamStats=} [properties] Properties to set
+             * @returns {curves.GameStatsPoint.TeamStats} TeamStats instance
+             */
+            TeamStats.create = function create(properties) {
+                return new TeamStats(properties);
+            };
+
+            /**
+             * Encodes the specified TeamStats message. Does not implicitly {@link curves.GameStatsPoint.TeamStats.verify|verify} messages.
+             * @function encode
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {curves.GameStatsPoint.ITeamStats} message TeamStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TeamStats.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.power != null && message.hasOwnProperty("power"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.power);
+                if (message.resources != null && message.hasOwnProperty("resources"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.resources);
+                if (message.workers != null && message.hasOwnProperty("workers"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.workers);
+                if (message.warriors != null && message.hasOwnProperty("warriors"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.warriors);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TeamStats message, length delimited. Does not implicitly {@link curves.GameStatsPoint.TeamStats.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {curves.GameStatsPoint.ITeamStats} message TeamStats message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TeamStats.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a TeamStats message from the specified reader or buffer.
+             * @function decode
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {curves.GameStatsPoint.TeamStats} TeamStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TeamStats.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.curves.GameStatsPoint.TeamStats();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.power = reader.int32();
+                        break;
+                    case 2:
+                        message.resources = reader.int32();
+                        break;
+                    case 3:
+                        message.workers = reader.int32();
+                        break;
+                    case 4:
+                        message.warriors = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a TeamStats message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {curves.GameStatsPoint.TeamStats} TeamStats
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TeamStats.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TeamStats message.
+             * @function verify
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TeamStats.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.power != null && message.hasOwnProperty("power"))
+                    if (!$util.isInteger(message.power))
+                        return "power: integer expected";
+                if (message.resources != null && message.hasOwnProperty("resources"))
+                    if (!$util.isInteger(message.resources))
+                        return "resources: integer expected";
+                if (message.workers != null && message.hasOwnProperty("workers"))
+                    if (!$util.isInteger(message.workers))
+                        return "workers: integer expected";
+                if (message.warriors != null && message.hasOwnProperty("warriors"))
+                    if (!$util.isInteger(message.warriors))
+                        return "warriors: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a TeamStats message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {curves.GameStatsPoint.TeamStats} TeamStats
+             */
+            TeamStats.fromObject = function fromObject(object) {
+                if (object instanceof $root.curves.GameStatsPoint.TeamStats)
+                    return object;
+                var message = new $root.curves.GameStatsPoint.TeamStats();
+                if (object.power != null)
+                    message.power = object.power | 0;
+                if (object.resources != null)
+                    message.resources = object.resources | 0;
+                if (object.workers != null)
+                    message.workers = object.workers | 0;
+                if (object.warriors != null)
+                    message.warriors = object.warriors | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TeamStats message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @static
+             * @param {curves.GameStatsPoint.TeamStats} message TeamStats
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TeamStats.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.power = 0;
+                    object.resources = 0;
+                    object.workers = 0;
+                    object.warriors = 0;
+                }
+                if (message.power != null && message.hasOwnProperty("power"))
+                    object.power = message.power;
+                if (message.resources != null && message.hasOwnProperty("resources"))
+                    object.resources = message.resources;
+                if (message.workers != null && message.hasOwnProperty("workers"))
+                    object.workers = message.workers;
+                if (message.warriors != null && message.hasOwnProperty("warriors"))
+                    object.warriors = message.warriors;
+                return object;
+            };
+
+            /**
+             * Converts this TeamStats to JSON.
+             * @function toJSON
+             * @memberof curves.GameStatsPoint.TeamStats
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TeamStats.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return TeamStats;
+        })();
+
+        return GameStatsPoint;
+    })();
+
     return curves;
 })();
 
 module.exports = $root;
 
-},{"protobufjs/minimal":186}],3:[function(require,module,exports){
+},{"protobufjs/minimal":187}],3:[function(require,module,exports){
 "use strict";
 module.exports = asPromise;
 
@@ -50184,7 +51429,7 @@ if ('undefined' !== typeof module) {
 
 
 }).call(this,require('_process'))
-},{"_process":185}],15:[function(require,module,exports){
+},{"_process":186}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -50703,7 +51948,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":185}],19:[function(require,module,exports){
+},{"_process":186}],19:[function(require,module,exports){
 var EMPTY_ARRAY_BUFFER = new ArrayBuffer(0);
 
 /**
@@ -52346,6 +53591,19 @@ var setPrecision = function(src, precision)
 module.exports = setPrecision;
 
 },{}],36:[function(require,module,exports){
+(function (global){
+/*!
+ * pixi-particles - v3.1.0
+ * Compiled Wed, 29 Aug 2018 15:47:46 UTC
+ *
+ * pixi-particles is licensed under the MIT License.
+ * http://www.opensource.org/licenses/mit-license
+ */
+!function(t){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=t();else if("function"==typeof define&&define.amd)define([],t);else{var e;e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,e.pixiParticles=t()}}(function(){return function(){function t(e,i,s){function a(n,o){if(!i[n]){if(!e[n]){var h="function"==typeof require&&require;if(!o&&h)return h(n,!0);if(r)return r(n,!0);var l=new Error("Cannot find module '"+n+"'");throw l.code="MODULE_NOT_FOUND",l}var p=i[n]={exports:{}};e[n][0].call(p.exports,function(t){var i=e[n][1][t];return a(i||t)},p,p.exports,t,e,i,s)}return i[n].exports}for(var r="function"==typeof require&&require,n=0;n<s.length;n++)a(s[n]);return a}return t}()({1:[function(t,e,i){"use strict";var s=this&&this.__extends||function(){var t=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var i in e)e.hasOwnProperty(i)&&(t[i]=e[i])};return function(e,i){function s(){this.constructor=e}t(e,i),e.prototype=null===i?Object.create(i):(s.prototype=i.prototype,new s)}}();Object.defineProperty(i,"__esModule",{value:!0});var a=t("./Particle"),r=PIXI.Texture,n=function(t){function e(e){var i=t.call(this,e)||this;return i.textures=null,i.duration=0,i.framerate=0,i.elapsed=0,i.loop=!1,i}return s(e,t),e.prototype.init=function(){this.Particle_init(),this.elapsed=0,this.framerate<0&&(this.duration=this.maxLife,this.framerate=this.textures.length/this.duration)},e.prototype.applyArt=function(t){this.textures=t.textures,this.framerate=t.framerate,this.duration=t.duration,this.loop=t.loop},e.prototype.update=function(t){var e=this.Particle_update(t);if(e>=0){this.elapsed+=t,this.elapsed>this.duration&&(this.loop?this.elapsed=this.elapsed%this.duration:this.elapsed=this.duration-1e-6);var i=this.elapsed*this.framerate+1e-7|0;this.texture=this.textures[i]||PIXI.Texture.EMPTY}return e},e.prototype.destroy=function(){this.Particle_destroy(),this.textures=null},e.parseArt=function(t){for(var e,i,s,a,n,o=[],h=0;h<t.length;++h){e=t[h],o[h]=i={},i.textures=n=[],s=e.textures;for(var l=0;l<s.length;++l)if("string"==typeof(a=s[l]))n.push(r.fromImage(a));else if(a instanceof r)n.push(a);else{var p=a.count||1;for(a="string"==typeof a.texture?r.fromImage(a.texture):a.texture;p>0;--p)n.push(a)}"matchLife"==e.framerate?(i.framerate=-1,i.duration=0,i.loop=!1):(i.loop=!!e.loop,i.framerate=e.framerate>0?e.framerate:60,i.duration=n.length/i.framerate)}return o},e}(a.default);i.default=n},{"./Particle":3}],2:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=t("./ParticleUtils"),a=t("./Particle"),r=t("./PropertyNode"),n=PIXI.ticker.shared,o=new PIXI.Point,h=function(){function t(t,e,i){this._particleConstructor=a.default,this.particleImages=null,this.startAlpha=null,this.startSpeed=null,this.minimumSpeedMultiplier=1,this.acceleration=null,this.maxSpeed=NaN,this.startScale=null,this.minimumScaleMultiplier=1,this.startColor=null,this.minLifetime=0,this.maxLifetime=0,this.minStartRotation=0,this.maxStartRotation=0,this.noRotation=!1,this.minRotationSpeed=0,this.maxRotationSpeed=0,this.particleBlendMode=0,this.customEase=null,this.extraData=null,this._frequency=1,this.spawnChance=1,this.maxParticles=1e3,this.emitterLifetime=-1,this.spawnPos=null,this.spawnType=null,this._spawnFunc=null,this.spawnRect=null,this.spawnCircle=null,this.particlesPerWave=1,this.particleSpacing=0,this.angleStart=0,this.rotation=0,this.ownerPos=null,this._prevEmitterPos=null,this._prevPosIsValid=!1,this._posChanged=!1,this._parent=null,this.addAtBack=!1,this.particleCount=0,this._emit=!1,this._spawnTimer=0,this._emitterLife=-1,this._activeParticlesFirst=null,this._activeParticlesLast=null,this._poolFirst=null,this._origConfig=null,this._origArt=null,this._autoUpdate=!1,this._destroyWhenComplete=!1,this._completeCallback=null,this.parent=t,e&&i&&this.init(e,i),this.recycle=this.recycle,this.update=this.update,this.rotate=this.rotate,this.updateSpawnPos=this.updateSpawnPos,this.updateOwnerPos=this.updateOwnerPos}return Object.defineProperty(t.prototype,"frequency",{get:function(){return this._frequency},set:function(t){this._frequency="number"==typeof t&&t>0?t:1},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"particleConstructor",{get:function(){return this._particleConstructor},set:function(t){if(t!=this._particleConstructor){this._particleConstructor=t,this.cleanup();for(var e=this._poolFirst;e;e=e.next)e.destroy();this._poolFirst=null,this._origConfig&&this._origArt&&this.init(this._origArt,this._origConfig)}},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"parent",{get:function(){return this._parent},set:function(t){this.cleanup(),this._parent=t},enumerable:!0,configurable:!0}),t.prototype.init=function(t,e){if(t&&e){this.cleanup(),this._origConfig=e,this._origArt=t,t=Array.isArray(t)?t.slice():[t];var i=this._particleConstructor;this.particleImages=i.parseArt?i.parseArt(t):t,e.alpha?this.startAlpha=r.default.createList(e.alpha):this.startAlpha=new r.default(1,0),e.speed?(this.startSpeed=r.default.createList(e.speed),this.minimumSpeedMultiplier=e.speed.minimumSpeedMultiplier||1):(this.minimumSpeedMultiplier=1,this.startSpeed=new r.default(0,0));var a=e.acceleration;a&&(a.x||a.y)?(this.startSpeed.next=null,this.acceleration=new PIXI.Point(a.x,a.y),this.maxSpeed=e.maxSpeed||NaN):this.acceleration=new PIXI.Point,e.scale?(this.startScale=r.default.createList(e.scale),this.minimumScaleMultiplier=e.scale.minimumScaleMultiplier||1):(this.startScale=new r.default(1,0),this.minimumScaleMultiplier=1),e.color?this.startColor=r.default.createList(e.color):this.startColor=new r.default({r:255,g:255,b:255},0),e.startRotation?(this.minStartRotation=e.startRotation.min,this.maxStartRotation=e.startRotation.max):this.minStartRotation=this.maxStartRotation=0,e.noRotation&&(this.minStartRotation||this.maxStartRotation)?this.noRotation=!!e.noRotation:this.noRotation=!1,e.rotationSpeed?(this.minRotationSpeed=e.rotationSpeed.min,this.maxRotationSpeed=e.rotationSpeed.max):this.minRotationSpeed=this.maxRotationSpeed=0,this.minLifetime=e.lifetime.min,this.maxLifetime=e.lifetime.max,this.particleBlendMode=s.default.getBlendMode(e.blendMode),e.ease?this.customEase="function"==typeof e.ease?e.ease:s.default.generateEase(e.ease):this.customEase=null,i.parseData?this.extraData=i.parseData(e.extraData):this.extraData=e.extraData||null,this.spawnRect=this.spawnCircle=null,this.particlesPerWave=1,e.particlesPerWave&&e.particlesPerWave>1&&(this.particlesPerWave=e.particlesPerWave),this.particleSpacing=0,this.angleStart=0;var n;switch(e.spawnType){case"rect":this.spawnType="rect",this._spawnFunc=this._spawnRect;var o=e.spawnRect;this.spawnRect=new PIXI.Rectangle(o.x,o.y,o.w,o.h);break;case"circle":this.spawnType="circle",this._spawnFunc=this._spawnCircle,n=e.spawnCircle,this.spawnCircle=new PIXI.Circle(n.x,n.y,n.r);break;case"ring":this.spawnType="ring",this._spawnFunc=this._spawnRing,n=e.spawnCircle,this.spawnCircle=new PIXI.Circle(n.x,n.y,n.r),this.spawnCircle.minRadius=n.minR;break;case"burst":this.spawnType="burst",this._spawnFunc=this._spawnBurst,this.particleSpacing=e.particleSpacing,this.angleStart=e.angleStart?e.angleStart:0;break;case"point":default:this.spawnType="point",this._spawnFunc=this._spawnPoint}this.frequency=e.frequency,this.spawnChance="number"==typeof e.spawnChance&&e.spawnChance>0?e.spawnChance:1,this.emitterLifetime=e.emitterLifetime||-1,this.maxParticles=e.maxParticles>0?e.maxParticles:1e3,this.addAtBack=!!e.addAtBack,this.rotation=0,this.ownerPos=new PIXI.Point,this.spawnPos=new PIXI.Point(e.pos.x,e.pos.y),this._prevEmitterPos=this.spawnPos.clone(),this._prevPosIsValid=!1,this._spawnTimer=0,this.emit=void 0===e.emit||!!e.emit,this.autoUpdate=void 0!==e.autoUpdate&&!!e.autoUpdate}},t.prototype.recycle=function(t){t.next&&(t.next.prev=t.prev),t.prev&&(t.prev.next=t.next),t==this._activeParticlesLast&&(this._activeParticlesLast=t.prev),t==this._activeParticlesFirst&&(this._activeParticlesFirst=t.next),t.prev=null,t.next=this._poolFirst,this._poolFirst=t,t.parent&&t.parent.removeChild(t),--this.particleCount},t.prototype.rotate=function(t){if(this.rotation!=t){var e=t-this.rotation;this.rotation=t,s.default.rotatePoint(e,this.spawnPos),this._posChanged=!0}},t.prototype.updateSpawnPos=function(t,e){this._posChanged=!0,this.spawnPos.x=t,this.spawnPos.y=e},t.prototype.updateOwnerPos=function(t,e){this._posChanged=!0,this.ownerPos.x=t,this.ownerPos.y=e},t.prototype.resetPositionTracking=function(){this._prevPosIsValid=!1},Object.defineProperty(t.prototype,"emit",{get:function(){return this._emit},set:function(t){this._emit=!!t,this._emitterLife=this.emitterLifetime},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"autoUpdate",{get:function(){return this._autoUpdate},set:function(t){this._autoUpdate&&!t?n.remove(this.update,this):!this._autoUpdate&&t&&n.add(this.update,this),this._autoUpdate=!!t},enumerable:!0,configurable:!0}),t.prototype.playOnceAndDestroy=function(t){this.autoUpdate=!0,this.emit=!0,this._destroyWhenComplete=!0,this._completeCallback=t},t.prototype.playOnce=function(t){this.emit=!0,this._completeCallback=t},t.prototype.update=function(t){if(this._autoUpdate&&(t=t/PIXI.settings.TARGET_FPMS/1e3),this._parent){var e,i,s;for(i=this._activeParticlesFirst;i;i=s)s=i.next,i.update(t);var a,r;this._prevPosIsValid&&(a=this._prevEmitterPos.x,r=this._prevEmitterPos.y);var n=this.ownerPos.x+this.spawnPos.x,o=this.ownerPos.y+this.spawnPos.y;if(this._emit)for(this._spawnTimer-=t<0?0:t;this._spawnTimer<=0;){if(this._emitterLife>0&&(this._emitterLife-=this._frequency,this._emitterLife<=0)){this._spawnTimer=0,this._emitterLife=0,this.emit=!1;break}if(this.particleCount>=this.maxParticles)this._spawnTimer+=this._frequency;else{var h=void 0;if(h=this.minLifetime==this.maxLifetime?this.minLifetime:Math.random()*(this.maxLifetime-this.minLifetime)+this.minLifetime,-this._spawnTimer<h){var l=void 0,p=void 0;if(this._prevPosIsValid&&this._posChanged){var c=1+this._spawnTimer/t;l=(n-a)*c+a,p=(o-r)*c+r}else l=n,p=o;e=0;for(var u=Math.min(this.particlesPerWave,this.maxParticles-this.particleCount);e<u;++e)if(!(this.spawnChance<1&&Math.random()>=this.spawnChance)){var d=void 0;if(this._poolFirst?(d=this._poolFirst,this._poolFirst=this._poolFirst.next,d.next=null):d=new this.particleConstructor(this),this.particleImages.length>1?d.applyArt(this.particleImages[Math.floor(Math.random()*this.particleImages.length)]):d.applyArt(this.particleImages[0]),d.alphaList.reset(this.startAlpha),1!=this.minimumSpeedMultiplier&&(d.speedMultiplier=Math.random()*(1-this.minimumSpeedMultiplier)+this.minimumSpeedMultiplier),d.speedList.reset(this.startSpeed),d.acceleration.x=this.acceleration.x,d.acceleration.y=this.acceleration.y,d.maxSpeed=this.maxSpeed,1!=this.minimumScaleMultiplier&&(d.scaleMultiplier=Math.random()*(1-this.minimumScaleMultiplier)+this.minimumScaleMultiplier),d.scaleList.reset(this.startScale),d.colorList.reset(this.startColor),this.minRotationSpeed==this.maxRotationSpeed?d.rotationSpeed=this.minRotationSpeed:d.rotationSpeed=Math.random()*(this.maxRotationSpeed-this.minRotationSpeed)+this.minRotationSpeed,d.noRotation=this.noRotation,d.maxLife=h,d.blendMode=this.particleBlendMode,d.ease=this.customEase,d.extraData=this.extraData,this._spawnFunc(d,l,p,e),d.init(),d.update(-this._spawnTimer),d.parent){var f=this._parent.children;if(f[0]==d)f.shift();else if(f[f.length-1]==d)f.pop();else{var m=f.indexOf(d);f.splice(m,1)}this.addAtBack?f.unshift(d):f.push(d)}else this.addAtBack?this._parent.addChildAt(d,0):this._parent.addChild(d);this._activeParticlesLast?(this._activeParticlesLast.next=d,d.prev=this._activeParticlesLast,this._activeParticlesLast=d):this._activeParticlesLast=this._activeParticlesFirst=d,++this.particleCount}}this._spawnTimer+=this._frequency}}this._posChanged&&(this._prevEmitterPos.x=n,this._prevEmitterPos.y=o,this._prevPosIsValid=!0,this._posChanged=!1),this._emit||this._activeParticlesFirst||(this._completeCallback&&this._completeCallback(),this._destroyWhenComplete&&this.destroy())}},t.prototype._spawnPoint=function(t,e,i){this.minStartRotation==this.maxStartRotation?t.rotation=this.minStartRotation+this.rotation:t.rotation=Math.random()*(this.maxStartRotation-this.minStartRotation)+this.minStartRotation+this.rotation,t.position.x=e,t.position.y=i},t.prototype._spawnRect=function(t,e,i){this.minStartRotation==this.maxStartRotation?t.rotation=this.minStartRotation+this.rotation:t.rotation=Math.random()*(this.maxStartRotation-this.minStartRotation)+this.minStartRotation+this.rotation,o.x=Math.random()*this.spawnRect.width+this.spawnRect.x,o.y=Math.random()*this.spawnRect.height+this.spawnRect.y,0!==this.rotation&&s.default.rotatePoint(this.rotation,o),t.position.x=e+o.x,t.position.y=i+o.y},t.prototype._spawnCircle=function(t,e,i){this.minStartRotation==this.maxStartRotation?t.rotation=this.minStartRotation+this.rotation:t.rotation=Math.random()*(this.maxStartRotation-this.minStartRotation)+this.minStartRotation+this.rotation,o.x=Math.random()*this.spawnCircle.radius,o.y=0,s.default.rotatePoint(360*Math.random(),o),o.x+=this.spawnCircle.x,o.y+=this.spawnCircle.y,0!==this.rotation&&s.default.rotatePoint(this.rotation,o),t.position.x=e+o.x,t.position.y=i+o.y},t.prototype._spawnRing=function(t,e,i){var a=this.spawnCircle;this.minStartRotation==this.maxStartRotation?t.rotation=this.minStartRotation+this.rotation:t.rotation=Math.random()*(this.maxStartRotation-this.minStartRotation)+this.minStartRotation+this.rotation,a.minRadius!==a.radius?o.x=Math.random()*(a.radius-a.minRadius)+a.minRadius:o.x=a.radius,o.y=0;var r=360*Math.random();t.rotation+=r,s.default.rotatePoint(r,o),o.x+=this.spawnCircle.x,o.y+=this.spawnCircle.y,0!==this.rotation&&s.default.rotatePoint(this.rotation,o),t.position.x=e+o.x,t.position.y=i+o.y},t.prototype._spawnBurst=function(t,e,i,s){0===this.particleSpacing?t.rotation=360*Math.random():t.rotation=this.angleStart+this.particleSpacing*s+this.rotation,t.position.x=e,t.position.y=i},t.prototype.cleanup=function(){var t,e;for(t=this._activeParticlesFirst;t;t=e)e=t.next,this.recycle(t),t.parent&&t.parent.removeChild(t);this._activeParticlesFirst=this._activeParticlesLast=null,this.particleCount=0},t.prototype.destroy=function(){this.autoUpdate=!1,this.cleanup();for(var t,e=this._poolFirst;e;e=t)t=e.next,e.destroy();this._poolFirst=this._parent=this.particleImages=this.spawnPos=this.ownerPos=this.startColor=this.startScale=this.startAlpha=this.startSpeed=this.customEase=this._completeCallback=null},t}();i.default=h},{"./Particle":3,"./ParticleUtils":4,"./PropertyNode":7}],3:[function(t,e,i){"use strict";var s=this&&this.__extends||function(){var t=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var i in e)e.hasOwnProperty(i)&&(t[i]=e[i])};return function(e,i){function s(){this.constructor=e}t(e,i),e.prototype=null===i?Object.create(i):(s.prototype=i.prototype,new s)}}();Object.defineProperty(i,"__esModule",{value:!0});var a=t("./ParticleUtils"),r=t("./PropertyList"),n=PIXI.Sprite,o=function(t){function e(i){var s=t.call(this)||this;return s.emitter=i,s.anchor.x=s.anchor.y=.5,s.velocity=new PIXI.Point,s.maxLife=0,s.age=0,s.ease=null,s.extraData=null,s.alphaList=new r.default,s.speedList=new r.default,s.speedMultiplier=1,s.acceleration=new PIXI.Point,s.maxSpeed=NaN,s.scaleList=new r.default,s.scaleMultiplier=1,s.colorList=new r.default(!0),s._doAlpha=!1,s._doScale=!1,s._doSpeed=!1,s._doAcceleration=!1,s._doColor=!1,s._doNormalMovement=!1,s._oneOverLife=0,s.next=null,s.prev=null,s.init=s.init,s.Particle_init=e.prototype.init,s.update=s.update,s.Particle_update=e.prototype.update,s.Sprite_destroy=t.prototype.destroy,s.Particle_destroy=e.prototype.destroy,s.applyArt=s.applyArt,s.kill=s.kill,s}return s(e,t),e.prototype.init=function(){this.age=0,this.velocity.x=this.speedList.current.value*this.speedMultiplier,this.velocity.y=0,a.default.rotatePoint(this.rotation,this.velocity),this.noRotation?this.rotation=0:this.rotation*=a.default.DEG_TO_RADS,this.rotationSpeed*=a.default.DEG_TO_RADS,this.alpha=this.alphaList.current.value,this.scale.x=this.scale.y=this.scaleList.current.value,this._doAlpha=!!this.alphaList.current.next,this._doSpeed=!!this.speedList.current.next,this._doScale=!!this.scaleList.current.next,this._doColor=!!this.colorList.current.next,this._doAcceleration=0!==this.acceleration.x||0!==this.acceleration.y,this._doNormalMovement=this._doSpeed||0!==this.speedList.current.value||this._doAcceleration,this._oneOverLife=1/this.maxLife;var t=this.colorList.current.value;this.tint=a.default.combineRGBComponents(t.r,t.g,t.b),this.visible=!0},e.prototype.applyArt=function(t){this.texture=t||PIXI.Texture.EMPTY},e.prototype.update=function(t){if(this.age+=t,this.age>=this.maxLife||this.age<0)return this.kill(),-1;var e=this.age*this._oneOverLife;if(this.ease&&(e=4==this.ease.length?this.ease(e,0,1,1):this.ease(e)),this._doAlpha&&(this.alpha=this.alphaList.interpolate(e)),this._doScale){var i=this.scaleList.interpolate(e)*this.scaleMultiplier;this.scale.x=this.scale.y=i}if(this._doNormalMovement){if(this._doSpeed){var s=this.speedList.interpolate(e)*this.speedMultiplier;a.default.normalize(this.velocity),a.default.scaleBy(this.velocity,s)}else if(this._doAcceleration&&(this.velocity.x+=this.acceleration.x*t,this.velocity.y+=this.acceleration.y*t,this.maxSpeed)){var r=a.default.length(this.velocity);r>this.maxSpeed&&a.default.scaleBy(this.velocity,this.maxSpeed/r)}this.position.x+=this.velocity.x*t,this.position.y+=this.velocity.y*t}return this._doColor&&(this.tint=this.colorList.interpolate(e)),0!==this.rotationSpeed?this.rotation+=this.rotationSpeed*t:this.acceleration&&!this.noRotation&&(this.rotation=Math.atan2(this.velocity.y,this.velocity.x)),e},e.prototype.kill=function(){this.emitter.recycle(this)},e.prototype.destroy=function(){this.parent&&this.parent.removeChild(this),this.Sprite_destroy(),this.emitter=this.velocity=this.colorList=this.scaleList=this.alphaList=this.speedList=this.ease=this.next=this.prev=null},e.parseArt=function(t){var e;for(e=t.length;e>=0;--e)"string"==typeof t[e]&&(t[e]=PIXI.Texture.fromImage(t[e]));if(a.default.verbose)for(e=t.length-1;e>0;--e)if(t[e].baseTexture!=t[e-1].baseTexture){window.console&&console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");break}return t},e.parseData=function(t){return t},e}(n);i.default=o},{"./ParticleUtils":4,"./PropertyList":6}],4:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=PIXI.BLEND_MODES,a=t("./PropertyNode"),r={verbose:!1,DEG_TO_RADS:Math.PI/180,rotatePoint:function(t,e){if(t){t*=r.DEG_TO_RADS;var i=Math.sin(t),s=Math.cos(t),a=e.x*s-e.y*i,n=e.x*i+e.y*s;e.x=a,e.y=n}},combineRGBComponents:function(t,e,i){return t<<16|e<<8|i},normalize:function(t){var e=1/r.length(t);t.x*=e,t.y*=e},scaleBy:function(t,e){t.x*=e,t.y*=e},length:function(t){return Math.sqrt(t.x*t.x+t.y*t.y)},hexToRGB:function(t,e){e||(e={}),"#"==t.charAt(0)?t=t.substr(1):0===t.indexOf("0x")&&(t=t.substr(2));var i;return 8==t.length&&(i=t.substr(0,2),t=t.substr(2)),e.r=parseInt(t.substr(0,2),16),e.g=parseInt(t.substr(2,2),16),e.b=parseInt(t.substr(4,2),16),i&&(e.a=parseInt(i,16)),e},generateEase:function(t){var e=t.length,i=1/e;return function(s){var a,r,n=e*s|0;return a=(s-n*i)*e,r=t[n]||t[e-1],r.s+a*(2*(1-a)*(r.cp-r.s)+a*(r.e-r.s))}},getBlendMode:function(t){if(!t)return s.NORMAL;for(t=t.toUpperCase();t.indexOf(" ")>=0;)t=t.replace(" ","_");return s[t]||s.NORMAL},createSteppedGradient:function(t,e){void 0===e&&(e=10),("number"!=typeof e||e<=0)&&(e=10);var i=new a.default(t[0].value,t[0].time);i.isStepped=!0;for(var s=i,n=t[0],o=1,h=t[o],l=1;l<e;++l){for(var p=l/e;p>h.time;)n=h,h=t[++o];p=(p-n.time)/(h.time-n.time);var c=r.hexToRGB(n.value),u=r.hexToRGB(h.value),d={};d.r=(u.r-c.r)*p+c.r,d.g=(u.g-c.g)*p+c.g,d.b=(u.b-c.b)*p+c.b,s.next=new a.default(d,l/e),s=s.next}return i}};i.default=r},{"./PropertyNode":7}],5:[function(t,e,i){"use strict";var s=this&&this.__extends||function(){var t=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var i in e)e.hasOwnProperty(i)&&(t[i]=e[i])};return function(e,i){function s(){this.constructor=e}t(e,i),e.prototype=null===i?Object.create(i):(s.prototype=i.prototype,new s)}}();Object.defineProperty(i,"__esModule",{value:!0});var a=t("./ParticleUtils"),r=t("./Particle"),n=new PIXI.Point,o=["pow","sqrt","abs","floor","round","ceil","E","PI","sin","cos","tan","asin","acos","atan","atan2","log"],h=new RegExp(["[01234567890\\.\\*\\-\\+\\/\\(\\)x ,]"].concat(o).join("|"),"g"),l=function(t){for(var e=t.match(h),i=e.length-1;i>=0;--i)o.indexOf(e[i])>=0&&(e[i]="Math."+e[i]);return t=e.join(""),new Function("x","return "+t+";")},p=function(t){function e(e){var i=t.call(this,e)||this;return i.path=null,i.initialRotation=0,i.initialPosition=new PIXI.Point,i.movement=0,i}return s(e,t),e.prototype.init=function(){this.initialRotation=this.rotation,this.Particle_init(),this.path=this.extraData.path,this._doNormalMovement=!this.path,this.movement=0,this.initialPosition.x=this.position.x,this.initialPosition.y=this.position.y},e.prototype.update=function(t){var e=this.Particle_update(t);if(e>=0&&this.path){var i=this.speedList.interpolate(e)*this.speedMultiplier;this.movement+=i*t,n.x=this.movement,n.y=this.path(this.movement),a.default.rotatePoint(this.initialRotation,n),this.position.x=this.initialPosition.x+n.x,this.position.y=this.initialPosition.y+n.y}return e},e.prototype.destroy=function(){this.Particle_destroy(),this.path=this.initialPosition=null},e.parseArt=function(t){return r.default.parseArt(t)},e.parseData=function(t){var e={};if(t&&t.path)try{e.path=l(t.path)}catch(t){a.default.verbose&&console.error("PathParticle: error in parsing path expression"),e.path=null}else a.default.verbose&&console.error("PathParticle requires a path string in extraData!"),e.path=null;return e},e}(r.default);i.default=p},{"./Particle":3,"./ParticleUtils":4}],6:[function(t,e,i){"use strict";function s(t){return this.ease&&(t=this.ease(t)),(this.next.value-this.current.value)*t+this.current.value}function a(t){this.ease&&(t=this.ease(t));var e=this.current.value,i=this.next.value,s=(i.r-e.r)*t+e.r,a=(i.g-e.g)*t+e.g,r=(i.b-e.b)*t+e.b;return l.default.combineRGBComponents(s,a,r)}function r(t){for(this.ease&&(t=this.ease(t));t>this.next.time;)this.current=this.next,this.next=this.next.next;return t=(t-this.current.time)/(this.next.time-this.current.time),(this.next.value-this.current.value)*t+this.current.value}function n(t){for(this.ease&&(t=this.ease(t));t>this.next.time;)this.current=this.next,this.next=this.next.next;t=(t-this.current.time)/(this.next.time-this.current.time);var e=this.current.value,i=this.next.value,s=(i.r-e.r)*t+e.r,a=(i.g-e.g)*t+e.g,r=(i.b-e.b)*t+e.b;return l.default.combineRGBComponents(s,a,r)}function o(t){for(this.ease&&(t=this.ease(t));this.next&&t>this.next.time;)this.current=this.next,this.next=this.next.next;return this.current.value}function h(t){for(this.ease&&(t=this.ease(t));this.next&&t>this.next.time;)this.current=this.next,this.next=this.next.next;var e=this.current.value;return l.default.combineRGBComponents(e.r,e.g,e.b)}Object.defineProperty(i,"__esModule",{value:!0});var l=t("./ParticleUtils"),p=function(){function t(t){void 0===t&&(t=!1),this.current=null,this.next=null,this.isColor=!!t,this.interpolate=null,this.ease=null}return t.prototype.reset=function(t){this.current=t,this.next=t.next,this.next&&this.next.time>=1?this.interpolate=this.isColor?a:s:t.isStepped?this.interpolate=this.isColor?h:o:this.interpolate=this.isColor?n:r,this.ease=this.current.ease},t}();i.default=p},{"./ParticleUtils":4}],7:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=t("./ParticleUtils"),a=function(){function t(t,e,i){this.value="string"==typeof t?s.default.hexToRGB(t):t,this.time=e,this.next=null,this.isStepped=!1,this.ease=i?"function"==typeof i?i:s.default.generateEase(i):null}return t.createList=function(e){if(Array.isArray(e.list)){var i=e.list,s=void 0,a=void 0;if(a=s=new t(i[0].value,i[0].time,e.ease),i.length>2||2===i.length&&i[1].value!==i[0].value)for(var r=1;r<i.length;++r)s.next=new t(i[r].value,i[r].time),s=s.next;return a.isStepped=!!e.isStepped,a}var n=new t(e.start,0);return e.end!==e.start&&(n.next=new t(e.end,1)),n},t}();i.default=a},{"./ParticleUtils":4}],8:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=t("./ParticleUtils.js");i.ParticleUtils=s.default;var a=t("./Particle.js");i.Particle=a.default;var r=t("./Emitter.js");i.Emitter=r.default;var n=t("./PathParticle.js");i.PathParticle=n.default;var o=t("./AnimatedParticle.js");i.AnimatedParticle=o.default},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5}],9:[function(t,e,i){"use strict";if(Object.defineProperty(i,"__esModule",{value:!0}),"undefined"==typeof PIXI)throw"pixi-particles requires pixi.js to be loaded first";PIXI.particles||(PIXI.particles={});var s=t("./particles");for(var a in s)PIXI.particles[a]=s[a];void 0!==e&&e.exports&&(e.exports=s)},{"./particles":8}]},{},[9])(9)});
+
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],37:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -52839,7 +54097,7 @@ exports.default = AccessibilityManager;
 core.WebGLRenderer.registerPlugin('accessibility', AccessibilityManager);
 core.CanvasRenderer.registerPlugin('accessibility', AccessibilityManager);
 
-},{"../core":61,"./accessibleTarget":37,"ismobilejs":13}],37:[function(require,module,exports){
+},{"../core":62,"./accessibleTarget":38,"ismobilejs":13}],38:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -52897,7 +54155,7 @@ exports.default = {
   _accessibleDiv: false
 };
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -52922,7 +54180,7 @@ Object.defineProperty(exports, 'AccessibilityManager', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./AccessibilityManager":36,"./accessibleTarget":37}],39:[function(require,module,exports){
+},{"./AccessibilityManager":37,"./accessibleTarget":38}],40:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -53146,7 +54404,7 @@ var Application = function () {
 
 exports.default = Application;
 
-},{"./autoDetectRenderer":41,"./const":42,"./display/Container":44,"./settings":97,"./ticker":117}],40:[function(require,module,exports){
+},{"./autoDetectRenderer":42,"./const":43,"./display/Container":45,"./settings":98,"./ticker":118}],41:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -53213,7 +54471,7 @@ var Shader = function (_GLShader) {
 
 exports.default = Shader;
 
-},{"./settings":97,"pixi-gl-core":25}],41:[function(require,module,exports){
+},{"./settings":98,"pixi-gl-core":25}],42:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -53282,7 +54540,7 @@ function autoDetectRenderer(options, arg1, arg2, arg3) {
     return new _CanvasRenderer2.default(options, arg1, arg2);
 }
 
-},{"./renderers/canvas/CanvasRenderer":73,"./renderers/webgl/WebGLRenderer":80,"./utils":121}],42:[function(require,module,exports){
+},{"./renderers/canvas/CanvasRenderer":74,"./renderers/webgl/WebGLRenderer":81,"./utils":122}],43:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -53625,7 +54883,7 @@ var UPDATE_PRIORITY = exports.UPDATE_PRIORITY = {
   UTILITY: -50
 };
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -53968,7 +55226,7 @@ var Bounds = function () {
 
 exports.default = Bounds;
 
-},{"../math":66}],44:[function(require,module,exports){
+},{"../math":67}],45:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -54586,7 +55844,7 @@ var Container = function (_DisplayObject) {
 exports.default = Container;
 Container.prototype.containerUpdateTransform = Container.prototype.updateTransform;
 
-},{"../utils":121,"./DisplayObject":45}],45:[function(require,module,exports){
+},{"../utils":122,"./DisplayObject":46}],46:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -55280,7 +56538,7 @@ var DisplayObject = function (_EventEmitter) {
 exports.default = DisplayObject;
 DisplayObject.prototype.displayObjectUpdateTransform = DisplayObject.prototype.updateTransform;
 
-},{"../const":42,"../math":66,"../settings":97,"./Bounds":43,"./Transform":46,"./TransformStatic":48,"eventemitter3":12}],46:[function(require,module,exports){
+},{"../const":43,"../math":67,"../settings":98,"./Bounds":44,"./Transform":47,"./TransformStatic":49,"eventemitter3":12}],47:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -55461,7 +56719,7 @@ var Transform = function (_TransformBase) {
 
 exports.default = Transform;
 
-},{"../math":66,"./TransformBase":47}],47:[function(require,module,exports){
+},{"../math":67,"./TransformBase":48}],48:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -55548,7 +56806,7 @@ TransformBase.prototype.updateWorldTransform = TransformBase.prototype.updateTra
 
 TransformBase.IDENTITY = new TransformBase();
 
-},{"../math":66}],48:[function(require,module,exports){
+},{"../math":67}],49:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -55758,7 +57016,7 @@ var TransformStatic = function (_TransformBase) {
 
 exports.default = TransformStatic;
 
-},{"../math":66,"./TransformBase":47}],49:[function(require,module,exports){
+},{"../math":67,"./TransformBase":48}],50:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -56963,7 +58221,7 @@ exports.default = Graphics;
 
 Graphics._SPRITE_TEXTURE = null;
 
-},{"../const":42,"../display/Bounds":43,"../display/Container":44,"../math":66,"../renderers/canvas/CanvasRenderer":73,"../sprites/Sprite":98,"../textures/RenderTexture":109,"../textures/Texture":111,"../utils":121,"./GraphicsData":50,"./utils/bezierCurveTo":52}],50:[function(require,module,exports){
+},{"../const":43,"../display/Bounds":44,"../display/Container":45,"../math":67,"../renderers/canvas/CanvasRenderer":74,"../sprites/Sprite":99,"../textures/RenderTexture":110,"../textures/Texture":112,"../utils":122,"./GraphicsData":51,"./utils/bezierCurveTo":53}],51:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -57099,7 +58357,7 @@ var GraphicsData = function () {
 
 exports.default = GraphicsData;
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -57368,7 +58626,7 @@ exports.default = CanvasGraphicsRenderer;
 
 _CanvasRenderer2.default.registerPlugin('graphics', CanvasGraphicsRenderer);
 
-},{"../../const":42,"../../renderers/canvas/CanvasRenderer":73}],52:[function(require,module,exports){
+},{"../../const":43,"../../renderers/canvas/CanvasRenderer":74}],53:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -57418,7 +58676,7 @@ function bezierCurveTo(fromX, fromY, cpX, cpY, cpX2, cpY2, toX, toY) {
     return path;
 }
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -57683,7 +58941,7 @@ exports.default = GraphicsRenderer;
 
 _WebGLRenderer2.default.registerPlugin('graphics', GraphicsRenderer);
 
-},{"../../const":42,"../../renderers/webgl/WebGLRenderer":80,"../../renderers/webgl/utils/ObjectRenderer":90,"../../utils":121,"./WebGLGraphicsData":54,"./shaders/PrimitiveShader":55,"./utils/buildCircle":56,"./utils/buildPoly":58,"./utils/buildRectangle":59,"./utils/buildRoundedRectangle":60}],54:[function(require,module,exports){
+},{"../../const":43,"../../renderers/webgl/WebGLRenderer":81,"../../renderers/webgl/utils/ObjectRenderer":91,"../../utils":122,"./WebGLGraphicsData":55,"./shaders/PrimitiveShader":56,"./utils/buildCircle":57,"./utils/buildPoly":59,"./utils/buildRectangle":60,"./utils/buildRoundedRectangle":61}],55:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -57826,7 +59084,7 @@ var WebGLGraphicsData = function () {
 
 exports.default = WebGLGraphicsData;
 
-},{"pixi-gl-core":25}],55:[function(require,module,exports){
+},{"pixi-gl-core":25}],56:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -57871,7 +59129,7 @@ var PrimitiveShader = function (_Shader) {
 
 exports.default = PrimitiveShader;
 
-},{"../../../Shader":40}],56:[function(require,module,exports){
+},{"../../../Shader":41}],57:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -57964,7 +59222,7 @@ function buildCircle(graphicsData, webGLData, webGLDataNativeLines) {
     }
 }
 
-},{"../../../const":42,"../../../utils":121,"./buildLine":57}],57:[function(require,module,exports){
+},{"../../../const":43,"../../../utils":122,"./buildLine":58}],58:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -58234,7 +59492,7 @@ function buildNativeLine(graphicsData, webGLData) {
     }
 }
 
-},{"../../../math":66,"../../../utils":121}],58:[function(require,module,exports){
+},{"../../../math":67,"../../../utils":122}],59:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -58320,7 +59578,7 @@ function buildPoly(graphicsData, webGLData, webGLDataNativeLines) {
     }
 }
 
-},{"../../../utils":121,"./buildLine":57,"earcut":11}],59:[function(require,module,exports){
+},{"../../../utils":122,"./buildLine":58,"earcut":11}],60:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -58396,7 +59654,7 @@ function buildRectangle(graphicsData, webGLData, webGLDataNativeLines) {
     }
 }
 
-},{"../../../utils":121,"./buildLine":57}],60:[function(require,module,exports){
+},{"../../../utils":122,"./buildLine":58}],61:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -58552,7 +59810,7 @@ function quadraticBezierCurve(fromX, fromY, cpX, cpY, toX, toY) {
     return points;
 }
 
-},{"../../../utils":121,"./buildLine":57,"earcut":11}],61:[function(require,module,exports){
+},{"../../../utils":122,"./buildLine":58,"earcut":11}],62:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -58938,7 +60196,7 @@ exports.WebGLRenderer = _WebGLRenderer2.default; /**
                                                   * @namespace PIXI
                                                   */
 
-},{"./Application":39,"./Shader":40,"./autoDetectRenderer":41,"./const":42,"./display/Bounds":43,"./display/Container":44,"./display/DisplayObject":45,"./display/Transform":46,"./display/TransformBase":47,"./display/TransformStatic":48,"./graphics/Graphics":49,"./graphics/GraphicsData":50,"./graphics/canvas/CanvasGraphicsRenderer":51,"./graphics/webgl/GraphicsRenderer":53,"./math":66,"./renderers/canvas/CanvasRenderer":73,"./renderers/canvas/utils/CanvasRenderTarget":75,"./renderers/webgl/WebGLRenderer":80,"./renderers/webgl/filters/Filter":82,"./renderers/webgl/filters/spriteMask/SpriteMaskFilter":85,"./renderers/webgl/managers/WebGLManager":89,"./renderers/webgl/utils/ObjectRenderer":90,"./renderers/webgl/utils/Quad":91,"./renderers/webgl/utils/RenderTarget":92,"./settings":97,"./sprites/Sprite":98,"./sprites/canvas/CanvasSpriteRenderer":99,"./sprites/canvas/CanvasTinter":100,"./sprites/webgl/SpriteRenderer":102,"./text/Text":104,"./text/TextMetrics":105,"./text/TextStyle":106,"./textures/BaseRenderTexture":107,"./textures/BaseTexture":108,"./textures/RenderTexture":109,"./textures/Spritesheet":110,"./textures/Texture":111,"./textures/TextureMatrix":112,"./textures/TextureUvs":113,"./textures/VideoBaseTexture":114,"./ticker":117,"./utils":121,"pixi-gl-core":25}],62:[function(require,module,exports){
+},{"./Application":40,"./Shader":41,"./autoDetectRenderer":42,"./const":43,"./display/Bounds":44,"./display/Container":45,"./display/DisplayObject":46,"./display/Transform":47,"./display/TransformBase":48,"./display/TransformStatic":49,"./graphics/Graphics":50,"./graphics/GraphicsData":51,"./graphics/canvas/CanvasGraphicsRenderer":52,"./graphics/webgl/GraphicsRenderer":54,"./math":67,"./renderers/canvas/CanvasRenderer":74,"./renderers/canvas/utils/CanvasRenderTarget":76,"./renderers/webgl/WebGLRenderer":81,"./renderers/webgl/filters/Filter":83,"./renderers/webgl/filters/spriteMask/SpriteMaskFilter":86,"./renderers/webgl/managers/WebGLManager":90,"./renderers/webgl/utils/ObjectRenderer":91,"./renderers/webgl/utils/Quad":92,"./renderers/webgl/utils/RenderTarget":93,"./settings":98,"./sprites/Sprite":99,"./sprites/canvas/CanvasSpriteRenderer":100,"./sprites/canvas/CanvasTinter":101,"./sprites/webgl/SpriteRenderer":103,"./text/Text":105,"./text/TextMetrics":106,"./text/TextStyle":107,"./textures/BaseRenderTexture":108,"./textures/BaseTexture":109,"./textures/RenderTexture":110,"./textures/Spritesheet":111,"./textures/Texture":112,"./textures/TextureMatrix":113,"./textures/TextureUvs":114,"./textures/VideoBaseTexture":115,"./ticker":118,"./utils":122,"pixi-gl-core":25}],63:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -59131,7 +60389,7 @@ var GroupD8 = {
 
 exports.default = GroupD8;
 
-},{"./Matrix":63}],63:[function(require,module,exports){
+},{"./Matrix":64}],64:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -59653,7 +60911,7 @@ var Matrix = function () {
 
 exports.default = Matrix;
 
-},{"../const":42,"./Point":65}],64:[function(require,module,exports){
+},{"../const":43,"./Point":66}],65:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -59770,7 +61028,7 @@ var ObservablePoint = function () {
 
 exports.default = ObservablePoint;
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -59861,7 +61119,7 @@ var Point = function () {
 
 exports.default = Point;
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -59949,7 +61207,7 @@ Object.defineProperty(exports, 'RoundedRectangle', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./GroupD8":62,"./Matrix":63,"./ObservablePoint":64,"./Point":65,"./shapes/Circle":67,"./shapes/Ellipse":68,"./shapes/Polygon":69,"./shapes/Rectangle":70,"./shapes/RoundedRectangle":71}],67:[function(require,module,exports){
+},{"./GroupD8":63,"./Matrix":64,"./ObservablePoint":65,"./Point":66,"./shapes/Circle":68,"./shapes/Ellipse":69,"./shapes/Polygon":70,"./shapes/Rectangle":71,"./shapes/RoundedRectangle":72}],68:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -60063,7 +61321,7 @@ var Circle = function () {
 
 exports.default = Circle;
 
-},{"../../const":42,"./Rectangle":70}],68:[function(require,module,exports){
+},{"../../const":43,"./Rectangle":71}],69:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -60185,7 +61443,7 @@ var Ellipse = function () {
 
 exports.default = Ellipse;
 
-},{"../../const":42,"./Rectangle":70}],69:[function(require,module,exports){
+},{"../../const":43,"./Rectangle":71}],70:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -60316,7 +61574,7 @@ var Polygon = function () {
 
 exports.default = Polygon;
 
-},{"../../const":42,"../Point":65}],70:[function(require,module,exports){
+},{"../../const":43,"../Point":66}],71:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -60579,7 +61837,7 @@ var Rectangle = function () {
 
 exports.default = Rectangle;
 
-},{"../../const":42}],71:[function(require,module,exports){
+},{"../../const":43}],72:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -60712,7 +61970,7 @@ var RoundedRectangle = function () {
 
 exports.default = RoundedRectangle;
 
-},{"../../const":42}],72:[function(require,module,exports){
+},{"../../const":43}],73:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61077,7 +62335,7 @@ var SystemRenderer = function (_EventEmitter) {
 
 exports.default = SystemRenderer;
 
-},{"../const":42,"../display/Container":44,"../math":66,"../settings":97,"../textures/RenderTexture":109,"../utils":121,"eventemitter3":12}],73:[function(require,module,exports){
+},{"../const":43,"../display/Container":45,"../math":67,"../settings":98,"../textures/RenderTexture":110,"../utils":122,"eventemitter3":12}],74:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61442,7 +62700,7 @@ var CanvasRenderer = function (_SystemRenderer) {
 exports.default = CanvasRenderer;
 _utils.pluginTarget.mixin(CanvasRenderer);
 
-},{"../../const":42,"../../settings":97,"../../utils":121,"../SystemRenderer":72,"./utils/CanvasMaskManager":74,"./utils/CanvasRenderTarget":75,"./utils/mapCanvasBlendModesToPixi":77}],74:[function(require,module,exports){
+},{"../../const":43,"../../settings":98,"../../utils":122,"../SystemRenderer":73,"./utils/CanvasMaskManager":75,"./utils/CanvasRenderTarget":76,"./utils/mapCanvasBlendModesToPixi":78}],75:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61611,7 +62869,7 @@ var CanvasMaskManager = function () {
 
 exports.default = CanvasMaskManager;
 
-},{"../../../const":42}],75:[function(require,module,exports){
+},{"../../../const":43}],76:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61735,7 +62993,7 @@ var CanvasRenderTarget = function () {
 
 exports.default = CanvasRenderTarget;
 
-},{"../../../settings":97}],76:[function(require,module,exports){
+},{"../../../settings":98}],77:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61796,7 +63054,7 @@ function canUseNewCanvasBlendModes() {
     return data[0] === 255 && data[1] === 0 && data[2] === 0;
 }
 
-},{}],77:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61868,7 +63126,7 @@ function mapCanvasBlendModesToPixi() {
     return array;
 }
 
-},{"../../../const":42,"./canUseNewCanvasBlendModes":76}],78:[function(require,module,exports){
+},{"../../../const":43,"./canUseNewCanvasBlendModes":77}],79:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -61988,7 +63246,7 @@ var TextureGarbageCollector = function () {
 
 exports.default = TextureGarbageCollector;
 
-},{"../../const":42,"../../settings":97}],79:[function(require,module,exports){
+},{"../../const":43,"../../settings":98}],80:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -62244,7 +63502,7 @@ var TextureManager = function () {
 
 exports.default = TextureManager;
 
-},{"../../const":42,"../../utils":121,"./utils/RenderTarget":92,"pixi-gl-core":25}],80:[function(require,module,exports){
+},{"../../const":43,"../../utils":122,"./utils/RenderTarget":93,"pixi-gl-core":25}],81:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -63061,7 +64319,7 @@ var WebGLRenderer = function (_SystemRenderer) {
 exports.default = WebGLRenderer;
 _utils.pluginTarget.mixin(WebGLRenderer);
 
-},{"../../const":42,"../../textures/BaseTexture":108,"../../utils":121,"../SystemRenderer":72,"./TextureGarbageCollector":78,"./TextureManager":79,"./WebGLState":81,"./managers/FilterManager":86,"./managers/MaskManager":87,"./managers/StencilManager":88,"./utils/ObjectRenderer":90,"./utils/RenderTarget":92,"./utils/mapWebGLDrawModesToPixi":95,"./utils/validateContext":96,"pixi-gl-core":25}],81:[function(require,module,exports){
+},{"../../const":43,"../../textures/BaseTexture":109,"../../utils":122,"../SystemRenderer":73,"./TextureGarbageCollector":79,"./TextureManager":80,"./WebGLState":82,"./managers/FilterManager":87,"./managers/MaskManager":88,"./managers/StencilManager":89,"./utils/ObjectRenderer":91,"./utils/RenderTarget":93,"./utils/mapWebGLDrawModesToPixi":96,"./utils/validateContext":97,"pixi-gl-core":25}],82:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -63341,7 +64599,7 @@ var WebGLState = function () {
 
 exports.default = WebGLState;
 
-},{"./utils/mapWebGLBlendModesToPixi":94}],82:[function(require,module,exports){
+},{"./utils/mapWebGLBlendModesToPixi":95}],83:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -63537,7 +64795,7 @@ var Filter = function () {
 
 exports.default = Filter;
 
-},{"../../../const":42,"../../../settings":97,"../../../utils":121,"./extractUniformsFromSrc":83}],83:[function(require,module,exports){
+},{"../../../const":43,"../../../settings":98,"../../../utils":122,"./extractUniformsFromSrc":84}],84:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -63599,7 +64857,7 @@ function extractUniformsFromString(string) {
     return uniforms;
 }
 
-},{"pixi-gl-core":25}],84:[function(require,module,exports){
+},{"pixi-gl-core":25}],85:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -63659,7 +64917,7 @@ function calculateSpriteMatrix(outputMatrix, filterArea, textureSize, sprite) {
     return mappedMatrix;
 }
 
-},{"../../../math":66}],85:[function(require,module,exports){
+},{"../../../math":67}],86:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -63747,7 +65005,7 @@ var SpriteMaskFilter = function (_Filter) {
 
 exports.default = SpriteMaskFilter;
 
-},{"../../../../math":66,"../../../../textures/TextureMatrix":112,"../Filter":82,"path":18}],86:[function(require,module,exports){
+},{"../../../../math":67,"../../../../textures/TextureMatrix":113,"../Filter":83,"path":18}],87:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -64387,7 +65645,7 @@ var FilterManager = function (_WebGLManager) {
 
 exports.default = FilterManager;
 
-},{"../../../Shader":40,"../../../math":66,"../filters/filterTransforms":84,"../utils/Quad":91,"../utils/RenderTarget":92,"./WebGLManager":89,"bit-twiddle":10}],87:[function(require,module,exports){
+},{"../../../Shader":41,"../../../math":67,"../filters/filterTransforms":85,"../utils/Quad":92,"../utils/RenderTarget":93,"./WebGLManager":90,"bit-twiddle":10}],88:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -64597,7 +65855,7 @@ var MaskManager = function (_WebGLManager) {
 
 exports.default = MaskManager;
 
-},{"../filters/spriteMask/SpriteMaskFilter":85,"./WebGLManager":89}],88:[function(require,module,exports){
+},{"../filters/spriteMask/SpriteMaskFilter":86,"./WebGLManager":90}],89:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -64750,7 +66008,7 @@ var StencilManager = function (_WebGLManager) {
 
 exports.default = StencilManager;
 
-},{"./WebGLManager":89}],89:[function(require,module,exports){
+},{"./WebGLManager":90}],90:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -64805,7 +66063,7 @@ var WebGLManager = function () {
 
 exports.default = WebGLManager;
 
-},{}],90:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -64883,7 +66141,7 @@ var ObjectRenderer = function (_WebGLManager) {
 
 exports.default = ObjectRenderer;
 
-},{"../managers/WebGLManager":89}],91:[function(require,module,exports){
+},{"../managers/WebGLManager":90}],92:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65064,7 +66322,7 @@ var Quad = function () {
 
 exports.default = Quad;
 
-},{"../../../utils/createIndicesForQuads":119,"pixi-gl-core":25}],92:[function(require,module,exports){
+},{"../../../utils/createIndicesForQuads":120,"pixi-gl-core":25}],93:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65391,7 +66649,7 @@ var RenderTarget = function () {
 
 exports.default = RenderTarget;
 
-},{"../../../const":42,"../../../math":66,"../../../settings":97,"pixi-gl-core":25}],93:[function(require,module,exports){
+},{"../../../const":43,"../../../math":67,"../../../settings":98,"pixi-gl-core":25}],94:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65466,7 +66724,7 @@ function generateIfTestSrc(maxIfs) {
     return src;
 }
 
-},{"pixi-gl-core":25}],94:[function(require,module,exports){
+},{"pixi-gl-core":25}],95:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65515,7 +66773,7 @@ function mapWebGLBlendModesToPixi(gl) {
     return array;
 }
 
-},{"../../../const":42}],95:[function(require,module,exports){
+},{"../../../const":43}],96:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65547,7 +66805,7 @@ function mapWebGLDrawModesToPixi(gl) {
   return object;
 }
 
-},{"../../../const":42}],96:[function(require,module,exports){
+},{"../../../const":43}],97:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65563,7 +66821,7 @@ function validateContext(gl) {
     }
 }
 
-},{}],97:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -65808,7 +67066,7 @@ exports.default = {
   MESH_CANVAS_PADDING: 0
 };
 
-},{"./utils/canUploadSameBuffer":118,"./utils/maxRecommendedTextures":123}],98:[function(require,module,exports){
+},{"./utils/canUploadSameBuffer":119,"./utils/maxRecommendedTextures":124}],99:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -66431,7 +67689,7 @@ var Sprite = function (_Container) {
 
 exports.default = Sprite;
 
-},{"../const":42,"../display/Container":44,"../math":66,"../textures/Texture":111,"../utils":121}],99:[function(require,module,exports){
+},{"../const":43,"../display/Container":45,"../math":67,"../textures/Texture":112,"../utils":122}],100:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -66584,7 +67842,7 @@ exports.default = CanvasSpriteRenderer;
 
 _CanvasRenderer2.default.registerPlugin('sprite', CanvasSpriteRenderer);
 
-},{"../../const":42,"../../math":66,"../../renderers/canvas/CanvasRenderer":73,"./CanvasTinter":100}],100:[function(require,module,exports){
+},{"../../const":43,"../../math":67,"../../renderers/canvas/CanvasRenderer":74,"./CanvasTinter":101}],101:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -66835,7 +68093,7 @@ CanvasTinter.tintMethod = CanvasTinter.canUseMultiply ? CanvasTinter.tintWithMul
 
 exports.default = CanvasTinter;
 
-},{"../../renderers/canvas/utils/canUseNewCanvasBlendModes":76,"../../utils":121}],101:[function(require,module,exports){
+},{"../../renderers/canvas/utils/canUseNewCanvasBlendModes":77,"../../utils":122}],102:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -66888,7 +68146,7 @@ var Buffer = function () {
 
 exports.default = Buffer;
 
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -67439,7 +68697,7 @@ exports.default = SpriteRenderer;
 
 _WebGLRenderer2.default.registerPlugin('sprite', SpriteRenderer);
 
-},{"../../renderers/webgl/WebGLRenderer":80,"../../renderers/webgl/utils/ObjectRenderer":90,"../../renderers/webgl/utils/checkMaxIfStatmentsInShader":93,"../../settings":97,"../../utils":121,"../../utils/createIndicesForQuads":119,"./BatchBuffer":101,"./generateMultiTextureShader":103,"bit-twiddle":10,"pixi-gl-core":25}],103:[function(require,module,exports){
+},{"../../renderers/webgl/WebGLRenderer":81,"../../renderers/webgl/utils/ObjectRenderer":91,"../../renderers/webgl/utils/checkMaxIfStatmentsInShader":94,"../../settings":98,"../../utils":122,"../../utils/createIndicesForQuads":120,"./BatchBuffer":102,"./generateMultiTextureShader":104,"bit-twiddle":10,"pixi-gl-core":25}],104:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -67502,7 +68760,7 @@ function generateSampleSrc(maxTextures) {
     return src;
 }
 
-},{"../../Shader":40,"path":18}],104:[function(require,module,exports){
+},{"../../Shader":41,"path":18}],105:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -68157,7 +69415,7 @@ var Text = function (_Sprite) {
 
 exports.default = Text;
 
-},{"../const":42,"../math":66,"../settings":97,"../sprites/Sprite":98,"../textures/Texture":111,"../utils":121,"../utils/trimCanvas":126,"./TextMetrics":105,"./TextStyle":106}],105:[function(require,module,exports){
+},{"../const":43,"../math":67,"../settings":98,"../sprites/Sprite":99,"../textures/Texture":112,"../utils":122,"../utils/trimCanvas":127,"./TextMetrics":106,"./TextStyle":107}],106:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -68537,7 +69795,7 @@ TextMetrics._context = canvas.getContext('2d');
  */
 TextMetrics._fonts = {};
 
-},{}],106:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -69339,7 +70597,7 @@ function deepCopyProperties(target, source, propertyObj) {
     }
 }
 
-},{"../const":42,"../utils":121}],107:[function(require,module,exports){
+},{"../const":43,"../utils":122}],108:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -69501,7 +70759,7 @@ var BaseRenderTexture = function (_BaseTexture) {
 
 exports.default = BaseRenderTexture;
 
-},{"../settings":97,"./BaseTexture":108}],108:[function(require,module,exports){
+},{"../settings":98,"./BaseTexture":109}],109:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -70347,7 +71605,7 @@ var BaseTexture = function (_EventEmitter) {
 
 exports.default = BaseTexture;
 
-},{"../settings":97,"../utils":121,"../utils/determineCrossOrigin":120,"bit-twiddle":10,"eventemitter3":12}],109:[function(require,module,exports){
+},{"../settings":98,"../utils":122,"../utils/determineCrossOrigin":121,"bit-twiddle":10,"eventemitter3":12}],110:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -70501,7 +71759,7 @@ var RenderTexture = function (_Texture) {
 
 exports.default = RenderTexture;
 
-},{"./BaseRenderTexture":107,"./Texture":111}],110:[function(require,module,exports){
+},{"./BaseRenderTexture":108,"./Texture":112}],111:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -70766,7 +72024,7 @@ var Spritesheet = function () {
 
 exports.default = Spritesheet;
 
-},{"../":61,"../utils":121}],111:[function(require,module,exports){
+},{"../":62,"../utils":122}],112:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -71458,7 +72716,7 @@ Texture.WHITE = createWhiteTexture();
 removeAllHandlers(Texture.WHITE);
 removeAllHandlers(Texture.WHITE.baseTexture);
 
-},{"../math":66,"../settings":97,"../utils":121,"./BaseTexture":108,"./TextureUvs":113,"./VideoBaseTexture":114,"eventemitter3":12}],112:[function(require,module,exports){
+},{"../math":67,"../settings":98,"../utils":122,"./BaseTexture":109,"./TextureUvs":114,"./VideoBaseTexture":115,"eventemitter3":12}],113:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -71622,7 +72880,7 @@ var TextureMatrix = function () {
 
 exports.default = TextureMatrix;
 
-},{"../math/Matrix":63}],113:[function(require,module,exports){
+},{"../math/Matrix":64}],114:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -71727,7 +72985,7 @@ var TextureUvs = function () {
 
 exports.default = TextureUvs;
 
-},{"../math/GroupD8":62}],114:[function(require,module,exports){
+},{"../math/GroupD8":63}],115:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -72069,7 +73327,7 @@ function createSource(path, type) {
     return source;
 }
 
-},{"../const":42,"../ticker":117,"../utils":121,"../utils/determineCrossOrigin":120,"./BaseTexture":108}],115:[function(require,module,exports){
+},{"../const":43,"../ticker":118,"../utils":122,"../utils/determineCrossOrigin":121,"./BaseTexture":109}],116:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -72542,7 +73800,7 @@ var Ticker = function () {
 
 exports.default = Ticker;
 
-},{"../const":42,"../settings":97,"./TickerListener":116}],116:[function(require,module,exports){
+},{"../const":43,"../settings":98,"./TickerListener":117}],117:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -72716,7 +73974,7 @@ var TickerListener = function () {
 
 exports.default = TickerListener;
 
-},{}],117:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -72796,7 +74054,7 @@ shared.destroy = function () {
 exports.shared = shared;
 exports.Ticker = _Ticker2.default;
 
-},{"./Ticker":115}],118:[function(require,module,exports){
+},{"./Ticker":116}],119:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -72810,7 +74068,7 @@ function canUploadSameBuffer() {
 	return !ios;
 }
 
-},{}],119:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -72844,7 +74102,7 @@ function createIndicesForQuads(size) {
     return indices;
 }
 
-},{}],120:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -72900,7 +74158,7 @@ function determineCrossOrigin(url) {
     return '';
 }
 
-},{"url":208}],121:[function(require,module,exports){
+},{"url":209}],122:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -73382,7 +74640,7 @@ function premultiplyTintToRgba(tint, alpha, out, premultiply) {
     return out;
 }
 
-},{"../const":42,"../settings":97,"./mapPremultipliedBlendModes":122,"./mixin":124,"./pluginTarget":125,"earcut":11,"eventemitter3":12,"ismobilejs":13,"remove-array-items":201}],122:[function(require,module,exports){
+},{"../const":43,"../settings":98,"./mapPremultipliedBlendModes":123,"./mixin":125,"./pluginTarget":126,"earcut":11,"eventemitter3":12,"ismobilejs":13,"remove-array-items":202}],123:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -73425,7 +74683,7 @@ function mapPremultipliedBlendModes() {
     return array;
 }
 
-},{"../const":42}],123:[function(require,module,exports){
+},{"../const":43}],124:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -73447,7 +74705,7 @@ function maxRecommendedTextures(max) {
     return max;
 }
 
-},{"ismobilejs":13}],124:[function(require,module,exports){
+},{"ismobilejs":13}],125:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -73509,7 +74767,7 @@ function performMixins() {
     mixins.length = 0;
 }
 
-},{}],125:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -73575,7 +74833,7 @@ exports.default = {
     }
 };
 
-},{}],126:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -73651,7 +74909,7 @@ function trimCanvas(canvas) {
     };
 }
 
-},{}],127:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -74795,7 +76053,7 @@ function deprecation(core) {
     }
 }
 
-},{}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -74975,7 +76233,7 @@ exports.default = CanvasExtract;
 
 core.CanvasRenderer.registerPlugin('extract', CanvasExtract);
 
-},{"../../core":61}],129:[function(require,module,exports){
+},{"../../core":62}],130:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -75000,7 +76258,7 @@ Object.defineProperty(exports, 'canvas', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./canvas/CanvasExtract":128,"./webgl/WebGLExtract":130}],130:[function(require,module,exports){
+},{"./canvas/CanvasExtract":129,"./webgl/WebGLExtract":131}],131:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -75235,7 +76493,7 @@ exports.default = WebGLExtract;
 
 core.WebGLRenderer.registerPlugin('extract', WebGLExtract);
 
-},{"../../core":61}],131:[function(require,module,exports){
+},{"../../core":62}],132:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -75644,7 +76902,7 @@ var AnimatedSprite = function (_core$Sprite) {
 
 exports.default = AnimatedSprite;
 
-},{"../core":61}],132:[function(require,module,exports){
+},{"../core":62}],133:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -76235,7 +77493,7 @@ exports.default = BitmapText;
 
 BitmapText.fonts = {};
 
-},{"../core":61,"../core/math/ObservablePoint":64,"../core/settings":97,"../core/utils":121}],133:[function(require,module,exports){
+},{"../core":62,"../core/math/ObservablePoint":65,"../core/settings":98,"../core/utils":122}],134:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -76681,7 +77939,7 @@ var TilingSprite = function (_core$Sprite) {
 
 exports.default = TilingSprite;
 
-},{"../core":61,"../core/sprites/canvas/CanvasTinter":100}],134:[function(require,module,exports){
+},{"../core":62,"../core/sprites/canvas/CanvasTinter":101}],135:[function(require,module,exports){
 'use strict';
 
 var _core = require('../core');
@@ -77085,7 +78343,7 @@ DisplayObject.prototype._cacheAsBitmapDestroy = function _cacheAsBitmapDestroy(o
     this.destroy(options);
 };
 
-},{"../core":61,"../core/textures/BaseTexture":108,"../core/textures/Texture":111,"../core/utils":121}],135:[function(require,module,exports){
+},{"../core":62,"../core/textures/BaseTexture":109,"../core/textures/Texture":112,"../core/utils":122}],136:[function(require,module,exports){
 'use strict';
 
 var _core = require('../core');
@@ -77120,7 +78378,7 @@ core.Container.prototype.getChildByName = function getChildByName(name) {
     return null;
 };
 
-},{"../core":61}],136:[function(require,module,exports){
+},{"../core":62}],137:[function(require,module,exports){
 'use strict';
 
 var _core = require('../core');
@@ -77154,7 +78412,7 @@ core.DisplayObject.prototype.getGlobalPosition = function getGlobalPosition() {
     return point;
 };
 
-},{"../core":61}],137:[function(require,module,exports){
+},{"../core":62}],138:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -77206,7 +78464,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // imported for side effect of extending the prototype only, contains no exports
 
-},{"./AnimatedSprite":131,"./BitmapText":132,"./TilingSprite":133,"./cacheAsBitmap":134,"./getChildByName":135,"./getGlobalPosition":136,"./webgl/TilingSpriteRenderer":138}],138:[function(require,module,exports){
+},{"./AnimatedSprite":132,"./BitmapText":133,"./TilingSprite":134,"./cacheAsBitmap":135,"./getChildByName":136,"./getGlobalPosition":137,"./webgl/TilingSpriteRenderer":139}],139:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -77368,7 +78626,7 @@ exports.default = TilingSpriteRenderer;
 
 core.WebGLRenderer.registerPlugin('tilingSprite', TilingSpriteRenderer);
 
-},{"../../core":61,"../../core/const":42,"path":18}],139:[function(require,module,exports){
+},{"../../core":62,"../../core/const":43,"path":18}],140:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -77452,7 +78710,7 @@ var AlphaFilter = function (_core$Filter) {
 
 exports.default = AlphaFilter;
 
-},{"../../core":61,"path":18}],140:[function(require,module,exports){
+},{"../../core":62,"path":18}],141:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -77626,7 +78884,7 @@ var BlurFilter = function (_core$Filter) {
 
 exports.default = BlurFilter;
 
-},{"../../core":61,"./BlurXFilter":141,"./BlurYFilter":142}],141:[function(require,module,exports){
+},{"../../core":62,"./BlurXFilter":142,"./BlurYFilter":143}],142:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -77792,7 +79050,7 @@ var BlurXFilter = function (_core$Filter) {
 
 exports.default = BlurXFilter;
 
-},{"../../core":61,"./generateBlurFragSource":143,"./generateBlurVertSource":144,"./getMaxBlurKernelSize":145}],142:[function(require,module,exports){
+},{"../../core":62,"./generateBlurFragSource":144,"./generateBlurVertSource":145,"./getMaxBlurKernelSize":146}],143:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -77957,7 +79215,7 @@ var BlurYFilter = function (_core$Filter) {
 
 exports.default = BlurYFilter;
 
-},{"../../core":61,"./generateBlurFragSource":143,"./generateBlurVertSource":144,"./getMaxBlurKernelSize":145}],143:[function(require,module,exports){
+},{"../../core":62,"./generateBlurFragSource":144,"./generateBlurVertSource":145,"./getMaxBlurKernelSize":146}],144:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78004,7 +79262,7 @@ function generateFragBlurSource(kernelSize) {
     return fragSource;
 }
 
-},{}],144:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78048,7 +79306,7 @@ function generateVertBlurSource(kernelSize, x) {
     return vertSource;
 }
 
-},{}],145:[function(require,module,exports){
+},{}],146:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -78064,7 +79322,7 @@ function getMaxKernelSize(gl) {
     return kernelSize;
 }
 
-},{}],146:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78615,7 +79873,7 @@ var ColorMatrixFilter = function (_core$Filter) {
 exports.default = ColorMatrixFilter;
 ColorMatrixFilter.prototype.grayscale = ColorMatrixFilter.prototype.greyscale;
 
-},{"../../core":61,"path":18}],147:[function(require,module,exports){
+},{"../../core":62,"path":18}],148:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78723,7 +79981,7 @@ var DisplacementFilter = function (_core$Filter) {
 
 exports.default = DisplacementFilter;
 
-},{"../../core":61,"path":18}],148:[function(require,module,exports){
+},{"../../core":62,"path":18}],149:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78777,7 +80035,7 @@ var FXAAFilter = function (_core$Filter) {
 
 exports.default = FXAAFilter;
 
-},{"../../core":61,"path":18}],149:[function(require,module,exports){
+},{"../../core":62,"path":18}],150:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78856,7 +80114,7 @@ Object.defineProperty(exports, 'AlphaFilter', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./alpha/AlphaFilter":139,"./blur/BlurFilter":140,"./blur/BlurXFilter":141,"./blur/BlurYFilter":142,"./colormatrix/ColorMatrixFilter":146,"./displacement/DisplacementFilter":147,"./fxaa/FXAAFilter":148,"./noise/NoiseFilter":150}],150:[function(require,module,exports){
+},{"./alpha/AlphaFilter":140,"./blur/BlurFilter":141,"./blur/BlurXFilter":142,"./blur/BlurYFilter":143,"./colormatrix/ColorMatrixFilter":147,"./displacement/DisplacementFilter":148,"./fxaa/FXAAFilter":149,"./noise/NoiseFilter":151}],151:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -78953,7 +80211,7 @@ var NoiseFilter = function (_core$Filter) {
 
 exports.default = NoiseFilter;
 
-},{"../../core":61,"path":18}],151:[function(require,module,exports){
+},{"../../core":62,"path":18}],152:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -79067,7 +80325,7 @@ if (typeof _deprecation2.default === 'function') {
 global.PIXI = exports; // eslint-disable-line
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./accessibility":38,"./core":61,"./deprecation":127,"./extract":129,"./extras":137,"./filters":149,"./interaction":156,"./loaders":159,"./mesh":168,"./particles":171,"./polyfill":177,"./prepare":181}],152:[function(require,module,exports){
+},{"./accessibility":39,"./core":62,"./deprecation":128,"./extract":130,"./extras":138,"./filters":150,"./interaction":157,"./loaders":160,"./mesh":169,"./particles":172,"./polyfill":178,"./prepare":182}],153:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -79290,7 +80548,7 @@ var InteractionData = function () {
 
 exports.default = InteractionData;
 
-},{"../core":61}],153:[function(require,module,exports){
+},{"../core":62}],154:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -79373,7 +80631,7 @@ var InteractionEvent = function () {
 
 exports.default = InteractionEvent;
 
-},{}],154:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81144,7 +82402,7 @@ exports.default = InteractionManager;
 core.WebGLRenderer.registerPlugin('interaction', InteractionManager);
 core.CanvasRenderer.registerPlugin('interaction', InteractionManager);
 
-},{"../core":61,"./InteractionData":152,"./InteractionEvent":153,"./InteractionTrackingData":155,"./interactiveTarget":157,"eventemitter3":12}],155:[function(require,module,exports){
+},{"../core":62,"./InteractionData":153,"./InteractionEvent":154,"./InteractionTrackingData":156,"./interactiveTarget":158,"eventemitter3":12}],156:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -81320,7 +82578,7 @@ InteractionTrackingData.FLAGS = Object.freeze({
     RIGHT_DOWN: 1 << 2
 });
 
-},{}],156:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81372,7 +82630,7 @@ Object.defineProperty(exports, 'InteractionEvent', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./InteractionData":152,"./InteractionEvent":153,"./InteractionManager":154,"./InteractionTrackingData":155,"./interactiveTarget":157}],157:[function(require,module,exports){
+},{"./InteractionData":153,"./InteractionEvent":154,"./InteractionManager":155,"./InteractionTrackingData":156,"./interactiveTarget":158}],158:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81489,7 +82747,7 @@ exports.default = {
   _trackedPointers: undefined
 };
 
-},{}],158:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81581,7 +82839,7 @@ function parse(resource, texture) {
     resource.bitmapFont = _extras.BitmapText.registerFont(resource.data, texture);
 }
 
-},{"../core":61,"../extras":137,"path":18,"resource-loader":206}],159:[function(require,module,exports){
+},{"../core":62,"../extras":138,"path":18,"resource-loader":207}],160:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81709,7 +82967,7 @@ AppPrototype.destroy = function destroy(removeView) {
     this._parentDestroy(removeView);
 };
 
-},{"../core/Application":39,"./bitmapFontParser":158,"./loader":160,"./spritesheetParser":161,"./textureParser":162,"resource-loader":206}],160:[function(require,module,exports){
+},{"../core/Application":40,"./bitmapFontParser":159,"./loader":161,"./spritesheetParser":162,"./textureParser":163,"resource-loader":207}],161:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81880,7 +83138,7 @@ var Resource = _resourceLoader2.default.Resource;
 
 Resource.setExtensionXhrType('fnt', Resource.XHR_RESPONSE_TYPE.DOCUMENT);
 
-},{"./bitmapFontParser":158,"./spritesheetParser":161,"./textureParser":162,"eventemitter3":12,"resource-loader":206,"resource-loader/lib/middlewares/parsing/blob":207}],161:[function(require,module,exports){
+},{"./bitmapFontParser":159,"./spritesheetParser":162,"./textureParser":163,"eventemitter3":12,"resource-loader":207,"resource-loader/lib/middlewares/parsing/blob":208}],162:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81944,7 +83202,7 @@ function getResourcePath(resource, baseUrl) {
     return _url2.default.resolve(resource.url.replace(baseUrl, ''), resource.data.meta.image);
 }
 
-},{"../core":61,"resource-loader":206,"url":208}],162:[function(require,module,exports){
+},{"../core":62,"resource-loader":207,"url":209}],163:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -81967,7 +83225,7 @@ var _Texture2 = _interopRequireDefault(_Texture);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"../core/textures/Texture":111,"resource-loader":206}],163:[function(require,module,exports){
+},{"../core/textures/Texture":112,"resource-loader":207}],164:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -82336,7 +83594,7 @@ Mesh.DRAW_MODES = {
   TRIANGLES: 1
 };
 
-},{"../core":61,"../core/textures/Texture":111}],164:[function(require,module,exports){
+},{"../core":62,"../core/textures/Texture":112}],165:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -82723,7 +83981,7 @@ var NineSlicePlane = function (_Plane) {
 
 exports.default = NineSlicePlane;
 
-},{"./Plane":165}],165:[function(require,module,exports){
+},{"./Plane":166}],166:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -82864,7 +84122,7 @@ var Plane = function (_Mesh) {
 
 exports.default = Plane;
 
-},{"./Mesh":163}],166:[function(require,module,exports){
+},{"./Mesh":164}],167:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -83100,7 +84358,7 @@ var Rope = function (_Mesh) {
 
 exports.default = Rope;
 
-},{"./Mesh":163}],167:[function(require,module,exports){
+},{"./Mesh":164}],168:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -83386,7 +84644,7 @@ exports.default = MeshSpriteRenderer;
 
 core.CanvasRenderer.registerPlugin('mesh', MeshSpriteRenderer);
 
-},{"../../core":61,"../Mesh":163}],168:[function(require,module,exports){
+},{"../../core":62,"../Mesh":164}],169:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -83447,7 +84705,7 @@ Object.defineProperty(exports, 'Rope', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./Mesh":163,"./NineSlicePlane":164,"./Plane":165,"./Rope":166,"./canvas/CanvasMeshRenderer":167,"./webgl/MeshRenderer":169}],169:[function(require,module,exports){
+},{"./Mesh":164,"./NineSlicePlane":165,"./Plane":166,"./Rope":167,"./canvas/CanvasMeshRenderer":168,"./webgl/MeshRenderer":170}],170:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -83598,7 +84856,7 @@ exports.default = MeshRenderer;
 
 core.WebGLRenderer.registerPlugin('mesh', MeshRenderer);
 
-},{"../../core":61,"../Mesh":163,"path":18,"pixi-gl-core":25}],170:[function(require,module,exports){
+},{"../../core":62,"../Mesh":164,"path":18,"pixi-gl-core":25}],171:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -83988,7 +85246,7 @@ var ParticleContainer = function (_core$Container) {
 
 exports.default = ParticleContainer;
 
-},{"../core":61,"../core/utils":121}],171:[function(require,module,exports){
+},{"../core":62,"../core/utils":122}],172:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -84013,7 +85271,7 @@ Object.defineProperty(exports, 'ParticleRenderer', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./ParticleContainer":170,"./webgl/ParticleRenderer":173}],172:[function(require,module,exports){
+},{"./ParticleContainer":171,"./webgl/ParticleRenderer":174}],173:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -84262,7 +85520,7 @@ var ParticleBuffer = function () {
 
 exports.default = ParticleBuffer;
 
-},{"../../core/utils/createIndicesForQuads":119,"pixi-gl-core":25}],173:[function(require,module,exports){
+},{"../../core/utils/createIndicesForQuads":120,"pixi-gl-core":25}],174:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -84743,7 +86001,7 @@ exports.default = ParticleRenderer;
 
 core.WebGLRenderer.registerPlugin('particle', ParticleRenderer);
 
-},{"../../core":61,"../../core/utils":121,"./ParticleBuffer":172,"./ParticleShader":174}],174:[function(require,module,exports){
+},{"../../core":62,"../../core/utils":122,"./ParticleBuffer":173,"./ParticleShader":175}],175:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -84786,7 +86044,7 @@ var ParticleShader = function (_Shader) {
 
 exports.default = ParticleShader;
 
-},{"../../core/Shader":40}],175:[function(require,module,exports){
+},{"../../core/Shader":41}],176:[function(require,module,exports){
 "use strict";
 
 // References:
@@ -84804,7 +86062,7 @@ if (!Math.sign) {
     };
 }
 
-},{}],176:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 'use strict';
 
 var _objectAssign = require('object-assign');
@@ -84819,7 +86077,7 @@ if (!Object.assign) {
 // https://github.com/sindresorhus/object-assign
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-},{"object-assign":16}],177:[function(require,module,exports){
+},{"object-assign":16}],178:[function(require,module,exports){
 'use strict';
 
 require('./Object.assign');
@@ -84844,7 +86102,7 @@ if (!window.Uint16Array) {
     window.Uint16Array = Array;
 }
 
-},{"./Math.sign":175,"./Object.assign":176,"./requestAnimationFrame":178}],178:[function(require,module,exports){
+},{"./Math.sign":176,"./Object.assign":177,"./requestAnimationFrame":179}],179:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -84921,7 +86179,7 @@ if (!global.cancelAnimationFrame) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],179:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -85409,7 +86667,7 @@ function findTextStyle(item, queue) {
     return false;
 }
 
-},{"../core":61,"./limiters/CountLimiter":182}],180:[function(require,module,exports){
+},{"../core":62,"./limiters/CountLimiter":183}],181:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -85529,7 +86787,7 @@ function uploadBaseTextures(prepare, item) {
 
 core.CanvasRenderer.registerPlugin('prepare', CanvasPrepare);
 
-},{"../../core":61,"../BasePrepare":179}],181:[function(require,module,exports){
+},{"../../core":62,"../BasePrepare":180}],182:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -85581,7 +86839,7 @@ Object.defineProperty(exports, 'TimeLimiter', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./BasePrepare":179,"./canvas/CanvasPrepare":180,"./limiters/CountLimiter":182,"./limiters/TimeLimiter":183,"./webgl/WebGLPrepare":184}],182:[function(require,module,exports){
+},{"./BasePrepare":180,"./canvas/CanvasPrepare":181,"./limiters/CountLimiter":183,"./limiters/TimeLimiter":184,"./webgl/WebGLPrepare":185}],183:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -85639,7 +86897,7 @@ var CountLimiter = function () {
 
 exports.default = CountLimiter;
 
-},{}],183:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -85697,7 +86955,7 @@ var TimeLimiter = function () {
 
 exports.default = TimeLimiter;
 
-},{}],184:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -85819,7 +87077,7 @@ function findGraphics(item, queue) {
 
 core.WebGLRenderer.registerPlugin('prepare', WebGLPrepare);
 
-},{"../../core":61,"../BasePrepare":179}],185:[function(require,module,exports){
+},{"../../core":62,"../BasePrepare":180}],186:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -86005,13 +87263,13 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],186:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 // minimal library entry point.
 
 "use strict";
 module.exports = require("./src/index-minimal");
 
-},{"./src/index-minimal":187}],187:[function(require,module,exports){
+},{"./src/index-minimal":188}],188:[function(require,module,exports){
 "use strict";
 var protobuf = exports;
 
@@ -86049,7 +87307,7 @@ function configure() {
 protobuf.Writer._configure(protobuf.BufferWriter);
 configure();
 
-},{"./reader":188,"./reader_buffer":189,"./roots":190,"./rpc":191,"./util/minimal":194,"./writer":195,"./writer_buffer":196}],188:[function(require,module,exports){
+},{"./reader":189,"./reader_buffer":190,"./roots":191,"./rpc":192,"./util/minimal":195,"./writer":196,"./writer_buffer":197}],189:[function(require,module,exports){
 "use strict";
 module.exports = Reader;
 
@@ -86458,7 +87716,7 @@ Reader._configure = function(BufferReader_) {
     });
 };
 
-},{"./util/minimal":194}],189:[function(require,module,exports){
+},{"./util/minimal":195}],190:[function(require,module,exports){
 "use strict";
 module.exports = BufferReader;
 
@@ -86504,7 +87762,7 @@ BufferReader.prototype.string = function read_string_buffer() {
  * @returns {Buffer} Value read
  */
 
-},{"./reader":188,"./util/minimal":194}],190:[function(require,module,exports){
+},{"./reader":189,"./util/minimal":195}],191:[function(require,module,exports){
 "use strict";
 module.exports = {};
 
@@ -86524,7 +87782,7 @@ module.exports = {};
  * var root = protobuf.roots["myroot"];
  */
 
-},{}],191:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 "use strict";
 
 /**
@@ -86562,7 +87820,7 @@ var rpc = exports;
 
 rpc.Service = require("./rpc/service");
 
-},{"./rpc/service":192}],192:[function(require,module,exports){
+},{"./rpc/service":193}],193:[function(require,module,exports){
 "use strict";
 module.exports = Service;
 
@@ -86706,7 +87964,7 @@ Service.prototype.end = function end(endedByRPC) {
     return this;
 };
 
-},{"../util/minimal":194}],193:[function(require,module,exports){
+},{"../util/minimal":195}],194:[function(require,module,exports){
 "use strict";
 module.exports = LongBits;
 
@@ -86908,7 +88166,7 @@ LongBits.prototype.length = function length() {
          : part2 < 128 ? 9 : 10;
 };
 
-},{"../util/minimal":194}],194:[function(require,module,exports){
+},{"../util/minimal":195}],195:[function(require,module,exports){
 (function (global){
 "use strict";
 var util = exports;
@@ -87317,7 +88575,7 @@ util._configure = function() {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./longbits":193,"@protobufjs/aspromise":3,"@protobufjs/base64":4,"@protobufjs/eventemitter":5,"@protobufjs/float":6,"@protobufjs/inquire":7,"@protobufjs/pool":8,"@protobufjs/utf8":9}],195:[function(require,module,exports){
+},{"./longbits":194,"@protobufjs/aspromise":3,"@protobufjs/base64":4,"@protobufjs/eventemitter":5,"@protobufjs/float":6,"@protobufjs/inquire":7,"@protobufjs/pool":8,"@protobufjs/utf8":9}],196:[function(require,module,exports){
 "use strict";
 module.exports = Writer;
 
@@ -87778,7 +89036,7 @@ Writer._configure = function(BufferWriter_) {
     BufferWriter = BufferWriter_;
 };
 
-},{"./util/minimal":194}],196:[function(require,module,exports){
+},{"./util/minimal":195}],197:[function(require,module,exports){
 "use strict";
 module.exports = BufferWriter;
 
@@ -87861,7 +89119,7 @@ BufferWriter.prototype.string = function write_string_buffer(value) {
  * @returns {Buffer} Finished buffer
  */
 
-},{"./util/minimal":194,"./writer":195}],197:[function(require,module,exports){
+},{"./util/minimal":195,"./writer":196}],198:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
@@ -88398,7 +89656,7 @@ BufferWriter.prototype.string = function write_string_buffer(value) {
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],198:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -88484,7 +89742,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],199:[function(require,module,exports){
+},{}],200:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -88571,13 +89829,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],200:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":198,"./encode":199}],201:[function(require,module,exports){
+},{"./decode":199,"./encode":200}],202:[function(require,module,exports){
 'use strict'
 
 /**
@@ -88607,7 +89865,7 @@ module.exports = function removeItems(arr, startIdx, removeCount)
   arr.length = len
 }
 
-},{}],202:[function(require,module,exports){
+},{}],203:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -89260,7 +90518,7 @@ var Loader = function () {
 
 exports.default = Loader;
 
-},{"./Resource":203,"./async":204,"mini-signals":15,"parse-uri":17}],203:[function(require,module,exports){
+},{"./Resource":204,"./async":205,"mini-signals":15,"parse-uri":17}],204:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -90416,7 +91674,7 @@ function reqType(xhr) {
     return xhr.toString().replace('object ', '');
 }
 
-},{"mini-signals":15,"parse-uri":17}],204:[function(require,module,exports){
+},{"mini-signals":15,"parse-uri":17}],205:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -90625,7 +91883,7 @@ function queue(worker, concurrency) {
     return q;
 }
 
-},{}],205:[function(require,module,exports){
+},{}],206:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -90693,7 +91951,7 @@ function encodeBinary(input) {
     return output;
 }
 
-},{}],206:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 'use strict';
 
 // import Loader from './Loader';
@@ -90717,7 +91975,7 @@ module.exports = Loader;
 // export default Loader;
 module.exports.default = Loader;
 
-},{"./Loader":202,"./Resource":203,"./async":204,"./b64":205}],207:[function(require,module,exports){
+},{"./Loader":203,"./Resource":204,"./async":205,"./b64":206}],208:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -90805,7 +92063,7 @@ function blobMiddlewareFactory() {
     };
 }
 
-},{"../../Resource":203,"../../b64":205}],208:[function(require,module,exports){
+},{"../../Resource":204,"../../b64":206}],209:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -91539,7 +92797,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":209,"punycode":197,"querystring":200}],209:[function(require,module,exports){
+},{"./util":210,"punycode":198,"querystring":201}],210:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -91557,7 +92815,7 @@ module.exports = {
   }
 };
 
-},{}],210:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 let pixi = require('pixi.js')
 let clientLogic = require('../c2w-client-logic/c2w-client-logic-js')
 let CameraType = clientLogic.com.codinghavoc.logic.world.helpers.CameraManager.CameraType
@@ -91590,7 +92848,6 @@ function setGameCamera(cam, num) {
     cam.cameraType= cameraTypes[num]
 }
 
-
 function setupHudCamera(app, cam) {
     cam.x = app.screen.width / 2
     cam.y = app.screen.height / 2
@@ -91605,11 +92862,14 @@ module.exports = {
     setupHudCamera,
     setGameCamera
 }
-},{"../c2w-client-logic/c2w-client-logic-js":1,"pixi.js":151}],211:[function(require,module,exports){
+},{"../c2w-client-logic/c2w-client-logic-js":1,"pixi.js":152}],212:[function(require,module,exports){
+
 let clientLogic = require('../c2w-client-logic/c2w-client-logic-js.js')
 let logic = clientLogic.com.codinghavoc.logic
 let pixi = require('pixi.js')
 let math = clientLogic.com.codinghavoc.libs.math
+let particles = require("pixi-particles");
+let particleEffects = require("./ParticleEffects")
 
 // TextureHandler **************************************************
 
@@ -91695,6 +92955,50 @@ FontHandler.prototype.releaseFonts = function () {
 }
 
 
+// ParticleEmitterManager ***************************************************
+
+function ParticleEmitterManager(name, app, pathToAssets) {
+    this.name = name
+    this.app = app
+    this.pathToAssets = pathToAssets
+    this.freeEmitters = []
+}
+
+ParticleEmitterManager.prototype.emit = function(x, y, layer) {
+    let emitter = null
+
+    if (this.freeEmitters.length === 0) {
+
+        let container = new PIXI.Container()
+        this.app.gameCamera.addChild(container)
+
+        emitter = new particles.Emitter(
+            container,
+            [PIXI.Texture.fromImage(this.pathToAssets + "/particle.png")],
+            particleEffects.effects[this.name]
+        );
+        emitter.container = container
+        this.app.ticker.add(delta => emitter.update((1/60) * delta));
+    } else {
+        emitter = this.freeEmitters.pop()
+    }
+
+    if (emitter.container.layer !== layer) {
+        emitter.container.layer = layer
+        this.app.stage.updateLayersOrder()
+    }
+
+    // Emit
+    emitter.spawnPos.x = x * this.app.ratio
+    emitter.spawnPos.y = this.app.renderer.view.height - y * this.app.ratio
+
+    let freeEmitters = this.freeEmitters
+    emitter.playOnce(function () {
+        freeEmitters.push(emitter)
+    })
+}
+
+
 // JsAdapter *****************************************************
 
 function JsAdapter(app, pathToAssets) {
@@ -91703,6 +93007,7 @@ function JsAdapter(app, pathToAssets) {
     this.fonts = {} // Currently only supports hud drawing
     this.gameGraphics = {}
     this.hudGraphics = {}
+    this.particleEmitterManagers = {}
     this.app = app
 }
 
@@ -91749,6 +93054,10 @@ JsAdapter.prototype.drawText = function(name,
     else if (align === logic.Align.left) font.anchor.x = 0
     else if (align === logic.Align.right) font.anchor.x = 1
 
+    if (isHud) {
+        font.anchor.y = -0.3 // hardcoded value, TODO improve
+    }
+
     let size = this.fonts[name].size
 
     font.x = x * this.app.ratio
@@ -91776,6 +93085,7 @@ JsAdapter.prototype.draw = function(name,
     sprite.height = height * this.app.ratio
     sprite.x = x * this.app.ratio + originX * this.app.ratio
     sprite.y = this.app.renderer.view.height - y * this.app.ratio - height * this.app.ratio + originY * this.app.ratio
+
     sprite.anchor.set(0.5, 0.5)
     sprite.rotation = -(rotation) * math.DEGREES_TO_RADIANS
 
@@ -91790,6 +93100,7 @@ JsAdapter.prototype.drawCircle = function(shapeType,
                                           layer,
                                           isHud) {
     let gfx = this.setShapeType(shapeType, lineWidth, layer, r, g, b, a, isHud)
+
 
     x = x  * this.app.ratio
     y = -y * this.app.ratio
@@ -91812,6 +93123,15 @@ JsAdapter.prototype.drawRect = function(shapeType,
     height = height * this.app.ratio
 
     gfx.drawRect(x, y, width, height)
+}
+
+JsAdapter.prototype.emitParticle = function(name, x, y, layer) {
+    if (!(name in this.particleEmitterManagers)) {
+        this.particleEmitterManagers[name] = new ParticleEmitterManager(name, this.app, this.pathToAssets)
+    }
+
+    let emitterManager = this.particleEmitterManagers[name]
+    emitterManager.emit(x, y, layer)
 }
 
 JsAdapter.prototype.drawTriangle = function(shapeType,
@@ -91938,7 +93258,343 @@ JsAdapter.prototype.endGraphics = function() {
 }
 
 module.exports = JsAdapter
-},{"../c2w-client-logic/c2w-client-logic-js.js":1,"pixi.js":151}],212:[function(require,module,exports){
+},{"../c2w-client-logic/c2w-client-logic-js.js":1,"./ParticleEffects":213,"pixi-particles":36,"pixi.js":152}],213:[function(require,module,exports){
+
+let effects = {
+    "bulletHitSomething": {
+        alpha: {
+            list: [
+                {
+                    value: 0.8,
+                    time: 0
+                },
+                {
+                    value: 0.1,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        scale: {
+            list: [
+                {
+                    value: 0.3,
+                    time: 0
+                },
+                {
+                    value: 0.1,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        color: {
+            list: [
+                {
+                    value: "fb1010",
+                    time: 0
+                },
+                {
+                    value: "f5b830",
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        speed: {
+            list: [
+                {
+                    value: 200,
+                    time: 0
+                },
+                {
+                    value: 100,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        startRotation: {
+            min: 0,
+            max: 360
+        },
+        rotationSpeed: {
+            min: 0,
+            max: 0
+        },
+        lifetime: {
+            min: 0.5,
+            max: 0.5
+        },
+        frequency: 0.008,
+        spawnChance: 1,
+        particlesPerWave: 1,
+        emitterLifetime: 0.31,
+        maxParticles: 1000,
+        pos: {
+            x: 0,
+            y: 0
+        },
+        addAtBack: false,
+        spawnType: "circle",
+        spawnCircle: {
+            x: 0,
+            y: 0,
+            r: 10
+        }
+    },
+    "resourcePickedUp": {
+        alpha: {
+            list: [
+                {
+                    value: 0.8,
+                    time: 0
+                },
+                {
+                    value: 0.1,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        scale: {
+            list: [
+                {
+                    value: 0.7,
+                    time: 0
+                },
+                {
+                    value: 0.5,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        color: {
+            list: [
+                {
+                    value: "ffffff",
+                    time: 0
+                },
+                {
+                    value: "ffffff",
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        speed: {
+            list: [
+                {
+                    value: 200,
+                    time: 0
+                },
+                {
+                    value: 100,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        startRotation: {
+            min: 0,
+            max: 360
+        },
+        rotationSpeed: {
+            min: 2,
+            max: 6
+        },
+        lifetime: {
+            min: 0.5,
+            max: 0.6
+        },
+        frequency: 0.03,
+        spawnChance: 0.8,
+        particlesPerWave: 1,
+        emitterLifetime: 0.31,
+        maxParticles: 1000,
+        pos: {
+            x: 0,
+            y: 0
+        },
+        addAtBack: false,
+        spawnType: "circle",
+        spawnCircle: {
+            x: 0,
+            y: 0,
+            r: 10
+        }
+    },
+    "unitDiedTeam1": {
+        alpha: {
+            list: [
+                {
+                    value: 0.8,
+                    time: 0
+                },
+                {
+                    value: 0.1,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        scale: {
+            list: [
+                {
+                    value: 2,
+                    time: 0
+                },
+                {
+                    value: 0.5,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        color: {
+            list: [
+                {
+                    value: "#D9C72E",
+                    time: 0
+                },
+                {
+                    value: "#918201",
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        speed: {
+            list: [
+                {
+                    value: 200,
+                    time: 0
+                },
+                {
+                    value: 100,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        startRotation: {
+            min: 0,
+            max: 360
+        },
+        rotationSpeed: {
+            min: 0,
+            max: 0
+        },
+        lifetime: {
+            min: 0.3,
+            max: 0.4
+        },
+        frequency: 0.008,
+        spawnChance: 1,
+        particlesPerWave: 1,
+        emitterLifetime: 0.21,
+        maxParticles: 1000,
+        pos: {
+            x: 0,
+            y: 0
+        },
+        addAtBack: false,
+        spawnType: "circle",
+        spawnCircle: {
+            x: 0,
+            y: 0,
+            r: 10
+        }
+    },
+    "unitDiedTeam2": {
+        alpha: {
+            list: [
+                {
+                    value: 0.8,
+                    time: 0
+                },
+                {
+                    value: 0.1,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        scale: {
+            list: [
+                {
+                    value: 2,
+                    time: 0
+                },
+                {
+                    value: 0.5,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        color: {
+            list: [
+                {
+                    value: "019170",
+                    time: 0
+                },
+                {
+                    value: "2ED964",
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        speed: {
+            list: [
+                {
+                    value: 200,
+                    time: 0
+                },
+                {
+                    value: 100,
+                    time: 1
+                }
+            ],
+            isStepped: false
+        },
+        startRotation: {
+            min: 0,
+            max: 360
+        },
+        rotationSpeed: {
+            min: 0,
+            max: 0
+        },
+        lifetime: {
+            min: 0.3,
+            max: 0.4
+        },
+        frequency: 0.008,
+        spawnChance: 1,
+        particlesPerWave: 1,
+        emitterLifetime: 0.21,
+        maxParticles: 1000,
+        pos: {
+            x: 0,
+            y: 0
+        },
+        addAtBack: false,
+        spawnType: "circle",
+        spawnCircle: {
+            x: 0,
+            y: 0,
+            r: 10
+        }
+    },
+}
+
+module.exports = {
+    effects
+}
+},{}],214:[function(require,module,exports){
 let protobuf = require("../curves_elements/curves_elements")
 let protobufMin = require("protobufjs/minimal")
 let clientLogic = require('../c2w-client-logic/c2w-client-logic-js.js')
@@ -91962,10 +93618,11 @@ function pValueString(value) {
 }
 
 
-function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapter, callbackFun) {
+function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapter,
+                 player1AllowBubbles, player2AllowBubbles, callbackFun) {
 
     if (bannedWordsListPath.length === 0) {
-        readReplay(pathToReplay, logicAdapter, [], callbackFun)
+        readReplay(pathToReplay, logicAdapter, [], player1AllowBubbles, player2AllowBubbles, callbackFun)
     }
     // Else get list of banned words and call readReplay
     else {
@@ -91983,7 +93640,8 @@ function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapt
                         bannedWordsMapping.push(mapping)
                     })
 
-                    readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping, callbackFun)
+                    readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping,
+                        player1AllowBubbles, player2AllowBubbles, callbackFun)
                 }
             }
         }
@@ -91991,11 +93649,12 @@ function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapt
     }
 }
 
-function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping, callbackFun) {
+function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping,
+                    player1AllowBubbles, player2AllowBubbles, callbackFun) {
     // If there is already a base64 encoded replay file then use it
     if (replayFileBase64.length > 0) {
         let replayData = convertBase64ToUint8Array(replayFileBase64)
-        parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun)
+        parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1AllowBubbles, player2AllowBubbles, callbackFun)
     }
     else {
         let xhr = new XMLHttpRequest()
@@ -92006,16 +93665,24 @@ function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMap
         xhr.responseType = "arraybuffer"
         xhr.onload = function(evt) {
             let replayData = new Uint8Array(xhr.response)
-            parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun)
+            parseReplayData(replayData, logicAdapter, bannedWordsMapping,
+                player1AllowBubbles, player2AllowBubbles, callbackFun)
         }
         xhr.send(null);
     }
 }
 
-function parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun) {
+function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1AllowBubbles,
+                         player2AllowBubbles, callbackFun) {
     let reader = protobufMin.Reader.create(replayData)
 
     let curatedTextsDict = {}
+
+    // Used to block text bubbles
+    let team1Entities = {}
+    let team2Entities = {}
+    let team1TextBubbleCurves = {}
+    let team2TextBubbleCurves = {}
 
     while (reader.pos < reader.len) {
         let msg = protobuf.curves.Element.decodeDelimited(reader)
@@ -92035,6 +93702,14 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackF
         else if (m.hasOwnProperty("createEntityEvent")) {
             m = m.createEntityEvent
             e = new curvesDb.events.CreateEntityEvent(m.eid, m.team, m.type)
+
+            // Store entity ids to block text bubbles if necessary
+            if (m.team === "TEAM_1" && !player1AllowBubbles) {
+                team1Entities[m.eid] = true
+            }
+            else if (m.team === "TEAM_2" && !player2AllowBubbles) {
+                team2Entities[m.eid] = true
+            }
         }
         else if (m.hasOwnProperty("curve")) {
             m = m.curve
@@ -92069,6 +93744,19 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackF
             }
             else if (m.ctype === protoCurveTypes.TEXT_BUBBLE_CURVE) {
                 e = new curveTypes.TextBubbleCurve(m.eid, m.type)
+
+                if (!player1AllowBubbles && team1Entities[m.eid]) {
+                    team1TextBubbleCurves[m.id] = true
+                }
+                else if (!player2AllowBubbles && team2Entities[m.eid]) {
+                    team2TextBubbleCurves[m.id] = true
+                }
+            }
+            else if (m.ctype === protoCurveTypes.ARRAY_CURVE) {
+              e = new curveTypes.ArrayCurve(m.eid, m.type)
+            }
+            else if (m.ctype === protoCurveTypes.GAME_STATS_CURVE) {
+              e = new curveTypes.GameStatsCurve(m.eid, m.type)
             }
             else {
                 throw "Unknown curve type. " + m
@@ -92121,8 +93809,36 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackF
             let msg = pValueString(m.msg)
             msg = (msg === "") ? msg : filterText(msg, bannedWordsMapping, curatedTextsDict)
 
+            if ((!player1AllowBubbles && team1TextBubbleCurves[m.cid]) ||
+                (!player2AllowBubbles && team2TextBubbleCurves[m.cid])) {
+                // Block text bubble message
+                msg = ""
+            }
+
             e = new curvesDb.points.TextBubblePoint(pValueInt(m.t), pValueInt(m.cid),  msg,
                 pValueInt(m.align), pValueInt(m.x), pValueInt(m.y))
+        }
+        else if (m.hasOwnProperty("arrayPoint")) {
+          //m = m.arrayPoint
+          //e = new curvesDb.points.ArrayPoint(pValueInt(m.t), pValueInt(m.cid), m.arrayVal)
+          console.log("arrayPoint is not supported yet")
+          // TODO!
+        }
+        else if (m.hasOwnProperty("gameStatsPoint")) {
+          m = m.gameStatsPoint
+          let team1 = {
+            power: pValueInt(m.team1.power),
+            resources: pValueInt(m.team1.resources),
+            workers: pValueInt(m.team1.workers),
+            warriors: pValueInt(m.team1.warriors)
+          }
+          let team2 = {
+            power: pValueInt(m.team2.power),
+            resources: pValueInt(m.team2.resources),
+            workers: pValueInt(m.team2.workers),
+            warriors: pValueInt(m.team2.warriors)
+          }
+          e = new curvesDb.points.GameStatsPoint(pValueInt(m.t), pValueInt(m.cid), team1, team2)
         }
         else if (m.hasOwnProperty("gameOverEvent")) {
             m = m.gameOverEvent
@@ -92135,8 +93851,12 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackF
         else {
             throw "Element is not recognized. " + m
         }
-
-        logicAdapter.insertIntoCurvesDB(e)
+        
+        try {
+            logicAdapter.insertIntoCurvesDB(e)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     callbackFun()
@@ -92176,11 +93896,12 @@ function convertBase64ToUint8Array(base64) {
 module.exports = {
     prepare
 }
-},{"../c2w-client-logic/c2w-client-logic-js.js":1,"../curves_elements/curves_elements":2,"protobufjs/minimal":186}],213:[function(require,module,exports){
+},{"../c2w-client-logic/c2w-client-logic-js.js":1,"../curves_elements/curves_elements":2,"protobufjs/minimal":187}],215:[function(require,module,exports){
 (function (global){
 
 
-function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToBannedWordsList, setGameDuration, setTime) {
+function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToBannedWordsList, setGameDuration, setTime,
+                    player1AllowBubbles, player2AllowBubbles) {
     global.kotlin = require('kotlin')
     let pixi = require('pixi.js')
     let Sprite = pixi.Sprite
@@ -92252,12 +93973,12 @@ function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToB
 
         //Start the game loop by adding the `gameLoop` function to
         //Pixi's `ticker` and providing it with a `delta` argument.
-        //app.ticker.add(delta => gameLoop((1/60) * delta));
         app.ticker.add(delta => gameLoop((1/60) * delta))
     }
 
     // Load replay
-    ReplayReader.prepare(pathToBannedWordsList, pathToReplay, replayFileBase64, logicAdapter, runGame)
+    ReplayReader.prepare(pathToBannedWordsList, pathToReplay, replayFileBase64, logicAdapter,
+        player1AllowBubbles, player2AllowBubbles, runGame)
 
     function gameLoop(delta) {
         let scaledDelta = calculateNewTime(delta)
@@ -92316,6 +94037,7 @@ function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToB
             b.layer = b.layer || 0
             return a.layer - b.layer
         });
+
         app.hudCamera.children.sort(function(a,b) {
             a.layer = a.layer || 0
             b.layer = b.layer || 0
@@ -92372,5 +94094,5 @@ module.exports = {
     playReplay
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../c2w-client-logic/c2w-client-logic-js":1,"./Camera":210,"./JsAdapter":211,"./ReplayReader":212,"kotlin":14,"pixi.js":151}]},{},[213])(213)
+},{"../c2w-client-logic/c2w-client-logic-js":1,"./Camera":211,"./JsAdapter":212,"./ReplayReader":214,"kotlin":14,"pixi.js":152}]},{},[215])(215)
 });
