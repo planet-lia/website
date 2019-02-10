@@ -19,6 +19,8 @@ class Replay extends Component {
       isFull: false,
       overlayOpacity: 0,
       forceReplayWidth: "100%",
+      player1AllowBubbles: true,
+      player2AllowBubbles: true
     }
     this.puiRef = React.createRef();
   }
@@ -83,7 +85,9 @@ class Replay extends Component {
           this.props.replayFileBase64,
           "/assets/banned-words.txt",
           this.setGameDuration,
-          this.setTime
+          this.setTime,
+          this.state.player1AllowBubbles,
+          this.state.player2AllowBubbles
         )
       });
     } else {

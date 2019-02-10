@@ -1,5 +1,5 @@
 const REPO_BASE_URL = "https://raw.githubusercontent.com/liagame"
-const SDK_VERSION = "v0.2.0"
+const SDK_VERSION = "v1.0.0"
 
 export const programmingLanguages = {
   python3: {
