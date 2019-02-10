@@ -93622,7 +93622,7 @@ function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapt
                  player1AllowBubbles, player2AllowBubbles, callbackFun) {
 
     if (bannedWordsListPath.length === 0) {
-        readReplay(pathToReplay, logicAdapter, [], callbackFun)
+        readReplay(pathToReplay, logicAdapter, [], player1AllowBubbles, player2AllowBubbles, callbackFun)
     }
     // Else get list of banned words and call readReplay
     else {
@@ -93654,7 +93654,7 @@ function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMap
     // If there is already a base64 encoded replay file then use it
     if (replayFileBase64.length > 0) {
         let replayData = convertBase64ToUint8Array(replayFileBase64)
-        parseReplayData(replayData, logicAdapter, bannedWordsMapping, callbackFun)
+        parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1AllowBubbles, player2AllowBubbles, callbackFun)
     }
     else {
         let xhr = new XMLHttpRequest()
