@@ -1,9 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Contacts = () => {
+const Contacts = (props) => {
   return (
-    <div className="cont-contacts">
+    <div className={"cont-contacts " + props.className}>
       <a className="contacts-logo clr-fb" href="https://www.facebook.com/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "facebook-square"]} /></a>
       <a className="contacts-logo clr-rd" href="https://www.reddit.com/r/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "reddit"]} /></a>
       <a className="contacts-logo clr-gh" href="https://github.com/liagame/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={["fab", "github"]} /></a>
