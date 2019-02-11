@@ -875,7 +875,7 @@ iframe {
   .land-what-text {
     text-align: center;
   }
-  #land-cont-contact > div {
+  .land-cont-contact {
     margin: 0 auto;
 
     -ms-flex-pack: distribute;
@@ -1108,22 +1108,22 @@ iframe {
 
 #lia-team {
   width: 100%;
-  padding: 52px 0;
+  padding-top: 16px;
 }
 
-#about-cont-contact > div{
+.about-cont-contact {
   margin: 30px auto 0;
 }
 
 @media screen and (max-width: 1199.98px) {
   #lia-team {
-    padding: 112px 0;
+    padding-top: 68px;
   }
 }
 
 @media screen and (max-width: 991.98px) {
   #lia-team {
-    padding: 0;
+    padding-top: 0;
   }
 }
 
