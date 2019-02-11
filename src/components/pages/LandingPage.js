@@ -86,9 +86,7 @@ class LandingPage extends Component {
                     compete with your friends and programmers from all around
                     the world.
                   </p>
-                  <div id="land-cont-contact">
-                    <Contacts />
-                  </div>
+                  <Contacts className="land-cont-contact"/>
               </Col>
             </Row>
           </div>

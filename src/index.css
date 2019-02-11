@@ -111,6 +111,14 @@ select.placeholder > option {
     padding: 10px 0;
 }
 
+.title {
+  font-weight: bold;
+}
+
+.title.no-top {
+  margin-top: 0;
+}
+
 /* Layout */
 
 #main-container {
@@ -850,7 +858,7 @@ iframe {
   .land-what-text {
     text-align: center;
   }
-  #land-cont-contact > div {
+  .land-cont-contact {
     margin: 0 auto;
 
     -ms-flex-pack: distribute;
@@ -1083,22 +1091,26 @@ iframe {
 
 #lia-team {
   width: 100%;
-  padding: 52px 0;
+  padding-top: 0;
 }
 
-#about-cont-contact > div{
+.about-cont-contact {
   margin: 30px auto 0;
 }
 
 @media screen and (max-width: 1199.98px) {
   #lia-team {
-    padding: 112px 0;
+    padding-top: 50px;
   }
 }
 
 @media screen and (max-width: 991.98px) {
   #lia-team {
-    padding: 0;
+    padding-top: 0;
+  }
+
+  .about .title.team {
+    margin-top: 20px;
   }
 }
 
@@ -1432,6 +1444,18 @@ a.contacts-logo {
   color: #333;
   font-size: 2.5em;
   cursor: pointer;
+}
+
+/* PersonalContacts */
+.pers-contact {
+  padding-top: 10px;
+}
+.pers-contact .name {
+  margin: 0;
+  font-weight: bold;
+}
+.pers-contact .email {
+  margin-bottom: 5px;
 }
 
 /* TODO @aljaz's css, fix if needed */
