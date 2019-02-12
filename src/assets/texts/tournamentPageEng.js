@@ -62,13 +62,13 @@ const tournamentPageEng = {
     <sup key="1">nd</sup>,
     <span key="2"> place</span>
   ],
-  txtSubPrize2: "Prize will be revealed in February",
+  txtSubPrize2: "Panoramic flight above Triglav for 3 persons",
   txtPrize3: [
     <span key="0">Final tournament 3</span>,
     <sup key="1">rd</sup>,
     <span key="2"> place</span>
   ],
-  txtSubPrize3: "Prize will be revealed in February",
+  txtSubPrize3: "Sennheiser HD 4.50 BT Wireless headphones",
   txtPrize4: "Leaderboard winners week 1 to 3",
   txtSubPrize4: "3x JBL GO bluetooth speaker",
   txtPrize5: "Best game of the tournament",
