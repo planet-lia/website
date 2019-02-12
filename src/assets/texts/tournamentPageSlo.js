@@ -52,7 +52,7 @@ const tournamentPageSlo = {
   txtPrize1: "1. mesto na zaključnem turnirju",
   txtSubPrize1: "Nagrada bo objavljena v začetku februarja",
   txtPrize2: "2. mesto na zaključnem turnirju",
-  txtSubPrize2: "Panoramski polet nad Triglavom za 3 osebe",
+  txtSubPrize2: "Panoramski polet nad Triglavom za tri osebe",
   txtPrize3: "3. mesto na zaključnem turnirju",
   txtSubPrize3: "Brezžične slušalke Sennheiser HD 4.50 BT",
   txtPrize4: "Vodilni po 1., 2. in 3. tednu",
