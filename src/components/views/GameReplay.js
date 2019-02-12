@@ -75,7 +75,8 @@ class GameReplay extends Component {
           </div>
         </div>
         <div key={this.state.matchId}>
-          <Replay containerId="gameView" replayFileBase64="" number={0} replayUrl={replayUrl}/>
+          <Replay containerId="gameView" replayFileBase64="" player1Name={this.state.player1}
+                  player2Name={this.state.player2} number={0} replayUrl={replayUrl}/>
         </div>
       </div>
     )

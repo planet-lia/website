@@ -93619,10 +93619,11 @@ function pValueString(value) {
 
 
 function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapter,
-                 player1AllowBubbles, player2AllowBubbles, callbackFun) {
+                 player1AllowBubbles, player2AllowBubbles, setGameStateStatistics, callbackFun) {
 
     if (bannedWordsListPath.length === 0) {
-        readReplay(pathToReplay, logicAdapter, [], player1AllowBubbles, player2AllowBubbles, callbackFun)
+        readReplay(pathToReplay, logicAdapter, [], player1AllowBubbles, player2AllowBubbles,
+            setGameStateStatistics, callbackFun)
     }
     // Else get list of banned words and call readReplay
     else {
@@ -93641,7 +93642,7 @@ function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapt
                     })
 
                     readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping,
-                        player1AllowBubbles, player2AllowBubbles, callbackFun)
+                        player1AllowBubbles, player2AllowBubbles, setGameStateStatistics, callbackFun)
                 }
             }
         }
@@ -93650,11 +93651,12 @@ function prepare(bannedWordsListPath, pathToReplay, replayFileBase64, logicAdapt
 }
 
 function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMapping,
-                    player1AllowBubbles, player2AllowBubbles, callbackFun) {
+                    player1AllowBubbles, player2AllowBubbles, setGameStateStatistics, callbackFun) {
     // If there is already a base64 encoded replay file then use it
     if (replayFileBase64.length > 0) {
         let replayData = convertBase64ToUint8Array(replayFileBase64)
-        parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1AllowBubbles, player2AllowBubbles, callbackFun)
+        parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1AllowBubbles, player2AllowBubbles,
+            setGameStateStatistics, callbackFun)
     }
     else {
         let xhr = new XMLHttpRequest()
@@ -93666,14 +93668,14 @@ function readReplay(pathToReplay, replayFileBase64, logicAdapter, bannedWordsMap
         xhr.onload = function(evt) {
             let replayData = new Uint8Array(xhr.response)
             parseReplayData(replayData, logicAdapter, bannedWordsMapping,
-                player1AllowBubbles, player2AllowBubbles, callbackFun)
+                player1AllowBubbles, player2AllowBubbles, setGameStateStatistics, callbackFun)
         }
         xhr.send(null);
     }
 }
 
 function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1AllowBubbles,
-                         player2AllowBubbles, callbackFun) {
+                         player2AllowBubbles, setGameStateStatistics, callbackFun) {
     let reader = protobufMin.Reader.create(replayData)
 
     let curatedTextsDict = {}
@@ -93683,6 +93685,9 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1Al
     let team2Entities = {}
     let team1TextBubbleCurves = {}
     let team2TextBubbleCurves = {}
+
+    // Store all game state points
+    let gameStatePoints = []
 
     while (reader.pos < reader.len) {
         let msg = protobuf.curves.Element.decodeDelimited(reader)
@@ -93838,6 +93843,14 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1Al
             workers: pValueInt(m.team2.workers),
             warriors: pValueInt(m.team2.warriors)
           }
+
+          // Store game stats point
+          gameStatePoints.push({
+              time: pValueInt(m.t),
+              team1: team1,
+              team2: team2,
+          })
+
           e = new curvesDb.points.GameStatsPoint(pValueInt(m.t), pValueInt(m.cid), team1, team2)
         }
         else if (m.hasOwnProperty("gameOverEvent")) {
@@ -93858,6 +93871,8 @@ function parseReplayData(replayData, logicAdapter, bannedWordsMapping, player1Al
             console.log(err)
         }
     }
+
+    setGameStateStatistics(gameStatePoints)
 
     callbackFun()
 }
@@ -93901,7 +93916,7 @@ module.exports = {
 
 
 function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToBannedWordsList, setGameDuration, setTime,
-                    player1AllowBubbles, player2AllowBubbles) {
+                    setGameStatisticsFoo, player1AllowBubbles, player2AllowBubbles) {
     global.kotlin = require('kotlin')
     let pixi = require('pixi.js')
     let Sprite = pixi.Sprite
@@ -93978,7 +93993,7 @@ function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToB
 
     // Load replay
     ReplayReader.prepare(pathToBannedWordsList, pathToReplay, replayFileBase64, logicAdapter,
-        player1AllowBubbles, player2AllowBubbles, runGame)
+        player1AllowBubbles, player2AllowBubbles, setGameStatisticsFoo, runGame)
 
     function gameLoop(delta) {
         let scaledDelta = calculateNewTime(delta)
