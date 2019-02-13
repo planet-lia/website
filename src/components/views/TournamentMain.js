@@ -123,8 +123,11 @@ const TournamentMain = (props) => {
                     color="#d9c72e"
                     mainText={content.txtPrize1}
                     subText={content.txtSubPrize1}
-                    sponsor={content.txtSponsor1}
-                    sponsorLink="https://styliff.com/"
+                    sponsor={{
+                      before: content.txtSponBy,
+                      text: content.txtSponsor1,
+                      link: "https://styliff.com/"
+                    }}
                   />
                   <Prize
                     color="#9b9b92"
@@ -142,8 +145,11 @@ const TournamentMain = (props) => {
                     color="#018e6a"
                     mainText={content.txtPrize7}
                     subText={content.txtSubPrize7}
-                    sponsor={content.txtSponsor7}
-                    sponsorLink="https://svet.fri.uni-lj.si/"
+                    sponsor={{
+                      before: content.txtSponBy,
+                      text: content.txtSponsor7,
+                      link: "https://svet.fri.uni-lj.si/"
+                    }}
                   />
                   <Prize
                     color="#018e6a"

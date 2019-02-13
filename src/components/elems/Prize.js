@@ -13,8 +13,9 @@ const Prize = (props) => {
         {props.sponsor
           ? (
             <div className="tour-prize-subtext">
-              <a href={props.sponsorLink} target="_blank" rel="noopener noreferrer">
-                {props.sponsor}
+              <span>{props.sponsor.before + " "}</span>
+              <a href={props.sponsor.link} target="_blank" rel="noopener noreferrer">
+                {props.sponsor.text}
               </a>
             </div>
           )
