@@ -11,7 +11,13 @@ const Prize = (props) => {
         <div className="tour-prize-text">{props.mainText}</div>
         <div className="tour-prize-subtext">{props.subText}</div>
         {props.sponsor
-          ? <div className="tour-prize-subtext">{props.sponsor}</div>
+          ? (
+            <div className="tour-prize-subtext">
+              <a href={props.sponsorLink} target="_blank" rel="noopener noreferrer">
+                {props.sponsor}
+              </a>
+            </div>
+          )
           : null
         }
       </div>
