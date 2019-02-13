@@ -124,6 +124,7 @@ const TournamentMain = (props) => {
                     mainText={content.txtPrize1}
                     subText={content.txtSubPrize1}
                     sponsor="Styliff Tech"
+                    sponsorLink="https://styliff.com/"
                   />
                   <Prize
                     color="#9b9b92"
@@ -139,6 +140,13 @@ const TournamentMain = (props) => {
                 <Col sm={6}>
                   <Prize
                     color="#018e6a"
+                    mainText={content.txtPrize7}
+                    subText={content.txtSubPrize7}
+                    sponsor="ŠS FRI"
+                    sponsorLink="https://svet.fri.uni-lj.si/"
+                  />
+                  <Prize
+                    color="#018e6a"
                     mainText={content.txtPrize4}
                     subText={content.txtSubPrize4}
                   />
@@ -152,16 +160,6 @@ const TournamentMain = (props) => {
                     mainText={content.txtPrize6}
                     subText={content.txtSubPrize6}
                   />
-                </Col>
-              </Row>
-              <Row>
-                <Col sm={6} smOffset={3}>
-                <Prize
-                  color="#018e6a"
-                  mainText={content.txtPrize7}
-                  subText={content.txtSubPrize7}
-                  sponsor="ŠS FRI"
-                />
                 </Col>
               </Row>
             </Col>

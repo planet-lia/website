@@ -61,7 +61,7 @@ const tournamentPageSlo = {
   txtSubPrize5: "Žepni dron UGO Zephir",
   txtPrize6: "Najboljši gledalec turnirja",
   txtSubPrize6: "5x 20€ BIG BANG darilni bon",
-  txtPrize7: "Najbolje uvrščeni dijak",
+  txtPrize7: "Najboljše uvrščeni dijak",
   txtSubPrize7: "Razer Cynosa PRO & Deathadder 2000",
   titleRules: "Pravila",
   txtRules: "Natančnejše informacije in pravila o turnirju lahko prebereš ",
