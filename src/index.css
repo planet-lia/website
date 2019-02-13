@@ -450,7 +450,11 @@ a.btn.custom-btn:hover {
 }
 
 #logo-garaza {
-  padding-top: 25px;
+  padding: 56px 0 26px;
+}
+
+#logo-fri {
+  padding: 28px 0;
 }
 
 #tour-lang {
@@ -649,7 +653,8 @@ a.btn.custom-btn:hover {
   padding: 0;
 }
 
-#logo-medius {
+#logo-medius,
+#logo-sfri {
   padding: 20px 0;
 }
 
