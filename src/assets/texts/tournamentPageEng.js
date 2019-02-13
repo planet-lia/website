@@ -57,6 +57,7 @@ const tournamentPageEng = {
     <span key="2"> place</span>
   ],
   txtSubPrize1: "PlayStation 4 & FIFA 19 + internship",
+  txtSponsor1: "Styliff Tech",
   txtPrize2: [
     <span key="0">Final tournament 2</span>,
     <sup key="1">nd</sup>,
@@ -77,6 +78,7 @@ const tournamentPageEng = {
   txtSubPrize6: "5x 20€ BIG BANG gift card",
   txtPrize7: "Best ranked highschool student",
   txtSubPrize7: "Razer Cynosa PRO & Deathadder 2000",
+  txtSponsor7: "Student council FRI",
   titleRules: "Rules",
   txtRules: "To get detailed information & rules about the tournament go ",
   linkRules: "here",
