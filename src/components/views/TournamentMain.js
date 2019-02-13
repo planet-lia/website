@@ -123,7 +123,7 @@ const TournamentMain = (props) => {
                     color="#d9c72e"
                     mainText={content.txtPrize1}
                     subText={content.txtSubPrize1}
-                    sponsor="Styliff Tech"
+                    sponsor={content.txtSponsor1}
                     sponsorLink="https://styliff.com/"
                   />
                   <Prize
@@ -142,7 +142,7 @@ const TournamentMain = (props) => {
                     color="#018e6a"
                     mainText={content.txtPrize7}
                     subText={content.txtSubPrize7}
-                    sponsor="ŠS FRI"
+                    sponsor={content.txtSponsor7}
                     sponsorLink="https://svet.fri.uni-lj.si/"
                   />
                   <Prize
