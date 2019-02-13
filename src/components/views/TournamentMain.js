@@ -123,6 +123,7 @@ const TournamentMain = (props) => {
                     color="#d9c72e"
                     mainText={content.txtPrize1}
                     subText={content.txtSubPrize1}
+                    sponsor="Styliff Tech"
                   />
                   <Prize
                     color="#9b9b92"
@@ -151,6 +152,16 @@ const TournamentMain = (props) => {
                     mainText={content.txtPrize6}
                     subText={content.txtSubPrize6}
                   />
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={6} smOffset={3}>
+                <Prize
+                  color="#018e6a"
+                  mainText={content.txtPrize7}
+                  subText={content.txtSubPrize7}
+                  sponsor="ŠS FRI"
+                />
                 </Col>
               </Row>
             </Col>

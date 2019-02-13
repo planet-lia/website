@@ -10,6 +10,10 @@ const Prize = (props) => {
       <div>
         <div className="tour-prize-text">{props.mainText}</div>
         <div className="tour-prize-subtext">{props.subText}</div>
+        {props.sponsor
+          ? <div className="tour-prize-subtext">{props.sponsor}</div>
+          : null
+        }
       </div>
     </div>
   )

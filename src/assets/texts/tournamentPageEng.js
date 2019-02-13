@@ -56,7 +56,7 @@ const tournamentPageEng = {
     <sup key="1">st</sup>,
     <span key="2"> place</span>
   ],
-  txtSubPrize1: "Prize will be revealed in February",
+  txtSubPrize1: "PlayStation 4 & FIFA 19 + internship",
   txtPrize2: [
     <span key="0">Final tournament 2</span>,
     <sup key="1">nd</sup>,
@@ -75,6 +75,8 @@ const tournamentPageEng = {
   txtSubPrize5: "Pocket drone UGO Zephir",
   txtPrize6: "Best spectator award",
   txtSubPrize6: "5x 20€ BIG BANG gift card",
+  txtPrize7: "Best ranked highschool student",
+  txtSubPrize7: "Razer Cynosa PRO & Deathadder 2000",
   titleRules: "Rules",
   txtRules: "To get detailed information & rules about the tournament go ",
   linkRules: "here",
