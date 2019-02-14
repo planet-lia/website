@@ -45,7 +45,7 @@ class EditorPage extends Component {
           code: text,
           isLoadingCode: false
         });
-        this.generateGame();
+        //this.generateGame();
       });
   }
 
@@ -248,7 +248,7 @@ class EditorPage extends Component {
             </div>
             {/* Key resets the replay; instead of currentReplayFileBase64 do gameID */}
             <div id="editor-cont-replay" key={gameKey}>
-              <Replay containerId="player" number={ 0 } replayFileBase64={ currentReplayFileBase64 } />
+              <Replay containerId="player" number={ 0 } replayFileBase64={ currentReplayFileBase64 } showStatistics={false}/>
               {generatingGame &&
                 <div id="editor-loader-overlay">
                   <div className="cont-loader">

@@ -27,7 +27,7 @@ class Replay extends Component {
       unitsData: [],
       player1Name: "",
       player2Name: "",
-      showStatistics: false,
+      showStatistics: props.showStatistics,
       player1AllowBubbles: true,
       player2AllowBubbles: true
     }
@@ -44,9 +44,8 @@ class Replay extends Component {
     if(this.props.number || this.props.replayFileBase64 || this.props.replayUrl){
       this.checkAndRun();
     }
-    if (this.props.player1Name && this.props.player2Name) {
+    if (this.props.showStatistics) {
         this.setState({
-            showStatistics: true,
             player1Name: this.props.player1Name,
             player2Name: this.props.player2Name,
         });
@@ -355,173 +354,143 @@ class Replay extends Component {
   render() {
       return (
         <div>
-            <Row>
-                <Col sm={8}>
-                <Fullscreen
-                    enabled={this.state.isFull}
-                    onChange={isFull => this.setState({isFull})}
-                >
-                    <div className={this.state.replay===null ? "cont-player no-replay" : "cont-player"}>
-                        <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
-                            <div id={ this.props.containerId } style={{width: (this.state.isFull ? this.state.forceReplayWidth : "100%") }}></div>
-                            <div className="player-overlay"></div>
-                            {this.state.isPlaying ? (
-                                <Glyphicon className="player-overlay-icon" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
-                            ) : (
-                                <Glyphicon className="player-overlay-icon" glyph="pause" style={{opacity: this.state.overlayOpacity}}/>
-                            )}
-                        </div>
-                        <div className="row-pui" ref={ this.puiRef }>
-                            <div className="pui-timeline">
-                                <ReactBootstrapSlider value={this.state.time} min={0} max={this.state.duration} step={0.01} change={this.onChangeTime} tooltip="hide" />
-                            </div>
-                            <div className="pui-buttons">
-                                <div className="pui-btns-left">
-                                    <div className="pui-btn" onClick={this.onTogglePlay}>
-                                        {this.state.isPlaying ? (
-                                            <Glyphicon className="pui-btns-glyph" glyph="pause" />
-                                        ) : (
-                                            <Glyphicon className="pui-btns-glyph" glyph="play" />
-                                        )}
-                                    </div>
-                                    <div className="pui-cont"
-                                         onMouseEnter={ () => this.setState({insideSpeedSlider: true}) }
-                                         onMouseLeave={ () => this.setState({insideSpeedSlider: false}) }
-                                    >
-                                        <div className="pui-btn pui-btn-wide">
-                                            <span className="pui-text">{this.state.speed + "x"}</span>
-                                        </div>
-                                        {(this.state.replay!==null) && (this.state.insideSpeedSlider ||  this.state.speedSliderTabId>0) ? (
-                                            <div className="pui-speed-slider"
-                                                 tabIndex={ this.state.speedSliderTabId }
-                                                 onBlur={
-                                                     this.state.insideSpeedSlider ? (
-                                                         null
-                                                     ) : (
-                                                         () => this.setState({
-                                                             insideSpeedSlider: false,
-                                                             speedSliderTabId: -1
-                                                         })
-                                                     )
-                                                 }
-                                            >
-                                                <span className="pui-divider"></span>
-                                                <ReactBootstrapSlider
-                                                    value={this.state.speed}
-                                                    min={-6}
-                                                    max={6}
-                                                    step={0.1}
-                                                    change={this.onSpeedChange}
-                                                    tooltip="hide"
-                                                />
-                                                <span className="pui-divider"></span>
-                                                <span className="pui-btn" onClick={this.onResetSpeed}>
-                          <Glyphicon className="pui-btns-glyph" glyph="refresh" />
-                        </span>
-                                            </div>
-                                        ) : null}
-                                    </div>
-                                </div>
-                                <div className="pui-btns-right">
-                                    <div className="pui-cont" onMouseEnter={() => this.setState({showCameras: true})} onMouseLeave={() => this.setState({showCameras: false})}>
-                                        {(this.state.replay!==null) && this.state.showCameras ? (
-                                            <div className="pui-cont pui-cameras">
-                                                <div className="pui-btn" onClick={() => this.onCamChange(0)} style={this.state.camera===1 ? {color: "#facd3b"} : {}}>
-                                                    <Glyphicon glyph="facetime-video" />
-                                                    <span className="pui-text"> 1</span>
-                                                </div>
-                                                <div className="pui-btn" onClick={() => this.onCamChange(1)} style={this.state.camera===2 ? {color: "#facd3b"} : {}}>
-                                                    <Glyphicon glyph="facetime-video" />
-                                                    <span className="pui-text"> 2</span>
-                                                </div>
-                                                <div className="pui-btn" onClick={() => this.onCamChange(2)} style={this.state.camera===3 ? {color: "#facd3b"} : {}}>
-                                                    <Glyphicon glyph="facetime-video" />
-                                                    <span className="pui-text"> 3</span>
-                                                </div>
-                                                <span className="pui-divider"></span>
-                                            </div>
-                                        ) : null }
-                                        <div className="pui-btn">
-                                            <Glyphicon className="pui-btns-glyph" glyph="facetime-video" />
-                                            <span className="pui-text">{" " + this.state.camera}</span>
-                                        </div>
-                                    </div>
-                                    <div className="pui-btn" onClick={this.goFull}>
-                                        {this.state.isFull ? <Glyphicon className="pui-btns-glyph" glyph="fullscreen" /> : <Glyphicon className="pui-btns-glyph" glyph="fullscreen" />}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Fullscreen>
-                </Col>
-                <Col sm={4}>
-                    {(this.state.showStatistics)
-                        ? (
-                            <div>
-                                <h4>Power</h4>
-                                < Line data={this.state.powerData} options={this.state.chartOptions}/>
-
-                                <h4>Resources</h4>
-                                < Line data={this.state.resourceData} options={this.state.chartOptions}/>
-                            </div>
-                        ) : null
-                    }
-                </Col>
-            </Row>
             {(this.state.showStatistics)
-                ? (
-                    <Row>
-                        <Col sm={4}>
-                            <h4>Workers</h4>
-                            < Line data={this.state.workersData} options={this.state.chartOptions}/>
-                        </Col>
-                        <Col sm={4}>
-                            <h4>Warriors</h4>
-                            < Line data={this.state.warriorsData} options={this.state.chartOptions}/>
-                        </Col>
-                        <Col sm={4}>
-                            <h4>Units</h4>
-                            < Line data={this.state.unitsData} options={this.state.chartOptions}/>
-                        </Col>
-                    </Row>
-                ) : null
-            }
+                ? ( <div>
+                        <Row>
+                            <Col sm={8}>
+                                {this.fullscreen()}
+                            </Col>
+                            <Col sm={4}>
+                                   <div>
+                                    <h4>Power</h4>
+                                    < Line data={this.state.powerData} options={this.state.chartOptions}/>
 
-            {/*{(this.state.showStatistics)*/}
-                {/*? (*/}
-                {/*<div>*/}
-                    {/*<Row>*/}
-                        {/*<Col sm={6}>*/}
-                            {/*<h3>Power</h3>*/}
-                            {/*< Line data={this.state.powerData} options={this.state.chartOptions}/>*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={6}>*/}
-                            {/*<h3>Resources</h3>*/}
-                            {/*< Line data={this.state.resourceData} options={this.state.chartOptions}/>*/}
-                        {/*</Col>*/}
-                    {/*</Row>*/}
-                    {/*<Row>*/}
-                        {/*<Col sm={4}>*/}
-                            {/*<h3>Workers</h3>*/}
-                            {/*< Line data={this.state.workersData} options={this.state.chartOptions}/>*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={4}>*/}
-                            {/*<h3>Warriors</h3>*/}
-                            {/*< Line data={this.state.warriorsData} options={this.state.chartOptions}/>*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={4}>*/}
-                            {/*<h3>Units</h3>*/}
-                            {/*< Line data={this.state.unitsData} options={this.state.chartOptions}/>*/}
-                        {/*</Col>*/}
-                    {/*</Row>*/}
-                {/*</div>*/}
-                {/*) : null*/}
-            {/*}*/}
-
+                                    <h4>Resources</h4>
+                                    < Line data={this.state.resourceData} options={this.state.chartOptions}/>
+                                </div>
+                            </Col> 
+                        </Row>
+                        <Row>
+                            <Col sm={4}>
+                                <h4>Workers</h4>
+                                < Line data={this.state.workersData} options={this.state.chartOptions}/>
+                            </Col>
+                            <Col sm={4}>
+                                <h4>Warriors</h4>
+                                < Line data={this.state.warriorsData} options={this.state.chartOptions}/>
+                            </Col>
+                            <Col sm={4}>
+                                <h4>Units</h4>
+                                < Line data={this.state.unitsData} options={this.state.chartOptions}/>
+                            </Col>
+                        </Row>
+                    </div>
+                    ) 
+                    : this.fullscreen()
+                }
         </div>
 
     )
+  }
+
+  fullscreen = () => {
+      return (<Fullscreen
+        enabled={this.state.isFull}
+        onChange={isFull => this.setState({isFull})}
+    >
+        <div className={this.state.replay===null ? "cont-player no-replay" : "cont-player"}>
+            <div className="row-replay" onClick={this.onTogglePlay} onDoubleClick={this.goFull}>
+                <div id={ this.props.containerId } style={{width: (this.state.isFull ? this.state.forceReplayWidth : "100%") }}></div>
+                <div className="player-overlay"></div>
+                {this.state.isPlaying ? (
+                    <Glyphicon className="player-overlay-icon" glyph="play" style={{opacity: this.state.overlayOpacity}}/>
+                ) : (
+                    <Glyphicon className="player-overlay-icon" glyph="pause" style={{opacity: this.state.overlayOpacity}}/>
+                )}
+            </div>
+            <div className="row-pui" ref={ this.puiRef }>
+                <div className="pui-timeline">
+                    <ReactBootstrapSlider value={this.state.time} min={0} max={this.state.duration} step={0.01} change={this.onChangeTime} tooltip="hide" />
+                </div>
+                <div className="pui-buttons">
+                    <div className="pui-btns-left">
+                        <div className="pui-btn" onClick={this.onTogglePlay}>
+                            {this.state.isPlaying ? (
+                                <Glyphicon className="pui-btns-glyph" glyph="pause" />
+                            ) : (
+                                <Glyphicon className="pui-btns-glyph" glyph="play" />
+                            )}
+                        </div>
+                        <div className="pui-cont"
+                             onMouseEnter={ () => this.setState({insideSpeedSlider: true}) }
+                             onMouseLeave={ () => this.setState({insideSpeedSlider: false}) }
+                        >
+                            <div className="pui-btn pui-btn-wide">
+                                <span className="pui-text">{this.state.speed + "x"}</span>
+                            </div>
+                            {(this.state.replay!==null) && (this.state.insideSpeedSlider ||  this.state.speedSliderTabId>0) ? (
+                                <div className="pui-speed-slider"
+                                     tabIndex={ this.state.speedSliderTabId }
+                                     onBlur={
+                                         this.state.insideSpeedSlider ? (
+                                             null
+                                         ) : (
+                                             () => this.setState({
+                                                 insideSpeedSlider: false,
+                                                 speedSliderTabId: -1
+                                             })
+                                         )
+                                     }
+                                >
+                                    <span className="pui-divider"></span>
+                                    <ReactBootstrapSlider
+                                        value={this.state.speed}
+                                        min={-6}
+                                        max={6}
+                                        step={0.1}
+                                        change={this.onSpeedChange}
+                                        tooltip="hide"
+                                    />
+                                    <span className="pui-divider"></span>
+                                    <span className="pui-btn" onClick={this.onResetSpeed}>
+              <Glyphicon className="pui-btns-glyph" glyph="refresh" />
+            </span>
+                                </div>
+                            ) : null}
+                        </div>
+                    </div>
+                    <div className="pui-btns-right">
+                        <div className="pui-cont" onMouseEnter={() => this.setState({showCameras: true})} onMouseLeave={() => this.setState({showCameras: false})}>
+                            {(this.state.replay!==null) && this.state.showCameras ? (
+                                <div className="pui-cont pui-cameras">
+                                    <div className="pui-btn" onClick={() => this.onCamChange(0)} style={this.state.camera===1 ? {color: "#facd3b"} : {}}>
+                                        <Glyphicon glyph="facetime-video" />
+                                        <span className="pui-text"> 1</span>
+                                    </div>
+                                    <div className="pui-btn" onClick={() => this.onCamChange(1)} style={this.state.camera===2 ? {color: "#facd3b"} : {}}>
+                                        <Glyphicon glyph="facetime-video" />
+                                        <span className="pui-text"> 2</span>
+                                    </div>
+                                    <div className="pui-btn" onClick={() => this.onCamChange(2)} style={this.state.camera===3 ? {color: "#facd3b"} : {}}>
+                                        <Glyphicon glyph="facetime-video" />
+                                        <span className="pui-text"> 3</span>
+                                    </div>
+                                    <span className="pui-divider"></span>
+                                </div>
+                            ) : null }
+                            <div className="pui-btn">
+                                <Glyphicon className="pui-btns-glyph" glyph="facetime-video" />
+                                <span className="pui-text">{" " + this.state.camera}</span>
+                            </div>
+                        </div>
+                        <div className="pui-btn" onClick={this.goFull}>
+                            {this.state.isFull ? <Glyphicon className="pui-btns-glyph" glyph="fullscreen" /> : <Glyphicon className="pui-btns-glyph" glyph="fullscreen" />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Fullscreen>);
   }
 
 }
