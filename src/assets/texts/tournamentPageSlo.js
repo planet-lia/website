@@ -75,9 +75,11 @@ const tournamentPageSlo = {
 
   txtRlsMain: "To so pravila slovenskega Lia turnirja 2019.",
   titleRls1: "Lia verzija",
-  txtRls1: "Na tem turnirju bo v uporabi Lia-SDK verzija v1.0.x, ki jo bomo objavili nekaj dni pred turnirjem. Verzija bo vključevala manjšo a pomembno spremembo v igranju igre, ki bo vsem udeležencem omogočila enakovreden začetek in bo dodala k zanimivosti igre.",
-  titleRls2: "Dokumentacija in primeri",
-  txtRls2: "Dokumentacija in primeri bodo dosegljivi na uradni strani dokumentacije, ko bomo objavili Lia-SDK verzijo v1.0.0.",
+  txtRls1: "Na tem turnirju bo v uporabi Lia-SDK verzija v1.0.x. Ker je verzija povsem nova, bomo v kolikor bo to potrebno, v prvih dneh tekmovanja nekoliko prilagodili parametre igre.",
+  titleRls2: "Nagrade",
+  txtRls2: "Nagrade za vodilnega po 1., 2. in 3. tednu bodo podeljene po sledečih pravilih. Prvi zmagovalec bo igralec, ki bo vodilni na lestvici ob polnoči 24. februarja, drugi ob polnoči " +
+  "3. marca in tretji ob polnoči 24. marca. Kljub temu, da bo nalaganje botov na spletno stran onemogočeno po polnoči 9. marca, se bodo igre odvijale do polnoči 10. marca. " +
+  "V kolikor je igralec v predhodnjem tednu že dobil nagrado vodilnega, je nagrada podeljena naslednje uvrščenemu igralcu.",
   titleRls3: "Diskvalifikacija",
   txtRls3: "Uporabljati isto kodo v botih različnih udeležencev turnirja je prepovedano. Vsaka taka dejavnost bo kaznovana z diskvalifikacijo. Enako velja za poizkuse napadov na Lia strežnike in za ostale škodoželjne poizkuse, ki bi lahko škodili poteku turnirja. Smo zgolj študentje, ki si želimo organizirati zabaven turnir za programersko skupnost, tako da bodite prizanesljivi. :)",
   titleRls4: "Spletna lestvica (18. februar - 9. marec)",
