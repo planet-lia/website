@@ -43,6 +43,8 @@ class ProfilePage extends Component {
       newBotProcessingLogs: "",
       newBotTestMatchLogs: "",
       newBotTestMatchGameEngineLog: "",
+      cLeftToday: 0,
+      cTotal: 0,
       hasActiveBot: true,
       isChallenges: false,
       loadingData: false,
@@ -80,6 +82,11 @@ class ProfilePage extends Component {
         catch(err) {
           // Do nothing, if 404 latest bot does not exist
         }
+        const respChallengeStats = await api.game.getChallengesStats();
+        this.setState({
+          cLeftToday: respChallengeStats.challenges.today,
+          cTotal: respChallengeStats.challenges.total
+        })
       }
 
       this.loadGames(userId, 0);
@@ -196,7 +203,8 @@ class ProfilePage extends Component {
       wins, losses, playing, pageCount, version, language,
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
       activeBotPlaying, newBotUploadTime, newBotStatus,
-      newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog} = this.state;
+      newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog,
+      cLeftToday, cTotal } = this.state;
 
     return (
       <div className="container">
@@ -208,7 +216,7 @@ class ProfilePage extends Component {
               <div className="tour-cont-icon-lg">
                 <FontAwesomeIcon icon="robot" color={"#019170"}/>
               </div>
-              {(this.state.isPrivate) ? ("Challenges left: " + "TODO") : <ChallengeButton opponent={username} opponentId={userId}/>}
+              {(this.state.isPrivate) ? ("Challenges left: " + cLeftToday + "/" + cTotal) : <ChallengeButton opponent={username} opponentId={userId}/>}
             </Col>
             <Col sm={3}>
               <h4>Rank details</h4>
