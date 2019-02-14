@@ -150,10 +150,11 @@ class ProfilePage extends Component {
         player2: gamesList.bots[1].user.username,
         player1Rank: gamesList.bots[0].user.rank,
         player2Rank: gamesList.bots[1].user.rank,
-        result: (gamesList.bots[0].isWinner ? 1 : 2),
+        result: gamesList.status==="completed" ? (gamesList.bots[0].isWinner ? 1 : 2) : 0,
         duration: gamesList.duration,
         unitsRemain1: Math.max(gamesList.bots[0].unitsLeft, 0),
-        unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0)
+        unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0),
+        isCompleted: gamesList.status==="completed"
       })
     );
 

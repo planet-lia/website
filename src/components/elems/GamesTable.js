@@ -43,26 +43,35 @@ export default GamesTable;
 
 function watchNowFormatter(cell, row, rowIndex) {
   const textStyle = {color: "#9A3F1B"};
-  return (
-    <span>
-      <Link to={{
-        pathname: "/games/" + row.matchId,
-        state: row
-      }} style={{ textDecoration: 'none' }}>
-        &nbsp;&nbsp;
-        <FontAwesomeIcon icon="tv" color={"#9A3F1B"}/>
-        <span style={textStyle}>&nbsp; Watch</span>
-      </Link>
-    </span>
-  );
+  if(row.isCompleted){
+    return (
+      <span>
+        <Link to={{
+          pathname: "/games/" + row.matchId,
+          state: row
+        }} style={{ textDecoration: 'none' }}>
+          &nbsp;&nbsp;
+          <FontAwesomeIcon icon="tv" color={"#9A3F1B"}/>
+          <span style={textStyle}>&nbsp; Watch</span>
+        </Link>
+      </span>
+    );
+  } else {
+    return "In Progress"
+  }
+
 }
 
 function dateFormatter(cell, row, rowIndex) {
-  const d = new Date(row.date);
-  const date = d.toLocaleString();
-  return (
-    <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
-  );
+  if(row.isCompleted){
+    const d = new Date(row.date);
+    const date = d.toLocaleString();
+    return (
+      <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
+    );
+  } else {
+    return "-";
+  }
 }
 
 /*
@@ -114,7 +123,11 @@ function usernameToProfileLink(username) {
 }
 
 function durationFormatter(cell, row, rowIndex) {
-  return seconds2time(row.duration);
+  if(row.isCompleted){
+    return seconds2time(row.duration);
+  } else {
+    return "-";
+  }
 }
 
 /*
@@ -123,7 +136,10 @@ function playerRanksFormatter(cell, row, rowIndex) {
 }
 */
 
-
 function unitsRemainFormatter(cell, row, rowIndex) {
-  return (row.unitsRemain1 + " - " + row.unitsRemain2);
+  if(row.isCompleted){
+    return (row.unitsRemain1 + " - " + row.unitsRemain2);
+  } else {
+    return "-";
+  }
 }
