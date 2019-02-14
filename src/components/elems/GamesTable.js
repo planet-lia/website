@@ -42,22 +42,23 @@ const GamesTable = (props) => {
 export default GamesTable;
 
 function watchNowFormatter(cell, row, rowIndex) {
-  const textStyle = {color: "#9A3F1B"};
   if(row.isCompleted){
     return (
       <span>
-        <Link to={{
-          pathname: "/games/" + row.matchId,
-          state: row
-        }} style={{ textDecoration: 'none' }}>
-          &nbsp;&nbsp;
-          <FontAwesomeIcon icon="tv" color={"#9A3F1B"}/>
-          <span style={textStyle}>&nbsp; Watch</span>
+        <Link
+          to={{
+            pathname: "/games/" + row.matchId,
+            state: row
+          }}
+          className="btn-watch"
+        >
+          <span className="icon"><FontAwesomeIcon icon="tv" color={"#9A3F1B"}/></span>
+          <span>Watch</span>
         </Link>
       </span>
     );
   } else {
-    return "In Progress"
+    return <span className="status-pend">In Progress</span>
   }
 
 }

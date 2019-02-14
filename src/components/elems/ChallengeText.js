@@ -48,8 +48,14 @@ class ChallengeText extends Component {
   }
 
   popupMsgText = () => {
-    const { cLeft, cTotal, cResetIn, isReady } = this.state;
+    const { cTotal, cResetIn, isReady } = this.state;
+    let cLeft = this.state.cLeft;
     let res = [];
+
+    if(this.props.isSent){
+      cLeft--;
+    }
+    
     if(isReady) {
       if(cLeft<1){
         res.push(<p key="0">{"You already spent all of your challenges for today. You have to wait " + timeTo(new Date(cResetIn)) + " to start new challenges."}</p>);

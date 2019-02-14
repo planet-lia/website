@@ -418,7 +418,22 @@ a.btn.custom-btn:hover {
   -ms-transform: translate(-50%,-50%);
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
+}
 
+.btn-watch,
+.btn-watch:hover,
+.btn-watch:active,
+.btn-watch:focus {
+  color: #9a3f1b;
+  text-decoration: none;
+}
+
+.btn-watch > .icon {
+  margin: 0 8px;
+}
+
+.status-pend {
+  margin-left: 8px;
 }
 
 /* Notifications */
@@ -442,6 +457,10 @@ a.btn.custom-btn:hover {
 
 .custom-message {
   margin: 3em 0;
+}
+
+.cont-resp-msg{
+  padding-top: 20px;
 }
 
 /* Tournament */

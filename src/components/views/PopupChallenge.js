@@ -75,7 +75,10 @@ class PopupChallenge extends Component {
       }
     } else {
       this.setState({
+        cLeft: 0,
+        isSent: false,
         textIsReady: false,
+        loadingData: false,
         error: null
       })
     }
@@ -92,13 +95,15 @@ class PopupChallenge extends Component {
           </Modal.Header>
           <Modal.Body>
             <ChallengeText isSent={isSent} ready={(success, data) => this.handleReady( true, success, data)} setNotReady={() => this.handleReady(false)} />
-            {isSent
-              ? <p className="text-info">The challenge was sent! The result will be visible on your profile shortly.</p>
-              : null
-            }
-            {error!==null
-              ? <p className="text-danger">{error}</p>
-              : null}
+            <div className="cont-resp-msg">
+              {isSent
+                ? <p className="text-info">The challenge was sent! The result will be visible on your profile shortly.</p>
+                : null
+              }
+              {error!==null
+                ? <p className="text-danger">{error}</p>
+                : null}
+              </div>
           </Modal.Body>
           <Modal.Footer>
             <div className="text-center">
