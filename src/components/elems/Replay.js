@@ -259,7 +259,24 @@ class Replay extends Component {
   }
 
   setTime = (time) => {
-    this.setState({time: time});
+    //regular functionality
+    //this.setState({time: time});
+
+    //start: replay infinite loop
+    if(time===this.state.duration){
+      if(this.state.replay){
+          this.state.replay.changeTime(0);
+        if(this.state.isPlaying===false){
+          this.state.replay.forceUpdate();
+        }
+      }
+      this.setState({
+        time: 0
+      });
+    } else {
+      this.setState({time: time});
+    }
+    //end: replay infinite loop
   }
 
   onChangeTime = (event) => {
@@ -368,7 +385,7 @@ class Replay extends Component {
                                     <h4>Resources</h4>
                                     < Line data={this.state.resourceData} options={this.state.chartOptions}/>
                                 </div>
-                            </Col> 
+                            </Col>
                         </Row>
                         <Row>
                             <Col sm={4}>
@@ -385,7 +402,7 @@ class Replay extends Component {
                             </Col>
                         </Row>
                     </div>
-                    ) 
+                    )
                     : this.fullscreen()
                 }
         </div>
