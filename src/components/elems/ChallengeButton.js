@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { connect } from 'react-redux';
 import { popupsActions } from '../../utils/actions/popupsActions';
 
@@ -10,7 +12,8 @@ const ChallengeButton = (props) => {
       className="no-underline"
       onClick={() => showPopup(props.opponent, props.opponentId)}
     >
-      Challenge
+      <FontAwesomeIcon icon="chess-rook" />
+      {!props.icon ? " Challenge" : null}
     </a>
   )
 
