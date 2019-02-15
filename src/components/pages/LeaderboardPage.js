@@ -76,7 +76,7 @@ class LeaderboardPage extends Component {
   }
 
   challengeFormatter = (cell, row, rowIndex) => {
-    return <ChallengeButton opponent={row.username} opponentId={row.userId} />
+    return <div className="text-center"><ChallengeButton opponent={row.username} opponentId={row.userId} icon={true}/></div>
   }
 
   render(){

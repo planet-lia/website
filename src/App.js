@@ -9,9 +9,9 @@ import GlobalPopups from './components/layout/GlobalPopups'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube, faReddit } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot, faChessRook } from '@fortawesome/free-solid-svg-icons';
 library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
-  faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faReddit);
+  faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faChessRook, faReddit, faChessRook);
 
 
 class App extends Component {
