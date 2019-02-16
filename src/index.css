@@ -413,16 +413,23 @@ a.btn.custom-btn:hover {
   color: #ddd;
 }
 
-.custom-btn.custom-btn-light,
-.custom-btn.custom-btn-light:active,
-.custom-btn.custom-btn-light:focus {
+.custom-btn.btn-light,
+.custom-btn.btn-light:active,
+.custom-btn.btn-light:focus {
   color: #019170;
   background-color: rgba(0,0,0,0.047);
 }
 
-.btn.custom-btn.custom-btn-light:hover {
+.btn.custom-btn.btn-light:hover {
   color: #019170;
   background-color: rgba(0,0,0,0.1);
+}
+
+.custom-btn.btn-red,
+.custom-btn.btn-red:hover,
+.custom-btn.btn-red:active,
+.custom-btn.btn-red:focus {
+  background-color: #9a3f1b;
 }
 
 .custom-btn-lg {

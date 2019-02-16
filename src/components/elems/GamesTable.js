@@ -44,18 +44,16 @@ export default GamesTable;
 function watchNowFormatter(cell, row, rowIndex) {
   if(row.isCompleted){
     return (
-      <span>
-        <Link
-          to={{
-            pathname: "/games/" + row.matchId,
-            state: row
-          }}
-          className="btn-watch"
-        >
-          <span className="icon"><FontAwesomeIcon icon="tv" color={"#9A3F1B"}/></span>
-          <span>Watch</span>
-        </Link>
-      </span>
+      <Link
+        to={{
+          pathname: "/games/" + row.matchId,
+          state: row
+        }}
+        className="btn-watch"
+      >
+        <span className="icon"><FontAwesomeIcon icon="tv" /></span>
+        <span>Watch</span>
+      </Link>
     );
   } else {
     return <span className="status-pend">In Progress</span>
@@ -74,23 +72,6 @@ function dateFormatter(cell, row, rowIndex) {
     return "-";
   }
 }
-
-/*
-function playersFormatter(cell, row, rowIndex) {
-
-  const player1 = usernameToProfileLink(row.player1);
-  const player2 = usernameToProfileLink(row.player2);
-
-  const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
-
-  if(row.result===1){
-    return (<span><strong>{player1}</strong>&nbsp;{trophyIcon} - {player2}</span>)
-  } else if (row.result===2) {
-    return (<span>{player1} - <strong>
-      {player2}</strong>&nbsp;{trophyIcon}</span>)
-  }
-}
-*/
 
 function player1Formatter(cell, row, rowIndex) {
   return playerFormatter(cell, row, rowIndex, 1)
@@ -130,12 +111,6 @@ function durationFormatter(cell, row, rowIndex) {
     return "-";
   }
 }
-
-/*
-function playerRanksFormatter(cell, row, rowIndex) {
-  return (<span> {row.player1Rank} - {row.player2Rank}</span>);
-}
-*/
 
 function unitsRemainFormatter(cell, row, rowIndex) {
   if(row.isCompleted){
