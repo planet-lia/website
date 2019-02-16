@@ -24,6 +24,8 @@ class GameReplay extends Component {
       duration: "",
       mapSeed: "",
       unitsRemain: "",
+      bubblesAllowP1: true,
+      bubblesAllowP2: true,
       gameStatistics: {},
       loadingData: false,
       error: null
@@ -52,6 +54,8 @@ class GameReplay extends Component {
         duration: matchData.duration,
         mapSeed: matchData.mapSeed,
         unitsRemain: Math.floor( (matchData.bots[0].unitsLeft + matchData.bots[1].unitsLeft) / 32 * 100 ) + "%",
+        bubblesAllowP1: !matchData.bots[0].speechBubblesDisabled,
+        bubblesAllowP2: !matchData.bots[1].speechBubblesDisabled,
         loadingData: false
       });
     } catch(err) {
@@ -64,7 +68,7 @@ class GameReplay extends Component {
   }
 
   render(){
-    const { player1, player2, date, duration, mapSeed, replayUrl, result, gameStatistics } = this.state;
+    const { player1, player2, date, duration, mapSeed, replayUrl, result, bubblesAllowP1, bubblesAllowP2, gameStatistics } = this.state;
 
     return (
       <div>
@@ -91,6 +95,7 @@ class GameReplay extends Component {
                   number={0}
                   replayUrl={replayUrl}
                   setGameStatistics={(gameStatistics) => this.setState({gameStatistics: parseGameStatistics(gameStatistics, player1, player2)})}
+                  bubblesAllow={[bubblesAllowP1, bubblesAllowP2]}
                 />
               </div>
             </Col>

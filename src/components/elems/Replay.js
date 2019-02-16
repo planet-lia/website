@@ -18,9 +18,7 @@ class Replay extends Component {
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
-      forceReplayWidth: "100%",
-      player1AllowBubbles: true,
-      player2AllowBubbles: true
+      forceReplayWidth: "100%"
     }
     this.puiRef = React.createRef();
   }
@@ -72,26 +70,28 @@ class Replay extends Component {
   }
 
   checkAndRun = () => {
+    const { replayUrl, containerId, replayFileBase64, setGameStatistics, bubblesAllow } = this.props;
+
     if(window.liaGame){
-      let replayUrl = "/assets/replays/replay_" + this.props.number + ".lia";
-      if(this.props.replayUrl){
-        replayUrl = this.props.replayUrl;
+      let url = "/assets/replays/replay_" + this.props.number + ".lia";
+      if(replayUrl){
+        url = replayUrl;
       }
 
       this.setState({
         replay: window.liaGame.playReplay(
-          this.props.containerId,
+          containerId,
           "/assets/",
-          replayUrl,
-          this.props.replayFileBase64,
+          url,
+          replayFileBase64,
           "/assets/banned-words.txt",
           this.setGameDuration,
           this.setTime,
-          this.props.setGameStatistics
-            ? this.props.setGameStatistics
+          setGameStatistics
+            ? setGameStatistics
             : function(){ return false },
-          this.state.player1AllowBubbles,
-          this.state.player2AllowBubbles
+          bubblesAllow ? bubblesAllow[0] : true,
+          bubblesAllow ? bubblesAllow[1] : true
         )
       });
     } else {
