@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Routes from './components/layout/Routes';
 import withTracker from './components/tracking/withTracker';
 import GlobalPopups from './components/layout/GlobalPopups'
+
+import {connect} from "react-redux";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube, faReddit } from '@fortawesome/free-brands-svg-icons';
@@ -36,4 +38,11 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  const { isAuthenticated } = state.authentication;
+  return {
+    isAuthenticated
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(App));

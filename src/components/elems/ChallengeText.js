@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { miscConst } from '../../utils/constants/miscConst';
 import { timeTo } from '../../utils/helpers/time';
 
 import api from '../../utils/api';
@@ -14,6 +13,8 @@ class ChallengeText extends Component {
       cLeft: 0,
       cTotal: 0,
       cResetIn: 0,
+      cExtra: 0,
+      cMax: 0,
       isReady: false,
       error: null,
     }
@@ -34,6 +35,8 @@ class ChallengeText extends Component {
         cLeft: respStats.challenges.today,
         cTotal: respStats.challenges.total,
         cResetIn: respStats.challenges.reset,
+        cExtra: respStats.challenges.extraChallengesPerReferral,
+        cMax: respStats.challenges.maxDailyChallenges,
         isReady: true
       });
       ready(true, respStats.challenges.today);
@@ -48,19 +51,19 @@ class ChallengeText extends Component {
   }
 
   popupMsgText = () => {
-    const { cTotal, cResetIn, isReady } = this.state;
+    const { cTotal, cResetIn, cExtra, cMax, isReady } = this.state;
     let cLeft = this.state.cLeft;
     let res = [];
 
     if(this.props.isSent){
       cLeft--;
     }
-    
+
     if(isReady) {
       if(cLeft<1){
         res.push(<p key="0">{"You already spent all of your challenges for today. You have to wait " + timeTo(new Date(cResetIn)) + " to start new challenges."}</p>);
-        if(cTotal<miscConst.MAX_NUM_CHALLENGES){
-          res.push(<p key="1">Invite friends to unlock more daily challenges.</p>);
+        if(cTotal<cMax){
+          res.push(<p key="1">{"Invite friends and unlock " + cExtra + " more daily challenges per invite."}</p>);
         }
         return res;
       }

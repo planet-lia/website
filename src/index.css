@@ -76,6 +76,7 @@ td {
   color: #ff0000;
 }
 
+.clr-em,
 .clr-em:hover {
   color: #019170;
 }
@@ -261,6 +262,34 @@ select.placeholder > option {
   transform: translate(-50%,-50%);
 }
 
+.custom-subnav {
+  background-color: rgba(0,0,0,0.047);
+  list-style-type: none;
+  margin: 0 0 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.custom-subnav > li {
+  float: left;
+}
+
+.custom-subnav > li > a {
+  display: block;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.custom-subnav > li > a:hover {
+  background-color: rgba(0,0,0,0.06);
+  color: #019170;
+}
+
+.custom-subnav .active {
+  background-color: rgba(0,0,0,0.03);
+}
+
 @media screen and (max-width: 991.98px) {
   .custom-section {
     padding: 6em 0;
@@ -432,12 +461,36 @@ a.btn.custom-btn:hover {
   color: #ddd;
 }
 
+.custom-btn.btn-light,
+.custom-btn.btn-light:active,
+.custom-btn.btn-light:focus {
+  color: #019170;
+  background-color: rgba(0,0,0,0.047);
+}
+
+.btn.custom-btn.btn-light:hover {
+  color: #019170;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.custom-btn.btn-red,
+.custom-btn.btn-red:hover,
+.custom-btn.btn-red:active,
+.custom-btn.btn-red:focus {
+  background-color: #9a3f1b;
+}
+
 .custom-btn-lg {
   font-size: 16px;
 }
 
 .custom-btn-xl {
   font-size: 20px;
+}
+
+td .btn.custom-btn {
+  font-size: 14px;
+  padding: 3px 12px
 }
 
 .btn.custom-btn:hover {
@@ -480,8 +533,8 @@ a.btn.custom-btn:hover {
   margin: 0 8px;
 }
 
-.status-pend {
-  margin-left: 8px;
+.btn-chall-profile {
+  margin-top: 20px;
 }
 
 /* Notifications */
@@ -1248,6 +1301,11 @@ iframe {
 
 .game-stats {
   font-size: small;
+}
+
+/* Games Table */
+.status-pend {
+  margin-left: 8px;
 }
 
 /* Player */
