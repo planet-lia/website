@@ -150,7 +150,7 @@ class SignUpForm extends Component {
   }
 
   validateForm = () => {
-    const {firstName, lastName, username, email, password, repeat, level, agreeToTerms} = this.state;
+    const {firstName, lastName, username, email, password, repeat, level, country, agreeToTerms} = this.state;
 
     if( !(firstName && validators.length(firstName, 30)) ) {this.setState({error: "Invalid Name length"}); return false;}
     if( !(lastName && validators.length(lastName, 50)) ) {this.setState({error: "Invalid Last Name length"}); return false;}
@@ -160,7 +160,8 @@ class SignUpForm extends Component {
     if( !validators.usernameRegex(username) ) {this.setState({error: "Invalid username format"}); return false;}
     if( !validators.emailRegex(email) ) {this.setState({error: "Invalid email format"}); return false;}
     if( !validators.passwordWithRepeat(password, repeat) ){this.setState({error: "Passwords don't match"}); return false;}
-    if( !(level) ) {this.setState({error: "Level not set"}); return false;}
+    if( !(level) ) {this.setState({error: "Level is not chosen"}); return false;}
+    if( !(country) ) {this.setState({error: "Country is not chosen"}); return false;}
     if( !(agreeToTerms) ) {this.setState({error: "You need to agree to Lia Terms and Conditions and Privacy Policy."}); return false;}
 
     if( !this.isUsernameAvalible() ) {this.setState({error: "Username is not available"}); return false;}
@@ -297,7 +298,7 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Country</ControlLabel>
+              <ControlLabel>Country</ControlLabel>*
               <Select
                 options={this.state.countriesList}
                 placeholder="Your country"

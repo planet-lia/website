@@ -97,7 +97,7 @@ class PopupChallenge extends Component {
             <ChallengeText isSent={isSent} ready={(success, data) => this.handleReady( true, success, data)} setNotReady={() => this.handleReady(false)} />
             <div className="cont-resp-msg">
               {isSent
-                ? <p className="text-info">The challenge was sent! The result will be visible on your profile shortly.</p>
+                ? <p className="text-info">The challenge was sent! Follow the progress of the challange on your profile page under challanges.</p>
                 : null
               }
               {error!==null
