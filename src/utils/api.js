@@ -39,14 +39,17 @@ export default {
       axios.post(API_BASE_URL + "/user/confirm-email/", {emailVerificationCode})
         .then((response) => response.data),
 
-    edit: (firstName, lastName, organization, country, level) =>
+    edit: (firstName, lastName, organization, country, level, allowGlobal, allowMarketing, allowTournament) =>
       axios.post(API_BASE_URL + "/user/",
         {
           firstName: firstName,
           lastName: lastName,
           organization: organization,
           countryAlpha2Code: country,
-          level: level
+          level: level,
+          allowPublicationToGlobalLeaderboard: allowGlobal,
+          allowMarketingEmails: allowMarketing,
+          allowTournament2019Emails: allowTournament
         }
       ).then((response) => response.data),
 
