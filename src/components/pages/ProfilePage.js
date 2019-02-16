@@ -254,7 +254,13 @@ class ProfilePage extends Component {
                     </div>
                   </span>
                 )
-                : <div>You don't have any bots.</div>
+                : (
+                  <div>
+                    <span>To learn how to upload your first bot visit </span>
+                    <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">here</a>
+                    .
+                  </div>
+                )
               }
               {(this.state.isPrivate)
                 ? (
