@@ -7,14 +7,25 @@ import { connect } from 'react-redux';
 import { popupsActions } from '../../utils/actions/popupsActions';
 
 const ChallengeButton = (props) => {
-  return(
-    <Button
-      className={"btn custom-btn " + props.className}
-      onClick={() => showPopup(props.opponent, props.opponentId)}
-    >
-      <span><FontAwesomeIcon icon="chess-rook" /></span>
-      {" Challenge"}
-    </Button>
+  return (
+    props.username===props.opponent
+      ? (
+        <Button
+          className={"btn custom-btn " + props.className}
+          disabled
+        >
+          <span><FontAwesomeIcon icon="chess-rook" /></span>
+          {" Challenge"}
+        </Button>
+      ) : (
+        <Button
+          className={"btn custom-btn " + props.className}
+          onClick={() => showPopup(props.opponent, props.opponentId)}
+        >
+          <span><FontAwesomeIcon icon="chess-rook" /></span>
+          {" Challenge"}
+        </Button>
+      )
   )
 
   async function showPopup(opponent, opponentId) {
@@ -23,4 +34,11 @@ const ChallengeButton = (props) => {
 
 }
 
-export default connect()(ChallengeButton);
+function mapStateToProps(state) {
+  const { username } = state.authentication;
+  return {
+    username
+  };
+}
+
+export default connect(mapStateToProps)(ChallengeButton);
