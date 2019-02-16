@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -7,14 +8,13 @@ import { popupsActions } from '../../utils/actions/popupsActions';
 
 const ChallengeButton = (props) => {
   return(
-    <a
-      role="button"
-      className="no-underline"
+    <Button
+      className={"btn custom-btn " + props.className}
       onClick={() => showPopup(props.opponent, props.opponentId)}
     >
-      <FontAwesomeIcon icon="chess-rook" />
-      {!props.icon ? " Challenge" : null}
-    </a>
+      <span><FontAwesomeIcon icon="chess-rook" /></span>
+      {" Challenge"}
+    </Button>
   )
 
   async function showPopup(opponent, opponentId) {

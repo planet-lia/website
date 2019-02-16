@@ -205,7 +205,7 @@ class ProfilePage extends Component {
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
       activeBotPlaying, newBotUploadTime, newBotStatus,
       newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog,
-      cLeftToday, cTotal } = this.state;
+      cLeftToday, cTotal, isChallenges } = this.state;
 
     return (
       <div className="container">
@@ -217,7 +217,10 @@ class ProfilePage extends Component {
               <div className="tour-cont-icon-lg">
                 <FontAwesomeIcon icon="robot" color={"#019170"}/>
               </div>
-              {(this.state.isPrivate) ? ("Challenges left: " + cLeftToday + "/" + cTotal) : <ChallengeButton opponent={username} opponentId={userId}/>}
+              {this.state.isPrivate
+                ? ("Challenges left: " + cLeftToday + "/" + cTotal)
+                : <ChallengeButton opponent={username} opponentId={userId} className="btn-chall-profile custom-btn-lg"/>
+              }
             </Col>
             <Col sm={3}>
               <h4>Rank details</h4>
@@ -299,7 +302,7 @@ class ProfilePage extends Component {
                 {"Losses: "} <strong>{activeBotLosses}</strong>
               </div>
               <div>
-                {"Win %: "} <strong>{winPercentage(activeBotWins, activeBotLosses)}</strong>
+                {"Win ratio: "} <strong>{winPercentage(activeBotWins, activeBotLosses)}</strong>
               </div>
               <div>
                 {"Playing: "} <strong>{activeBotPlaying}</strong>
@@ -315,7 +318,7 @@ class ProfilePage extends Component {
                 {"Losses: "} <strong>{losses}</strong>
               </div>
               <div>
-                {"Win %: "} <strong>{winPercentage(wins, losses)}</strong>
+                {"Win ratio: "} <strong>{winPercentage(wins, losses)}</strong>
               </div>
               <div>
                 {"Playing: "} <strong>{playing}</strong>
@@ -323,16 +326,11 @@ class ProfilePage extends Component {
             </Col>
           </Row>
         </div>
-        {(this.state.isPrivate)
-          ? <h3>Games</h3>
-          : (
-            <div>
-              <h3>Games</h3>
-            </div>
-          )
-        }
-        <Button onClick={() => this.loadGames(this.state.userId, 0, false)}>Ranked</Button>
-        <Button onClick={() => this.loadGames(this.state.userId, 0, true)}>Challenges</Button>
+        <h3>Games</h3>
+        <ul className="custom-subnav">
+          <li><a className={!isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, false)}>Ranked</a></li>
+          <li><a className={isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, true)}>Challenges</a></li>
+        </ul>
         <GamesTable data={gamesData} loading={loadingData}/>
         <ReactPaginate previousLabel={"<"}
                        nextLabel={">"}
