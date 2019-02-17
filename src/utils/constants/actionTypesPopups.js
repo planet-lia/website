@@ -6,5 +6,7 @@ export const actionTypesPopups = {
 
     CHALLENGE_SHOW: 'POPUP_CHALLENGE_SHOW',
 
+    INVITE_SHOW: 'POPUP_INVITE_SHOW',
+
     POPUPS_HIDE: 'POPUP_HIDE',
 };

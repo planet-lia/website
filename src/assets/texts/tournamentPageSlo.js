@@ -81,7 +81,7 @@ const tournamentPageSlo = {
   "3. marca in tretji ob polnoči 24. marca. Kljub temu, da bo nalaganje botov na spletno stran onemogočeno po polnoči 9. marca, se bodo igre odvijale do polnoči 10. marca. " +
   "V kolikor je igralec v predhodnjem tednu že dobil nagrado vodilnega, je nagrada podeljena naslednje uvrščenemu igralcu.",
   titleRls3: "Diskvalifikacija",
-  txtRls3: "Uporabljati isto kodo v botih različnih udeležencev turnirja je prepovedano. Vsaka taka dejavnost bo kaznovana z diskvalifikacijo. Enako velja za poizkuse napadov na Lia strežnike in za ostale škodoželjne poizkuse, ki bi lahko škodili poteku turnirja. Smo zgolj študentje, ki si želimo organizirati zabaven turnir za programersko skupnost, tako da bodite prizanesljivi. :)",
+  txtRls3: "Uporaba večih računov je prepovadana. Prepovedana je tudi uporaba kode drugega igralca. Vsaka taka dejavnost bo kaznovana z diskvalifikacijo. Enako velja za poizkuse napadov na Lia strežnike in za ostale škodoželjne poizkuse, ki bi lahko škodili poteku turnirja. Smo zgolj študentje, ki si želimo organizirati zabaven turnir za programersko skupnost, tako da bodite prizanesljivi. :)",
   titleRls4: "Spletna lestvica (18. februar - 9. marec)",
   txtRls4: "V tem času bo preko spleta na voljo Lia lestvica. Vsi slovenski študentje in dijaki se bodo lahko v tem času registrirali in nalagali svoje bote. Naložen bot bo avtomatično tekmoval proti ostalim igralcem na lestvici in bo na njej uvrščen glede na njegovo kvaliteto. Za računanje ranka botov bomo uporabljali knjižnico TrueSkill. Registracije bodo odprte do zaključka lestvice 9. marca.",
   titleRls5: "Priprave na zaključni turnir  (10. marec - 13. marec)",

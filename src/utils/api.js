@@ -19,7 +19,7 @@ const API_BASE_URL = (() => {
 
   switch (lastSubdomain) {
     case "dev":
-      return apiUrlLog(apis["dev"]);
+      return apiUrlLog(apis["staging2"]);
     case "staging":
       return apiUrlLog(apis["staging"]);
     case "staging2":
@@ -27,7 +27,7 @@ const API_BASE_URL = (() => {
     case "www":
       return apiUrlLog(apis["prod"]);
     case "localhost":
-      return apiUrlLog(apis["dev"]);
+      return apiUrlLog(apis["staging2"]);
     default:
       return apiUrlLog(apis["prod"]);
   }
@@ -39,14 +39,17 @@ export default {
       axios.post(API_BASE_URL + "/user/confirm-email/", {emailVerificationCode})
         .then((response) => response.data),
 
-    edit: (firstName, lastName, organization, country, level) =>
+    edit: (firstName, lastName, organization, country, level, allowGlobal, allowMarketing, allowTournament) =>
       axios.post(API_BASE_URL + "/user/",
         {
           firstName: firstName,
           lastName: lastName,
           organization: organization,
           countryAlpha2Code: country,
-          level: level
+          level: level,
+          allowPublicationToGlobalLeaderboard: allowGlobal,
+          allowMarketingEmails: allowMarketing,
+          allowTournament2019Emails: allowTournament
         }
       ).then((response) => response.data),
 
@@ -58,7 +61,7 @@ export default {
       axios.post(API_BASE_URL + "/auth/", {username, password})
         .then((response) => response.data),
 
-    register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country ) =>
+    register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country, referral ) =>
       axios.post(API_BASE_URL + "/user/register/",
         {
           username: username,
@@ -71,7 +74,8 @@ export default {
           allowPublicationToGlobalLeaderboard: allowGlobal,
           allowMarketingEmails: allowMarketing,
           allowTournament2019Emails: allowTournament,
-          countryAlpha2Code: country
+          countryAlpha2Code: country,
+          referral: referral
         }
       ).then((response) => response.data),
 
