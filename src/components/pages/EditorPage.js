@@ -275,12 +275,13 @@ class EditorPage extends Component {
         </div>
 
         <Popup
-          dialogClassName="custom-popup pop-text"
+          dialogClassName="custom-popup pop-editor-wait pop-text"
           show={showWaitAlert}
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
           heading="Please wait"
           buttonText="OK"
+          center={true}
         >
           <WaitAlert wait={waitRemain}/>
         </Popup>

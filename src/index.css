@@ -325,7 +325,8 @@ select.placeholder > option {
 .pop-sub,
 .pop-noauth,
 .pop-invite,
-.pop-challenge {
+.pop-challenge,
+.pop-editor-wait {
   width: 100%;
 }
 
@@ -335,7 +336,8 @@ select.placeholder > option {
   }
 
   .sign-in,
-  .pop-noauth {
+  .pop-noauth,
+  .pop-editor-wait {
     width: 400px;
   }
 

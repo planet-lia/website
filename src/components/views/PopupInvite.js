@@ -21,7 +21,7 @@ const PopupInvite = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <div className="text-center">
-              <Button bsClass="btn custom-btn custom-btn-lg" onClick={onHide}>Ok</Button>
+              <Button bsClass="btn custom-btn custom-btn-lg" onClick={onHide}>OK</Button>
             </div>
           </Modal.Footer>
         </Modal>

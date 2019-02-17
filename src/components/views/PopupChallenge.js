@@ -51,7 +51,7 @@ class PopupChallenge extends Component {
     if(loadingData || !textIsReady){
       return <LoadingButton bsClass="btn custom-btn custom-btn-lg">Send Challenge</LoadingButton>
     } else if(isSent){
-      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.props.onHide}>Ok</Button>
+      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.props.onHide}>OK</Button>
     } else if(cLeft>0){
       return <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.postChallenge}>Send Challenge</Button>
     } else {
