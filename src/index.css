@@ -1072,7 +1072,7 @@ iframe {
 
 .editor-cont-page {
   width: 100%;
-  min-width: 768px;
+  min-width: 835px;
   min-height: calc(28.125vw + 2.7em - 4px + 41px + 8em);
   background-color: #1e1e1e;
   border-top: 1px solid #333;
@@ -1127,7 +1127,12 @@ iframe {
 #editor-lang,
 #editor-btn-run {
   margin: 5px;
-  align-self: center
+  align-self: center;
+}
+
+#editor-btn-reset {
+  margin: 5px 20px 5px 0;
+  align-self: center;
 }
 
 #editor-lang > select {
@@ -1217,7 +1222,7 @@ iframe {
   border-radius: 0;
 }
 
-@media screen and (max-width: 971px) {
+@media screen and (max-width: 1106px) {
   #editor-cont-links > div {
     display: block;
     margin-bottom: 0;
