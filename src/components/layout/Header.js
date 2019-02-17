@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -82,6 +82,11 @@ class Header extends Component {
                   <li role="presentation" onClick={this.onSelectNavItem}>
                     <NavLink to={"/user/" + this.props.username} exact activeClassName="nav-link-active">
                         <div><FontAwesomeIcon icon="user" /> {this.props.username}</div>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={"/settings"} exact activeClassName="nav-link-active">
+                      <div>Settings</div>
                     </NavLink>
                   </li>
                   <li role="presentation" onClick={this.logout}>

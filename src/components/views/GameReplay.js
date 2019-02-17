@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import Moment from 'react-moment';
 import Replay from '../elems/Replay';
-import { seconds2time } from '../../utils/helpers/time';
-import api from '../../utils/api';
 import Link from "react-router-dom/es/Link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
+
+import StatisticsGraph from '../elems/StatisticsGraph'
+import { seconds2time } from '../../utils/helpers/time';
+import { parseGameStatistics } from '../../utils/helpers/replayStatistics';
+
+import api from '../../utils/api';
 
 class GameReplay extends Component {
   constructor(props){
@@ -19,6 +24,9 @@ class GameReplay extends Component {
       duration: "",
       mapSeed: "",
       unitsRemain: "",
+      bubblesAllowP1: true,
+      bubblesAllowP2: true,
+      gameStatistics: {},
       loadingData: false,
       error: null
     };
@@ -46,6 +54,8 @@ class GameReplay extends Component {
         duration: matchData.duration,
         mapSeed: matchData.mapSeed,
         unitsRemain: Math.floor( (matchData.bots[0].unitsLeft + matchData.bots[1].unitsLeft) / 32 * 100 ) + "%",
+        bubblesAllowP1: !matchData.bots[0].speechBubblesDisabled,
+        bubblesAllowP2: !matchData.bots[1].speechBubblesDisabled,
         loadingData: false
       });
     } catch(err) {
@@ -58,7 +68,7 @@ class GameReplay extends Component {
   }
 
   render(){
-    const { player1, player2, date, duration, mapSeed, replayUrl, result } = this.state;
+    const { player1, player2, date, duration, mapSeed, replayUrl, result, bubblesAllowP1, bubblesAllowP2, gameStatistics } = this.state;
 
     return (
       <div>
@@ -74,10 +84,39 @@ class GameReplay extends Component {
             {"Map seed: " + mapSeed}
           </div>
         </div>
-        <div key={this.state.matchId}>
-          <Replay containerId="gameView" replayFileBase64="" player1Name={this.state.player1}
-                  player2Name={this.state.player2} showStatistics={true} number={0} replayUrl={replayUrl}/>
+
+        <div>
+          <Row>
+            <Col sm={8}>
+              <div key={this.state.matchId}>
+                <Replay
+                  containerId="gameView"
+                  replayFileBase64=""
+                  number={0}
+                  replayUrl={replayUrl}
+                  setGameStatistics={(gameStatistics) => this.setState({gameStatistics: parseGameStatistics(gameStatistics, player1, player2)})}
+                  bubblesAllow={[bubblesAllowP1, bubblesAllowP2]}
+                />
+              </div>
+            </Col>
+            <Col sm={4}>
+              <StatisticsGraph title="Power" data={gameStatistics.powerData} />
+              <StatisticsGraph title="Resources" data={gameStatistics.resourceData} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={4}>
+              <StatisticsGraph title="Workers" data={gameStatistics.workersData} />
+            </Col>
+            <Col sm={4}>
+              <StatisticsGraph title="Warriors" data={gameStatistics.warriorsData} />
+            </Col>
+            <Col sm={4}>
+              <StatisticsGraph title="Units" data={gameStatistics.unitsData} />
+            </Col>
+          </Row>
         </div>
+
       </div>
     )
   }

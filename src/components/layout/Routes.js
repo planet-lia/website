@@ -12,6 +12,7 @@ import ProfilePage from '../pages/ProfilePage';
 import RegistrationEmailPage from '../pages/RegistrationEmailPage';
 import TermsAndConditions from "../views/TermsAndConditions";
 import PrivacyPolicy from "../views/PrivacyPolicy";
+import SettingsPage from "../pages/SettingsPage";
 
 const Routes = () => {
   return (
@@ -28,6 +29,7 @@ const Routes = () => {
       <Route path="/registration" component={RegistrationEmailPage} />
       <Route path="/terms-and-conditions" component={TermsAndConditions} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/settings" component={SettingsPage} />
     </Switch>
   );
 }

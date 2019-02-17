@@ -24,6 +24,10 @@ export function popups(state = initialState, action) {
         opponent: action.opponent,
         opponentId: action.opponentId
       };
+    case actionTypesPopups.INVITE_SHOW:
+      return {
+        showInvitePopup: true
+      }
     case actionTypesPopups.POPUPS_HIDE:
       return {};
     default:
