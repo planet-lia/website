@@ -25,6 +25,8 @@ const API_BASE_URL = (() => {
       return apiUrlLog(apis["staging"]);
     case "staging2":
       return apiUrlLog(apis["staging2"]);
+    case "production":
+      return apiUrlLog(apis["production"]);
     case "www":
       return apiUrlLog(apis["prod"]);
     case "localhost":
