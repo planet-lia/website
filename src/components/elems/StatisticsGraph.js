@@ -8,6 +8,12 @@ const StatisticsGraph = (props) => {
           xAxes: [{
               type: 'time',
               distribution: 'linear',
+              // ticks: {
+              //   callback: function(label, index, labels) {
+              //    // return parseInt(label, 10);
+              //     return label;
+              //   },
+              // },
               time: {
                   displayFormats: {
                       'millisecond': 'SSS',
@@ -22,8 +28,12 @@ const StatisticsGraph = (props) => {
                   }
               }
           }]
+      },
+    "tooltips": {
+      "enabled": false,
+      "mode": "nearest",
       }
-  };
+    };
 
   return (
     <div>

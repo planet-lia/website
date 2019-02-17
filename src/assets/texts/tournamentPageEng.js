@@ -94,7 +94,7 @@ const tournamentPageEng = {
   txtRls2: "The prize Leaderboard winners week 1 to 3 will be decided based on the following rules. The first winner will be the person on top of the leaderboard at February 24th at midnight, the second at March 3rd at midnight and the third at March 10th. " +
   "Although players won't be able to upload their bots after the midnight at March 9th, the games will continue to generate until the midnight of March 10th. If the player has already won a prize for a leaderboard winner in a previous week, the prize will be given to the player second in the lead.",
   titleRls3: "Cheating",
-  txtRls3: "Uploading a code from another Lia user is forbidden and will result in disqualification from the tournament. Same goes for trying to bring down our servers or other malicious attempts. We are trying to make a fun event for programming community so please be reasonable. :)",
+  txtRls3: "Uploading a code from another Lia user or using multiple accounts is forbidden and will result in disqualification from the tournament. Same goes for trying to bring down our servers or other malicious attempts. We are trying to make a fun event for programming community so please be reasonable. :)",
   titleRls4: "Online leaderboard (18 Feb - 9 Mar)",
   txtRls4: "During this period an online leaderboard will be live. Every high school or university student from Slovenia will be able to register and upload his bots. When a bot is uploaded it is automatically matched against bots from other players and is according to its skill properly ranked on the leaderboard. The rank is calculated using TrueSkill library. Registrations will be opened until the very last day.",
   titleRls5: "Preparations for the final tournament  (10 Mar - 13 Mar)",

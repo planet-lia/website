@@ -19,7 +19,7 @@ const API_BASE_URL = (() => {
 
   switch (lastSubdomain) {
     case "dev":
-      return apiUrlLog(apis["dev"]);
+      return apiUrlLog(apis["staging2"]);
     case "staging":
       return apiUrlLog(apis["staging"]);
     case "staging2":
@@ -27,7 +27,7 @@ const API_BASE_URL = (() => {
     case "www":
       return apiUrlLog(apis["prod"]);
     case "localhost":
-      return apiUrlLog(apis["dev"]);
+      return apiUrlLog(apis["staging2"]);
     default:
       return apiUrlLog(apis["prod"]);
   }
