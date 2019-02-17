@@ -30,8 +30,7 @@ class EditorPage extends Component {
       showWaitAlert: false,
       showResetAlert: false,
       waitRemain: 0,
-      isCodeChanged: false,
-      isLangChange: false
+      isCodeChanged: false
     };
   }
 
@@ -69,18 +68,11 @@ class EditorPage extends Component {
   }
 
   componentWillUnmount = () => {
-    const { code, currentLang, isCodeChanged, isLangChange } = this.state;
+    const { code, currentLang } = this.state;
     window.removeEventListener('fullscreenchange', this.scrollToBottom);
     window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
     window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
     window.removeEventListener('MSFullscreenChange', this.scrollToBottom);
-
-    if(isCodeChanged) {
-      localStorage.setItem("editorCode", code);
-    }
-    if(isLangChange){
-      localStorage.setItem("editorProgLang", currentLang);
-    }
   }
 
 
@@ -89,6 +81,7 @@ class EditorPage extends Component {
       code: newValue,
       isCodeChanged: true,
     });
+    localStorage.setItem("editorCode", newValue);
   }
 
   onChangeLanguage = (event) => {
@@ -138,7 +131,6 @@ class EditorPage extends Component {
         code: text,
         isLoadingCode: false,
         isCodeChanged: !langChanged,
-        isLangChange: langChanged
       })
       localStorage.removeItem("editorCode");
       localStorage.setItem("editorProgLang", lang);
