@@ -7,7 +7,8 @@ import ReactResizeDetector from 'react-resize-detector';
 
 import Replay from '../elems/Replay';
 import Popup from '../views/Popup';
-import WaitAlert from '../forms/WaitAlert';
+import PopupConfirm from '../views/PopupConfirm';
+import WaitAlert from '../elems/WaitAlert';
 import { programmingLanguages } from '../../utils/constants/programmingLanguages';
 
 
@@ -17,6 +18,7 @@ class EditorPage extends Component {
     this.state = {
       code: '',
       currentLang: "python3",
+      newLang: null,
       currentLog: "Press RUN to generate a game.",
       currentReplayFileBase64: "",
       generatingGame: false,
@@ -26,7 +28,10 @@ class EditorPage extends Component {
       editorH: "100%",
       lastPlay: null,
       showWaitAlert: false,
-      waitRemain: 0
+      showResetAlert: false,
+      waitRemain: 0,
+      isCodeChanged: false,
+      isLangChange: false
     };
   }
 
@@ -36,47 +41,108 @@ class EditorPage extends Component {
     window.addEventListener('mozfullscreenchange', this.scrollToBottom);
     window.addEventListener('MSFullscreenChange', this.scrollToBottom);
 
-    const langData = programmingLanguages[this.state.currentLang];
+    let lang = this.state.currentLang;
+    if(localStorage.editorProgLang) {
+      lang = localStorage.editorProgLang
+    }
 
-    fetch(langData.baseBotUrl)
-      .then((resp)=>{ return resp.text() })
-      .then( (text) =>{
-        this.setState({
-          code: text,
-          isLoadingCode: false
-        });
-        //this.generateGame();
+    if(localStorage.editorCode) {
+      this.setState({
+        code: localStorage.editorCode,
+        currentLang: lang,
+        isLoadingCode: false,
+        isCodeChanged: true
       });
+    } else {
+      const langData = programmingLanguages[lang];
+      fetch(langData.baseBotUrl)
+        .then((resp)=>{ return resp.text() })
+        .then( (text) =>
+          this.setState({
+            code: text,
+            currentLang: lang,
+            isLoadingCode: false,
+            isCodeChanged: false
+          })
+        );
+    }
   }
 
   componentWillUnmount = () => {
+    const { code, currentLang, isCodeChanged, isLangChange } = this.state;
     window.removeEventListener('fullscreenchange', this.scrollToBottom);
     window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
     window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
     window.removeEventListener('MSFullscreenChange', this.scrollToBottom);
+
+    if(isCodeChanged) {
+      localStorage.setItem("editorCode", code);
+    }
+    if(isLangChange){
+      localStorage.setItem("editorProgLang", currentLang);
+    }
   }
 
 
   onChange = (newValue, e) => {
-    this.setState({ code: newValue });
+    this.setState({
+      code: newValue,
+      isCodeChanged: true,
+    });
   }
 
   onChangeLanguage = (event) => {
-    const lang = event.target.value;
+    this.onChangeCode(event.target.value);
+  }
+
+  onResetLanguage = () => {
+    this.onChangeCode(this.state.currentLang);
+  }
+
+  onChangeCode = (lang) => {
+    if(this.state.isCodeChanged){
+      this.setState({
+        showResetAlert: true,
+        newLang: lang,
+      })
+    } else {
+      this.setLanguage(lang);
+    }
+  }
+
+  onConformation = () => {
+    this.setLanguage(this.state.newLang)
+    this.setState({
+      showResetAlert: false,
+      newLang: null
+    })
+  }
+
+  setLanguage = (lang) => {
     const langData = programmingLanguages[lang];
+    let langChanged = true;
+
+    if(lang===this.state.currentLang){
+      langChanged = false;
+    }
 
     // Store current language
     this.setState({
-      currentLang: lang,
       isLoadingCode: true
     });
 
     fetch(langData.baseBotUrl)
       .then((resp)=>{ return resp.text() })
-      .then( (text) => this.setState({
+      .then( (text) => {this.setState({
+        currentLang: lang,
         code: text,
-        isLoadingCode: false
-      }) );
+        isLoadingCode: false,
+        isCodeChanged: !langChanged,
+        isLangChange: langChanged
+      })
+      localStorage.removeItem("editorCode");
+      localStorage.setItem("editorProgLang", lang);
+    });
   };
 
   generateGame = async () => {
@@ -169,7 +235,9 @@ class EditorPage extends Component {
 
   onPopupClose = () => {
     this.setState({
-      showWaitAlert: false
+      showWaitAlert: false,
+      showResetAlert: false,
+      newLang: null
     })
   }
 
@@ -185,6 +253,7 @@ class EditorPage extends Component {
       editorW,
       editorH,
       showWaitAlert,
+      showResetAlert,
       waitRemain
     } = this.state;
     const highlighting = programmingLanguages[currentLang].highlighting;
@@ -204,7 +273,7 @@ class EditorPage extends Component {
           <div id="editor-left">
             <div id="editor-cont-ui">
               <div id="editor-lang">
-                <FormControl componentClass="select" onChange={this.onChangeLanguage} disabled={isLoadingCode} bsClass="form-control editor-input" bsSize="small">
+                <FormControl componentClass="select" onChange={this.onChangeLanguage} disabled={isLoadingCode} value={currentLang} bsClass="form-control editor-input" bsSize="small">
                   <option value="python3">Python3</option>
                   <option value="java">Java</option>
                   <option value="kotlin">Kotlin</option>
@@ -275,7 +344,7 @@ class EditorPage extends Component {
         </div>
 
         <Popup
-          dialogClassName="custom-popup pop-editor-wait pop-text"
+          dialogClassName="custom-popup pop-editor-sm pop-text"
           show={showWaitAlert}
           onHide={this.onPopupClose}
           onButtonClick={this.onPopupClose}
@@ -285,6 +354,16 @@ class EditorPage extends Component {
         >
           <WaitAlert wait={waitRemain}/>
         </Popup>
+
+        <PopupConfirm
+          dialogClassName="custom-popup pop-editor-sm pop-text"
+          show={showResetAlert}
+          onHide={this.onPopupClose}
+          onButtonClick={this.onConformation}
+          heading="Warning"
+        >
+          <p>If you change programming language, your changes will be lost.</p>
+        </PopupConfirm>
 
       </div>
     );
