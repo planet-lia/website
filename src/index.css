@@ -40,6 +40,10 @@ p {
   font-size: 1.3em;
 }
 
+p.txt-small {
+  font-size: 14px;
+}
+
 td {
   font-size: 1.2em;
 }
@@ -318,7 +322,10 @@ select.placeholder > option {
 .sign-in,
 .sign-up,
 .upload-bot,
-.pop-sub {
+.pop-sub,
+.pop-noauth,
+.pop-invite,
+.pop-challenge {
   width: 100%;
 }
 
@@ -327,13 +334,16 @@ select.placeholder > option {
     margin: 30px auto;
   }
 
-  .sign-in {
+  .sign-in,
+  .pop-noauth {
     width: 400px;
   }
 
   .sign-up,
   .upload-bot,
-  .pop-sub {
+  .pop-sub,
+  .pop-invite,
+  .pop-challenge {
     width: 500px;
   }
 }
@@ -362,7 +372,7 @@ select.placeholder > option {
 }
 
 .pop-text p {
-  font-size: 1.3em;
+  font-size: 1em;
   margin: 0 10px 20px;
 }
 
@@ -397,6 +407,11 @@ select.placeholder > option {
 
 .pop-challenge .challenge-data {
   font-weight: bold;
+}
+
+.pop-invite .ref-link {
+  width: 80%;
+  margin-bottom: 20px;
 }
 
 /* Popups Overwrites*/
@@ -530,8 +545,18 @@ td .btn.custom-btn {
   margin: 0 8px;
 }
 
-.btn-chall-profile {
-  margin-top: 20px;
+.btn-invite-prof {
+  margin: 10px 0;
+}
+
+.btn-invite-lead {
+  margin: 20px 0 10px;
+}
+
+/* Icons */
+
+.icon-lg {
+  font-size: 4.5em;
 }
 
 /* Notifications */
@@ -557,7 +582,7 @@ td .btn.custom-btn {
   margin: 3em 0;
 }
 
-.cont-resp-msg{
+.resp-msg{
   padding-top: 20px;
 }
 
@@ -1222,6 +1247,10 @@ iframe {
 
 #prof-cont-data {
   margin: 2em 0;
+}
+
+#prof-icon {
+  margin-bottom: 20px;
 }
 
 /* About Page */

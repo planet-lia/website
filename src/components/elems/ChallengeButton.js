@@ -13,9 +13,10 @@ const ChallengeButton = (props) => {
         <Button
           className={"btn custom-btn " + props.className}
           disabled
+          title="You can't challenge yourself"
         >
           <span><FontAwesomeIcon icon="chess-rook" /></span>
-          {" Challenge"}
+          <span> Challenge</span>
         </Button>
       ) : (
         <Button
@@ -23,7 +24,7 @@ const ChallengeButton = (props) => {
           onClick={() => showPopup(props.opponent, props.opponentId)}
         >
           <span><FontAwesomeIcon icon="chess-rook" /></span>
-          {" Challenge"}
+          <span> Challenge</span>
         </Button>
       )
   )

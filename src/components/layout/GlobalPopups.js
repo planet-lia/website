@@ -2,6 +2,7 @@ import React from 'react';
 
 import PopupSubmit from '../views/PopupSubmit';
 import PopupChallenge from '../views/PopupChallenge';
+import PopupInvite from '../views/PopupInvite';
 
 import { connect } from 'react-redux';
 import { popupsActions } from '../../utils/actions/popupsActions';
@@ -29,6 +30,10 @@ const GlobalPopups = (props) => {
         show={props.showChallengePopup}
         onHide={closePopups}
       />
+      <PopupInvite
+        show={props.showInvitePopup}
+        onHide={closePopups}
+      />
     </div>
   );
 
@@ -38,11 +43,12 @@ const GlobalPopups = (props) => {
 }
 
 function mapStateToProps(state) {
-    const { showRegPopup, showSignInPopup, showChallengePopup } = state.popups;
+    const { showRegPopup, showSignInPopup, showChallengePopup, showInvitePopup } = state.popups;
     return {
         showRegPopup,
         showSignInPopup,
-        showChallengePopup
+        showChallengePopup,
+        showInvitePopup
     };
 }
 

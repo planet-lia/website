@@ -92,6 +92,8 @@ class SignUpForm extends Component {
     if(this.validateForm()) {
       try {
         this.setState({message: "Signing you up..."});
+        const referral = localStorage.inviteRefUserId;
+
         await api.user.register(
             this.state.username,
             this.state.email,
@@ -103,9 +105,12 @@ class SignUpForm extends Component {
             this.state.allowGlobal,
             this.state.allowMarketing,
             this.state.allowTournament,
-            this.state.country
+            this.state.country,
+            referral
           );
+
           this.props.closePopup();
+          localStorage.removeItem("inviteRefUserId");
           this.setState({
             firstName: "",
             lastName: "",
@@ -355,9 +360,9 @@ class SignUpForm extends Component {
           </Col>
         </Row>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden" disabled={this.state.isLoading}></Button>
-        <span className="text-info">{this.state.message}</span>
-        <span className="text-danger">{this.state.error}</span>
-        <span className="text-danger">{this.state.errorUn}</span>
+        <p className="clr-em">{this.state.message}</p>
+        <p className="text-danger">{this.state.error}</p>
+        <p className="text-danger">{this.state.errorUn}</p>
       </form>
     );
   }

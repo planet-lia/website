@@ -3,11 +3,11 @@ import { Modal, Button } from 'react-bootstrap';
 
 import LoadingButton from '../elems/LoadingButton';
 import ChallengeText from '../elems/ChallengeText';
+import NoAuthModal from '../elems/NoAuthModal';
 
 import api from '../../utils/api';
 
 import { connect } from 'react-redux';
-import { popupsActions } from '../../utils/actions/popupsActions';
 
 class PopupChallenge extends Component {
   constructor(props){
@@ -85,8 +85,9 @@ class PopupChallenge extends Component {
   }
 
   render() {
-    const { show, onHide, isAuthenticated, dispatch } = this.props;
+    const { show, onHide, isAuthenticated } = this.props;
     const { isSent, error } = this.state;
+    const heading = "Challenge"
     if(isAuthenticated){
       return(
         <Modal dialogClassName="custom-popup pop-challenge pop-text" show={show} onHide={onHide}>
@@ -95,15 +96,13 @@ class PopupChallenge extends Component {
           </Modal.Header>
           <Modal.Body>
             <ChallengeText isSent={isSent} ready={(success, data) => this.handleReady( true, success, data)} setNotReady={() => this.handleReady(false)} />
-            <div className="cont-resp-msg">
-              {isSent
-                ? <p className="text-info">The challenge was sent! Follow the progress of the challange on your profile page under challanges.</p>
-                : null
-              }
-              {error!==null
-                ? <p className="text-danger">{error}</p>
-                : null}
-              </div>
+            {isSent
+              ? <p className="clr-em resp-msg">The challenge was sent! Follow the progress of the challange on your profile page under challanges.</p>
+              : null
+            }
+            {error!==null
+              ? <p className="text-danger resp-msg">{error}</p>
+              : null}
           </Modal.Body>
           <Modal.Footer>
             <div className="text-center">
@@ -114,20 +113,9 @@ class PopupChallenge extends Component {
       )
     } else {
       return(
-        <Modal dialogClassName="custom-popup pop-challenge" show={show} onHide={onHide}>
-          <Modal.Header className="custom-modal-header" closeButton>
-            <Modal.Title>Challenge</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>You need to be signed in to send a challenge! If you do not have an account yet, you need to sign up and upload a bot.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <div className="text-center">
-              <Button bsClass="btn custom-btn custom-btn-lg" onClick={() => dispatch(popupsActions.showSignIn())}>Sign In</Button>
-              <Button bsClass="btn custom-btn custom-btn-lg" onClick={() => dispatch(popupsActions.showRegistration())}>Sign Up</Button>
-            </div>
-          </Modal.Footer>
-        </Modal>
+        <NoAuthModal {...this.props} heading={heading}>
+          <p>You need to sign in to send a challenge! If you do not have an account yet, you need to sign up and upload a bot.</p>
+        </NoAuthModal>
       )
     }
 

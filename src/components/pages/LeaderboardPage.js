@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
 
-import ChallengeButton from '../elems/ChallengeButton'
+import ChallengeButton from '../elems/ChallengeButton';
+import InviteButton from '../elems/InviteButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
@@ -128,9 +130,14 @@ class LeaderboardPage extends Component {
             <p>Sponsored by</p>
             <Sponsors />
           </div>
-          <h2>Leaderboard</h2>
-          {/* TODO sorry for that ugly hack, put it in CSS. :) */}
-          <span>&nbsp;&nbsp;</span>
+          <Row>
+            <Col xs={6}>
+              <h2>Leaderboard</h2>
+            </Col>
+            <Col xs={6}>
+              <InviteButton className="btn-invite-lead pull-right"/>
+            </Col>
+          </Row>
           <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
           <Moment format="DD/MM/YYYY HH:mm" style={leaderboardUpdatedTextStype}>{lastUpdated}</Moment>
         </div>
