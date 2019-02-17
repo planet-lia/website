@@ -7,6 +7,7 @@ const API_BASE_URL = (() => {
     "staging": "https://staging.cloud1.liagame.com",
     "staging2": "https://staging2.cloud1.liagame.com",
     "prod": "https://prod.cloud1.liagame.com",
+    "production": "https://production.cloud1.liagame.com",
   };
 
   let hostname = window.location.hostname;
