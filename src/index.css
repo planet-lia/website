@@ -1132,9 +1132,9 @@ iframe {
 
 #editor-lang > select {
   width: 7.5em;
-  background-color: #333;
+  background-color: #494949;
   color: #ddd;
-  border: 1px solid #333;
+  border: 1px solid #555;
 }
 
 #editor-cont-links {
