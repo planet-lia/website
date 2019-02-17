@@ -21,9 +21,7 @@ class ChallengeText extends Component {
   }
 
   componentDidMount = () => {
-    if(this.props.isAuthenticated){
-      this.loadChallengeStats();
-    }
+    this.loadChallengeStats();
   }
 
   loadChallengeStats = async () => {
@@ -84,7 +82,7 @@ class ChallengeText extends Component {
             }
           </span>
         </p>
-        <div>{this.popupMsgText()}</div>
+        {this.popupMsgText()}
       </div>
     )
   }
@@ -92,10 +90,8 @@ class ChallengeText extends Component {
 }
 
 function mapStateToProps(state) {
-    const { isAuthenticated } = state.authentication;
     const { opponent, opponentId } = state.popups;
     return {
-        isAuthenticated,
         opponent,
         opponentId
     };

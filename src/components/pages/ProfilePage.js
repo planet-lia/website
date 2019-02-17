@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ChallengeButton from '../elems/ChallengeButton';
+import InviteButton from '../elems/InviteButton';
 
 import api from '../../utils/api';
 
@@ -214,12 +215,17 @@ class ProfilePage extends Component {
             <Col sm={3}>
               <h2>{username}</h2>
               {(this.state.isPrivate) ? "Your profile" : null}
-              <div className="tour-cont-icon-lg">
+              <div className="icon-lg">
                 <FontAwesomeIcon icon="robot" color={"#019170"}/>
               </div>
               {this.state.isPrivate
-                ? ("Challenges left: " + cLeftToday + "/" + cTotal)
-                : <ChallengeButton opponent={username} opponentId={userId} className="btn-chall-profile custom-btn-lg"/>
+                ? (
+                  <div>
+                    <div>{"Challenges left: " + cLeftToday + "/" + cTotal}</div>
+                    <InviteButton className="btn-invite-prof"/>
+                  </div>
+                )
+                : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg"/>
               }
             </Col>
             <Col sm={3}>
