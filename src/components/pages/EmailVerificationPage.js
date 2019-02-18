@@ -52,7 +52,11 @@ class EmailVerificationPage extends Component {
       } else if(isAuthenticated && isVerified){
         msg = "Your email was successfully verified!";
       } else {
-        msg = <Button bsClass="btn custom-btn custom-btn-lg" onClick={() => this.confirmEmailFromCode(this.state.confirmationCode)}>Confirm</Button>
+        msg = <div style={{paddingTop: "15px"}}>
+          <h3>I hereby confirm my email.</h3>
+          <Button bsClass="btn custom-btn custom-btn-lg btn-invite-lead"
+                  onClick={() => this.confirmEmailFromCode(this.state.confirmationCode)}>Confirm</Button>
+        </div>
       }
     }
     return msg;
