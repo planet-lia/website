@@ -79,6 +79,10 @@ export default {
         }
       ).then((response) => response.data),
 
+    resetPasswordEmail: (email) =>
+      axios.post(API_BASE_URL + "/user/reset-password/email/", {email})
+        .then((response) => response.data),
+
     usernameAvalible: (username) =>
       axios.get(API_BASE_URL + "/user/username-available/?username=" + encodeURI(username))
         .then((response) => response.data),

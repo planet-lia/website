@@ -147,7 +147,7 @@ class SignUpForm extends Component {
           this.setState({
             error: "Network Error: ",
             isLoading: false
-        });
+          });
         }
       }
     }
