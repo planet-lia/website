@@ -120,6 +120,23 @@ select.placeholder > option {
     padding: 10px 0;
 }
 
+.banner {
+  display: inline-block;
+  background-color: #f3f3f3;
+  padding: 20px;
+  margin: 10px 0 20px;
+}
+
+.banner > *:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.banner > *:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .title {
   font-weight: bold;
 }
@@ -132,6 +149,11 @@ select.placeholder > option {
   background-color: #f3f3f3;
   padding: 15px 20px;
   margin-top: 20px;
+}
+
+#live-now {
+  color: #cc3300;
+  margin-bottom: 20px
 }
 
 /* Bootstrap Navbar Overrides*/

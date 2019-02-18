@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
-import Countdown from 'react-countdown-now';
 
 import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
 import SubscriptionPopup from '../views/SubscriptionPopup';
-import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 import Supporters from '../elems/Supporters';
 import Contacts from '../elems/Contacts';
 import queryString from 'query-string';
@@ -86,7 +84,7 @@ class LandingPage extends Component {
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <Countdown date={"2019-02-18T15:00:00"} renderer={countdownRenderer}/>
+            <h3 id="live-now" className="tour-title">We are live!</h3>
             <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <Supporters />
           </div>

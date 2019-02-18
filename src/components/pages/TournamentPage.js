@@ -3,7 +3,7 @@ import { Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import Countdown from 'react-countdown-now';
+//import Countdown from 'react-countdown-now';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TournamentMain from '../views/TournamentMain';
@@ -49,6 +49,7 @@ class TournamentPage extends Component {
 
   }
 
+/*
   countdownRenderer = ({ days, hours, minutes, seconds }) => {
     const { content } = this.state;
     return (
@@ -72,6 +73,7 @@ class TournamentPage extends Component {
         </div>
     );
   }
+*/
 
   render() {
     const { content } = this.state;
@@ -95,7 +97,7 @@ class TournamentPage extends Component {
                   <div>
                     <h4 className="tour-date">{content.tourDate}</h4>
                     <p>{content.txtBanner}</p>
-                    <Countdown date={"2019-02-18T15:00:00"} renderer={this.countdownRenderer}/>
+                    <h3 id="live-now" className="tour-title">{content.txtLive}</h3>
 
                     <Button
                       bsClass="btn custom-btn custom-btn-xl center-block"
