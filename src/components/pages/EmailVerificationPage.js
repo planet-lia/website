@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { Redirect } from "react-router-dom"
+import { Button } from 'react-bootstrap';
 
 import { authActions } from '../../utils/actions/authActions'
 
@@ -11,11 +12,14 @@ class EmailVerificationPage extends Component {
     super(props);
     this.state = {
       isCheckingForCode: true,
-      codeExists: false
+      codeExists: false,
+      buttonPressed: false,
     }
   }
 
-  componentDidMount = () => {
+  runConfirmation = () => {
+    this.setState({buttonPressed: true});
+
     const parms = queryString.parse(this.props.location.search)
     if(parms.code){
       this.setState({
@@ -26,7 +30,7 @@ class EmailVerificationPage extends Component {
     } else {
       this.setState({
         codeExists: false,
-        isCheckingForCode: false
+        isCheckingForCode: false,
       });
     }
   }
@@ -41,7 +45,7 @@ class EmailVerificationPage extends Component {
     let msg = "";
 
     if(isVerifing || isCheckingForCode){
-      msg = "Verifing...";
+      msg = "Verifying...";
     } else {
       if(error){
         msg = "Verification failed, with error: " + error;
@@ -57,13 +61,18 @@ class EmailVerificationPage extends Component {
   }
 
   render(){
-    const { isCheckingForCode, codeExists } = this.state;
+    const { isCheckingForCode, codeExists, buttonPressed } = this.state;
     return (
       <div className="container">
-        {(codeExists || isCheckingForCode)
-          ? (<div className="custom-message text-center"><p>{this.getMessage()}</p></div>)
-          : (<Redirect to="/" />)
-        }
+          <div>
+            {(!buttonPressed)
+              ? <div className="text-center"><br/><h4>Confirm your email</h4>
+                <Button onClick={this.runConfirmation}
+                        className="btn custom-btn custom-btn-lg">Confirm</Button>
+              </div>
+              :  (<div className="custom-message text-center"><p>{this.getMessage()}</p></div>)
+            }
+          </div>
       </div>
     );
   }
