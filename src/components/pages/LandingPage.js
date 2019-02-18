@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
-import Countdown from 'react-countdown-now';
 
 import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
 import SubscriptionPopup from '../views/SubscriptionPopup';
-import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 import Supporters from '../elems/Supporters';
 import Contacts from '../elems/Contacts';
 import queryString from 'query-string';
@@ -79,20 +77,15 @@ class LandingPage extends Component {
         </div>
         <div className="custom-section sec-short">
           <div className="container text-center">
-            <h2 className="tour-title">
-              <span className="position-relative">
-                Slovenian Lia Tournament 2019
-                <span id="live-now">Live Now</span>
-              </span>
-
-            </h2>
+            <h2 className="tour-title">Slovenian Lia Tournament 2019</h2>
             <h4 className="tour-date">18 Feb - 14 Mar</h4>
             <p>
               Are you a university or high school student from Slovenia and know
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" id="land-tour-btn" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <h3 id="live-now" className="tour-title">We are live!</h3>
+            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <Supporters />
           </div>
         </div>
