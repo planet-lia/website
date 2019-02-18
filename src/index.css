@@ -120,6 +120,23 @@ select.placeholder > option {
     padding: 10px 0;
 }
 
+.banner {
+  display: inline-block;
+  background-color: #f3f3f3;
+  padding: 20px;
+  margin: 10px 0 20px;
+}
+
+.banner > *:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.banner > *:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .title {
   font-weight: bold;
 }
@@ -132,6 +149,22 @@ select.placeholder > option {
   background-color: #f3f3f3;
   padding: 15px 20px;
   margin-top: 20px;
+}
+
+#live-now {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  background-color: #cc3300;
+  color: #fff;
+  position: absolute;
+  right: 70px;
+  bottom: -17px;
+  padding: 5px;
+
+  -webkit-transform: rotate(-6deg);
+  -ms-transform: rotate(-6deg);
+  transform: rotate(-6deg);
+
 }
 
 /* Bootstrap Navbar Overrides*/
@@ -961,6 +994,10 @@ td .btn.custom-btn {
 .land-btn.btn-get-started:hover {
   background-color: #007e5a;
   color: #ccc;
+}
+
+#land-tour-btn {
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 575.98px) {

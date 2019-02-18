@@ -79,15 +79,20 @@ class LandingPage extends Component {
         </div>
         <div className="custom-section sec-short">
           <div className="container text-center">
-            <h2 className="tour-title">Slovenian Lia Tournament 2019</h2>
+            <h2 className="tour-title">
+              <span className="position-relative">
+                Slovenian Lia Tournament 2019
+                <span id="live-now">Live Now</span>
+              </span>
+
+            </h2>
             <h4 className="tour-date">18 Feb - 14 Mar</h4>
             <p>
               Are you a university or high school student from Slovenia and know
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <Countdown date={"2019-02-18T15:00:00"} renderer={countdownRenderer}/>
-            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" id="land-tour-btn" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <Supporters />
           </div>
         </div>

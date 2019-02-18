@@ -89,13 +89,17 @@ class TournamentPage extends Component {
                 <span> | </span>
                 <Link to={currentPath + "?lang=" + languageConst.SLOVENIAN}>SLO</Link>
               </div>
-              <h2 className="tour-title">{content.titleTour}</h2>
+              <h2 className="tour-title">
+                <span className="position-relative">
+                  {content.titleTour}
+                  <span id="live-now">Live Now</span>
+                </span>
+              </h2>
               {currentPath==="/tournament"
                 ? (
                   <div>
                     <h4 className="tour-date">{content.tourDate}</h4>
                     <p>{content.txtBanner}</p>
-                    <Countdown date={"2019-02-18T15:00:00"} renderer={this.countdownRenderer}/>
 
                     <Button
                       bsClass="btn custom-btn custom-btn-xl center-block"
