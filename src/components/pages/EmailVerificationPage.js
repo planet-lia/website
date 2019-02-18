@@ -14,6 +14,7 @@ class EmailVerificationPage extends Component {
       isCheckingForCode: true,
       codeExists: false,
       buttonPressed: false,
+      finished: false,
     }
   }
 
@@ -61,7 +62,8 @@ class EmailVerificationPage extends Component {
   }
 
   render(){
-    const { isCheckingForCode, codeExists, buttonPressed } = this.state;
+    const { isCheckingForCode, codeExists, buttonPressed, finished } = this.state;
+
     return (
       <div className="container">
           <div>
@@ -69,7 +71,7 @@ class EmailVerificationPage extends Component {
               ? <div className="text-center"><br/><h4>Confirm your email</h4>
                 <Button onClick={this.runConfirmation}
                         className="btn custom-btn custom-btn-lg">Confirm</Button>
-              </div>
+                </div>
               :  (<div className="custom-message text-center"><p>{this.getMessage()}</p></div>)
             }
           </div>
