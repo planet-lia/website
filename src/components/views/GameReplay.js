@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import Replay from '../elems/Replay';
 import Link from "react-router-dom/es/Link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
+import queryString from 'query-string';
 
 import StatisticsGraph from '../elems/StatisticsGraph'
 import { seconds2time } from '../../utils/helpers/time';
@@ -27,12 +28,17 @@ class GameReplay extends Component {
       bubblesAllowP1: true,
       bubblesAllowP2: true,
       gameStatistics: {},
+      isInfLoop: false,
       loadingData: false,
       error: null
     };
   }
 
   componentDidMount = () => {
+    const parms = queryString.parse(this.props.location.search)
+    if(parms.loop){
+      this.setState({isInfLoop: true});
+    }
     if(this.props.location.state){
       this.setState(this.props.location.state);
     }
@@ -68,7 +74,7 @@ class GameReplay extends Component {
   }
 
   render(){
-    const { player1, player2, date, duration, mapSeed, replayUrl, result, bubblesAllowP1, bubblesAllowP2, gameStatistics } = this.state;
+    const { player1, player2, date, duration, mapSeed, replayUrl, result, bubblesAllowP1, bubblesAllowP2, gameStatistics, isInfLoop } = this.state;
 
     return (
       <div>
@@ -96,6 +102,7 @@ class GameReplay extends Component {
                   replayUrl={replayUrl}
                   setGameStatistics={(gameStatistics) => this.setState({gameStatistics: parseGameStatistics(gameStatistics, player1, player2)})}
                   bubblesAllow={[bubblesAllowP1, bubblesAllowP2]}
+                  loop={isInfLoop}
                 />
               </div>
             </Col>

@@ -63,10 +63,8 @@ function watchNowFormatter(cell, row, rowIndex) {
 
 function dateFormatter(cell, row, rowIndex) {
   if(row.isCompleted){
-    const d = new Date(row.date);
-    const date = d.toLocaleString();
     return (
-      <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
+      <Moment format="DD/MM/YYYY HH:mm">{row.date}</Moment>
     );
   } else {
     return "-";

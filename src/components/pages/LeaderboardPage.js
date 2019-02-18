@@ -18,7 +18,7 @@ class LeaderboardPage extends Component {
     this.state = {
       leaderboardData: [],
       loadingData: false,
-      lastUpdated: "",
+      lastUpdated: null,
       error: null
     };
   }
