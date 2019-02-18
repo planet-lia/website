@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { Redirect } from "react-router-dom"
-import { Button } from 'react-bootstrap';
 
 import { authActions } from '../../utils/actions/authActions'
 
 import { connect } from 'react-redux';
+import {Button} from "react-bootstrap";
 
 class EmailVerificationPage extends Component {
   constructor(props) {
@@ -13,25 +13,23 @@ class EmailVerificationPage extends Component {
     this.state = {
       isCheckingForCode: true,
       codeExists: false,
-      buttonPressed: false,
-      finished: false,
+      confirmationCode: ""
     }
   }
 
-  runConfirmation = () => {
-    this.setState({buttonPressed: true});
-
+  componentDidMount = () => {
     const parms = queryString.parse(this.props.location.search)
     if(parms.code){
       this.setState({
         codeExists: true,
-        isCheckingForCode: false
+        isCheckingForCode: false,
+        confirmationCode: parms.code
       });
-      this.confirmEmailFromCode(parms.code);
+      // this.confirmEmailFromCode(parms.code);
     } else {
       this.setState({
         codeExists: false,
-        isCheckingForCode: false,
+        isCheckingForCode: false
       });
     }
   }
@@ -42,19 +40,19 @@ class EmailVerificationPage extends Component {
 
   getMessage = () => {
     const { isCheckingForCode } = this.state;
-    const { isVerifing, isAuthenticated, error } = this.props;
+    const { isVerifing, isAuthenticated, isVerified, error } = this.props;
     let msg = "";
 
     if(isVerifing || isCheckingForCode){
-      msg = "Verifying...";
+      msg = "Verifing...";
     } else {
       if(error){
         msg = "Verification failed, with error: " + error;
 
-      } else if(isAuthenticated){
+      } else if(isAuthenticated && isVerified){
         msg = "Your email was successfully verified!";
       } else {
-        msg = "Something went wrong.";
+        msg = <Button bsClass="btn custom-btn custom-btn-lg" onClick={() => this.confirmEmailFromCode(this.state.confirmationCode)}>Confirm</Button>
       }
     }
     return msg;
@@ -62,30 +60,25 @@ class EmailVerificationPage extends Component {
   }
 
   render(){
-    const { isCheckingForCode, codeExists, buttonPressed, finished } = this.state;
-
+    const { isCheckingForCode, codeExists } = this.state;
     return (
-      <div className="container">
-          <div>
-            {(!buttonPressed)
-              ? <div className="text-center"><br/><h4>Confirm your email</h4>
-                <Button onClick={this.runConfirmation}
-                        className="btn custom-btn custom-btn-lg">Confirm</Button>
-                </div>
-              :  (<div className="custom-message text-center"><p>{this.getMessage()}</p></div>)
-            }
-          </div>
-      </div>
+        <div className="container">
+          {(codeExists || isCheckingForCode)
+              ? (<div className="text-center">{this.getMessage()}</div>)
+              : (<Redirect to="/" />)
+          }
+        </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { isVerifing, isAuthenticated, error } = state.authentication;
+  const { isVerifing, isAuthenticated, isVerified, error } = state.authentication;
   return {
-      isVerifing,
-      isAuthenticated,
-      error
+    isVerifing,
+    isAuthenticated,
+    isVerified,
+    error
   };
 }
 

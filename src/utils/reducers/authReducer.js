@@ -35,6 +35,7 @@ export function authentication(state = initialState, action) {
   case actionTypesAuth.CONFIRM_EMAIL_SUCCESS:
     return {
       isAuthenticated: true,
+      isVerified: true,
       username: action.username,
       userId: action.userId
     };
