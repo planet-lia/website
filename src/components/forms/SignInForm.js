@@ -147,7 +147,18 @@ class SignInForm extends Component {
   switchForm = () => {
     this.props.setHeading();
     this.props.setButtonText();
-    this.setState({isForgotPw: true})
+    this.setState({
+      isForgotPw: true,
+      username: "",
+      usernameError: null,
+      password: "",
+      passwordError: null,
+      email: "",
+      emailError: null,
+      responseError: null,
+      message: null,
+      emailIsSent: false
+    })
   }
 
   onChange = (event) => {

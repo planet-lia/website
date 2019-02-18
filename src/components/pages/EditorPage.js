@@ -68,7 +68,6 @@ class EditorPage extends Component {
   }
 
   componentWillUnmount = () => {
-    const { code, currentLang } = this.state;
     window.removeEventListener('fullscreenchange', this.scrollToBottom);
     window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
     window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
