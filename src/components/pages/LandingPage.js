@@ -53,7 +53,7 @@ class LandingPage extends Component {
   }
 
   redirectToGettingStarted = () => {
-    window.open("https://docs-dev.liagame.com/", "_blank");
+    window.open("https://docs.liagame.com/", "_blank");
   }
 
   onPopupClose = () => {
