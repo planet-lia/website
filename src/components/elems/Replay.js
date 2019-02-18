@@ -104,7 +104,24 @@ class Replay extends Component {
   }
 
   setTime = (time) => {
+    //regular functionality
     this.setState({time: time});
+
+    //start: replay infinite loop
+    /*if(time===this.state.duration){
+      if(this.state.replay){
+          this.state.replay.changeTime(0);
+        if(this.state.isPlaying===false){
+          this.state.replay.forceUpdate();
+        }
+      }
+      this.setState({
+        time: 0
+      });
+    } else {
+      this.setState({time: time});
+    }*/
+    //end: replay infinite loop
   }
 
   onChangeTime = (event) => {
