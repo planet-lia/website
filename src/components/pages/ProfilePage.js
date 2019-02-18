@@ -48,6 +48,7 @@ class ProfilePage extends Component {
       cTotal: 0,
       hasActiveBot: true,
       isChallenges: false,
+      currentPage: 0,
       loadingData: false,
       error: null
     }
@@ -112,11 +113,13 @@ class ProfilePage extends Component {
     });
   }
 
-  loadGames = async (userId, offset, isChallenges = false) => {
+  loadGames = async (userId, page, isChallenges = false) => {
+    let offset = page * this.state.nGamesPerPage
     this.setState({
       loadingData: true,
       gamesData: [],
-      isChallenges: isChallenges
+      isChallenges: isChallenges,
+      currentPage: page
     });
     let respGames;
     try {
@@ -134,12 +137,6 @@ class ProfilePage extends Component {
       console.log(err.message);
     }
   }
-
-  handlePageClick = (data) => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected * this.state.nGamesPerPage);
-    this.loadGames(this.state.userId, offset, this.state.isChallenges);
-  };
 
   setGamesData = (respGames) => {
     const gamesList = respGames.matches.map(
@@ -159,11 +156,31 @@ class ProfilePage extends Component {
       })
     );
 
-    const pageCount = Math.ceil(respGames.pagination.total / respGames.pagination.count)
+    let count = respGames.pagination.count;
+    let total = respGames.pagination.total;
+    let nextOffset = respGames.pagination.nextOffset;
+    let nGamesPerPage = this.state.nGamesPerPage;
+    let pageCount = this.state.pageCount;
+
+    if (total === 0) {
+      //no games
+      nGamesPerPage = 0;
+      pageCount = 0;
+    } else if (count === total) {
+      //less than full page
+      nGamesPerPage = count;
+      pageCount = 1;
+    } else if (nextOffset) {
+      //full page
+      nGamesPerPage = count;
+      pageCount = Math.ceil(total / count);
+    } /*else {
+      //lastpage
+    }*/
 
     this.setState({
       gamesData: gamesList,
-      nGamesPerPage: respGames.pagination.count,
+      nGamesPerPage: nGamesPerPage,
       pageCount: pageCount,
       loadingData: false
     });
@@ -200,13 +217,17 @@ class ProfilePage extends Component {
     return (<a href={logLink} target="_blank">download</a>);
   }
 
+  handlePageClick = (data) => {
+    this.loadGames(this.state.userId, data.selected, this.state.isChallenges);
+  };
+
   render(){
     const { gamesData, loadingData, userId, username, rank, rating, mu, sigma,
       wins, losses, playing, pageCount, version, language,
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
       activeBotPlaying, newBotUploadTime, newBotStatus,
       newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog,
-      cLeftToday, cTotal, isChallenges } = this.state;
+      cLeftToday, cTotal, isChallenges, currentPage } = this.state;
 
     return (
       <div className="container">
@@ -344,17 +365,23 @@ class ProfilePage extends Component {
           <li><a className={isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, true)}>Challenges</a></li>
         </ul>
         <GamesTable data={gamesData} loading={loadingData}/>
-        <ReactPaginate previousLabel={"<"}
-                       nextLabel={">"}
-                       breakLabel={"..."}
-                       breakClassName={"break-me"}
-                       pageCount={pageCount}
-                       marginPagesDisplayed={1}
-                       pageRangeDisplayed={5}
-                       onPageChange={this.handlePageClick}
-                       containerClassName={"pagination"}
-                       subContainerClassName={"pages pagination"}
-                       activeClassName={"active"} />
+        {pageCount
+          ? <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={pageCount}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={5}
+              onPageChange={this.handlePageClick}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+              forcePage={currentPage}
+            />
+          : null
+        }
       </div>
     )
   }
