@@ -10,6 +10,9 @@ import SubscriptionPopup from '../views/SubscriptionPopup';
 import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 import Supporters from '../elems/Supporters';
 import Contacts from '../elems/Contacts';
+import queryString from 'query-string';
+
+import api from '../../utils/api';
 
 import thumb1 from '../../assets/thumb1.jpg';
 import thumb2 from '../../assets/thumb2.jpg';
@@ -22,6 +25,26 @@ class LandingPage extends Component {
       gameId: null,
       showTryNowPopup: false,
       showSubscribePopup: false
+    }
+  }
+
+  componentDidMount = () => {
+    //save invite reference for registration
+    const parms = queryString.parse(this.props.location.search);
+    if(parms.ref){
+      this.saveReference(parms.ref);
+    }
+  }
+
+  saveReference = async (refUserName) => {
+    try {
+      const respUserId = await api.user.getUsernameToUserId(refUserName);
+      localStorage.setItem("inviteRefUserId", respUserId.userId);
+    } catch(err) {
+      this.setState({
+        error: "Network Error"
+      });
+      console.log(err.message);
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -12,8 +12,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: null,
-      activeNav: 0,
+      isExpanded: false
     }
   }
 
@@ -29,14 +28,13 @@ class Header extends Component {
     this.setState({ isExpanded: false });
   }
 
-  onSelectNavSignItem = (mode) => {
-    this.props.onNavSignClick(mode);
-    this.setState({ isExpanded: false });
-  }
-
-  showSignUpPopup = async () => {
+  showSignPopup = async (mode) => {
     this.onSelectNavItem();
-    await this.props.dispatch(popupsActions.showRegistration());
+    if(mode===0){
+      await this.props.dispatch(popupsActions.showSignIn());
+    } else if(mode===1) {
+      await this.props.dispatch(popupsActions.showRegistration());
+    }
   }
 
   logout = async () => {
@@ -86,18 +84,19 @@ class Header extends Component {
                         <div><FontAwesomeIcon icon="user" /> {this.props.username}</div>
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink to={"/settings"} exact activeClassName="nav-link-active">
+                      <div>Settings</div>
+                    </NavLink>
+                  </li>
                   <li role="presentation" onClick={this.logout}>
                     <a role="button" onClick={() => {return false}}>Sign Out</a>
                   </li>
                 </ul>
               ) : (
                 <Nav pullRight>
-                  <NavItem onClick={this.showSignUpPopup}>
-                    Sign Up
-                  </NavItem>
-                  <NavItem onClick={() => this.onSelectNavSignItem(1)}>
-                    Sign In
-                  </NavItem>
+                  <NavItem onClick={() => this.showSignPopup(1)}>Sign Up</NavItem>
+                  <NavItem onClick={() => this.showSignPopup(0)}>Sign In</NavItem>
                 </Nav>
               )}
             </Navbar.Collapse>

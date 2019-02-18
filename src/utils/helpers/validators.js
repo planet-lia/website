@@ -3,6 +3,7 @@ import { validationConst } from '../constants/validationConst';
 export const validators = {
   length,
   username,
+  email,
   usernameLength,
   usernameRegex,
   emailLength,
@@ -23,6 +24,16 @@ function username(username) {
     return false;
   }
   if(!usernameRegex(username)){
+    return false;
+  }
+  return true
+}
+
+function email(email) {
+  if(!emailLength(email)){
+    return false;
+  }
+  if(!emailRegex(email)){
     return false;
   }
   return true

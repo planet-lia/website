@@ -5,13 +5,15 @@ import { Redirect } from "react-router-dom"
 import { authActions } from '../../utils/actions/authActions'
 
 import { connect } from 'react-redux';
+import {Button} from "react-bootstrap";
 
 class EmailVerificationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isCheckingForCode: true,
-      codeExists: false
+      codeExists: false,
+      confirmationCode: ""
     }
   }
 
@@ -20,9 +22,10 @@ class EmailVerificationPage extends Component {
     if(parms.code){
       this.setState({
         codeExists: true,
-        isCheckingForCode: false
+        isCheckingForCode: false,
+        confirmationCode: parms.code
       });
-      this.confirmEmailFromCode(parms.code);
+      // this.confirmEmailFromCode(parms.code);
     } else {
       this.setState({
         codeExists: false,
@@ -37,7 +40,7 @@ class EmailVerificationPage extends Component {
 
   getMessage = () => {
     const { isCheckingForCode } = this.state;
-    const { isVerifing, isAuthenticated, error } = this.props;
+    const { isVerifing, isAuthenticated, isVerified, error } = this.props;
     let msg = "";
 
     if(isVerifing || isCheckingForCode){
@@ -46,10 +49,14 @@ class EmailVerificationPage extends Component {
       if(error){
         msg = "Verification failed, with error: " + error;
 
-      } else if(isAuthenticated){
+      } else if(isAuthenticated && isVerified){
         msg = "Your email was successfully verified!";
       } else {
-        msg = "Something went wrong.";
+        msg = <div style={{paddingTop: "15px"}}>
+          <h3>I hereby confirm my email.</h3>
+          <Button bsClass="btn custom-btn custom-btn-lg btn-invite-lead"
+                  onClick={() => this.confirmEmailFromCode(this.state.confirmationCode)}>Confirm</Button>
+        </div>
       }
     }
     return msg;
@@ -59,22 +66,23 @@ class EmailVerificationPage extends Component {
   render(){
     const { isCheckingForCode, codeExists } = this.state;
     return (
-      <div className="container">
-        {(codeExists || isCheckingForCode)
-          ? (<div className="custom-message text-center"><p>{this.getMessage()}</p></div>)
-          : (<Redirect to="/" />)
-        }
-      </div>
+        <div className="container">
+          {(codeExists || isCheckingForCode)
+              ? (<div className="text-center">{this.getMessage()}</div>)
+              : (<Redirect to="/" />)
+          }
+        </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { isVerifing, isAuthenticated, error } = state.authentication;
+  const { isVerifing, isAuthenticated, isVerified, error } = state.authentication;
   return {
-      isVerifing,
-      isAuthenticated,
-      error
+    isVerifing,
+    isAuthenticated,
+    isVerified,
+    error
   };
 }
 

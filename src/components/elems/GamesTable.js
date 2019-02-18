@@ -42,45 +42,36 @@ const GamesTable = (props) => {
 export default GamesTable;
 
 function watchNowFormatter(cell, row, rowIndex) {
-  const textStyle = {color: "#9A3F1B"};
-  return (
-    <span>
-      <Link to={{
-        pathname: "/games/" + row.matchId,
-        state: row
-      }} style={{ textDecoration: 'none' }}>
-        &nbsp;&nbsp;
-        <FontAwesomeIcon icon="tv" color={"#9A3F1B"}/>
-        <span style={textStyle}>&nbsp; Watch</span>
+  if(row.isCompleted){
+    return (
+      <Link
+        to={{
+          pathname: "/games/" + row.matchId,
+          state: row
+        }}
+        className="btn-watch"
+      >
+        <span className="icon"><FontAwesomeIcon icon="tv" /></span>
+        <span>Watch</span>
       </Link>
-    </span>
-  );
+    );
+  } else {
+    return <span className="status-pend">In Progress</span>
+  }
+
 }
 
 function dateFormatter(cell, row, rowIndex) {
-  const d = new Date(row.date);
-  const date = d.toLocaleString();
-  return (
-    <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
-  );
-}
-
-/*
-function playersFormatter(cell, row, rowIndex) {
-
-  const player1 = usernameToProfileLink(row.player1);
-  const player2 = usernameToProfileLink(row.player2);
-
-  const trophyIcon = <FontAwesomeIcon icon="trophy" color={"#CCCCCC"}/>;
-
-  if(row.result===1){
-    return (<span><strong>{player1}</strong>&nbsp;{trophyIcon} - {player2}</span>)
-  } else if (row.result===2) {
-    return (<span>{player1} - <strong>
-      {player2}</strong>&nbsp;{trophyIcon}</span>)
+  if(row.isCompleted){
+    const d = new Date(row.date);
+    const date = d.toLocaleString();
+    return (
+      <Moment format="DD/MM/YYYY HH:mm">{date}</Moment>
+    );
+  } else {
+    return "-";
   }
 }
-*/
 
 function player1Formatter(cell, row, rowIndex) {
   return playerFormatter(cell, row, rowIndex, 1)
@@ -114,16 +105,17 @@ function usernameToProfileLink(username) {
 }
 
 function durationFormatter(cell, row, rowIndex) {
-  return seconds2time(row.duration);
+  if(row.isCompleted){
+    return seconds2time(row.duration);
+  } else {
+    return "-";
+  }
 }
-
-/*
-function playerRanksFormatter(cell, row, rowIndex) {
-  return (<span> {row.player1Rank} - {row.player2Rank}</span>);
-}
-*/
-
 
 function unitsRemainFormatter(cell, row, rowIndex) {
-  return (row.unitsRemain1 + " - " + row.unitsRemain2);
+  if(row.isCompleted){
+    return (row.unitsRemain1 + " - " + row.unitsRemain2);
+  } else {
+    return "-";
+  }
 }

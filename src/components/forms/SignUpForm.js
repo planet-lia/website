@@ -92,6 +92,8 @@ class SignUpForm extends Component {
     if(this.validateForm()) {
       try {
         this.setState({message: "Signing you up..."});
+        const referral = localStorage.inviteRefUserId;
+
         await api.user.register(
             this.state.username,
             this.state.email,
@@ -103,9 +105,12 @@ class SignUpForm extends Component {
             this.state.allowGlobal,
             this.state.allowMarketing,
             this.state.allowTournament,
-            this.state.country
+            this.state.country,
+            referral
           );
+
           this.props.closePopup();
+          localStorage.removeItem("inviteRefUserId");
           this.setState({
             firstName: "",
             lastName: "",
@@ -142,7 +147,7 @@ class SignUpForm extends Component {
           this.setState({
             error: "Network Error: ",
             isLoading: false
-        });
+          });
         }
       }
     }
@@ -150,7 +155,7 @@ class SignUpForm extends Component {
   }
 
   validateForm = () => {
-    const {firstName, lastName, username, email, password, repeat, level, agreeToTerms} = this.state;
+    const {firstName, lastName, username, email, password, repeat, level, country, agreeToTerms} = this.state;
 
     if( !(firstName && validators.length(firstName, 30)) ) {this.setState({error: "Invalid Name length"}); return false;}
     if( !(lastName && validators.length(lastName, 50)) ) {this.setState({error: "Invalid Last Name length"}); return false;}
@@ -160,7 +165,8 @@ class SignUpForm extends Component {
     if( !validators.usernameRegex(username) ) {this.setState({error: "Invalid username format"}); return false;}
     if( !validators.emailRegex(email) ) {this.setState({error: "Invalid email format"}); return false;}
     if( !validators.passwordWithRepeat(password, repeat) ){this.setState({error: "Passwords don't match"}); return false;}
-    if( !(level) ) {this.setState({error: "Level not set"}); return false;}
+    if( !(level) ) {this.setState({error: "Level is not chosen"}); return false;}
+    if( !(country) ) {this.setState({error: "Country is not chosen"}); return false;}
     if( !(agreeToTerms) ) {this.setState({error: "You need to agree to Lia Terms and Conditions and Privacy Policy."}); return false;}
 
     if( !this.isUsernameAvalible() ) {this.setState({error: "Username is not available"}); return false;}
@@ -297,7 +303,7 @@ class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <ControlLabel>Country</ControlLabel>
+              <ControlLabel>Country</ControlLabel>*
               <Select
                 options={this.state.countriesList}
                 placeholder="Your country"
@@ -354,9 +360,9 @@ class SignUpForm extends Component {
           </Col>
         </Row>
         <Button id={this.props.submitButtonId} type="submit" bsClass="hidden" disabled={this.state.isLoading}></Button>
-        <span className="text-info">{this.state.message}</span>
-        <span className="text-danger">{this.state.error}</span>
-        <span className="text-danger">{this.state.errorUn}</span>
+        <p className="clr-em">{this.state.message}</p>
+        <p className="text-danger">{this.state.error}</p>
+        <p className="text-danger">{this.state.errorUn}</p>
       </form>
     );
   }

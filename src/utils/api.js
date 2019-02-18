@@ -7,6 +7,7 @@ const API_BASE_URL = (() => {
     "staging": "https://staging.cloud1.liagame.com",
     "staging2": "https://staging2.cloud1.liagame.com",
     "prod": "https://prod.cloud1.liagame.com",
+    "production": "https://production.cloud1.liagame.com",
   };
 
   let hostname = window.location.hostname;
@@ -19,11 +20,13 @@ const API_BASE_URL = (() => {
 
   switch (lastSubdomain) {
     case "dev":
-      return apiUrlLog(apis["dev"]);
+      return apiUrlLog(apis["staging2"]);
     case "staging":
       return apiUrlLog(apis["staging"]);
     case "staging2":
       return apiUrlLog(apis["staging2"]);
+    case "production":
+      return apiUrlLog(apis["production"]);
     case "www":
       return apiUrlLog(apis["prod"]);
     case "localhost":
@@ -39,14 +42,17 @@ export default {
       axios.post(API_BASE_URL + "/user/confirm-email/", {emailVerificationCode})
         .then((response) => response.data),
 
-    edit: (firstName, lastName, organization, country, level) =>
+    edit: (firstName, lastName, organization, country, level, allowGlobal, allowMarketing, allowTournament) =>
       axios.post(API_BASE_URL + "/user/",
         {
           firstName: firstName,
           lastName: lastName,
           organization: organization,
           countryAlpha2Code: country,
-          level: level
+          level: level,
+          allowPublicationToGlobalLeaderboard: allowGlobal,
+          allowMarketingEmails: allowMarketing,
+          allowTournament2019Emails: allowTournament
         }
       ).then((response) => response.data),
 
@@ -58,7 +64,7 @@ export default {
       axios.post(API_BASE_URL + "/auth/", {username, password})
         .then((response) => response.data),
 
-    register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country ) =>
+    register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country, referral ) =>
       axios.post(API_BASE_URL + "/user/register/",
         {
           username: username,
@@ -71,9 +77,18 @@ export default {
           allowPublicationToGlobalLeaderboard: allowGlobal,
           allowMarketingEmails: allowMarketing,
           allowTournament2019Emails: allowTournament,
-          countryAlpha2Code: country
+          countryAlpha2Code: country,
+          referral: referral
         }
       ).then((response) => response.data),
+
+    resetPasswordEmail: (email) =>
+      axios.post(API_BASE_URL + "/user/reset-password/email/", {email})
+        .then((response) => response.data),
+
+    resetPassword: (passwordResetCode, newPassword) =>
+      axios.post(API_BASE_URL + "/user/reset-password/", {passwordResetCode, newPassword})
+        .then((response) => response.data),
 
     usernameAvalible: (username) =>
       axios.get(API_BASE_URL + "/user/username-available/?username=" + encodeURI(username))
@@ -99,25 +114,34 @@ export default {
         .then((response) => response.data),
     getGamesList: (offset = 0) =>
       axios.get(API_BASE_URL + "/game/match/latest/?offset=" + encodeURI(offset))
-        .then((response => response.data)),
+        .then((response) => response.data),
     getGame: (matchId) =>
       axios.get(API_BASE_URL + "/game/match/" + matchId + "/")
-        .then((response => response.data)),
+        .then((response) => response.data),
     getUserPublic: (userId) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/")
-        .then((response => response.data)),
+        .then((response) => response.data),
     getUserGames: (userId, offset) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/matches/?offset=" + encodeURI(offset))
-        .then((response => response.data)),
+        .then((response) => response.data),
     getActiveBot: () =>
       axios.get(API_BASE_URL + "/game/bot/active/")
-        .then((response => response.data)),
+        .then((response) => response.data),
     getLatestBot: () =>
       axios.get(API_BASE_URL + "/game/bot/latest/")
-        .then((response => response.data)),
+        .then((response) => response.data),
     getBot: (botId) =>
       axios.get(API_BASE_URL + "/game/bot/" + botId + "/")
-        .then((response => response.data)),
+        .then((response) => response.data),
+    getChallengesStats: () =>
+      axios.get(API_BASE_URL + "/game/challenges/")
+        .then((response) => response.data),
+    getUserChallenges: (userId, offset) =>
+      axios.get(API_BASE_URL + "/game/user/" + userId + "/challenges/?offset=" + encodeURI(offset))
+        .then((response) => response.data),
+    challengeUser: (userId) =>
+      axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
+        .then((response) => response.data),
   },
 
   other: {

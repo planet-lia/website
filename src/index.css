@@ -40,6 +40,10 @@ p {
   font-size: 1.3em;
 }
 
+p.txt-small {
+  font-size: 14px;
+}
+
 td {
   font-size: 1.2em;
 }
@@ -54,6 +58,10 @@ td {
 
 .position-relative {
   position: relative;
+}
+
+.no-underline {
+  text-decoration: none !important;
 }
 
 .clr-fb, .clr-fb:hover {
@@ -72,6 +80,7 @@ td {
   color: #ff0000;
 }
 
+.clr-em,
 .clr-em:hover {
   color: #019170;
 }
@@ -117,6 +126,51 @@ select.placeholder > option {
 
 .title.no-top {
   margin-top: 0;
+}
+
+.form-page {
+  background-color: #f3f3f3;
+  padding: 15px 20px;
+  margin-top: 20px;
+}
+
+/* Bootstrap Navbar Overrides*/
+@media (max-width: 991.98px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
 }
 
 /* Layout */
@@ -218,6 +272,31 @@ select.placeholder > option {
   transform: translate(-50%,-50%);
 }
 
+.custom-subnav {
+  background-color: rgba(0,0,0,0.047);
+  list-style-type: none;
+  margin: 0 0 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.custom-subnav > li {
+  float: left;
+}
+
+.custom-subnav > li > a {
+  display: block;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.custom-subnav > li > a:hover,
+.custom-subnav .active {
+  background-color: rgba(0,0,0,0.06);
+  color: #019170;
+}
+
 @media screen and (max-width: 991.98px) {
   .custom-section {
     padding: 6em 0;
@@ -249,7 +328,11 @@ select.placeholder > option {
 .sign-in,
 .sign-up,
 .upload-bot,
-.pop-sub {
+.pop-sub,
+.pop-noauth,
+.pop-invite,
+.pop-challenge,
+.pop-editor-sm {
   width: 100%;
 }
 
@@ -258,13 +341,17 @@ select.placeholder > option {
     margin: 30px auto;
   }
 
-  .sign-in {
+  .sign-in,
+  .pop-noauth,
+  .pop-editor-sm {
     width: 400px;
   }
 
   .sign-up,
   .upload-bot,
-  .pop-sub {
+  .pop-sub,
+  .pop-invite,
+  .pop-challenge {
     width: 500px;
   }
 }
@@ -293,7 +380,7 @@ select.placeholder > option {
 }
 
 .pop-text p {
-  font-size: 1.3em;
+  font-size: 1em;
   margin: 0 10px 20px;
 }
 
@@ -324,6 +411,15 @@ select.placeholder > option {
 
 .pop-text .sub-footnote {
   font-size: 0.8em;
+}
+
+.pop-challenge .challenge-data {
+  font-weight: bold;
+}
+
+.pop-invite .ref-link {
+  width: 80%;
+  margin-bottom: 20px;
 }
 
 /* Popups Overwrites*/
@@ -385,12 +481,36 @@ a.btn.custom-btn:hover {
   color: #ddd;
 }
 
+.custom-btn.btn-light,
+.custom-btn.btn-light:active,
+.custom-btn.btn-light:focus {
+  color: #019170;
+  background-color: rgba(0,0,0,0.047);
+}
+
+.btn.custom-btn.btn-light:hover {
+  color: #019170;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.custom-btn.btn-red,
+.custom-btn.btn-red:hover,
+.custom-btn.btn-red:active,
+.custom-btn.btn-red:focus {
+  background-color: #9a3f1b;
+}
+
 .custom-btn-lg {
   font-size: 16px;
 }
 
 .custom-btn-xl {
   font-size: 20px;
+}
+
+td .btn.custom-btn {
+  font-size: 14px;
+  padding: 3px 12px
 }
 
 .btn.custom-btn:hover {
@@ -404,6 +524,47 @@ a.btn.custom-btn:hover {
 
 .btn-subtext {
   font-size: 0.5em;
+}
+
+.btn-loading {
+  color: rgba(238,238,238,0);
+  position: relative;
+}
+
+.btn-loading > .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.btn-watch,
+.btn-watch:hover,
+.btn-watch:active,
+.btn-watch:focus {
+  color: #9a3f1b;
+  text-decoration: none;
+}
+
+.btn-watch > .icon {
+  margin: 0 8px;
+}
+
+.btn-invite-prof {
+  margin: 10px 0;
+}
+
+.btn-invite-lead {
+  margin: 20px 0 10px;
+}
+
+/* Icons */
+
+.icon-lg {
+  font-size: 4.5em;
 }
 
 /* Notifications */
@@ -427,6 +588,10 @@ a.btn.custom-btn:hover {
 
 .custom-message {
   margin: 3em 0;
+}
+
+.resp-msg{
+  padding-top: 20px;
 }
 
 /* Tournament */
@@ -913,7 +1078,7 @@ iframe {
 
 .editor-cont-page {
   width: 100%;
-  min-width: 768px;
+  min-width: 835px;
   min-height: calc(28.125vw + 2.7em - 4px + 41px + 8em);
   background-color: #1e1e1e;
   border-top: 1px solid #333;
@@ -968,14 +1133,19 @@ iframe {
 #editor-lang,
 #editor-btn-run {
   margin: 5px;
-  align-self: center
+  align-self: center;
+}
+
+#editor-btn-reset {
+  margin: 5px 20px 5px 0;
+  align-self: center;
 }
 
 #editor-lang > select {
   width: 7.5em;
-  background-color: #333;
+  background-color: #494949;
   color: #ddd;
-  border: 1px solid #333;
+  border: 1px solid #555;
 }
 
 #editor-cont-links {
@@ -1058,7 +1228,7 @@ iframe {
   border-radius: 0;
 }
 
-@media screen and (max-width: 971px) {
+@media screen and (max-width: 1106px) {
   #editor-cont-links > div {
     display: block;
     margin-bottom: 0;
@@ -1090,6 +1260,10 @@ iframe {
 
 #prof-cont-data {
   margin: 2em 0;
+}
+
+#prof-icon {
+  margin-bottom: 20px;
 }
 
 /* About Page */
@@ -1166,6 +1340,11 @@ iframe {
 
 .game-stats {
   font-size: small;
+}
+
+/* Games Table */
+.status-pend {
+  margin-left: 8px;
 }
 
 /* Player */
