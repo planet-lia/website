@@ -68,7 +68,6 @@ class EditorPage extends Component {
   }
 
   componentWillUnmount = () => {
-    const { code, currentLang } = this.state;
     window.removeEventListener('fullscreenchange', this.scrollToBottom);
     window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
     window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
@@ -112,11 +111,12 @@ class EditorPage extends Component {
   }
 
   setLanguage = (lang) => {
+    const {currentLang, isCodeChanged} = this.state;
     const langData = programmingLanguages[lang];
-    let langChanged = true;
+    let willCodeChange = false;
 
-    if(lang===this.state.currentLang){
-      langChanged = false;
+    if(lang===currentLang && isCodeChanged){
+      willCodeChange = true;
     }
 
     // Store current language
@@ -130,7 +130,7 @@ class EditorPage extends Component {
         currentLang: lang,
         code: text,
         isLoadingCode: false,
-        isCodeChanged: !langChanged,
+        isCodeChanged: willCodeChange,
       })
       localStorage.removeItem("editorCode");
       localStorage.setItem("editorProgLang", lang);
@@ -270,6 +270,9 @@ class EditorPage extends Component {
                   <option value="java">Java</option>
                   <option value="kotlin">Kotlin</option>
                 </FormControl>
+              </div>
+              <div id="editor-btn-reset">
+                <Button bsClass="btn btn-sm custom-btn btn-on-dark" onClick={() => this.onResetLanguage()} type="button" disabled={isLoadingCode}>Reset</Button>
               </div>
               <div id="editor-cont-links">
                 <div>

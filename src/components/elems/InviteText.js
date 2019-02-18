@@ -43,7 +43,7 @@ class InviteText extends Component {
         <FormControl
           type="text"
           name="ref-link"
-          value={"http://www.liagame.com/?ref=" + encodeURI(username)}
+          value={"https://www.liagame.com/?ref=" + encodeURI(username)}
           readOnly
           onFocus={(event) => event.target.select()}
           bsClass="form-control ref-link center-block"

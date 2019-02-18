@@ -8,13 +8,24 @@ class PopupSubmit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formSubmitButtonId: "btn-submit-" + this.props.formType
+      formSubmitButtonId: "btn-submit-" + this.props.formType,
+      newHeading: "",
+      newButtonText: "",
+      disableButton: false,
     }
   }
 
   getForm = () => {
     if(this.props.formType==="sign-in"){
-      return <SignInForm submitButtonId={this.state.formSubmitButtonId} closePopup={this.props.onHide}/>;
+      return (
+        <SignInForm
+          submitButtonId={this.state.formSubmitButtonId}
+          closePopup={this.props.onHide}
+          setHeading={() => this.setState({newHeading: "Forgot Password"})}
+          setButtonText={() => this.setState({newButtonText: "Send"})}
+          disableButton={() => this.setState({disableButton: true})}
+        />
+      );
     } else if (this.props.formType==="sign-up"){
       return <SignUpForm submitButtonId={this.state.formSubmitButtonId} closePopup={this.props.onHide}/>
     }
@@ -22,16 +33,19 @@ class PopupSubmit extends Component {
 
 
   render(){
+    const { formSubmitButtonId, newHeading, newButtonText, disableButton } = this.state;
+    const { dialogClassName, show, onHide, heading, buttonText } = this.props;
+
     return(
-      <Modal dialogClassName={this.props.dialogClassName} show={this.props.show} onHide={this.props.onHide}>
+      <Modal dialogClassName={dialogClassName} show={show} onHide={onHide}>
         <Modal.Header className="custom-modal-header" closeButton>
-          <Modal.Title>{this.props.heading}</Modal.Title>
+          <Modal.Title>{newHeading ? newHeading : heading}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.getForm()}
         </Modal.Body>
         <Modal.Footer>
-          <label className="btn custom-btn custom-btn-lg" htmlFor={this.state.formSubmitButtonId}>{this.props.buttonText}</label>
+          <label className="btn custom-btn custom-btn-lg" htmlFor={formSubmitButtonId} disabled={disableButton}>{newButtonText ? newButtonText : buttonText}</label>
         </Modal.Footer>
       </Modal>
     )
