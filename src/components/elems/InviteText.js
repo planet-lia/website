@@ -39,7 +39,7 @@ class InviteText extends Component {
     const { cExtra, cMax } = this.state;
     return (
       <div>
-        <p>Send this link to a friend and challange him at Lia. Let's see who creates a better bot!</p>
+        <p>Send this link to a friend and challenge him at Lia. Let's see who creates a better bot!</p>
         <FormControl
           type="text"
           name="ref-link"

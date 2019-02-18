@@ -221,7 +221,7 @@ class ProfilePage extends Component {
               {this.state.isPrivate
                 ? (
                   <div>
-                    <div>{"Challenges left: " + cLeftToday + "/" + cTotal}</div>
+                    <div>{"Challenges left today: " + cLeftToday + "/" + cTotal}</div>
                     <InviteButton className="btn-invite-prof"/>
                   </div>
                 )

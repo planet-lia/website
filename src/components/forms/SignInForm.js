@@ -103,7 +103,7 @@ class SignInForm extends Component {
           email: "",
           emailError: null,
           responseError: null,
-          message: "A link was sent to your email. Please follow the link to reset your password.",
+          message: "A link was sent to your email. Please follow the link to reset your password. If you don't see the email, check your spam and promotions.",
           emailIsSent: true
         });
         this.props.disableButton();
