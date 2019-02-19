@@ -18,7 +18,8 @@ class Replay extends Component {
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
-      forceReplayWidth: "100%"
+      forceReplayWidth: "100%",
+      isInfLoop: false
     }
     this.puiRef = React.createRef();
   }
@@ -29,6 +30,7 @@ class Replay extends Component {
     window.addEventListener('webkitfullscreenchange', this.resizeReplay);
     window.addEventListener('mozfullscreenchange', this.resizeReplay);
     window.addEventListener('MSFullscreenChange', this.resizeReplay);
+
     this.updateReplayWidth();
     if(this.props.number || this.props.replayFileBase64 || this.props.replayUrl){
       this.checkAndRun();
@@ -104,24 +106,23 @@ class Replay extends Component {
   }
 
   setTime = (time) => {
-    //regular functionality
-    this.setState({time: time});
-
-    //start: replay infinite loop
-    /*if(time===this.state.duration){
-      if(this.state.replay){
-          this.state.replay.changeTime(0);
-        if(this.state.isPlaying===false){
-          this.state.replay.forceUpdate();
+    if(this.props.loop) {
+      //replay infinite loop
+      if(time===this.state.duration){
+        if(this.state.replay){
+            this.state.replay.changeTime(0);
+          if(this.state.isPlaying===false){
+            this.state.replay.forceUpdate();
+          }
         }
+        this.setState({time: 0});
+      } else {
+        this.setState({time: time});
       }
-      this.setState({
-        time: 0
-      });
     } else {
+      //regular functionality
       this.setState({time: time});
-    }*/
-    //end: replay infinite loop
+    }
   }
 
   onChangeTime = (event) => {
