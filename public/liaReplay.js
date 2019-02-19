@@ -6110,7 +6110,7 @@
       if (rangeTo(0.0, Config_getInstance().BOT_CRASHED_TEXT_DURATION).contains_mef7kx$(this.gameLogic_0.stopwatch.time - timeCrashed)) {
         this.platform_0.draw(AssetManager_getInstance().bgPatch, 0.0, 0.0, Config_getInstance().SCENE_WIDTH * 0.5, Config_getInstance().SCENE_HEIGHT * 0.5, Config_getInstance().SCENE_WIDTH, Config_getInstance().SCENE_HEIGHT, 1.0, 1.0, 0.3, 0.0, Config_getInstance().HUD_LAYER, true);
         var color = this.getTeamColor_0(team);
-        this.platform_0.drawText(AssetManager_getInstance().fontLarge, this.getUsername_0(team) + ' disqualified', Config_getInstance().VIEWPORT_WIDTH * 0.5, Config_getInstance().VIEWPORT_HEIGHT * 0.5, color.r, color.g, color.b, color.a, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
+        this.platform_0.drawText(AssetManager_getInstance().fontLarge, this.getUsername_0(team) + "'s bot timed out :(", Config_getInstance().VIEWPORT_WIDTH * 0.5, Config_getInstance().VIEWPORT_HEIGHT * 0.5, color.r, color.g, color.b, color.a, Align_getInstance().center, Config_getInstance().HUD_LAYER, true);
       }
     }
   };
