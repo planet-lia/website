@@ -20,7 +20,8 @@ class GamesList extends Component {
     this.loadGames(0);
   }
 
-  loadGames = async (offset) => {
+  loadGames = async (page) => {
+    let offset = page * this.state.nGamesPerPage
     this.setState({loadingData: true, gamesData: []});
     try {
       const respGames = await api.game.getGamesList(offset);
@@ -51,24 +52,39 @@ class GamesList extends Component {
         isCompleted: gamesList.status==="completed"
       })
     );
+
+    let count = respGames.pagination.count;
+    let total = respGames.pagination.total;
+    let nextOffset = respGames.pagination.nextOffset;
+    let nGamesPerPage = this.state.nGamesPerPage;
     let pageCount = this.state.pageCount;
-    if (pageCount === 0) {
-      pageCount = Math.ceil(respGames.pagination.total / respGames.pagination.count)
-    }
+
+    if (total === 0) {
+      //no games
+      nGamesPerPage = 0;
+      pageCount = 0;
+    } else if (count === total) {
+      //less than full page
+      nGamesPerPage = count;
+      pageCount = 1;
+    } else if (nextOffset) {
+      //full page
+      nGamesPerPage = count;
+      pageCount = Math.ceil(total / count);
+    } /*else {
+      //lastpage
+    }*/
 
     this.setState({
       gamesData: gamesList,
-      nGamesPerPage: respGames.pagination.count,
+      nGamesPerPage: nGamesPerPage,
       pageCount: pageCount,
       loadingData: false
     });
   }
 
   handlePageClick = (data) => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected * this.state.nGamesPerPage);
-
-    this.loadGames(offset);
+    this.loadGames(data.selected);
   };
 
   render(){
@@ -78,17 +94,22 @@ class GamesList extends Component {
       <div>
         <h2>Games</h2>
         <GamesTable data={gamesData} loading={loadingData}/>
-        <ReactPaginate previousLabel={"<"}
-                       nextLabel={">"}
-                       breakLabel={"..."}
-                       breakClassName={"break-me"}
-                       pageCount={pageCount}
-                       marginPagesDisplayed={1}
-                       pageRangeDisplayed={5}
-                       onPageChange={this.handlePageClick}
-                       containerClassName={"pagination"}
-                       subContainerClassName={"pages pagination"}
-                       activeClassName={"active"} />
+        {pageCount
+          ? <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={pageCount}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={5}
+              onPageChange={this.handlePageClick}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+            />
+          : null
+        }
       </div>
     )
   }
