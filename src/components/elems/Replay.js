@@ -18,8 +18,7 @@ class Replay extends Component {
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
-      forceReplayWidth: "100%",
-      isInfLoop: false
+      forceReplayWidth: "100%"
     }
     this.puiRef = React.createRef();
   }
