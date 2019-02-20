@@ -82,7 +82,10 @@ class PopupChallenge extends Component {
             <Modal.Title>{heading}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <SubmitCodeText setIsBotProcessing={(isProcessing) => this.setState({isBotProcessing: isProcessing})}/>
+            <SubmitCodeText
+              setIsBotProcessing={(isProcessing) => this.setState({isBotProcessing: isProcessing})}
+              setLoading={(isLoading) => this.setState({loading: isLoading})}
+            />
             {isSent
               ? <p className="clr-em resp-msg">Your code was submitted! Follow the progress on your profile page.</p>
               : null
