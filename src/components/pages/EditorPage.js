@@ -8,8 +8,12 @@ import ReactResizeDetector from 'react-resize-detector';
 import Replay from '../elems/Replay';
 import Popup from '../views/Popup';
 import PopupConfirm from '../views/PopupConfirm';
+import PopupSubmitEditor from '../views/PopupSubmitEditor';
 import WaitAlert from '../elems/WaitAlert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { programmingLanguages } from '../../utils/constants/programmingLanguages';
+
+import { connect } from 'react-redux';
 
 
 class EditorPage extends Component {
@@ -17,7 +21,7 @@ class EditorPage extends Component {
     super(props);
     this.state = {
       code: '',
-      currentLang: null,
+      currentLang: "python3",
       currentLog: "Press RUN to generate a game.",
       currentReplayFileBase64: "",
       generatingGame: false,
@@ -30,6 +34,7 @@ class EditorPage extends Component {
       showResetAlert: false,
       waitRemain: 0,
       isCodeChanged: false,
+      showSubmitPopup: false,
       error: null
     };
   }
@@ -42,12 +47,13 @@ class EditorPage extends Component {
 
     if(localStorage.editorProgLang) {
       const lang = localStorage.editorProgLang;
-
+      this.setState({
+        currentLang: lang,
+        isNoLanguageSet: false
+      })
       if(localStorage.editorCode) {
         this.setState({
           code: localStorage.editorCode,
-          currentLang: lang,
-          isNoLanguageSet: false,
           isCodeChanged: true
         });
       } else {
@@ -82,11 +88,11 @@ class EditorPage extends Component {
   };
 
   generateGame = async () => {
-    const { lastPlay, currentLang } = this.state;
+    const { lastPlay, currentLang, isNoLanguageSet } = this.state;
     const currentTime = new Date();
     const delayMiliSec = 15000;
 
-    if(currentLang===null) {
+    if(isNoLanguageSet) {
       this.setState({
         error: "No programming language was choosen."
       })
@@ -122,7 +128,7 @@ class EditorPage extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          language: this.state.currentLang,
+          language: currentLang,
           code:     this.state.code
       })});
     const json = await response.json();
@@ -185,7 +191,8 @@ class EditorPage extends Component {
   onPopupClose = () => {
     this.setState({
       showWaitAlert: false,
-      showResetAlert: false
+      showResetAlert: false,
+      showSubmitPopup: false,
     })
   }
 
@@ -211,15 +218,11 @@ class EditorPage extends Component {
     this.setState({
       showResetAlert: false,
       code: "",
-      currentLang: null,
+      currentLang: "python3",
       isNoLanguageSet: true
     })
     localStorage.removeItem("editorCode");
     localStorage.removeItem("editorProgLang");
-  }
-
-  onSubmitCode = () => {
-    return false;
   }
 
   render() {
@@ -235,13 +238,11 @@ class EditorPage extends Component {
       editorH,
       showWaitAlert,
       showResetAlert,
+      showSubmitPopup,
       waitRemain
     } = this.state;
 
-    let highlighting;
-    if (currentLang) {
-      highlighting = programmingLanguages[currentLang].highlighting;
-    }
+    const highlighting = programmingLanguages[currentLang].highlighting;
 
     const options = {
       selectOnLineNumbers: true,
@@ -258,10 +259,7 @@ class EditorPage extends Component {
           <div id="editor-left">
             <div id="editor-cont-ui">
               <div id="editor-btn-reset" className="editor-cont-uielems">
-                <Button bsClass="custom-btn btn" onClick={() => this.onReset()} type="button" disabled={isNoLanguageSet}>Reset</Button>
-              </div>
-              <div id="editor-btn-submit" className="editor-cont-uielems">
-                <Button bsClass="custom-btn btn" onClick={() => this.onSubmitCode()} type="button" disabled={true || isNoLanguageSet}>Submit</Button>
+                <Button bsClass="custom-btn btn-gray btn" onClick={() => this.onReset()} type="button" disabled={isNoLanguageSet}>Reset</Button>
               </div>
               <div id="editor-btn-help" className="editor-cont-uielems">
                 <Dropdown id="dropdown-help">
@@ -308,6 +306,12 @@ class EditorPage extends Component {
                 <Button bsClass="custom-btn btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isNoLanguageSet}>
                   <Glyphicon glyph="play" />
                   {" RUN"}
+                </Button>
+              </div>
+              <div id="editor-btn-submit" className="editor-cont-uielems">
+                <Button bsClass="custom-btn btn" onClick={() => this.setState({showSubmitPopup: true})} type="button" disabled={isNoLanguageSet}>
+                  <FontAwesomeIcon icon="upload" />
+                  {" Submit"}
                 </Button>
               </div>
             </div>
@@ -400,9 +404,23 @@ class EditorPage extends Component {
           <p>If you reset the editor, your changes will be lost.</p>
         </PopupConfirm>
 
+        <PopupSubmitEditor
+          show={showSubmitPopup}
+          onHide={this.onPopupClose}
+          code={code}
+          language={currentLang}
+        />
+
       </div>
     );
   }
 }
 
-export default EditorPage;
+function mapStateToProps(state) {
+    const { isAuthenticated } = state.authentication;
+    return {
+        isAuthenticated
+    };
+}
+
+export default connect(mapStateToProps)(EditorPage);

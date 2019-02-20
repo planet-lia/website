@@ -105,6 +105,9 @@ export default {
   },
 
   game: {
+    challengeUser: (userId) =>
+      axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
+        .then((response) => response.data),
     getLeaderboard: () =>
       axios.get(API_BASE_URL + "/game/leaderboard/")
         .then((response) => response.data),
@@ -135,9 +138,10 @@ export default {
     getUserChallenges: (userId, offset) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/challenges/?offset=" + encodeURI(offset))
         .then((response) => response.data),
-    challengeUser: (userId) =>
-      axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
+    submitBasicSource: (sourceCode, language) =>
+      axios.post(API_BASE_URL + "/game/bot/upload/basic-source/", {sourceCode, language})
         .then((response) => response.data),
+
   },
 
   other: {
