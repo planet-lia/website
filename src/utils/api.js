@@ -37,6 +37,17 @@ const API_BASE_URL = (() => {
 })();
 
 export default {
+  auth: {
+    login: (username, password) =>
+      axios.post(API_BASE_URL + "/auth/", {username, password})
+        .then((response) => response.data),
+
+    verify: (token) =>
+      axios.post(API_BASE_URL + "/auth/verify/", null,
+        { headers: { "Authorization": "Bearer " + token } }
+      ).then((response) => response.data),
+  },
+
   user: {
     confirmEmail: (emailVerificationCode) =>
       axios.post(API_BASE_URL + "/user/confirm-email/", {emailVerificationCode})
@@ -58,10 +69,6 @@ export default {
 
     getUserInfo: () =>
       axios.get(API_BASE_URL + "/user/")
-        .then((response) => response.data),
-
-    login: (username, password) =>
-      axios.post(API_BASE_URL + "/auth/", {username, password})
         .then((response) => response.data),
 
     register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country, referral ) =>

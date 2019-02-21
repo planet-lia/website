@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Routes from './components/layout/Routes';
 import withTracker from './components/tracking/withTracker';
-import GlobalPopups from './components/layout/GlobalPopups'
+import GlobalPopups from './components/layout/GlobalPopups';
 
 import {connect} from "react-redux";
+import { authActions } from './utils/actions/authActions';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGithub, faYoutube, faReddit, faDiscord } from '@fortawesome/free-brands-svg-icons';
@@ -17,31 +19,65 @@ library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
 
 
 class App extends Component {
+  interval = null;
+
   constructor(props){
 		super(props);
     this.state = {};
   }
 
+  componentDidMount = () => {
+    this.checkForToken();
+  }
+
+  componentWillUnmount = () => {
+    clearTimeout(this.interval);
+  }
+
+  checkForToken = async () => {
+    this.interval = setTimeout(this.checkForToken, 5000);
+    if (!localStorage.token && !this.props.isLoggedOut) {
+      await this.props.dispatch(authActions.logout());
+    }
+  }
+
   render() {
     const isEditor = (window.location.pathname.split("/")[1]==="editor");
-    return (
-      <div id="main-container">
-        <div id="top"></div>
-        <Header foo={() => false}/>
-        <div className={isEditor ? "main-content no-footer" : "main-content"}>
-          <Route component={withTracker(Routes, { /* additional attributes */ })}/>
+
+    if (this.props.isCheckingAuth) {
+      return (
+        <div className="cont-loader">
+          <Loader
+            type="Triangle"
+            color="#018e6a"
+            height="100"
+            width="100"
+          />
         </div>
-        <GlobalPopups />
-        { !isEditor ? (<Footer />) : null}
-      </div>
-    );
+      )
+    } else {
+      return (
+        <div id="main-container">
+          <div id="top"></div>
+          <Header foo={() => false}/>
+          <div className={isEditor ? "main-content no-footer" : "main-content"}>
+            <Route component={withTracker(Routes, { /* additional attributes */ })}/>
+          </div>
+          <GlobalPopups />
+          { !isEditor ? (<Footer />) : null}
+        </div>
+      )
+    }
+
   }
 }
 
 function mapStateToProps(state) {
-  const { isAuthenticated } = state.authentication;
+  const { isAuthenticated, isLoggedOut, isCheckingAuth } = state.authentication;
   return {
-    isAuthenticated
+    isAuthenticated,
+    isLoggedOut,
+    isCheckingAuth
   };
 }
 

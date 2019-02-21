@@ -1,7 +1,6 @@
 import { actionTypesAuth } from '../constants/actionTypesAuth';
 
-let user = localStorage.getItem("user");
-const initialState = user ? { isAuthenticated: true, username: user.username } : {};
+const initialState = { isLoggedOut: true };
 
 export function authentication(state = initialState, action) {
   switch (action.type) {
@@ -21,12 +20,22 @@ export function authentication(state = initialState, action) {
       error: action.error
     };
   case actionTypesAuth.LOGOUT:
-    return {};
-  case actionTypesAuth.SET_AUTH:
+    return {
+      isLoggedOut: true
+    };
+  case actionTypesAuth.AUTH_REQUEST:
+    return {
+      isCheckingAuth: true
+    };
+  case actionTypesAuth.AUTH_SUCCESS:
     return {
       isAuthenticated: true,
       username: action.username,
       userId: action.userId
+    };
+  case actionTypesAuth.AUTH_FAILURE:
+    return {
+      initialAuthError: action.error
     };
   case actionTypesAuth.CONFIRM_EMAIL_REQUEST:
     return {

@@ -14,7 +14,7 @@ function login(username, password) {
   return async dispatch => {
     dispatch(request( username ));
     try {
-      const respLogin = await api.user.login(username, password);
+      const respLogin = await api.auth.login(username, password);
       const decoded = jwtDecode(respLogin.token);
       localStorage.setItem("token", respLogin.token);
       setAuthHeader(respLogin.token);
@@ -37,9 +37,22 @@ function logout() {
 }
 
 function authenticate(token) {
-  const decoded = jwtDecode(token);
-  setAuthHeader(token);
-  return { type: actionTypesAuth.SET_AUTH, username: decoded.data.username, userId: decoded.data.userId };
+  return async dispatch => {
+    dispatch(request());
+    try {
+      await api.auth.verify(token);
+      const decoded = jwtDecode(token);
+      setAuthHeader(token);
+      return dispatch(success( decoded.data.username, decoded.data.userId ));
+    } catch(err) {
+      localStorage.removeItem("token");
+      setAuthHeader();
+      return dispatch(failure(err.toString()));
+    }
+  }
+  function request() { return {type: actionTypesAuth.AUTH_REQUEST} }
+  function success(username, userId) { return {type: actionTypesAuth.AUTH_SUCCESS, username, userId} }
+  function failure(error) { return {type: actionTypesAuth.AUTH_FAILURE, error} }
 }
 
 function confirmEmail(code) {
