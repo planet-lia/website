@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
+import axios from 'axios';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -35,10 +36,20 @@ class App extends Component {
   }
 
   checkForToken = async () => {
-    this.interval = setTimeout(this.checkForToken, 5000);
-    if (!localStorage.token && !this.props.isLoggedOut) {
+    let axiosToken = axios.defaults.headers.common['Authorization'];
+
+    if(axiosToken) {
+      axiosToken = axiosToken.substring(7);
+      if(localStorage.token !== axiosToken){
+        await this.props.dispatch(authActions.authenticate(localStorage.token));
+      }
+    }
+
+    if ( !localStorage.token && !this.props.isLoggedOut) {
       await this.props.dispatch(authActions.logout());
     }
+
+    this.interval = setTimeout(this.checkForToken, 5000);
   }
 
   render() {

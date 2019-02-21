@@ -22,7 +22,18 @@ function login(username, password) {
     } catch(err) {
       localStorage.removeItem("token");
       setAuthHeader();
-      return dispatch(failure(err.toString()));
+
+      let error;
+      if(err.response){
+        if(err.response.status===401) {
+          error = "Incorrect username or password";
+        } else if (err.response.status===400){
+          error = "Invalid username or password";
+        }
+      } else {
+        error = "Network Error";
+      }
+      return dispatch(failure(error));
     }
   }
   function request(username) { return {type: actionTypesAuth.LOGIN_REQUEST, username} }
