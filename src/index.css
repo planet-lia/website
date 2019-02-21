@@ -80,6 +80,10 @@ td {
   color: #ff0000;
 }
 
+.clr-dc:hover {
+  color: #7289da;
+}
+
 .clr-em,
 .clr-em:hover {
   color: #019170;
@@ -867,6 +871,10 @@ td .btn.custom-btn {
 #logo-medius,
 #logo-sfri {
   padding: 20px 0;
+}
+
+#logo-celtra {
+  padding: 45px 0 24px;
 }
 
 @media screen and (max-width: 1199.98px) {
@@ -1670,7 +1678,7 @@ iframe {
 /* Contacts */
 
 .cont-contacts {
-  max-width: 20em;
+  max-width: 24em;
 
   display: -webkit-box;
   display: -ms-flexbox;

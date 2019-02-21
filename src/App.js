@@ -10,11 +10,11 @@ import GlobalPopups from './components/layout/GlobalPopups'
 import {connect} from "react-redux";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebookSquare, faGithub, faYoutube, faReddit } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookSquare, faGithub, faYoutube, faReddit, faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot, faChessRook, faBullhorn, faUpload } from '@fortawesome/free-solid-svg-icons';
 library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
   faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faChessRook, faReddit,
-  faChessRook, faBullhorn, faUpload
+  faBullhorn, faUpload, faDiscord
 );
 
 
