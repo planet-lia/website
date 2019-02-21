@@ -6,6 +6,7 @@ import logoLoop from '../../assets/logo_loop.svg';
 import logoAgilcon from '../../assets/logo_agilcon.png';
 import logoSensum from '../../assets/logo_sensum.png';
 import logoMedius from '../../assets/logo_medius.png';
+import logoCeltra from '../../assets/logo_celtra.png';
 import logoOutfit7 from '../../assets/logo_outfit7.png';
 import logoSFRI from '../../assets/logo_sfri.png';
 
@@ -50,14 +51,21 @@ const Sponsors = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={2} mdOffset={4} sm={4} smOffset={2} xs={6}>
+        <Col md={2} mdOffset={3} sm={4} xs={6}>
+          <div>
+            <a href="https://www.celtra.com/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-celtra" className="tour-company" src={ logoCeltra } alt="Celtra" />
+            </a>
+          </div>
+        </Col>
+        <Col md={2} sm={4} xs={6}>
           <div>
             <a href="https://outfit7.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-outfit7" className="tour-company" src={ logoOutfit7 } alt="Outfit7" />
             </a>
           </div>
         </Col>
-        <Col md={2} sm={4} xs={6}>
+        <Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>
           <div>
             <a href="https://svet.fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
               <img id="logo-sfri" className="tour-company" src={ logoSFRI } alt="ŠS FRI" />
