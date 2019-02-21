@@ -53,7 +53,6 @@ class SignInForm extends Component {
 
       } else if(respLogin.error){
         this.setState({responseError: respLogin.error});
-        console.log(respLogin.error);
       } else {
         this.setState({responseError: "Error"});
       }

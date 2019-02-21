@@ -75,7 +75,7 @@ const tournamentPageEng = {
   txtSubPrize4: "3x JBL GO bluetooth speaker",
   txtPrize5: "Best game of the tournament",
   txtSubPrize5: "Pocket drone UGO Zephir",
-  txtPrize6: "Best spectator award",
+  txtPrize6: "Spectator awards",
   txtSubPrize6: "5x 20€ BIG BANG gift card",
   txtPrize7: "Best ranked high school student",
   txtSubPrize7: "Razer Cynosa PRO & Deathadder 2000",

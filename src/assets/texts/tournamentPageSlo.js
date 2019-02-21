@@ -61,7 +61,7 @@ const tournamentPageSlo = {
   txtSubPrize4: "3x JBL GO bluetooth zvočnik",
   txtPrize5: "Najboljša igra turnirja",
   txtSubPrize5: "Žepni dron UGO Zephir",
-  txtPrize6: "Najboljši gledalec turnirja",
+  txtPrize6: "Nagrade za gledalce",
   txtSubPrize6: "5x 20€ BIG BANG darilni bon",
   txtPrize7: "Najboljše uvrščeni dijak",
   txtSubPrize7: "Razer Cynosa PRO in Deathadder 2000",

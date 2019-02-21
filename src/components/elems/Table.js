@@ -30,6 +30,7 @@ class Table extends Component {
         columns = {this.props.columns}
         keyField={this.props.keyField}
 				noDataIndication={this.noDataIndication}
+        rowClasses={this.props.rowClasses}
 				hover
 				condensed
       />
