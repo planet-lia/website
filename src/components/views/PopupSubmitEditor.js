@@ -63,7 +63,7 @@ class PopupChallenge extends Component {
     if(loading){
       return <LoadingButton bsClass="btn custom-btn custom-btn-lg">Submit</LoadingButton>
     } else if(isSent){
-      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.props.onHide}>OK</Button>
+      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={this.closePopup}>OK</Button>
     } else if(isBotProcessing) {
       return <Button bsClass="btn custom-btn custom-btn-lg" disabled>Submit</Button>
     } else {
@@ -71,20 +71,30 @@ class PopupChallenge extends Component {
     }
   }
 
+  closePopup = () => {
+    this.setState({
+      isSent: false,
+      loading: false,
+      isBotProcessing: true,
+      error: null
+    });
+
+    this.props.onHide();
+  }
+
   render() {
-    const { show, onHide, isAuthenticated } = this.props;
+    const { show, isAuthenticated } = this.props;
     const { isSent, error } = this.state;
     const heading = "Submit Your Code"
     if(isAuthenticated){
       return(
-        <Modal dialogClassName="custom-popup pop-editor-sm pop-text" show={show} onHide={onHide}>
+        <Modal dialogClassName="custom-popup pop-editor-sm pop-text" show={show} onHide={this.closePopup}>
           <Modal.Header className="custom-modal-header" closeButton>
             <Modal.Title>{heading}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <SubmitCodeText
               setIsBotProcessing={(isProcessing) => this.setState({isBotProcessing: isProcessing})}
-              setLoading={(isLoading) => this.setState({loading: isLoading})}
             />
             {isSent
               ? <p className="clr-em resp-msg">Your code was submitted! Follow the progress on your profile page.</p>

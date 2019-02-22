@@ -17,6 +17,8 @@ import { connect } from 'react-redux';
 
 
 class EditorPage extends Component {
+  timeout;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -67,6 +69,8 @@ class EditorPage extends Component {
     window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
     window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
     window.removeEventListener('MSFullscreenChange', this.scrollToBottom);
+
+    clearTimeout(this.timeout);
   }
 
   setLanguage = (lang) => {
@@ -175,7 +179,7 @@ class EditorPage extends Component {
   };
 
   sleep = async (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => {this.timeout = setTimeout(resolve, ms)});
   };
 
   resizePlayer = (width, height) => {

@@ -21,7 +21,6 @@ class SubmitCodeText extends Component {
     let activeBotId = null;
     let latestBotStatus =  null;
 
-    this.props.setLoading(true);
 
     try{
       const respBotActive = await api.game.getActiveBot();
@@ -53,7 +52,6 @@ class SubmitCodeText extends Component {
         console.log(err.message);
       }
     }
-    this.props.setLoading(false)
     this.popupMsgText(activeBotId, latestBotStatus)
   }
 
