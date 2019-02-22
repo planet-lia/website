@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import LoadingButton from '../elems/LoadingButton';
 import SubmitCodeText from '../elems/SubmitCodeText';
