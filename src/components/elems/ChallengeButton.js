@@ -10,14 +10,7 @@ const ChallengeButton = (props) => {
   return (
     props.username===props.opponent
       ? (
-        <Button
-          className={"btn custom-btn " + props.className}
-          disabled
-          title="You can't challenge yourself"
-        >
-          <span><FontAwesomeIcon icon="chess-rook" /></span>
-          <span> Challenge</span>
-        </Button>
+        <span>-</span>
       ) : (
         <Button
           className={"btn custom-btn " + props.className}

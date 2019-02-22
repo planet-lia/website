@@ -10,7 +10,9 @@ import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
 
-import api from '../../utils/api'
+import api from '../../utils/api';
+
+import {connect} from "react-redux";
 
 class LeaderboardPage extends Component {
   constructor(props){
@@ -81,6 +83,15 @@ class LeaderboardPage extends Component {
     return <div className="text-center"><ChallengeButton opponent={row.username} opponentId={row.userId} /></div>
   }
 
+  rowClasses = (row, rowIndex) => {
+    const {isAuthenticated, username} = this.props;
+    if(isAuthenticated && row.username===username) {
+      return "custom-table-row";
+    } else {
+      return "";
+    }
+  };
+
   render(){
     const { leaderboardData, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
@@ -138,7 +149,7 @@ class LeaderboardPage extends Component {
               <InviteButton className="btn-invite-lead pull-right"/>
             </Col>
           </Row>
-          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData}/>
+          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData} rowClasses = {this.rowClasses}/>
           <Moment format="DD/MM/YYYY HH:mm" style={leaderboardUpdatedTextStype}>{lastUpdated}</Moment>
         </div>
 
@@ -148,4 +159,12 @@ class LeaderboardPage extends Component {
 
 }
 
-export default LeaderboardPage;
+function mapStateToProps(state) {
+  const { isAuthenticated, username } = state.authentication;
+  return {
+    isAuthenticated,
+    username
+  };
+}
+
+export default connect(mapStateToProps)(LeaderboardPage);

@@ -92,7 +92,7 @@ class PopupChallenge extends Component {
       return(
         <Modal dialogClassName="custom-popup pop-challenge pop-text" show={show} onHide={onHide}>
           <Modal.Header className="custom-modal-header" closeButton>
-            <Modal.Title>Challenge</Modal.Title>
+            <Modal.Title>{heading}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ChallengeText isSent={isSent} ready={(success, data) => this.handleReady( true, success, data)} setNotReady={() => this.handleReady(false)} />

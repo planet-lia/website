@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormControl, Glyphicon } from 'react-bootstrap';
+import { Button, FormControl, Glyphicon, Dropdown, MenuItem } from 'react-bootstrap';
 import MonacoEditor from 'react-monaco-editor';
 import Loader from 'react-loader-spinner'
 import Cookies from 'universal-cookie';
@@ -8,29 +8,36 @@ import ReactResizeDetector from 'react-resize-detector';
 import Replay from '../elems/Replay';
 import Popup from '../views/Popup';
 import PopupConfirm from '../views/PopupConfirm';
+import PopupSubmitEditor from '../views/PopupSubmitEditor';
 import WaitAlert from '../elems/WaitAlert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { programmingLanguages } from '../../utils/constants/programmingLanguages';
+
+import { connect } from 'react-redux';
 
 
 class EditorPage extends Component {
+  timeout;
+
   constructor(props) {
     super(props);
     this.state = {
       code: '',
       currentLang: "python3",
-      newLang: null,
       currentLog: "Press RUN to generate a game.",
       currentReplayFileBase64: "",
       generatingGame: false,
       gameKey: 0,
-      isLoadingCode: true,
+      isNoLanguageSet: true,
       editorW: "100%",
       editorH: "100%",
       lastPlay: null,
       showWaitAlert: false,
       showResetAlert: false,
       waitRemain: 0,
-      isCodeChanged: false
+      isCodeChanged: false,
+      showSubmitPopup: false,
+      error: null
     };
   }
 
@@ -40,30 +47,20 @@ class EditorPage extends Component {
     window.addEventListener('mozfullscreenchange', this.scrollToBottom);
     window.addEventListener('MSFullscreenChange', this.scrollToBottom);
 
-    let lang = this.state.currentLang;
     if(localStorage.editorProgLang) {
-      lang = localStorage.editorProgLang
-    }
-
-    if(localStorage.editorCode) {
+      const lang = localStorage.editorProgLang;
       this.setState({
-        code: localStorage.editorCode,
         currentLang: lang,
-        isLoadingCode: false,
-        isCodeChanged: true
-      });
-    } else {
-      const langData = programmingLanguages[lang];
-      fetch(langData.baseBotUrl)
-        .then((resp)=>{ return resp.text() })
-        .then( (text) =>
-          this.setState({
-            code: text,
-            currentLang: lang,
-            isLoadingCode: false,
-            isCodeChanged: false
-          })
-        );
+        isNoLanguageSet: false
+      })
+      if(localStorage.editorCode) {
+        this.setState({
+          code: localStorage.editorCode,
+          isCodeChanged: true
+        });
+      } else {
+        this.setLanguage(lang)
+      }
     }
   }
 
@@ -72,65 +69,22 @@ class EditorPage extends Component {
     window.removeEventListener('webkitfullscreenchange', this.scrollToBottom);
     window.removeEventListener('mozfullscreenchange', this.scrollToBottom);
     window.removeEventListener('MSFullscreenChange', this.scrollToBottom);
-  }
 
-
-  onChange = (newValue, e) => {
-    this.setState({
-      code: newValue,
-      isCodeChanged: true,
-    });
-    localStorage.setItem("editorCode", newValue);
-  }
-
-  onChangeLanguage = (event) => {
-    this.onChangeCode(event.target.value);
-  }
-
-  onResetLanguage = () => {
-    this.onChangeCode(this.state.currentLang);
-  }
-
-  onChangeCode = (lang) => {
-    if(this.state.isCodeChanged){
-      this.setState({
-        showResetAlert: true,
-        newLang: lang,
-      })
-    } else {
-      this.setLanguage(lang);
-    }
-  }
-
-  onConformation = () => {
-    this.setLanguage(this.state.newLang)
-    this.setState({
-      showResetAlert: false,
-      newLang: null
-    })
+    clearTimeout(this.timeout);
   }
 
   setLanguage = (lang) => {
-    const {currentLang, isCodeChanged} = this.state;
     const langData = programmingLanguages[lang];
-    let willCodeChange = false;
-
-    if(lang===currentLang && isCodeChanged){
-      willCodeChange = true;
-    }
 
     // Store current language
-    this.setState({
-      isLoadingCode: true
-    });
 
     fetch(langData.baseBotUrl)
       .then((resp)=>{ return resp.text() })
       .then( (text) => {this.setState({
         currentLang: lang,
         code: text,
-        isLoadingCode: false,
-        isCodeChanged: willCodeChange,
+        isNoLanguageSet: false,
+        isCodeChanged: false,
       })
       localStorage.removeItem("editorCode");
       localStorage.setItem("editorProgLang", lang);
@@ -138,9 +92,17 @@ class EditorPage extends Component {
   };
 
   generateGame = async () => {
-    const { lastPlay } = this.state;
+    const { lastPlay, currentLang, isNoLanguageSet } = this.state;
     const currentTime = new Date();
     const delayMiliSec = 15000;
+
+    if(isNoLanguageSet) {
+      this.setState({
+        error: "No programming language was choosen."
+      })
+      console.error("No programming language was choosen.")
+      return false;
+    }
 
     if(lastPlay && (currentTime - lastPlay) < delayMiliSec){
       this.setState({
@@ -170,7 +132,7 @@ class EditorPage extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          language: this.state.currentLang,
+          language: currentLang,
           code:     this.state.code
       })});
     const json = await response.json();
@@ -207,12 +169,17 @@ class EditorPage extends Component {
       await this.sleep(500);
     }
 
+    this.setState({
+      generatingGame: false,
+      error: "Failed to fetch game results in time."
+    })
+
     console.error("Failed to fetch game results in time.")
 
   };
 
   sleep = async (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => {this.timeout = setTimeout(resolve, ms)});
   };
 
   resizePlayer = (width, height) => {
@@ -229,8 +196,37 @@ class EditorPage extends Component {
     this.setState({
       showWaitAlert: false,
       showResetAlert: false,
-      newLang: null
+      showSubmitPopup: false,
     })
+  }
+
+  onChange = (newValue, e) => {
+    this.setState({
+      code: newValue,
+      isCodeChanged: true,
+    });
+    localStorage.setItem("editorCode", newValue);
+  }
+
+  onReset = () => {
+    if(this.state.isCodeChanged){
+      this.setState({
+        showResetAlert: true
+      })
+    } else {
+      this.resetEditor();
+    }
+  }
+
+  resetEditor = () => {
+    this.setState({
+      showResetAlert: false,
+      code: "",
+      currentLang: "python3",
+      isNoLanguageSet: true
+    })
+    localStorage.removeItem("editorCode");
+    localStorage.removeItem("editorProgLang");
   }
 
   render() {
@@ -241,13 +237,15 @@ class EditorPage extends Component {
       currentReplayFileBase64,
       generatingGame,
       gameKey,
-      isLoadingCode,
+      isNoLanguageSet,
       editorW,
       editorH,
       showWaitAlert,
       showResetAlert,
+      showSubmitPopup,
       waitRemain
     } = this.state;
+
     const highlighting = programmingLanguages[currentLang].highlighting;
 
     const options = {
@@ -264,30 +262,60 @@ class EditorPage extends Component {
         <div className="cont-fullpage editor-cont-page">
           <div id="editor-left">
             <div id="editor-cont-ui">
-              <div id="editor-lang">
-                <FormControl componentClass="select" onChange={this.onChangeLanguage} disabled={isLoadingCode} value={currentLang} bsClass="form-control editor-input" bsSize="small">
-                  <option value="python3">Python3</option>
-                  <option value="java">Java</option>
-                  <option value="kotlin">Kotlin</option>
-                </FormControl>
+              <div id="editor-btn-reset" className="editor-cont-uielems">
+                <Button bsClass="custom-btn btn-gray btn" onClick={() => this.onReset()} type="button" disabled={isNoLanguageSet}>Reset</Button>
               </div>
-              <div id="editor-btn-reset">
-                <Button bsClass="btn btn-sm custom-btn btn-on-dark" onClick={() => this.onResetLanguage()} type="button" disabled={isLoadingCode}>Reset</Button>
+              <div id="editor-btn-help" className="editor-cont-uielems">
+                <Dropdown id="dropdown-help">
+                  <Dropdown.Toggle className="custom-btn btn-gray">
+                    Help
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="custom-btn btn-gray">
+                    <MenuItem
+                      href="https://docs.liagame.com/game-rules/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      eventKey="1"
+                    >
+                      Game rules
+                    </MenuItem>
+                    <MenuItem
+                      href="https://docs.liagame.com/api/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      eventKey="2"
+                    >
+                      API
+                    </MenuItem>
+                    <MenuItem
+                      href="https://docs.liagame.com/examples/aiming-at-the-opponent/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      eventKey="3"
+                    >
+                      Examples
+                    </MenuItem>
+                    <MenuItem
+                      href="https://docs.liagame.com/getting-started/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      eventKey="4"
+                    >
+                      Download
+                    </MenuItem>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
-              <div id="editor-cont-links">
-                <div>
-                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/game-rules/" target="_blank" rel="noopener noreferrer">Game rules</Button>
-                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/api/" target="_blank" rel="noopener noreferrer">API</Button>
-                </div>
-                <div>
-                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/examples/aiming-at-the-opponent/" target="_blank" rel="noopener noreferrer">Examples</Button>
-                  <Button bsClass="btn btn-sm custom-btn btn-on-dark" href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">Download</Button>
-                </div>
-              </div>
-              <div id="editor-btn-run">
-                <Button bsClass="btn btn-sm custom-btn btn-on-dark" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isLoadingCode}>
+              <div id="editor-btn-run" className="editor-cont-uielems">
+                <Button bsClass="custom-btn btn" onClick={() => this.generateGame()} type="button" disabled={generatingGame || isNoLanguageSet}>
                   <Glyphicon glyph="play" />
                   {" RUN"}
+                </Button>
+              </div>
+              <div id="editor-btn-submit" className="editor-cont-uielems">
+                <Button bsClass="custom-btn btn" onClick={() => this.setState({showSubmitPopup: true})} type="button" disabled={isNoLanguageSet}>
+                  <FontAwesomeIcon icon="upload" />
+                  {" Submit"}
                 </Button>
               </div>
             </div>
@@ -302,6 +330,26 @@ class EditorPage extends Component {
                 onChange={this.onChange}
               />
               <ReactResizeDetector handleWidth handleHeight onResize={(width, height) => this.resizePlayer(width, height)} />
+              {isNoLanguageSet
+                ? (
+                  <div id="editor-block">
+                    <div id="cont-lang-select" className="text-center">
+                      <p>Choose your desired programming language to start.</p>
+                      <Button bsClass="custom-btn btn" onClick={() => this.setLanguage("python3")} type="button">
+                        Python
+                      </Button>
+                      <Button bsClass="custom-btn btn" onClick={() => this.setLanguage("java")} type="button">
+                        Java
+                      </Button>
+                      <Button bsClass="custom-btn btn" onClick={() => this.setLanguage("kotlin")} type="button">
+                        Kotlin
+                      </Button>
+                      <p className="txt-small">If you want to switch the language later click on "Reset" button.</p>
+                    </div>
+                  </div>
+                )
+                : null
+              }
             </div>
           </div>
           <div id="editor-right">
@@ -354,15 +402,29 @@ class EditorPage extends Component {
           dialogClassName="custom-popup pop-editor-sm pop-text"
           show={showResetAlert}
           onHide={this.onPopupClose}
-          onButtonClick={this.onConformation}
+          onButtonClick={this.resetEditor}
           heading="Warning"
         >
-          <p>If you change programming language, your changes will be lost.</p>
+          <p>If you reset the editor, your changes will be lost.</p>
         </PopupConfirm>
+
+        <PopupSubmitEditor
+          show={showSubmitPopup}
+          onHide={this.onPopupClose}
+          code={code}
+          language={currentLang}
+        />
 
       </div>
     );
   }
 }
 
-export default EditorPage;
+function mapStateToProps(state) {
+    const { isAuthenticated } = state.authentication;
+    return {
+        isAuthenticated
+    };
+}
+
+export default connect(mapStateToProps)(EditorPage);

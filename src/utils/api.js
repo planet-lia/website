@@ -33,6 +33,17 @@ const API_BASE_URL = (() => {
 })();
 
 export default {
+  auth: {
+    login: (username, password) =>
+      axios.post(API_BASE_URL + "/auth/", {username, password})
+        .then((response) => response.data),
+
+    verify: (token) =>
+      axios.post(API_BASE_URL + "/auth/verify/", null,
+        { headers: { "Authorization": "Bearer " + token } }
+      ).then((response) => response.data),
+  },
+
   user: {
     confirmEmail: (emailVerificationCode) =>
       axios.post(API_BASE_URL + "/user/confirm-email/", {emailVerificationCode})
@@ -54,10 +65,6 @@ export default {
 
     getUserInfo: () =>
       axios.get(API_BASE_URL + "/user/")
-        .then((response) => response.data),
-
-    login: (username, password) =>
-      axios.post(API_BASE_URL + "/auth/", {username, password})
         .then((response) => response.data),
 
     register: (username, email, firstName, lastName, password, level, organization, allowGlobal, allowMarketing, allowTournament, country, referral ) =>
@@ -105,6 +112,9 @@ export default {
   },
 
   game: {
+    challengeUser: (userId) =>
+      axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
+        .then((response) => response.data),
     getLeaderboard: () =>
       axios.get(API_BASE_URL + "/game/leaderboard/")
         .then((response) => response.data),
@@ -135,9 +145,10 @@ export default {
     getUserChallenges: (userId, offset) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/challenges/?offset=" + encodeURI(offset))
         .then((response) => response.data),
-    challengeUser: (userId) =>
-      axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
+    submitBasicSource: (sourceCode, language) =>
+      axios.post(API_BASE_URL + "/game/bot/upload/basic-source/", {sourceCode, language})
         .then((response) => response.data),
+
   },
 
   other: {
