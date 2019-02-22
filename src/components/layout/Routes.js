@@ -9,7 +9,6 @@ import EditorTracking from '../pages/EditorTracking';
 import AboutPage from '../pages/AboutPage';
 import EmailVerificationPage from '../pages/EmailVerificationPage';
 import ProfilePage from '../pages/ProfilePage';
-import RegistrationEmailPage from '../pages/RegistrationEmailPage';
 import TermsAndConditions from "../views/TermsAndConditions";
 import PrivacyPolicy from "../views/PrivacyPolicy";
 import SettingsPage from "../pages/SettingsPage";
@@ -27,7 +26,6 @@ const Routes = () => {
       <Route path="/about" component={AboutPage} />
       <Route path="/account/verify" component={EmailVerificationPage} />
       <Route path="/user/:username" component={ProfilePage} />
-      <Route path="/registration" component={RegistrationEmailPage} />
       <Route path="/terms-and-conditions" component={TermsAndConditions} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/settings" component={SettingsPage} />

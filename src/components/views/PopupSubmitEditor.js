@@ -117,7 +117,7 @@ class PopupChallenge extends Component {
       )
     } else {
       return(
-        <NoAuthModal {...this.props} heading={heading}>
+        <NoAuthModal {...this.props} heading={heading} onHide={this.closePopup}>
           <p>You need to sign in to submit your code! If you do not have an account yet, you need to sign up.</p>
         </NoAuthModal>
       )
