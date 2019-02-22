@@ -141,7 +141,7 @@ class EditorPage extends Component {
     let trackingId = json['trackingId'];
 
     // Fetch results
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 180; i++) {
       const response = await fetch('https://editor.cloud1.liagame.com/results/' + trackingId, {
           method: 'GET',
           headers: {

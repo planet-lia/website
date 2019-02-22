@@ -83,7 +83,7 @@ class PopupChallenge extends Component {
   }
 
   render() {
-    const { show, isAuthenticated } = this.props;
+    const { show, isAuthenticated, username } = this.props;
     const { isSent, error } = this.state;
     const heading = "Submit Your Code"
     if(isAuthenticated){
@@ -97,7 +97,11 @@ class PopupChallenge extends Component {
               setIsBotProcessing={(isProcessing) => this.setState({isBotProcessing: isProcessing})}
             />
             {isSent
-              ? <p className="clr-em resp-msg">Your code was submitted! Follow the progress on your profile page.</p>
+              ? <p className="clr-em resp-msg">
+                  <span>Your code was submitted! Follow the progress on your </span>
+                  <a href={"/user/" + username} target="_blank" rel="noopener noreferrer">profile page</a>
+                  .
+                </p>
               : null
             }
             {error!==null
@@ -113,7 +117,7 @@ class PopupChallenge extends Component {
       )
     } else {
       return(
-        <NoAuthModal {...this.props} heading={heading}>
+        <NoAuthModal {...this.props} heading={heading} onHide={this.closePopup}>
           <p>You need to sign in to submit your code! If you do not have an account yet, you need to sign up.</p>
         </NoAuthModal>
       )
@@ -124,9 +128,10 @@ class PopupChallenge extends Component {
 }
 
 function mapStateToProps(state) {
-    const { isAuthenticated } = state.authentication;
+    const { isAuthenticated, username } = state.authentication;
     return {
-        isAuthenticated
+        isAuthenticated,
+        username
     };
 }
 

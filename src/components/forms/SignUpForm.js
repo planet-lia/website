@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Row, Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 import {Typeahead} from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -87,7 +86,14 @@ class SignUpForm extends Component {
 
   formSubmit = async (event) => {
     event.preventDefault();
-    this.setState({isLoading: true, error: null});
+
+    this.props.setIsSending(true);
+    this.setState({
+      isLoading: true,
+      error: null,
+      errorUn: null,
+      message: null
+    });
 
     if(this.validateForm()) {
       try {
@@ -109,26 +115,14 @@ class SignUpForm extends Component {
             referral
           );
 
-          this.props.closePopup();
-          localStorage.removeItem("inviteRefUserId");
+          this.props.setSuccess();
           this.setState({
-            firstName: "",
-            lastName: "",
-            email: "",
-            username: "",
-            password: "",
-            repeat: "",
-            level: "",
-            organization: "",
-            country: "",
-            allowGlobal: false,
-            allowTournament: false,
-            allowMarketing: false,
-            error: null,
-            errorUn: null,
-            isSuccess: true,
-            isLoading: false
+            message: "Signup successful! A confirmation link was sent to your email. Please follow the link to finish your registration.",
+            isLoading: false,
+            isSuccess: true
           })
+          localStorage.removeItem("inviteRefUserId");
+
       } catch(err) {
         if(err.response){
           let field = "";
@@ -140,18 +134,22 @@ class SignUpForm extends Component {
 
           this.setState({
             error: field + ": " + msg,
+            message: null,
             isLoading: false
           });
           //set up errors for each field
         } else {
           this.setState({
             error: "Network Error: ",
+            message: null,
             isLoading: false
           });
         }
       }
     }
-    this.setState({isLoading: false, message: null});
+
+    this.props.setIsSending(false);
+    this.setState({isLoading: false});
   }
 
   validateForm = () => {
@@ -202,10 +200,6 @@ class SignUpForm extends Component {
   }
 
   render(){
-    if (this.state.isSuccess === true) {
-      return <Redirect to="/registration" />
-    }
-
     return (
       <form onSubmit={this.formSubmit} noValidate>
         <Row>

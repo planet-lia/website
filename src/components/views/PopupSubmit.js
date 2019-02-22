@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 import SignInForm from '../forms/SignInForm';
 import SignUpForm from '../forms/SignUpForm';
+import LoadingButton from '../elems/LoadingButton';
 
 class PopupSubmit extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class PopupSubmit extends Component {
       newHeading: "",
       newButtonText: "",
       disableButton: false,
+      isSuccess: false,
+      isSending: false
     }
   }
 
@@ -21,20 +24,48 @@ class PopupSubmit extends Component {
         <SignInForm
           submitButtonId={this.state.formSubmitButtonId}
           closePopup={this.props.onHide}
-          setHeading={() => this.setState({newHeading: "Forgot Password"})}
-          setButtonText={() => this.setState({newButtonText: "Send"})}
+          setHeading={(heading) => this.setState({newHeading: heading})}
+          setButtonText={(buttonText) => this.setState({newButtonText: buttonText})}
           disableButton={() => this.setState({disableButton: true})}
         />
       );
     } else if (this.props.formType==="sign-up"){
-      return <SignUpForm submitButtonId={this.state.formSubmitButtonId} closePopup={this.props.onHide}/>
+      return (
+        <SignUpForm
+          submitButtonId={this.state.formSubmitButtonId}
+          closePopup={this.props.onHide}
+          setSuccess={() => this.setState({isSuccess: true})}
+          setIsSending={(isSending) => this.setState({isSending: isSending})}
+        />
+      )
+    }
+  }
+
+  popupSubmitButton = () => {
+    const { formSubmitButtonId, newButtonText, isSending, isSuccess, disableButton } = this.state;
+    const { buttonText, onHide } = this.props;
+
+    if(isSending){
+      return <LoadingButton bsClass="btn custom-btn custom-btn-lg">{newButtonText ? newButtonText : buttonText}</LoadingButton>
+    } else if(isSuccess){
+      return <Button bsClass="btn custom-btn custom-btn-lg" onClick={onHide}>OK</Button>
+    } else {
+      return (
+        <label
+          className="btn custom-btn custom-btn-lg"
+          htmlFor={formSubmitButtonId}
+          disabled={disableButton}
+        >
+          {newButtonText ? newButtonText : buttonText}
+        </label>
+      )
     }
   }
 
 
   render(){
-    const { formSubmitButtonId, newHeading, newButtonText, disableButton } = this.state;
-    const { dialogClassName, show, onHide, heading, buttonText } = this.props;
+    const { newHeading } = this.state;
+    const { dialogClassName, show, onHide, heading } = this.props;
 
     return(
       <Modal dialogClassName={dialogClassName} show={show} onHide={onHide}>
@@ -45,7 +76,7 @@ class PopupSubmit extends Component {
           {this.getForm()}
         </Modal.Body>
         <Modal.Footer>
-          <label className="btn custom-btn custom-btn-lg" htmlFor={formSubmitButtonId} disabled={disableButton}>{newButtonText ? newButtonText : buttonText}</label>
+          {this.popupSubmitButton()}
         </Modal.Footer>
       </Modal>
     )
