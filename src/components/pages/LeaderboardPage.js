@@ -149,7 +149,7 @@ class LeaderboardPage extends Component {
                 mainText={"Leaderboard winner week 1"}
                 subText={
                   <div>
-                    <div>1st ranked player on Sunday February 24<sup>th</sup> at 8:00pm</div>
+                    <div>1st ranked player on Sunday February 24<sup>th</sup> at 8:00 pm</div>
                     <div>JBL GO bluetooth speaker</div>
                   </div>
                 }
