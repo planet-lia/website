@@ -9,6 +9,7 @@ import InviteButton from '../elems/InviteButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
+import Prize from '../elems/Prize';
 
 import api from '../../utils/api';
 
@@ -140,6 +141,20 @@ class LeaderboardPage extends Component {
           <div className="tour-lb-sponsors text-center">
             <p>Sponsored by</p>
             <Sponsors />
+          </div>
+          <div className="lead-sec-prize text-center">
+            <div className="lead-cont-prize">
+              <Prize
+                color="#018e6a"
+                mainText={"Leaderboard winner week 1"}
+                subText={
+                  <div>
+                    <div>1st ranked player on Sunday February 24<sup>th</sup> at 8:00pm</div>
+                    <div>JBL GO bluetooth speaker</div>
+                  </div>
+                }
+              />
+            </div>
           </div>
           <Row>
             <Col xs={6}>
