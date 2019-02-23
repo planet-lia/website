@@ -78,8 +78,8 @@ const tournamentPageSlo = {
   titleRls1: "Lia verzija",
   txtRls1: "Na tem turnirju bo v uporabi Lia-SDK verzija v1.0.x. Ker je verzija povsem nova, bomo v kolikor bo to potrebno, v prvih dneh tekmovanja nekoliko prilagodili parametre igre.",
   titleRls2: "Nagrade",
-  txtRls2: "Nagrade za vodilnega po 1., 2. in 3. tednu bodo podeljene po sledečih pravilih. Prvi zmagovalec bo igralec, ki bo vodilni na lestvici ob polnoči 24. februarja, drugi ob polnoči " +
-  "3. marca in tretji ob polnoči 24. marca. Kljub temu, da bo nalaganje botov na spletno stran onemogočeno po polnoči 9. marca, se bodo igre odvijale do polnoči 10. marca. " +
+  txtRls2: "Nagrade za vodilnega po 1., 2. in 3. tednu bodo podeljene po sledečih pravilih. Prvi zmagovalec bo igralec, ki bo vodilni na lestvici 24. februarja ob 20:00, drugi " +
+  "3. marca ob 20:00 in tretji 10. marca ob 20:00. Kljub temu, da bo nalaganje botov na spletno stran onemogočeno 9. marca ob 20:00, se bodo igre odvijale do 10. marca do 20:00. " +
   "V kolikor je igralec v predhodnjem tednu že dobil nagrado vodilnega, je nagrada podeljena naslednje uvrščenemu igralcu.",
   titleRls3: "Diskvalifikacija",
   txtRls3: "Uporaba večih računov je prepovadana. Prepovedana je tudi uporaba kode drugega igralca. Vsaka taka dejavnost bo kaznovana z diskvalifikacijo. Enako velja za poizkuse napadov na Lia strežnike in za ostale škodoželjne poizkuse, ki bi lahko škodili poteku turnirja. Smo zgolj študentje, ki si želimo organizirati zabaven turnir za programersko skupnost, tako da bodite prizanesljivi. :)",

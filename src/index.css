@@ -1132,6 +1132,18 @@ iframe {
   margin: 0.4em 0;
 }
 
+/* Leaderboard Page */
+.lead-sec-prize {
+  padding-bottom: 20px;
+  background-color: #f3f3f3;
+}
+
+.lead-cont-prize {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: left;
+}
+
 /* Editor Page */
 
 .editor-cont-page {
