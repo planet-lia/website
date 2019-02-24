@@ -1144,6 +1144,11 @@ iframe {
   text-align: left;
 }
 
+.lead-prize-win {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /* Editor Page */
 
 .editor-cont-page {
