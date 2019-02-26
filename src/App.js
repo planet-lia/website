@@ -18,13 +18,13 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import {
   faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot,
-  faChessRook, faBullhorn, faUpload, faAward, faQuestionCircle
+  faChessRook, faBullhorn, faUpload, faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
   faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faChessRook, faReddit,
-  faBullhorn, faUpload, faDiscord, faAward, faQuestionCircle
+  faBullhorn, faUpload, faDiscord, faQuestionCircle
 );
 
 

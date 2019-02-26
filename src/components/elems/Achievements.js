@@ -9,16 +9,29 @@ const Achievements = (props) => {
   let achiDisplay = [];
   props.data.forEach((item, index) => {
     achiDisplay.push(
-      <div key={index}>
-        <span className="achi-icon"><FontAwesomeIcon icon="award" color={"#" + item.color}/></span>
-        <span>{item.achievement}</span>
-      </div>
+      <tr key={index}>
+        <td>
+          <span className="achi-icon"><FontAwesomeIcon icon="medal" color={item.color}/></span>
+          <span>{item.achievement}</span>
+        </td>
+      </tr>
     )
   })
 
   return (
-    <div className={props.className}>
-      {achiDisplay}
+    <div className={"prof-display " + (props.className ? props.className : "") }>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <h4>Achievements</h4>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          {achiDisplay}
+        </tbody>
+      </table>
     </div>
   )
 }

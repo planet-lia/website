@@ -1370,11 +1370,30 @@ iframe {
 /* Profile Page */
 
 #prof-cont-data {
-  margin: 2em 0;
+  margin: 2em 0 0;
 }
 
 #prof-icon {
-  margin-bottom: 20px;
+  padding: 5px 10px;
+}
+
+.prof-display {
+  background-color: #f3f3f3;
+  padding: 0 20px 10px;
+  margin-bottom: 30px;
+}
+
+.prof-display > table {
+  width: 100%;
+}
+
+.prof-display tbody > tr > td {
+  width: 50%;
+  font-size: 1em;
+}
+
+.prof-display tbody > tr.has-data > td:last-child {
+  font-weight: bold;
 }
 
 /* About Page */
