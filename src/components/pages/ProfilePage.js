@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import GamesTable from '../elems/GamesTable';
 import Moment from 'react-moment';
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ChallengeButton from '../elems/ChallengeButton';
 import InviteButton from '../elems/InviteButton';
+import Achievements from '../elems/Achievements';
 
 import api from '../../utils/api';
 
@@ -27,6 +28,7 @@ class ProfilePage extends Component {
       losses: 0,
       total: 0,
       playing: 0,
+      achievements: [],
       activeBotId: "",
       activeBotWins: 0,
       activeBotLosses: 0,
@@ -195,7 +197,8 @@ class ProfilePage extends Component {
       wins: respUser.stats.match.allTime.wins,
       losses: respUser.stats.match.allTime.losses,
       total: respUser.stats.match.allTime.total,
-      playing: respUser.stats.match.allTime.playing
+      playing: respUser.stats.match.allTime.playing,
+      achievements: respUser.achievements
     });
   }
 
@@ -223,11 +226,20 @@ class ProfilePage extends Component {
 
   render(){
     const { gamesData, loadingData, userId, username, rank, rating, mu, sigma,
-      wins, losses, playing, pageCount, version, language,
+      wins, losses, playing, achievements, pageCount, version, language,
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
       activeBotPlaying, newBotUploadTime, newBotStatus,
       newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog,
       cLeftToday, cTotal, isChallenges, currentPage } = this.state;
+
+    const tooltip = (
+      <Tooltip id="tooltip-rank">
+        <div>Rating = Mu - 3 * Sigma</div>
+        <div className="margin-top10">Mu - Estimate of your rank</div>
+        <div>Sigma - Certenty of your rank</div>
+        <div className="margin-top10">The more games you play the closer your Rating is to Mu</div>
+      </Tooltip>
+    );
 
     return (
       <div className="container">
@@ -246,11 +258,18 @@ class ProfilePage extends Component {
                     <InviteButton className="btn-invite-prof"/>
                   </div>
                 )
-                : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg"/>
+                : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg margin-top10"/>
               }
+              <h4 className="margin-top20">Achievements</h4>
+              <Achievements data={achievements}/>
             </Col>
             <Col sm={3}>
-              <h4>Rank details</h4>
+              <h4>
+                <span>Rank details</span>
+                <OverlayTrigger placement="bottom" overlay={tooltip} >
+                  <FontAwesomeIcon icon="question-circle" size="sm" id="tooltip-rank-icon"/>
+                </OverlayTrigger>
+              </h4>
               <div>
                 {"Rank: "} <strong>{rank}</strong>
               </div>

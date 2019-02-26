@@ -13,11 +13,18 @@ import {connect} from "react-redux";
 import { authActions } from './utils/actions/authActions';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebookSquare, faGithub, faYoutube, faReddit, faDiscord } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot, faChessRook, faBullhorn, faUpload } from '@fortawesome/free-solid-svg-icons';
-library.add(faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
+import {
+  faFacebookSquare, faGithub, faYoutube, faReddit, faDiscord
+} from '@fortawesome/free-brands-svg-icons';
+import {
+  faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot,
+  faChessRook, faBullhorn, faUpload, faAward, faQuestionCircle
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+  faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
   faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faChessRook, faReddit,
-  faBullhorn, faUpload, faDiscord
+  faBullhorn, faUpload, faDiscord, faAward, faQuestionCircle
 );
 
 
