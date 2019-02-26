@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Achievements = (props) => {
-  if(props.data.length===0){
+  if(!props.data || (props.data && props.data.length===0)){
     return null;
   }
 

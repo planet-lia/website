@@ -34,7 +34,7 @@ const ProfileDisplay = (props) => {
     props.data.forEach((item, index) => {
       if(item.value!==null){
         body.push(
-          <tr key={index} className="has-data">
+          <tr key={index}>
             <td>{item.label}</td>
             <td style={item.color ? {color: item.color} : null}>{item.value}</td>
           </tr>

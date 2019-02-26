@@ -57,7 +57,7 @@ class LeaderboardPage extends Component {
         language: leaderboard.bot.language,
         lastChange: timeSince(new Date(leaderboard.bot.uploaded)) + " ago",
         version: leaderboard.bot.version,
-        achievements: leaderboard.user.achievements
+        achievements: leaderboard.user.achievements ? leaderboard.user.achievements : []
       })
     );
     this.setState({
@@ -69,11 +69,14 @@ class LeaderboardPage extends Component {
 
   linkFormatter = (cell, row, rowIndex) => {
     let display = [];
-    row.achievements.forEach((item, index) => {
-      display.push(
-        <span key={index} title={item.achievement} className="achi-icon-lead"><FontAwesomeIcon icon="medal" color={item.color}/></span>
-      )
-    })
+    if(row.achievements) {
+      row.achievements.forEach((item, index) => {
+        display.push(
+          <span key={index} title={item.achievement} className="achi-icon-lead"><FontAwesomeIcon icon="medal" color={item.color}/></span>
+        )
+      })
+    }
+
 
     return (
       <span>

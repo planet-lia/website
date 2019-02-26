@@ -199,7 +199,7 @@ class ProfilePage extends Component {
       losses: respUser.stats.match.allTime.losses,
       total: respUser.stats.match.allTime.total,
       playing: respUser.stats.match.allTime.playing,
-      achievements: respUser.achievements
+      achievements: respUser.achievements ? respUser.achievements : []
     });
   }
 
@@ -253,21 +253,23 @@ class ProfilePage extends Component {
             </Col>
           </Row>
           <Row>
-            <Col sm={3}>
-              <div id="prof-icon" className="icon-lg">
-                <FontAwesomeIcon icon="robot" color={"#019170"}/>
+            <Col md={2} sm={3}>
+              <div className="margin-bottom30">
+                <div id="prof-icon" className="icon-lg">
+                  <FontAwesomeIcon icon="robot" color={"#019170"}/>
+                </div>
+                {this.state.isPrivate
+                  ? (
+                    <div>
+                      <div>{"Challenges left today: " + cLeftToday + "/" + cTotal}</div>
+                      <InviteButton className="btn-invite-prof"/>
+                    </div>
+                  )
+                  : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg margin-top10"/>
+                }
               </div>
-              {this.state.isPrivate
-                ? (
-                  <div>
-                    <div>{"Challenges left today: " + cLeftToday + "/" + cTotal}</div>
-                    <InviteButton className="btn-invite-prof"/>
-                  </div>
-                )
-                : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg margin-top10"/>
-              }
             </Col>
-            <Col sm={9}>
+            <Col md={10} sm={9}>
               <Row>
                 <Col sm={4}>
                   <ProfileDisplay
@@ -345,6 +347,8 @@ class ProfilePage extends Component {
                     ]}
                   />
                 </Col>
+              </Row>
+              <Row>
                 {(achievements.length > 0)
                   ? (
                     <Col sm={4}>
