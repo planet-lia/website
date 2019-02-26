@@ -1778,6 +1778,10 @@ a.contacts-logo {
   margin-right: 5px;
 }
 
+.achi-icon-lead {
+  margin-left: 5px;
+}
+
 /* TODO @aljaz's css, fix if needed */
 
 .pagination>.active>a,

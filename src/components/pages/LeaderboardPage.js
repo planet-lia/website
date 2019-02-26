@@ -56,7 +56,8 @@ class LeaderboardPage extends Component {
         organization: leaderboard.user.organization,
         language: leaderboard.bot.language,
         lastChange: timeSince(new Date(leaderboard.bot.uploaded)) + " ago",
-        version: leaderboard.bot.version
+        version: leaderboard.bot.version,
+        achievements: leaderboard.user.achievements
       })
     );
     this.setState({
@@ -67,7 +68,19 @@ class LeaderboardPage extends Component {
 
 
   linkFormatter = (cell, row, rowIndex) => {
-    return (<Link to={"/user/" + row.username} className="no-underline">{row.username}</Link>);
+    let display = [];
+    row.achievements.forEach((item, index) => {
+      display.push(
+        <span key={index} title={item.achievement} className="achi-icon-lead"><FontAwesomeIcon icon="medal" color={item.color}/></span>
+      )
+    })
+
+    return (
+      <span>
+        <Link to={"/user/" + row.username} className="no-underline">{row.username}</Link>
+        {display}
+      </span>
+    );
   }
 
 
