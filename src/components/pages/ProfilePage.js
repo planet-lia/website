@@ -49,7 +49,7 @@ class ProfilePage extends Component {
       newBotTestMatchGameEngineLog: "",
       cLeftToday: 0,
       cTotal: 0,
-      hasActiveBot: true,
+      hasActiveBot: false,
       isChallenges: false,
       currentPage: 0,
       loadingData: false,
@@ -72,7 +72,7 @@ class ProfilePage extends Component {
       const respUser = await api.game.getUserPublic(userId);
 
       let hasActiveBot = respUser.user.activeBot !== null;
-      this.setState({hasActiveBot: false});
+      this.setState({hasActiveBot: hasActiveBot});
       this.setUserData(respUser.user);
       if (hasActiveBot) {
         const activeBotStats = respUser.user.stats.match.activeBot;
@@ -274,7 +274,7 @@ class ProfilePage extends Component {
                     heading={
                       <span>
                         Rank details
-                        <OverlayTrigger placement="bottom" overlay={tooltip} >
+                        <OverlayTrigger placement="bottom" overlay={tooltip}>
                           <FontAwesomeIcon icon="question-circle" size="sm" color="#019170" id="tooltip-rank-icon"/>
                         </OverlayTrigger>
                       </span>
@@ -345,9 +345,14 @@ class ProfilePage extends Component {
                     ]}
                   />
                 </Col>
-                <Col sm={4}>
-                  <Achievements data={achievements}/>
-                </Col>
+                {(achievements.length > 0)
+                  ? (
+                    <Col sm={4}>
+                      <Achievements data={achievements}/>
+                    </Col>
+                  )
+                  : null
+                }
                 <Col sm={4}>
                   <ProfileDisplay
                     heading="Current Bot"
@@ -364,7 +369,7 @@ class ProfilePage extends Component {
                         },
                         {
                           label: "Upload time:",
-                          value: ((uploadTime === "") ? "" : <Moment format="DD/MM/YYYY HH:mm">{uploadTime}</Moment>)
+                          value: ((uploadTime === "") ? "" : <Moment format="DD/MM/YY HH:mm">{uploadTime}</Moment>)
                         }
                       ]
                       : []
@@ -388,7 +393,7 @@ class ProfilePage extends Component {
                           [
                             {
                               label: "Upload time:",
-                              value: (newBotUploadTime === "") ? "" : <Moment format="DD/MM/YYYY HH:mm">{newBotUploadTime}</Moment>
+                              value: (newBotUploadTime === "") ? "" : <Moment format="DD/MM/YY HH:mm">{newBotUploadTime}</Moment>
                             },
                             {
                               label: "Status:",

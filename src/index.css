@@ -639,6 +639,13 @@ td .btn.custom-btn {
   margin-left: 5px;
 }
 
+/* Tooltips Overwrites */
+
+.tooltip-inner {
+  border-radius: 0;
+  background-color: #1c1c1a;
+}
+
 /* Notifications */
 .custom-notification {
   background-color: #019170;
@@ -1388,11 +1395,13 @@ iframe {
 }
 
 .prof-display tbody > tr > td {
-  width: 50%;
+  width: 45%;
   font-size: 1em;
+  vertical-align: top;
 }
 
 .prof-display tbody > tr.has-data > td:last-child {
+  width: 55%;
   font-weight: bold;
 }
 
