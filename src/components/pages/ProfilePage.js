@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import GamesTable from '../elems/GamesTable';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import ProfileDisplay from '../elems/ProfileDisplay';
 import ChallengeButton from '../elems/ChallengeButton';
 import InviteButton from '../elems/InviteButton';
+import Achievements from '../elems/Achievements';
 
 import api from '../../utils/api';
 
@@ -27,6 +29,7 @@ class ProfilePage extends Component {
       losses: 0,
       total: 0,
       playing: 0,
+      achievements: [],
       activeBotId: "",
       activeBotWins: 0,
       activeBotLosses: 0,
@@ -46,7 +49,7 @@ class ProfilePage extends Component {
       newBotTestMatchGameEngineLog: "",
       cLeftToday: 0,
       cTotal: 0,
-      hasActiveBot: true,
+      hasActiveBot: false,
       isChallenges: false,
       currentPage: 0,
       loadingData: false,
@@ -195,7 +198,8 @@ class ProfilePage extends Component {
       wins: respUser.stats.match.allTime.wins,
       losses: respUser.stats.match.allTime.losses,
       total: respUser.stats.match.allTime.total,
-      playing: respUser.stats.match.allTime.playing
+      playing: respUser.stats.match.allTime.playing,
+      achievements: respUser.achievements ? respUser.achievements : []
     });
   }
 
@@ -223,139 +227,206 @@ class ProfilePage extends Component {
 
   render(){
     const { gamesData, loadingData, userId, username, rank, rating, mu, sigma,
-      wins, losses, playing, pageCount, version, language,
+      wins, losses, playing, achievements, pageCount, version, language,
       uploadTime, activeBotId, latestBotId, activeBotWins, activeBotLosses,
       activeBotPlaying, newBotUploadTime, newBotStatus,
       newBotProcessingLogs, newBotTestMatchLogs, newBotTestMatchGameEngineLog,
-      cLeftToday, cTotal, isChallenges, currentPage } = this.state;
+      cLeftToday, cTotal, isChallenges, currentPage, hasActiveBot, isPrivate
+    } = this.state;
+
+    const tooltip = (
+      <Tooltip id="tooltip-rank">
+        <div>Rating = Mu - 3 * Sigma</div>
+        <div className="margin-top10">Mu - Estimate of your rank</div>
+        <div>Sigma - Certenty of your rank</div>
+        <div className="margin-top10">The more games you play the closer your Rating is to Mu</div>
+      </Tooltip>
+    );
 
     return (
       <div className="container">
         <div id="prof-cont-data">
           <Row>
-            <Col sm={3}>
+            <Col xs={12}>
               <h2>{username}</h2>
-              {(this.state.isPrivate) ? "Your profile" : null}
-              <div className="icon-lg">
-                <FontAwesomeIcon icon="robot" color={"#019170"}/>
-              </div>
-              {this.state.isPrivate
-                ? (
-                  <div>
-                    <div>{"Challenges left today: " + cLeftToday + "/" + cTotal}</div>
-                    <InviteButton className="btn-invite-prof"/>
-                  </div>
-                )
-                : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg"/>
-              }
+              {(this.state.isPrivate) ? (<div>Your profile</div>) : null}
             </Col>
-            <Col sm={3}>
-              <h4>Rank details</h4>
-              <div>
-                {"Rank: "} <strong>{rank}</strong>
-              </div>
-              <div>
-                {"Rating: "} <strong>{rating}</strong>
-              </div>
-              <div>
-                {"Mu: "} <strong>{mu}</strong>
-              </div>
-              <div>
-                {"Sigma: "} <strong>{sigma}</strong>
+          </Row>
+          <Row>
+            <Col md={2} sm={3}>
+              <div className="margin-bottom30">
+                <div id="prof-icon" className="icon-lg">
+                  <FontAwesomeIcon icon="robot" color={"#019170"}/>
+                </div>
+                {this.state.isPrivate
+                  ? (
+                    <div>
+                      <div>{"Challenges left today: " + cLeftToday + "/" + cTotal}</div>
+                      <InviteButton className="btn-invite-prof"/>
+                    </div>
+                  )
+                  : <ChallengeButton opponent={username} opponentId={userId} className="custom-btn-lg margin-top10"/>
+                }
               </div>
             </Col>
-            <Col sm={3}>
-              <h4>Current bot</h4>
-              {(this.state.hasActiveBot)
-                ? (
-                  <span>
-                    <div>
-                      {"Version: "} <strong>{version}</strong>
-                    </div>
-                    <div>
-                      {"Language: "}  <strong>{language}</strong>
-                    </div>
-                    <div>
-                      {"Upload time: "}
-                      {(uploadTime === "") ? "" : <strong><Moment format="DD/MM/YYYY HH:mm">{uploadTime}</Moment></strong>}
-                    </div>
-                  </span>
-                )
-                : (
-                  <div>
-                    <span>To learn how to upload your first bot visit </span>
-                    <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">here</a>
-                    .
-                  </div>
-                )
-              }
-              {(this.state.isPrivate)
-                ? (
-                  <span>
-                    <div>&nbsp;&nbsp;</div>
-                    <div>&nbsp;&nbsp;</div>
-                    <h4>New bot</h4>
-                    {(activeBotId !== latestBotId)
-                      ? (
-                        <span>
-                          <div>
-                            {"Upload time: "}
-                                  {(newBotUploadTime === "") ? ""
-                                    : <strong><Moment format="DD/MM/YYYY HH:mm">{newBotUploadTime}</Moment></strong>}
-                          </div>
-                          <div>
-                            {"Status: "} <span style={{color: "#FF0000"}}><strong>{newBotStatus}</strong></span>
-                          </div>
-                          {(newBotProcessingLogs !== "")
-                            ? <div>{"Processing logs: "} <strong>{this.logToDownloadLink(newBotProcessingLogs)}</strong></div>
-                            : null
-                          }
-                          {(newBotTestMatchLogs !== "")
-                            ? <div>{"Test match logs: "} <strong>{this.logToDownloadLink(newBotTestMatchLogs)}</strong></div>
-                            : null
-                          }
-                          {(newBotTestMatchGameEngineLog !== "")
-                            ? <div>{"Test match engine logs: "}<strong>{this.logToDownloadLink(newBotTestMatchGameEngineLog)}</strong></div>
-                            : null
-                          }
-                        </span>
-                      ) : "New bot is now current."
+            <Col md={10} sm={9}>
+              <Row>
+                <Col sm={4}>
+                  <ProfileDisplay
+                    heading={
+                      <span>
+                        Rank details
+                        <OverlayTrigger placement="bottom" overlay={tooltip}>
+                          <FontAwesomeIcon icon="question-circle" size="sm" color="#019170" id="tooltip-rank-icon"/>
+                        </OverlayTrigger>
+                      </span>
                     }
-                  </span>
-                )
-                : null
-              }
-            </Col>
-            <Col sm={3}>
-              <h4>Current bot results</h4>
-              <div>
-                {"Wins: "} <strong>{activeBotWins}</strong>
-              </div>
-              <div>
-                {"Losses: "} <strong>{activeBotLosses}</strong>
-              </div>
-              <div>
-                {"Win ratio: "} <strong>{winPercentage(activeBotWins, activeBotLosses)}</strong>
-              </div>
-              <div>
-                {"Playing: "} <strong>{activeBotPlaying}</strong>
-              </div>
-              <div>&nbsp;&nbsp;</div>
-              <div>
-                <h4>All time results</h4>
-              </div>
-              <div>
-                {"Wins: "} <strong>{wins}</strong>
-              </div>
-              <div>
-                {"Losses: "} <strong>{losses}</strong>
-              </div>
-              <div>
-                {"Win ratio: "} <strong>{winPercentage(wins, losses)}</strong>
-              </div>
-              <div>
-                {"Playing: "} <strong>{playing}</strong>
-              </div>
+                    data={[
+                      {
+                        label: "Rank:",
+                        value: rank
+                      },
+                      {
+                        label: "Rating:",
+                        value: rating
+                      },
+                      {
+                        label: "Mu:",
+                        value: mu
+                      },
+                      {
+                        label: "Sigma:",
+                        value: sigma
+                      },
+                    ]}
+                  />
+                </Col>
+                <Col sm={4}>
+                  <ProfileDisplay
+                    heading="Current Bot Results"
+                    data={[
+                      {
+                        label: "Wins:",
+                        value: activeBotWins
+                      },
+                      {
+                        label: "Losses:",
+                        value: activeBotLosses
+                      },
+                      {
+                        label: "Win ratio:",
+                        value: winPercentage(activeBotWins, activeBotLosses)
+                      },
+                      {
+                        label: "Playing:",
+                        value: activeBotPlaying
+                      },
+                    ]}
+                  />
+                </Col>
+                <Col sm={4}>
+                  <ProfileDisplay
+                    heading="All Time Results"
+                    data={[
+                      {
+                        label: "Wins:",
+                        value: wins
+                      },
+                      {
+                        label: "Losses:",
+                        value: losses
+                      },
+                      {
+                        label: "Win ratio:",
+                        value: winPercentage(wins, losses)
+                      },
+                      {
+                        label: "Playing:",
+                        value: playing
+                      },
+                    ]}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                {(achievements.length > 0)
+                  ? (
+                    <Col sm={4}>
+                      <Achievements data={achievements}/>
+                    </Col>
+                  )
+                  : null
+                }
+                <Col sm={4}>
+                  <ProfileDisplay
+                    heading="Current Bot"
+                    data={hasActiveBot
+                      ?
+                      [
+                        {
+                          label: "Version:",
+                          value: version
+                        },
+                        {
+                          label: "Language:",
+                          value: language
+                        },
+                        {
+                          label: "Upload time:",
+                          value: ((uploadTime === "") ? "" : <Moment format="DD/MM/YY HH:mm">{uploadTime}</Moment>)
+                        }
+                      ]
+                      : []
+                    }
+                    onEmptyData={
+                      <div>
+                        <span>To learn how to upload your first bot visit </span>
+                        <a href="https://docs.liagame.com/getting-started/" target="_blank" rel="noopener noreferrer">here</a>
+                        .
+                      </div>
+                    }
+                  />
+                </Col>
+                { isPrivate
+                  ? (
+                    <Col sm={4}>
+                      <ProfileDisplay
+                        heading="New bot"
+                        data={(activeBotId !== latestBotId)
+                          ?
+                          [
+                            {
+                              label: "Upload time:",
+                              value: (newBotUploadTime === "") ? "" : <Moment format="DD/MM/YY HH:mm">{newBotUploadTime}</Moment>
+                            },
+                            {
+                              label: "Status:",
+                              value: newBotStatus,
+                              color: "#FF0000"
+                            },
+                            {
+                              label: "Processing logs:",
+                              value: (newBotProcessingLogs ? this.logToDownloadLink(newBotProcessingLogs) : null)
+                            },
+                            {
+                              label: "Test match logs:",
+                              value: (newBotTestMatchLogs ? this.logToDownloadLink(newBotTestMatchLogs) : null)
+                            },
+                            {
+                              label: "Test match engine logs:",
+                              value: (newBotTestMatchGameEngineLog ? this.logToDownloadLink(newBotTestMatchGameEngineLog) : null)
+                            }
+                          ]
+                          : []
+                        }
+                        onEmptyData="New bot is now current."
+                      />
+                    </Col>
+                  )
+                  : null
+                }
+
+              </Row>
             </Col>
           </Row>
         </div>

@@ -164,6 +164,26 @@ select.placeholder > option {
   margin-bottom: 20px
 }
 
+.margin-top10 {
+  margin-top: 10px;
+}
+
+.margin-top20 {
+  margin-top: 20px;
+}
+
+.margin-bottom10 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom20 {
+  margin-bottom: 20px;
+}
+
+.margin-bottom30 {
+  margin-bottom: 30px;
+}
+
 /* Bootstrap Navbar Overrides*/
 @media (max-width: 991.98px) {
     .navbar-header {
@@ -619,6 +639,23 @@ td .btn.custom-btn {
 
 .icon-lg {
   font-size: 4.5em;
+}
+
+/* Tooltips */
+
+#tooltip-rank > div{
+  text-align: left;
+}
+
+#tooltip-rank-icon {
+  margin-left: 5px;
+}
+
+/* Tooltips Overwrites */
+
+.tooltip-inner {
+  border-radius: 0;
+  background-color: #1c1c1a;
 }
 
 /* Notifications */
@@ -1352,11 +1389,32 @@ iframe {
 /* Profile Page */
 
 #prof-cont-data {
-  margin: 2em 0;
+  margin: 2em 0 0;
 }
 
 #prof-icon {
-  margin-bottom: 20px;
+  padding: 5px 15px;
+}
+
+.prof-display {
+  background-color: #f3f3f3;
+  padding: 0 20px 10px;
+  margin-bottom: 30px;
+}
+
+.prof-display > table {
+  width: 100%;
+}
+
+.prof-display tbody > tr > td {
+  width: 45%;
+  font-size: 1em;
+  vertical-align: top;
+}
+
+.prof-display tbody > tr > td:nth-child(2) {
+  width: 55%;
+  font-weight: bold;
 }
 
 /* About Page */
@@ -1733,6 +1791,16 @@ a.contacts-logo {
 }
 .pers-contact .email {
   margin-bottom: 5px;
+}
+
+/* Achievements */
+
+.achi-icon {
+  margin-right: 5px;
+}
+
+.achi-icon-lead {
+  margin-left: 5px;
 }
 
 /* TODO @aljaz's css, fix if needed */
