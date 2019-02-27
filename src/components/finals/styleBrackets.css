@@ -1,0 +1,143 @@
+.cont-brackets {
+  display: grid;
+  grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+  grid-row-gap: 30px;
+
+  font-size: 16px;
+}
+
+.cont-brackets > div {
+  position: relative;
+}
+
+.bracket {
+  width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bracket.left {
+  text-align: right;
+}
+
+.bracket.right {
+  text-align: left;
+}
+
+.bracket.center {
+  text-align: center;
+}
+
+.vertex {
+  display: inline-block;
+  text-align: left;
+}
+
+.player-field {
+  border: 1px solid #000;
+  width: 230px;
+}
+
+.connect {
+  display: inline-block;
+  width: 20px;
+  height: 50px;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  position: relative;
+  top: -5px;
+}
+
+.connect.left {
+  border-right: 1px solid #000;
+}
+
+.connect.right {
+  border-left: 1px solid #000;
+}
+
+.edge {
+  display: inline-block;
+  width: 22.5px;
+  height: 30px;
+  position: relative;
+}
+
+.edge.left {
+  border-right: 1px solid #000;
+}
+
+.edge.right {
+  border-left: 1px solid #000;
+}
+
+.edge.top {
+  border-top: 1px solid #000;
+  top: -2px;
+}
+
+.edge.bottom {
+  border-bottom: 1px solid #000;
+  top: -27px;
+}
+
+/* Grid Positions */
+.g-col-1 {
+  grid-column-start: 1;
+}
+
+.g-col-2 {
+  grid-column-start: 2;
+}
+
+.g-col-3 {
+  grid-column-start: 3;
+}
+
+.g-col-4 {
+  grid-column-start: 4;
+}
+
+.g-col-5 {
+  grid-column-start: 5;
+}
+
+.g-col-6 {
+  grid-column-start: 6;
+}
+
+.g-col-7 {
+  grid-column-start: 7;
+}
+
+.g-row-1 {
+  grid-row-start: 1;
+}
+
+.g-row-2 {
+  grid-row-start: 2;
+}
+
+.g-row-3 {
+  grid-row-start: 3;
+}
+
+.g-row-4 {
+  grid-row-start: 4;
+}
+
+.g-row-12 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.g-row-23 {
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.g-row-34 {
+  grid-row-start: 3;
+  grid-row-end: 5;
+}
