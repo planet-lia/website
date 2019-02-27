@@ -162,11 +162,12 @@ class LeaderboardPage extends Component {
             <div className="lead-cont-prize">
               <Prize
                 color="#018e6a"
-                mainText={"Leaderboard winner week 1"}
+                mainText={"Leaderboard winner week 2"}
                 subText={
                   <div>
-                    <div className="lead-prize-win">Winner: <Link to="/user/grekiki1234" className="no-underline">grekiki1234</Link></div>
+                    <div>1<sup>st</sup> ranked player on Sunday March 3<sup>rd</sup> at 8:00 pm</div>
                     <div>Prize: JBL GO bluetooth speaker</div>
+                    <div><i>Previous week winner is not eligible for this prize</i></div>
                   </div>
                 }
               />
