@@ -238,7 +238,7 @@ class ProfilePage extends Component {
       <Tooltip id="tooltip-rank">
         <div>Rating = Mu - 3 * Sigma</div>
         <div className="margin-top10">Mu - Estimate of your rank</div>
-        <div>Sigma - Certenty of your rank</div>
+        <div>Sigma - Certainty of your rank</div>
         <div className="margin-top10">The more games you play the closer your Rating is to Mu</div>
       </Tooltip>
     );
