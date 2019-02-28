@@ -122,7 +122,7 @@ class ResetPasswordPage extends Component {
       return (
         <Loader
           type="Triangle"
-          color="#018e6a"
+          color="#019170"
           height="100"
           width="100"
         />)

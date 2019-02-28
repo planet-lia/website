@@ -366,7 +366,7 @@ class EditorPage extends Component {
                   <div className="cont-loader">
                     <Loader
                       type="Triangle"
-                      color="#018e6a"
+                      color="#019170"
                       height="100"
                       width="100"
                     />

@@ -18,13 +18,13 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import {
   faEnvelope, faTrophy, faDesktop, faPlay, faUser, faTv, faMedal, faRobot,
-  faChessRook, faBullhorn, faUpload, faQuestionCircle
+  faChessRook, faBullhorn, faUpload, faQuestionCircle, faTicketAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faFacebookSquare, faGithub, faYoutube, faEnvelope, faTrophy,
   faTv, faRobot, faMedal, faDesktop, faPlay, faUser, faChessRook, faReddit,
-  faBullhorn, faUpload, faDiscord, faQuestionCircle
+  faBullhorn, faUpload, faDiscord, faQuestionCircle, faTicketAlt
 );
 
 
@@ -69,7 +69,7 @@ class App extends Component {
         <div className="cont-loader">
           <Loader
             type="Triangle"
-            color="#018e6a"
+            color="#019170"
             height="100"
             width="100"
           />

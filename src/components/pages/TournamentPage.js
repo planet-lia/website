@@ -80,11 +80,6 @@ class TournamentPage extends Component {
     const currentPath= this.props.location.pathname;
     return (
       <div>
-        <div className="custom-notification">
-          <div className="container text-center">
-            Get your tickets for the finals of Slovenian Lia Tournament 2019, check <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">the event details</a>.
-          </div>
-        </div>
         <div className="custom-section sec-short">
           <div className="container text-center">
             <Col>
@@ -113,20 +108,17 @@ class TournamentPage extends Component {
                     <div id="tour-what"><a href="/#what-is-lia" target="_blank" rel="noopener noreferrer">{content.lnkWhat}</a></div>
 
                     <div id="cont-banner-fb">
-                      <a href="https://www.facebook.com/liagame/" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
                         <div id="banner-fb">
                           <div id="icon-fb" className="clr-fb">
                             <FontAwesomeIcon icon={["fab", "facebook-square"]} />
                           </div>
                           <div className="text-left">
                             <div>
-                              {content.bnrFBPrizes}
-                              <span className="trophy"><FontAwesomeIcon icon="trophy" /> </span>
-                              <span className="trophy"><FontAwesomeIcon icon="trophy" /></span>
-                              {content.bnrFBUpdates}
+                              {content.bnrFBTxt1}
                             </div>
                             <div>
-                              {content.bnrFBFind}
+                              {content.bnrFBTxt2}
                             </div>
                           </div>
                         </div>

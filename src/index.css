@@ -172,10 +172,6 @@ select.placeholder > option {
   margin-top: 20px;
 }
 
-.margin-bottom8 {
-  margin-bottom: 8px;
-}
-
 .margin-bottom10 {
   margin-bottom: 10px;
 }
@@ -645,6 +641,31 @@ td .btn.custom-btn {
   font-size: 4.5em;
 }
 
+.icon-ticket1 {
+  color: #019170;
+  transform: rotate(70deg);
+  position: relative;
+  top: -5px;
+  left: -18px;
+}
+
+.icon-ticket1-bg {
+  background-color: #f3f3f3;
+  transform: rotate(160deg);
+  height: 0.9em;
+  width: 26px;
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 30.5px);
+}
+
+.icon-ticket2 {
+  color: #aaa;
+  transform: rotate(-60deg);
+  position: absolute;
+  top: 3px;
+}
+
 /* Tooltips */
 
 #tooltip-rank > div{
@@ -666,7 +687,7 @@ td .btn.custom-btn {
 .custom-notification {
   background-color: #019170;
   color: #eee;
-  padding: 5px 0;
+  padding: 8px 0;
   margin-top: 10px;
 }
 
@@ -752,6 +773,10 @@ td .btn.custom-btn {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+#banner-fb:hover {
+  background-color: #ececec;
 }
 
 #banner-fb #icon-fb {
@@ -878,6 +903,7 @@ td .btn.custom-btn {
 }
 
 .tour-prize-icon {
+  position: relative;
   margin-right: 15px;
 }
 
@@ -1176,6 +1202,7 @@ iframe {
 /* Leaderboard Page */
 .lead-sec-prize {
   padding-bottom: 20px;
+  margin-bottom: 20px;
   background-color: #f3f3f3;
 }
 
