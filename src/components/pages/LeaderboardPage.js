@@ -190,7 +190,7 @@ class LeaderboardPage extends Component {
                     </a>
                   </div>
                   <div className="tour-prize-subtext">
-                    <div>Slovenian Lia Tournament 2019 - finals.</div>
+                    <div>Slovenian Lia Tournament 2019 - finals</div>
                   </div>
                 </div>
               </div>
