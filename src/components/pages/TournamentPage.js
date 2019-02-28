@@ -80,6 +80,11 @@ class TournamentPage extends Component {
     const currentPath= this.props.location.pathname;
     return (
       <div>
+        <div className="custom-notification">
+          <div className="container text-center">
+            Get your tickets for the finals of Slovenian Lia Tournament 2019, check <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">the event details</a>.
+          </div>
+        </div>
         <div className="custom-section sec-short">
           <div className="container text-center">
             <Col>

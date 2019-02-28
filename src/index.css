@@ -172,6 +172,10 @@ select.placeholder > option {
   margin-top: 20px;
 }
 
+.margin-bottom8 {
+  margin-bottom: 8px;
+}
+
 .margin-bottom10 {
   margin-bottom: 10px;
 }
@@ -662,7 +666,7 @@ td .btn.custom-btn {
 .custom-notification {
   background-color: #019170;
   color: #eee;
-  padding: 8px 0;
+  padding: 5px 0;
   margin-top: 10px;
 }
 

@@ -148,9 +148,10 @@ class LeaderboardPage extends Component {
     return (
       <div>
 
-        <div className="custom-notification">
+        <div className="custom-notification margin-bottom20">
           <div className="container text-center">
-            Leaderboard is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.
+            <div className="margin-bottom8">Leaderboard is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.</div>
+            <div>Get your tickets for the finals of Slovenian Lia Tournament 2019, check <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">the event details</a>.</div>
           </div>
         </div>
         <div className="container">
