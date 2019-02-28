@@ -185,12 +185,17 @@ class LeaderboardPage extends Component {
                 </div>
                 <div>
                   <div className="tour-prize-text">
-                    <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://goo.gl/forms/xF1q9cTzFgerncvo2" target="_blank" rel="noopener noreferrer">
                       Get Your Ticket
                     </a>
                   </div>
                   <div className="tour-prize-subtext">
                     <div>Slovenian Lia Tournament 2019 - finals</div>
+                    <div>
+                      <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
+                        more details
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
