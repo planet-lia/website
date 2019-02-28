@@ -16,7 +16,7 @@ const tournamentPageSlo = {
   txtLive: "Poteka zdaj!",
   btnRegisterEarly: "Pridruži se!",
   lnkWhat: "Kaj je Lia?",
-  bnrFBTxt1: (<span><strong>Rezerviraj vstopnice</strong> za finale</span>),
+  bnrFBTxt1: (<span><strong>Rezerviraj vstopnico</strong></span>),
   bnrFBTxt2: "in preberi več o dogodku.",
 
   titleWant: "Bi se rad zabaval in premagal prijatelje v programiranju?",
