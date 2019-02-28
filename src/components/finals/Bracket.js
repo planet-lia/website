@@ -3,13 +3,55 @@ import React, { Component } from 'react';
 class Bracket extends Component {
 
   render() {
-    const { col, row, side, vert, leaf } = this.props
+    const { col, row, side, vert, type } = this.props
+    let edgeIn = null;
+    let edgeOut = null;
+    let edgeLeft = null;
+    let edgeRight = null;
+
+    if(type==="normal"){
+      edgeIn = (
+        <div className="edge-in">
+          <div className={"top " + side}></div>
+          <div className={"bottom " + side}></div>
+        </div>
+      );
+      edgeOut = (
+        <div className="edge-out">
+          <div className={"connect " + side}></div>
+          <div className={"edge " + vert + " " + side}></div>
+        </div>
+      );
+    } else if(type==="leaf"){
+      edgeIn = (
+        <div className="edge-in">
+          &nbsp;
+        </div>
+      )
+      edgeOut = (
+        <div className="edge-out">
+          <div className={"connect " + side}></div>
+          <div className={"edge " + vert + " " + side}></div>
+        </div>
+      );
+    } else if(type==="root"){
+      edgeLeft = <div className="root-left"></div>
+
+      edgeRight = <div className="root-right"></div>
+    }
+
+    if(side==="left") {
+      edgeLeft = edgeIn;
+      edgeRight = edgeOut;
+    } else if (side==="right") {
+      edgeLeft = edgeOut;
+      edgeRight = edgeIn;
+    }
+
     return (
       <div className={"g-col-" + col + " g-row-" + row}>
         <div className={"bracket " + side}>
-          {(side==="left" && !leaf) ? (<div className={"connect"}></div>) : null}
-          {side==="right" ? (<div className={"edge " + side + " " + vert}></div>) : null}
-          {side==="right" ? (<div className={"connect " + side}></div>) : null}
+          {edgeLeft}
           <div className="vertex">
             <div className="player-field">
               Player 1
@@ -21,9 +63,7 @@ class Bracket extends Component {
               XXXXXXXXXXXXXXXXXX
             </div>
           </div>
-          {side==="left" ? (<div className={"connect " + side}></div>) : null}
-          {side==="left" ? (<div className={"edge " + side + " " + vert}></div>) : null}
-          {(side==="right" && !leaf) ? (<div className={"connect"}></div>) : null}
+          {edgeRight}
         </div>
       </div>
     )

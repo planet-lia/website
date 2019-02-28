@@ -12,34 +12,143 @@
 
 .bracket {
   width: 100%;
+  height: 100%;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
-.bracket.left {
-  text-align: right;
-}
-
-.bracket.right {
-  text-align: left;
-}
-
-.bracket.center {
-  text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .vertex {
-  display: inline-block;
-  text-align: left;
+  width: 82%;
 }
 
 .player-field {
   border: 1px solid #000;
-  width: 230px;
 }
 
-.connect {
+.root-left,
+.root-right {
+  width: 9%;
+  position: relative;
+  border-bottom: 1px solid #000;
+}
+
+.root-left {
+  top: -25px;
+}
+
+.root-right {
+  top: 24px;
+}
+
+.edge-in {
+  width: 6%;
+  height: 100%;
+  position: relative;
+}
+
+.edge-in > .top {
+  width: 100%;
+  height: calc(50% - 62.5px); /*half - 2.5x height of player-field*/
+  position: absolute;
+  top: 39px;  /*1.5x height of player-field*/
+  border-bottom: 1px solid #000;
+}
+
+.edge-in > .top.left {
+  border-left: 1px solid #000;
+}
+
+.edge-in > .top.right {
+  border-right: 1px solid #000;
+}
+
+.edge-in > .bottom {
+  width: 100%;
+  height: calc(50% - 62.5px); /*half - 3x hight of player-field*/
+  position: absolute;
+  bottom: 39px;
+  border-top: 1px solid #000;
+}
+
+.edge-in > .bottom.left {
+  border-left: 1px solid #000;
+}
+
+.edge-in > .bottom.right {
+  border-right: 1px solid #000;
+}
+
+.edge-out {
+  width: 12%;
+  height: 100%;
+  position: relative;
+}
+
+.edge-out > .connect {
+  width: 50%;
+  height: calc(72.55px -  25px); /*vertex height - 1x height of player-field*/
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.edge-out > .connect.left {
+  left: 0;
+  border-right: 1px solid #000;
+}
+
+.edge-out > .connect.right {
+  right:0;
+  border-left: 1px solid #000;
+}
+
+.edge-out > .edge {
+  width: calc(50% + 1px);
+  height: calc(50% - 12.5px);
+  position: absolute;
+}
+
+.edge-out > .edge.left {
+  right: -1px;
+  border-right: 1px solid #000;
+}
+
+.edge-out > .edge.right {
+  left: -1px;
+  border-left: 1px solid #000;
+}
+
+.edge-out > .edge.top {
+  bottom: 12.5px;
+  border-top: 1px solid #000;
+}
+
+.edge-out > .edge.bottom {
+  top: 12.5px;
+  border-bottom: 1px solid #000;
+}
+
+.edge-out > .edge.top-mid {
+  height: calc((72.55px - 25px) / 2); /*vertex height - 1x height of player-field, halfed*/
+  bottom: 62.5px;
+  border-top: 1px solid #000;
+}
+
+.edge-out > .edge.bottom-mid {
+  height: calc((72.55px - 25px) / 2); /*vertex height - 1x height of player-field, halfed*/
+  top: 62.5px;
+  border-bottom: 1px solid #000;
+}
+
+/*.connect {
   display: inline-block;
   width: 20px;
   height: 50px;
@@ -80,7 +189,7 @@
 .edge.bottom {
   border-bottom: 1px solid #000;
   top: -27px;
-}
+}*/
 
 /* Grid Positions */
 .g-col-1 {
