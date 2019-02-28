@@ -148,49 +148,6 @@
   border-bottom: 1px solid #000;
 }
 
-/*.connect {
-  display: inline-block;
-  width: 20px;
-  height: 50px;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-  position: relative;
-  top: -5px;
-}
-
-.connect.left {
-  border-right: 1px solid #000;
-}
-
-.connect.right {
-  border-left: 1px solid #000;
-}
-
-.edge {
-  display: inline-block;
-  width: 22.5px;
-  height: 30px;
-  position: relative;
-}
-
-.edge.left {
-  border-right: 1px solid #000;
-}
-
-.edge.right {
-  border-left: 1px solid #000;
-}
-
-.edge.top {
-  border-top: 1px solid #000;
-  top: -2px;
-}
-
-.edge.bottom {
-  border-bottom: 1px solid #000;
-  top: -27px;
-}*/
-
 /* Grid Positions */
 .g-col-1 {
   grid-column-start: 1;
