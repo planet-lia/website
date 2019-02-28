@@ -641,6 +641,31 @@ td .btn.custom-btn {
   font-size: 4.5em;
 }
 
+.icon-ticket1 {
+  color: #019170;
+  transform: rotate(70deg);
+  position: relative;
+  top: -5px;
+  left: -18px;
+}
+
+.icon-ticket1-bg {
+  background-color: #f3f3f3;
+  transform: rotate(160deg);
+  height: 0.9em;
+  width: 26px;
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 30.5px);
+}
+
+.icon-ticket2 {
+  color: #aaa;
+  transform: rotate(-60deg);
+  position: absolute;
+  top: 3px;
+}
+
 /* Tooltips */
 
 #tooltip-rank > div{
@@ -748,6 +773,10 @@ td .btn.custom-btn {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+#banner-fb:hover {
+  background-color: #ececec;
 }
 
 #banner-fb #icon-fb {
@@ -874,6 +903,7 @@ td .btn.custom-btn {
 }
 
 .tour-prize-icon {
+  position: relative;
   margin-right: 15px;
 }
 
@@ -1172,6 +1202,7 @@ iframe {
 /* Leaderboard Page */
 .lead-sec-prize {
   padding-bottom: 20px;
+  margin-bottom: 20px;
   background-color: #f3f3f3;
 }
 

@@ -148,9 +148,9 @@ class LeaderboardPage extends Component {
     return (
       <div>
 
-        <div className="custom-notification">
+        <div className="custom-notification margin-bottom20">
           <div className="container text-center">
-            Leaderboard is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.
+            <div>Leaderboard is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.</div>
           </div>
         </div>
         <div className="container">
@@ -161,7 +161,7 @@ class LeaderboardPage extends Component {
           <div className="lead-sec-prize text-center">
             <div className="lead-cont-prize">
               <Prize
-                color="#018e6a"
+                color="#019170"
                 mainText={"Leaderboard winner week 2"}
                 subText={
                   <div>
@@ -173,6 +173,27 @@ class LeaderboardPage extends Component {
                   </div>
                 }
               />
+            </div>
+          </div>
+          <div className="lead-sec-prize text-center">
+            <div className="lead-cont-prize">
+              <div className="tour-cont-prize">
+                <div className="tour-cont-icon-sm tour-prize-icon">
+                  <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
+                  <div className="icon-ticket1-bg">&nbsp;</div>
+                  <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
+                </div>
+                <div>
+                  <div className="tour-prize-text">
+                    <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
+                      Get Your Ticket
+                    </a>
+                  </div>
+                  <div className="tour-prize-subtext">
+                    <div>Slovenian Lia Tournament 2019 - finals</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <Row>

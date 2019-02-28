@@ -10,9 +10,9 @@ class GamesPage extends Component {
   render(){
     return (
       <div>
-        <div className="custom-notification">
+        <div className="custom-notification margin-bottom20">
           <div className="container text-center">
-            Game page is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.
+            <div>Game page is currently in use for <Link to="/tournament">Slovenian Lia tournament 2019</Link>.</div>
           </div>
         </div>
         <div className="container">

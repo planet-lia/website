@@ -142,7 +142,7 @@ const TournamentMain = (props) => {
                 </Col>
                 <Col sm={6}>
                   <Prize
-                    color="#018e6a"
+                    color="#019170"
                     mainText={content.txtPrize7}
                     subText={content.txtSubPrize7}
                     sponsor={{
@@ -152,17 +152,17 @@ const TournamentMain = (props) => {
                     }}
                   />
                   <Prize
-                    color="#018e6a"
+                    color="#019170"
                     mainText={content.txtPrize4}
                     subText={content.txtSubPrize4}
                   />
                   <Prize
-                    color="#018e6a"
+                    color="#019170"
                     mainText={content.txtPrize5}
                     subText={content.txtSubPrize5}
                   />
                   <Prize
-                    color="#018e6a"
+                    color="#019170"
                     mainText={content.txtPrize6}
                     subText={content.txtSubPrize6}
                   />

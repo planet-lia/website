@@ -16,13 +16,8 @@ const tournamentPageEng = {
   txtLive: "We are live!",
   btnRegisterEarly: "Join Now!",
   lnkWhat: "What is Lia?",
-  bnrFBPrizes: <strong>Prizes reveals </strong>,
-  bnrFBUpdates: [
-    <span key="0"> and other </span>,
-    <strong key="1">updates</strong>,
-    <span key="2">.</span>
-  ],
-  bnrFBFind: "Find us on Facebook.",
+  bnrFBTxt1: (<span><strong>Get your ticket</strong></span>),
+  bnrFBTxt2: "and check event details.",
 
   titleWant: "Want to have fun and beat your friends at coding?",
   txtWant: "Pick your favourite language and use our prebuilt starting bots to get you going within minutes.",

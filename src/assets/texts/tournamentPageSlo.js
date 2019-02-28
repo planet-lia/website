@@ -16,13 +16,8 @@ const tournamentPageSlo = {
   txtLive: "Poteka zdaj!",
   btnRegisterEarly: "Pridruži se!",
   lnkWhat: "Kaj je Lia?",
-  bnrFBPrizes: <strong>Razkritje nagrad </strong>,
-  bnrFBUpdates: [
-    <span key="0"> in ostale </span>,
-    <strong key="1">novosti</strong>,
-    <span key="2">.</span>
-  ],
-  bnrFBFind: "Obiščite našo Facebook stran.",
+  bnrFBTxt1: (<span><strong>Rezerviraj vstopnico</strong></span>),
+  bnrFBTxt2: "in preberi več o dogodku.",
 
   titleWant: "Bi se rad zabaval in premagal prijatelje v programiranju?",
   txtWant: "Izberi svoj najljubši programski jezik in uporabi že pripravljene začetne bote. Začneš lahko v le nekaj minutah.",
