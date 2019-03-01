@@ -214,12 +214,10 @@ class LeaderboardPage extends Component {
           </div>
           <Row>
             <Col xs={6}>
-              <div className="lead-cont-title">
-                <div className="lead-title"><h2>Leaderboard</h2></div>
-                <div className="lead-statistics">
-                  <span>{userCount + " players"}</span>
-                  <span>{rankedGamesCount + " games"}</span>
-                </div>
+              <h2>Leaderboard</h2>
+              <div className="lead-statistics">
+                <div>{"Players: " + userCount}</div>
+                <div>{"Total games: " + rankedGamesCount}</div>
               </div>
             </Col>
             <Col xs={6}>

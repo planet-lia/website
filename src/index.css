@@ -643,20 +643,26 @@ td .btn.custom-btn {
 
 .icon-ticket1 {
   color: #019170;
-  transform: rotate(70deg);
   position: relative;
   top: -5px;
   left: -18px;
+
+  -webkit-transform: rotate(70deg);
+  -ms-transform: rotate(70deg);
+  transform: rotate(70deg);
 }
 
 .icon-ticket1-bg {
   background-color: #f3f3f3;
-  transform: rotate(160deg);
   height: 0.9em;
   width: 26px;
   position: absolute;
   top: 5px;
   left: calc(50% - 30.5px);
+
+  -webkit-transform: rotate(160deg);
+  -ms-transform: rotate(160deg);
+  transform: rotate(160deg);
 }
 
 .icon-ticket2 {
@@ -664,6 +670,10 @@ td .btn.custom-btn {
   transform: rotate(-60deg);
   position: absolute;
   top: 3px;
+
+  -webkit-transform: rotate(-60deg);
+  -ms-transform: rotate(-60deg);
+  transform: rotate(-60deg);
 }
 
 @media screen and (max-width: 767.98px) {
@@ -1229,29 +1239,34 @@ iframe {
   flex-direction: row;
 }
 
-.lead-title {
-  margin: 0 20px 10px 0;
-}
-
 .lead-statistics {
   color: #999;
-  margin: 27px 0 20px;
-  font-size: 1.3em;
+  margin: -10px 0 20px;
+  font-size: 1.1em;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
-.lead-statistics > span:first-child  {
+.lead-statistics > div:first-child  {
   margin-right: 20px;
 }
 
 @media screen and (max-width: 991.98px) {
-  .lead-cont-title {
-    flex-direction: column;
-  }
-  .lead-title {
-    margin: 0;
-  }
   .lead-statistics {
-    margin-top: -10px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 }
 
