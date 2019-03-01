@@ -23,6 +23,7 @@ class LeaderboardPage extends Component {
       leaderboardData: [],
       loadingData: false,
       userCount: 0,
+      rankedGamesCount: 0,
       lastUpdated: null,
       error: null
     };
@@ -37,7 +38,10 @@ class LeaderboardPage extends Component {
     try {
       const respLeaderboard = await api.game.getLeaderboard();
       this.setLeaderboardData(respLeaderboard.leaderboard);
-      this.setState({lastUpdated: respLeaderboard.leaderboardMisc.updated});
+      this.setState({
+        lastUpdated: respLeaderboard.leaderboardMisc.updated,
+        rankedGamesCount: respLeaderboard.leaderboardMisc.statistics.matches.ranked
+      });
     } catch(err) {
       this.setState({
         loadingData: false,
@@ -65,11 +69,10 @@ class LeaderboardPage extends Component {
     const userCount = countBy(leaderboard, function (row) {
         return row.organization !== "Lia";
     });
-    console.log(userCount.true)
 
     this.setState({
       leaderboardData: leaderboard,
-      userCount: userCount,
+      userCount: userCount.true,
       loadingData: false
     });
   }
@@ -118,7 +121,7 @@ class LeaderboardPage extends Component {
   };
 
   render(){
-    const { leaderboardData, userCount, loadingData, lastUpdated } = this.state;
+    const { leaderboardData, userCount, rankedGamesCount, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
       dataField: 'no1',
 			text: 'Rank',
@@ -215,7 +218,7 @@ class LeaderboardPage extends Component {
                 <div className="lead-title"><h2>Leaderboard</h2></div>
                 <div className="lead-statistics">
                   <span>{userCount + " players"}</span>
-                  <span>{"999999 games"}</span>
+                  <span>{rankedGamesCount + " games"}</span>
                 </div>
               </div>
             </Col>
