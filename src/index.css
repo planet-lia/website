@@ -1241,7 +1241,7 @@ iframe {
 
 .lead-statistics {
   color: #999;
-  margin: -10px 0 20px;
+  margin: -5px 0 20px;
   font-size: 1.1em;
 
   display: -webkit-box;
@@ -1258,7 +1258,7 @@ iframe {
 }
 
 .lead-statistics > div:first-child  {
-  margin-right: 20px;
+  margin-right: 15px;
 }
 
 @media screen and (max-width: 767.98px) {
@@ -1474,7 +1474,7 @@ iframe {
 
 .prof-your {
   color: #999;
-  margin: -20px 0 20px;
+  margin: -15px 0 20px;
 }
 
 #prof-cont-data {
