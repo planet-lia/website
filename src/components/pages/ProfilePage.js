@@ -248,8 +248,8 @@ class ProfilePage extends Component {
         <div id="prof-cont-data">
           <Row>
             <Col xs={12}>
-              <h2>{username}</h2>
-              {(this.state.isPrivate) ? (<div>Your profile</div>) : null}
+              <h2 className="margin-bottom20">{username}</h2>
+              {(this.state.isPrivate) ? (<div className="prof-your">Your profile</div>) : null}
             </Col>
           </Row>
           <Row>
@@ -430,7 +430,7 @@ class ProfilePage extends Component {
             </Col>
           </Row>
         </div>
-        <h3>Games</h3>
+        <h3 className="margin-bottom20">Games</h3>
         <ul className="custom-subnav">
           <li><a className={!isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, false)}>Ranked</a></li>
           <li><a className={isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, true)}>Challenges</a></li>

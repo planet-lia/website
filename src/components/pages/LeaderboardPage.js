@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
+import countBy from 'lodash/countBy';
 
 import ChallengeButton from '../elems/ChallengeButton';
 import InviteButton from '../elems/InviteButton';
@@ -21,6 +22,7 @@ class LeaderboardPage extends Component {
     this.state = {
       leaderboardData: [],
       loadingData: false,
+      userCount: 0,
       lastUpdated: null,
       error: null
     };
@@ -60,8 +62,14 @@ class LeaderboardPage extends Component {
         achievements: leaderboard.user.achievements ? leaderboard.user.achievements : []
       })
     );
+    const userCount = countBy(leaderboard, function (row) {
+        return row.organization !== "Lia";
+    });
+    console.log(userCount.true)
+
     this.setState({
       leaderboardData: leaderboard,
+      userCount: userCount,
       loadingData: false
     });
   }
@@ -110,7 +118,7 @@ class LeaderboardPage extends Component {
   };
 
   render(){
-    const { leaderboardData, loadingData, lastUpdated } = this.state;
+    const { leaderboardData, userCount, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
       dataField: 'no1',
 			text: 'Rank',
@@ -203,7 +211,13 @@ class LeaderboardPage extends Component {
           </div>
           <Row>
             <Col xs={6}>
-              <h2>Leaderboard</h2>
+              <div className="lead-cont-title">
+                <div className="lead-title"><h2>Leaderboard</h2></div>
+                <div className="lead-statistics">
+                  <span>{userCount + " players"}</span>
+                  <span>{"999999 games"}</span>
+                </div>
+              </div>
             </Col>
             <Col xs={6}>
               <InviteButton className="btn-invite-lead pull-right"/>
