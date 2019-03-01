@@ -666,6 +666,12 @@ td .btn.custom-btn {
   top: 3px;
 }
 
+@media screen and (max-width: 767.98px) {
+  .cont-icon-tickets {
+    margin-left: 25px;
+  }
+}
+
 /* Tooltips */
 
 #tooltip-rank > div{

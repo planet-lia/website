@@ -178,7 +178,7 @@ class LeaderboardPage extends Component {
           <div className="lead-sec-prize text-center">
             <div className="lead-cont-prize">
               <div className="tour-cont-prize">
-                <div className="tour-cont-icon-sm tour-prize-icon">
+                <div className="tour-cont-icon-sm tour-prize-icon cont-icon-tickets">
                   <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
                   <div className="icon-ticket1-bg">&nbsp;</div>
                   <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
@@ -193,7 +193,7 @@ class LeaderboardPage extends Component {
                     <div>Slovenian Lia Tournament 2019 - finals</div>
                     <div>
                       <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
-                        more details
+                        More details
                       </a>
                     </div>
                   </div>
