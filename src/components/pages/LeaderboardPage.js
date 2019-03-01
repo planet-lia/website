@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
+import countBy from 'lodash/countBy';
 
 import ChallengeButton from '../elems/ChallengeButton';
 import InviteButton from '../elems/InviteButton';
@@ -21,6 +22,8 @@ class LeaderboardPage extends Component {
     this.state = {
       leaderboardData: [],
       loadingData: false,
+      userCount: 0,
+      rankedGamesCount: 0,
       lastUpdated: null,
       error: null
     };
@@ -35,7 +38,10 @@ class LeaderboardPage extends Component {
     try {
       const respLeaderboard = await api.game.getLeaderboard();
       this.setLeaderboardData(respLeaderboard.leaderboard);
-      this.setState({lastUpdated: respLeaderboard.leaderboardMisc.updated});
+      this.setState({
+        lastUpdated: respLeaderboard.leaderboardMisc.updated,
+        rankedGamesCount: respLeaderboard.leaderboardMisc.statistics.matches.ranked
+      });
     } catch(err) {
       this.setState({
         loadingData: false,
@@ -60,8 +66,13 @@ class LeaderboardPage extends Component {
         achievements: leaderboard.user.achievements ? leaderboard.user.achievements : []
       })
     );
+    const userCount = countBy(leaderboard, function (row) {
+        return row.organization !== "Lia";
+    });
+
     this.setState({
       leaderboardData: leaderboard,
+      userCount: userCount.true,
       loadingData: false
     });
   }
@@ -110,7 +121,7 @@ class LeaderboardPage extends Component {
   };
 
   render(){
-    const { leaderboardData, loadingData, lastUpdated } = this.state;
+    const { leaderboardData, userCount, rankedGamesCount, loadingData, lastUpdated } = this.state;
     const leaderboardColumns = [{
       dataField: 'no1',
 			text: 'Rank',
@@ -178,7 +189,7 @@ class LeaderboardPage extends Component {
           <div className="lead-sec-prize text-center">
             <div className="lead-cont-prize">
               <div className="tour-cont-prize">
-                <div className="tour-cont-icon-sm tour-prize-icon">
+                <div className="tour-cont-icon-sm tour-prize-icon cont-icon-tickets">
                   <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
                   <div className="icon-ticket1-bg">&nbsp;</div>
                   <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
@@ -193,7 +204,7 @@ class LeaderboardPage extends Component {
                     <div>Slovenian Lia Tournament 2019 - finals</div>
                     <div>
                       <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
-                        more details
+                        More details
                       </a>
                     </div>
                   </div>
@@ -204,6 +215,10 @@ class LeaderboardPage extends Component {
           <Row>
             <Col xs={6}>
               <h2>Leaderboard</h2>
+              <div className="lead-statistics">
+                <div>{"Players: " + userCount}</div>
+                <div>{"Total games: " + rankedGamesCount}</div>
+              </div>
             </Col>
             <Col xs={6}>
               <InviteButton className="btn-invite-lead pull-right"/>

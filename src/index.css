@@ -643,20 +643,26 @@ td .btn.custom-btn {
 
 .icon-ticket1 {
   color: #019170;
-  transform: rotate(70deg);
   position: relative;
   top: -5px;
   left: -18px;
+
+  -webkit-transform: rotate(70deg);
+  -ms-transform: rotate(70deg);
+  transform: rotate(70deg);
 }
 
 .icon-ticket1-bg {
   background-color: #f3f3f3;
-  transform: rotate(160deg);
   height: 0.9em;
   width: 26px;
   position: absolute;
   top: 5px;
   left: calc(50% - 30.5px);
+
+  -webkit-transform: rotate(160deg);
+  -ms-transform: rotate(160deg);
+  transform: rotate(160deg);
 }
 
 .icon-ticket2 {
@@ -664,6 +670,16 @@ td .btn.custom-btn {
   transform: rotate(-60deg);
   position: absolute;
   top: 3px;
+
+  -webkit-transform: rotate(-60deg);
+  -ms-transform: rotate(-60deg);
+  transform: rotate(-60deg);
+}
+
+@media screen and (max-width: 767.98px) {
+  .cont-icon-tickets {
+    margin-left: 25px;
+  }
 }
 
 /* Tooltips */
@@ -1217,6 +1233,43 @@ iframe {
   font-weight: bold;
 }
 
+.lead-cont-title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.lead-statistics {
+  color: #999;
+  margin: -5px 0 20px;
+  font-size: 1.1em;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.lead-statistics > div:first-child  {
+  margin-right: 15px;
+}
+
+@media screen and (max-width: 767.98px) {
+  .lead-statistics {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
 /* Editor Page */
 
 .editor-cont-page {
@@ -1418,6 +1471,11 @@ iframe {
 }
 
 /* Profile Page */
+
+.prof-your {
+  color: #999;
+  margin: -15px 0 20px;
+}
 
 #prof-cont-data {
   margin: 2em 0 0;
