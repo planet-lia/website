@@ -7,6 +7,8 @@ import logoAgilcon from '../../assets/logo_agilcon.png';
 import logoSensum from '../../assets/logo_sensum.png';
 import logoMedius from '../../assets/logo_medius.png';
 import logoCeltra from '../../assets/logo_celtra.png';
+import logoSolveraLynx from '../../assets/logo_solvera_lynx.svg';
+import logoComtrade from '../../assets/logo_comtrade.png';
 import logoOutfit7 from '../../assets/logo_outfit7.png';
 import logoSFRI from '../../assets/logo_sfri.png';
 
@@ -51,7 +53,7 @@ const Sponsors = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={2} mdOffset={3} sm={4} xs={6}>
+        <Col md={2} mdOffset={1} sm={4} xs={6}>
           <div>
             <a href="https://www.celtra.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-celtra" className="tour-company" src={ logoCeltra } alt="Celtra" />
@@ -59,6 +61,20 @@ const Sponsors = () => {
           </div>
         </Col>
         <Col md={2} sm={4} xs={6}>
+          <div>
+            <a href="https://www.solvera-lynx.com/en/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-solvera-lynx" className="tour-company" src={ logoSolveraLynx } alt="Solvera Lynx" />
+            </a>
+          </div>
+        </Col>
+        <Col md={2} sm={4} xs={6}>
+          <div>
+            <a href="https://www.comtrade.com/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-comtrade" className="tour-company" src={ logoComtrade } alt="Comtrade" />
+            </a>
+          </div>
+        </Col>
+        <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>
           <div>
             <a href="https://outfit7.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-outfit7" className="tour-company" src={ logoOutfit7 } alt="Outfit7" />
