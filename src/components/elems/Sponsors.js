@@ -9,6 +9,7 @@ import logoMedius from '../../assets/logo_medius.png';
 import logoCeltra from '../../assets/logo_celtra.png';
 import logoSolveraLynx from '../../assets/logo_solvera_lynx.svg';
 import logoComtrade from '../../assets/logo_comtrade.png';
+import logoRacDrustvo from '../../assets/logo_rac_drustvo.png';
 import logoOutfit7 from '../../assets/logo_outfit7.png';
 import logoSFRI from '../../assets/logo_sfri.png';
 
@@ -16,7 +17,7 @@ const Sponsors = () => {
   return (
     <div>
       <Row>
-        <Col md={2} mdOffset={1} sm={4} xs={6}>
+        <Col md={2} sm={4} xs={6}>
           <div>
             <a href="https://styliff.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-styliff" className="tour-company" src={ logoStyliff } alt="Styliff tech" />
@@ -37,30 +38,30 @@ const Sponsors = () => {
             </a>
           </div>
         </Col>
-        <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>
+        <Col md={2} sm={4} xs={6}>
           <div>
             <a href="https://www.sensum.eu/" target="_blank" rel="noopener noreferrer">
               <img id="logo-sensum" className="tour-company" src={ logoSensum } alt="Sensum" />
             </a>
           </div>
         </Col>
-        <Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>
+        <Col md={2} sm={4} xs={6}>
           <div>
             <a href="https://www.medius.si/" target="_blank" rel="noopener noreferrer">
               <img id="logo-medius" className="tour-company" src={ logoMedius } alt="Medius" />
             </a>
           </div>
         </Col>
-      </Row>
-      <Row>
-        <Col md={2} mdOffset={1} sm={4} xs={6}>
+        <Col md={2} sm={4} xs={6}>
           <div>
             <a href="https://www.celtra.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-celtra" className="tour-company" src={ logoCeltra } alt="Celtra" />
             </a>
           </div>
         </Col>
-        <Col md={2} sm={4} xs={6}>
+      </Row>
+      <Row>
+        <Col md={2} mdOffset={1} sm={4} xs={6}>
           <div>
             <a href="https://www.solvera-lynx.com/en/" target="_blank" rel="noopener noreferrer">
               <img id="logo-solvera-lynx" className="tour-company" src={ logoSolveraLynx } alt="Solvera Lynx" />
@@ -71,6 +72,13 @@ const Sponsors = () => {
           <div>
             <a href="https://www.comtrade.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-comtrade" className="tour-company" src={ logoComtrade } alt="Comtrade" />
+            </a>
+          </div>
+        </Col>
+        <Col md={2} sm={4} xs={6}>
+          <div>
+            <a href="https://racunalnisko-drustvo.si/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-rac-drustvo" className="tour-company" src={ logoRacDrustvo } alt="Računalniško društvo" />
             </a>
           </div>
         </Col>
