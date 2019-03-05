@@ -947,7 +947,8 @@ td .btn.custom-btn {
   padding: 42px 0;
 }
 
-#logo-loop {
+#logo-loop,
+#logo-solvera-lynx {
   padding: 39px 0;
 }
 
@@ -962,6 +963,14 @@ td .btn.custom-btn {
 
 #logo-celtra {
   padding: 45px 0 24px;
+}
+
+#logo-comtrade {
+  padding: 47.5px 0;
+}
+
+#logo-rac-drustvo {
+  padding: 31px 0;
 }
 
 @media screen and (max-width: 1199.98px) {
