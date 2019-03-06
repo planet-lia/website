@@ -1,3 +1,13 @@
+.fullscreen:fullscreen {
+  background-color: #fff;
+}
+
+.fullscreen:fullscreen > .cont-brackets {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .cont-brackets {
   display: grid;
   grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
@@ -122,7 +132,7 @@
 }
 
 .edge-out > .edge.right {
-  left: -1px;
+  left: -1.1px;
   border-left: 1px solid #000;
 }
 

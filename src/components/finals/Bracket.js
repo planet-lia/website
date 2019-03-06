@@ -60,7 +60,7 @@ class Bracket extends Component {
               - - -
             </div>
             <div className="player-field">
-              XXXXXXXXXXXXXXXXXX
+              PrekaljeniLisjak
             </div>
           </div>
           {edgeRight}
