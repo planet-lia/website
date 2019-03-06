@@ -173,7 +173,7 @@ class LeaderboardPage extends Component {
             <div className="lead-cont-prize">
               <Prize
                 color="#019170"
-                mainText={"Leaderboard winner week 2"}
+                mainText={"Leaderboard winner week 3"}
                 subText={
                   <div>
                     <div>
