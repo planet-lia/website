@@ -13,7 +13,7 @@ const tournamentPageEng = {
   cdHours: "Hours",
   cdMinutes: "Minutes",
   cdSeconds: "Seconds",
-  txtLive: "We are live!",
+  txtLive: "Qualifications ending soon!",
   btnRegisterEarly: "Join Now!",
   lnkWhat: "What is Lia?",
   bnrFBTxt1: (<span><strong>Get your ticket</strong></span>),
