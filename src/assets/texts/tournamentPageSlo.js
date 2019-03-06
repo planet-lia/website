@@ -13,7 +13,7 @@ const tournamentPageSlo = {
   cdHours: "Ure",
   cdMinutes: "Minute",
   cdSeconds: "Sekunde",
-  txtLive: "Poteka zdaj!",
+  txtLive: "Kvalifikacije se končujejo!",
   btnRegisterEarly: "Pridruži se!",
   lnkWhat: "Kaj je Lia?",
   bnrFBTxt1: (<span><strong>Rezerviraj vstopnico</strong></span>),
