@@ -1289,7 +1289,7 @@ iframe {
 }
 
 .lead-quali {
-  margin: 20px 0;
+  margin: 20px 0 5px;
 
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1333,6 +1333,7 @@ iframe {
     font-weight: bold;
     text-align: right;
     margin-right: 0;
+    margin-bottom: 5px;
   }
 }
 
