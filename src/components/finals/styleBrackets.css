@@ -8,9 +8,31 @@
   transform: translateY(-50%);
 }
 
+.controls {
+  height: 22.85px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-play {
+  font-size: 0.7em;
+  padding: 0 3px;
+  margin-right: 5px;
+}
+
+.btn-game {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #999;
+  margin-left: 5px;
+}
+
 .cont-brackets {
   display: grid;
-  grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+  grid-template-columns: 14.2857% 14.2857% 14.2857% 14.2857% 14.2857% 14.2857% 14.2857%;
   grid-row-gap: 30px;
 
   font-size: 16px;
@@ -39,19 +61,24 @@
   border: 1px solid #000;
 }
 
-.root-left,
-.root-right {
+.root-edge {
   width: 9%;
+  height: 100%;
   position: relative;
+}
+
+.root-edge .edge {
+  width: 100%;
+  position: absolute;
   border-bottom: 1px solid #000;
 }
 
-.root-left {
-  top: -25px;
+.root-edge .edge.left {
+  top: calc(50% - 25px);
 }
 
-.root-right {
-  top: 24px;
+.root-edge .edge.right {
+  top: calc(50% + 25px);
 }
 
 .edge-in {
@@ -157,6 +184,24 @@
   top: 62.5px;
   border-bottom: 1px solid #000;
 }
+
+.battle-id {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.battle-id.left,
+.battle-id.center {
+  right: 0;
+}
+
+.battle-id.right {
+  left: 0;
+}
+
 
 /* Grid Positions */
 .g-col-1 {

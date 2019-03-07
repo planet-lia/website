@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class Bracket extends Component {
 
   render() {
-    const { col, row, side, vert, type } = this.props
+    const { col, row, side, vert, type, battleId } = this.props
     let edgeIn = null;
     let edgeOut = null;
     let edgeLeft = null;
@@ -13,6 +14,7 @@ class Bracket extends Component {
       edgeIn = (
         <div className="edge-in">
           <div className={"top " + side}></div>
+          <div className={"battle-id " + side}>{battleId}</div>
           <div className={"bottom " + side}></div>
         </div>
       );
@@ -25,7 +27,7 @@ class Bracket extends Component {
     } else if(type==="leaf"){
       edgeIn = (
         <div className="edge-in">
-          &nbsp;
+          <div className={"battle-id " + side}>{battleId}</div>
         </div>
       )
       edgeOut = (
@@ -35,9 +37,22 @@ class Bracket extends Component {
         </div>
       );
     } else if(type==="root"){
-      edgeLeft = <div className="root-left"></div>
+      edgeLeft = (
+        <div className="root-edge">
+          <div className="edge left"></div>
+          <div className={"battle-id " + side}>{battleId}</div>
+        </div>
+      )
 
-      edgeRight = <div className="root-right"></div>
+      edgeRight = (
+        <div className="root-edge">
+          <div className="edge right"></div>
+        </div>
+      )
+    } else if(type==="outside") {
+      edgeLeft = <div className="root-edge"><div className={"battle-id " + side}>{battleId}</div></div>
+
+      edgeRight = <div className="root-edge"></div>
     }
 
     if(side==="left") {
@@ -56,8 +71,14 @@ class Bracket extends Component {
             <div className="player-field">
               Player 1
             </div>
-            <div>
-              - - -
+            <div className="controls">
+              <Button className="btn-play" onClick={() => console.log("play")}>
+                <Glyphicon className="pui-btns-glyph" glyph="play" />
+              </Button>
+              <div className="btn-game"></div>
+              <div className="btn-game"></div>
+              <div className="btn-game"></div>
+              <div className="btn-game"></div>
             </div>
             <div className="player-field">
               PrekaljeniLisjak
