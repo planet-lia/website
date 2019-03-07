@@ -98,7 +98,9 @@ class TournamentPage extends Component {
                     <h4 className="tour-date">{content.tourDate}</h4>
                     <p>{content.txtBanner}</p>
                     <h3 id="live-now" className="tour-title">{content.txtLive}</h3>
-                    <Countdown date={"2019-03-09T20:00:00"} renderer={this.countdownRenderer}/>
+                    <div className="cont-countdown">
+                      <Countdown date={"2019-03-09T20:00:00"} renderer={this.countdownRenderer}/>
+                    </div>
 
                     <Button
                       bsClass="btn custom-btn custom-btn-xl center-block"
