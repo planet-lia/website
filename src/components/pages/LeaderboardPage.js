@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
 import countBy from 'lodash/countBy';
+import Countdown from 'react-countdown-now';
 
 import ChallengeButton from '../elems/ChallengeButton';
 import InviteButton from '../elems/InviteButton';
@@ -11,6 +12,7 @@ import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
 import Prize from '../elems/Prize';
+import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 
 import api from '../../utils/api';
 
@@ -221,7 +223,19 @@ class LeaderboardPage extends Component {
               </div>
             </Col>
             <Col xs={6}>
-              <InviteButton className="btn-invite-lead pull-right"/>
+              <div className="lead-quali">
+                <div className="quali-text">
+                  <div>
+                    Qualifications ending soon!
+                  </div>
+                  <div>
+                    <Link onClick={() => window.scrollTo(0, 0)} to="/tournament/rules" >Who goes to finals?</Link>
+                  </div>
+                </div>
+                <div>
+                  <Countdown date={"2019-03-09T20:00:00"} renderer={countdownRenderer}/>
+                </div>
+              </div>
             </Col>
           </Row>
           <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData} rowClasses = {this.rowClasses}/>

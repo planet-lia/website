@@ -2,7 +2,7 @@ import React from 'react';
 
 export const countdownRenderer = ({ days, hours, minutes, seconds }) => {
     return (
-        <div className="countdown text-center">
+        <div className="countdown">
             <div>
                 <div className="cd-num">{days}</div>
                 <div className="cd-title">Days</div>

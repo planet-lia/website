@@ -87,8 +87,10 @@ class LandingPage extends Component {
               Join Lia and battle for the coding glory!
             </p>
             <h3 id="live-now" className="tour-title">Qualifications ending soon!</h3>
-            <Countdown date={"2019-03-09T20:00:00"} renderer={countdownRenderer}/>
-            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <div className="cont-countdown">
+              <Countdown date={"2019-03-09T20:00:00"} renderer={countdownRenderer}/>
+            </div>
+            <Link to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <Supporters />
           </div>
         </div>

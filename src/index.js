@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 import './index.css';
 import App from './App';
@@ -19,7 +20,9 @@ window.MonacoEnvironment = {
 ReactDOM.render((
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </BrowserRouter>
   </Provider>
 ), document.getElementById('root'));
