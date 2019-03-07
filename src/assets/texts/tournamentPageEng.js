@@ -92,17 +92,18 @@ const tournamentPageEng = {
   titleRls3: "Cheating",
   txtRls3: "Uploading a code from another Lia user or using multiple accounts is forbidden and will result in disqualification from the tournament. Same goes for trying to bring down our servers or other malicious attempts. We are trying to make a fun event for programming community so please be reasonable. :)",
   titleRls4: "Online leaderboard (18 Feb - 9 Mar)",
-  txtRls4: "During this period an online leaderboard will be live. Every high school or university student from Slovenia will be able to register and upload his bots. When a bot is uploaded it is automatically matched against bots from other players and is according to its skill properly ranked on the leaderboard. The rank is calculated using TrueSkill library. Registrations will be opened until the very last day.",
+  txtRls4: "During this period an online leaderboard will be live. Every high school or university student from Slovenia will be able to register and upload his bots. When a bot is uploaded it is automatically matched against bots from other players and is according to its skill properly ranked on the leaderboard. The rank is calculated using TrueSkill library. Registrations will be opened until the very last day. " +
+  "After the March 9th 8:00 pm, we will disable the ability to upload your bots to the leaderboard, reset the leaderboard and continue to generate games for 24 hours until we get the final rankings on March 10th at 8:00 pm. The top 16 players after the final rankings will be qualified to the finals. Shortly after the ranks will be known, we will publish who plays against who in the first rounds of the final tournament.",
   titleRls5: "Preparations for the final tournament  (10 Mar - 13 Mar)",
-  txtRls5: "Top 16 players from the online leaderboard get to play on the final tournament that will be hosted on the 14 of March. In the period in between they have a chance to make the final tweaks to their bots and upload them to our website. The opponents are known in advance based on the leaderboard ranking so the players can make a specific preparations for the bots they will battle as the final tournament.",
+  txtRls5: "Top 16 players from the online leaderboard get to play on the final tournament. In the period between March 10th 8:00 pm until March 13th midnight they have a chance to make the final tweaks to their bots and upload them to our website. Since the leaderboard will not be running, you won't be able to test those changes against other players, so be careful!",
   titleRls6: "Final tournament  (14 Mar)",
   txtRls6: [
     <span key="0">Final tournament will be held at Faculty of Computer and
       Information Science (FRI) of University of Ljubljana at Večna pot 113,
-      1000 Ljubljana. The exact time is not determined yet. The final tournament
-      will feature a top 16 players competing between each other. It is yet to
-      decide how exactly the battles will look like, but we will update the
-      rules well in advanced.</span>,
+      1000 Ljubljana at 16:00 pm in the classroom P22 The final tournament
+      will feature a top 16 players competing between each other in the best of 5 format.
+      See the event schedule and other details at the <a href="https://www.facebook.com/events/2543198445721481/">EVENT PAGE</a> and
+      get your <a href="https://goo.gl/forms/ZihOffKFgTC8ZaBF3">FREE TICKET</a>. Anyone is welcome!</span>,
     <br key="1"/>,
     <span key="2">Lia team will stream the games on the big canvas. After the
       final tournament all the games from all rounds will be available online

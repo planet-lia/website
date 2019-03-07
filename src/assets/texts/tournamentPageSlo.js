@@ -79,17 +79,18 @@ const tournamentPageSlo = {
   titleRls3: "Diskvalifikacija",
   txtRls3: "Uporaba večih računov je prepovadana. Prepovedana je tudi uporaba kode drugega igralca. Vsaka taka dejavnost bo kaznovana z diskvalifikacijo. Enako velja za poizkuse napadov na Lia strežnike in za ostale škodoželjne poizkuse, ki bi lahko škodili poteku turnirja. Smo zgolj študentje, ki si želimo organizirati zabaven turnir za programersko skupnost, tako da bodite prizanesljivi. :)",
   titleRls4: "Spletna lestvica (18. februar - 9. marec)",
-  txtRls4: "V tem času bo preko spleta na voljo Lia lestvica. Vsi slovenski študentje in dijaki se bodo lahko v tem času registrirali in nalagali svoje bote. Naložen bot bo avtomatično tekmoval proti ostalim igralcem na lestvici in bo na njej uvrščen glede na njegovo kvaliteto. Za računanje ranka botov bomo uporabljali knjižnico TrueSkill. Registracije bodo odprte do zaključka lestvice 9. marca.",
+  txtRls4: "V tem času bo preko spleta na voljo Lia lestvica. Vsi slovenski študentje in dijaki se bodo lahko v tem času registrirali in nalagali svoje bote. Naložen bot bo avtomatično tekmoval proti ostalim igralcem na lestvici in bo na njej uvrščen glede na njegovo kvaliteto. Za računanje ranka botov bomo uporabljali knjižnico TrueSkill. Po 9. marcu ob 20:00 bomo onemogočili objavljanje novih verzij botov, ponastavili lestvico in v naslednjih 24 urah generirali veliko število iger. Končni vrstni red lestvice bo določen v 10. marca ob 20:00. Najboljših 16 igralcev se bo uvrstilo na končni turnir. Kmalu po zaključku kvalifikacijske lestvice, bodo znani tekmeci v prvih krogih finalnega turnirja.",
   titleRls5: "Priprave na zaključni turnir  (10. marec - 13. marec)",
-  txtRls5: "Najboljših 16 igralcev spletne lestvice bo uvrščenih na zaključni turnir, ki se bo odvijal 14. marca. V vmesnem času bodo lahko vsi uvrščeni igralci naredili še zadnje spremembe svojih botov in jih naložili na spletno stran. Nasprotniki na končnem turnirju bodo znani takoj ob zaključku spletne lestvice, tako da se bodo igralci lahko pripravili na točno določene igralce, ki jih čakajo na zaključnem turnirju.",
+  txtRls5: "Najboljših 16 igralcev spletne lestvice bo uvrščenih na zaključni turnir. V vmesnem času bodo lahko vsi uvrščeni igralci med 10. marcem od 20:00 in polnočjo 13. marca posodabljali verzijo bota, ki ga bodo uporabili na tekmovanju. Nasprotniki na končnem turnirju bodo znani takoj ob zaključku spletne lestvice, tako da se bodo igralci lahko pripravili na točno določene igralce, ki jih čakajo na zaključnem turnirju. V tem času lestvica ne bo delovala!",
   titleRls6: "Zaključni turnir (14. marec)",
   txtRls6: [
     <span key="0">Zaključni turnir bo potekal na Fakulteti za računalništvo in
       informatiko (FRI) Univerze v Ljubljani na naslovu Večna pot 113, 1000
-      Ljubljana. Točen čas še ni določen. Na zaključnem turnirju bo tekmovalo
-      16 najboljših igralcev spletne lestvice. Trenutno še ni izbrano, koliko
-      iger bo odigranih med igralcema v vsakem krogu, bodo pa natančnejša
-      pravila objavljena pravočasno.</span>,
+      Ljubljana ob 16:00 v učilnici P22. Na zaključnem turnirju bo tekmovalo
+      16 najboljših igralcev spletne lestvice v formatu best of
+      5. <a href="https://www.facebook.com/events/2543198445721481/">Program</a> in
+      ostale podrobnosti si lahko preberete na strani dogodka
+      . <a href="https://goo.gl/forms/ZihOffKFgTC8ZaBF3">PRIJAVITE</a> se lahko tako igralci kot gledalci.</span>,
     <br key="1"/>,
     <span key="2">Ekipa Lia bo predvajala vse igre na velikem platnu, po
       končanem turnirju pa bodo vse igre dostopne tudi preko uradne spletne
