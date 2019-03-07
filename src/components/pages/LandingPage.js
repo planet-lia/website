@@ -90,7 +90,7 @@ class LandingPage extends Component {
             <div className="cont-countdown">
               <Countdown date={"2019-03-09T20:00:00"} renderer={countdownRenderer}/>
             </div>
-            <Link onClick={() => window.scrollTo(0, 0)} to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
+            <Link to="/tournament" className="btn custom-btn custom-btn-xl">Tournament Page</Link>
             <Supporters />
           </div>
         </div>
