@@ -574,7 +574,7 @@ a.btn.custom-btn:hover {
 .custom-btn.btn-red,
 .custom-btn.btn-red:hover,
 .custom-btn.btn-red:active,
-.custom-btn.btn-red:focus, {
+.custom-btn.btn-red:focus {
   background-color: #9a3f1b;
 }
 

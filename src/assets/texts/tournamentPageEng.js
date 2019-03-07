@@ -16,7 +16,7 @@ const tournamentPageEng = {
   txtLive: "Qualifications ending soon!",
   btnRegisterEarly: "Join Now!",
   lnkWhat: "What is Lia?",
-  bnrFBTxt1: (<span><strong>Get your ticket</strong></span>),
+  bnrFBTxt1: (<span><strong>Get your free ticket</strong></span>),
   bnrFBTxt2: "and check event details.",
 
   titleWant: "Want to have fun and beat your friends at coding?",
