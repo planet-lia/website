@@ -199,7 +199,7 @@ class LeaderboardPage extends Component {
                 <div>
                   <div className="tour-prize-text">
                     <a href="https://goo.gl/forms/xF1q9cTzFgerncvo2" target="_blank" rel="noopener noreferrer">
-                      Get Your Ticket
+                      Get Your Free Ticket
                     </a>
                   </div>
                   <div className="tour-prize-subtext">
