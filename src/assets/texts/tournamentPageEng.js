@@ -42,8 +42,8 @@ const tournamentPageEng = {
   txtAgenda3: [
     <span key="0">The </span>,
     <strong key="1">final tournament</strong>,
-    <span key="2"> at University of Ljubljana Faculty of Computer and
-      Information Science. Free food, drinks and loads of fun!
+    <span key="2"> on March 14th at 16:00 at Faculty of Computer and
+      Information Science University of Ljubljana in room P22. Free food, drinks and loads of fun!
     </span>
   ],
   titlePrizes: "Prizes",
