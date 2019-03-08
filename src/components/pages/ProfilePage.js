@@ -153,6 +153,7 @@ class ProfilePage extends Component {
         player2Rank: gamesList.bots[1].user.rank,
         result: gamesList.status==="completed" ? (gamesList.bots[0].isWinner ? 1 : 2) : 0,
         duration: gamesList.duration,
+        isWinner: gamesList.isWinner,
         unitsRemain1: Math.max(gamesList.bots[0].unitsLeft, 0),
         unitsRemain2: Math.max(gamesList.bots[1].unitsLeft, 0),
         isCompleted: gamesList.status==="completed"
@@ -435,7 +436,7 @@ class ProfilePage extends Component {
           <li><a className={!isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, false)}>Ranked</a></li>
           <li><a className={isChallenges ? "active" : ""} role="button" onClick={() => this.loadGames(this.state.userId, 0, true)}>Challenges</a></li>
         </ul>
-        <GamesTable data={gamesData} loading={loadingData}/>
+        <GamesTable data={gamesData} loading={loadingData} displayWinsAndLosses={true}/>
         {pageCount
           ? <ReactPaginate
               previousLabel={"<"}

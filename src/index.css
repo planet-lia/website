@@ -632,6 +632,15 @@ td .btn.custom-btn {
   transform: translate(-50%,-50%);
 }
 
+.result-loss {
+  color: #9a3f1b;
+}
+
+.result-win {
+  color: #019170;
+}
+
+
 .btn-watch,
 .btn-watch:hover,
 .btn-watch:active,

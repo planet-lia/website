@@ -6,7 +6,7 @@ import Table from '../elems/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GamesTable = (props) => {
-  const gamesColumns = [  {
+  let gamesColumns = [  {
     dataField: 'no1',
     text: 'Game',
     formatter: watchNowFormatter
@@ -18,6 +18,10 @@ const GamesTable = (props) => {
     dataField: 'no7',
     text: 'Player [rank]',
     formatter: player2Formatter
+  }, {
+    dataField: 'no8',
+    text: 'Result',
+    formatter: resultFormatter
   }, {
     dataField: 'no4',
     text: 'Remaining Units',
@@ -31,6 +35,11 @@ const GamesTable = (props) => {
     text: 'Date',
     formatter: dateFormatter
   }];
+
+  // Remove Result column if there is no username specified
+  if (!props.displayWinsAndLosses) {
+    gamesColumns = gamesColumns.filter(function(el) { return el.text !== "Result"; });
+  }
 
   return (
     <div>
@@ -77,6 +86,11 @@ function player1Formatter(cell, row, rowIndex) {
 
 function player2Formatter(cell, row, rowIndex) {
   return playerFormatter(cell, row, rowIndex, 2)
+}
+
+function resultFormatter(cell, row, rowIndex) {
+  if (row.result === 0) return "-";
+  return row.isWinner ? <span className="result-win">W</span> : <span className="result-loss">L</span>;
 }
 
 function playerFormatter(cell, row, rowIndex, playerIndex) {
