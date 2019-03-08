@@ -40,8 +40,8 @@ const tournamentPageSlo = {
   txtAgenda2: "Zadnje izboljšave botov najboljših 16 udeležencev, ki so se uvrstili na zaključni turnir.",
   txtAgenda3: [
     <strong key="0">Zaključni turnir</strong>,
-    <span key="1"> na Fakulteti za računalništvo in informatiko Univerze v
-      Ljubljani. Hrana, pijača in zabava zagotovljena!
+    <span key="1"> 14. marca ob 16:00 na Fakulteti za računalništvo in informatiko Univerze v
+      Ljubljani v predavalnici P22. Hrana, pijača in zabava zagotovljena!
     </span>
   ],
   titlePrizes: "Nagrade",
