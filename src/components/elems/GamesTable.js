@@ -20,7 +20,7 @@ const GamesTable = (props) => {
     formatter: player2Formatter
   }, {
     dataField: 'no8',
-    text: 'Result',
+    text: 'Win/Loss',
     formatter: resultFormatter
   }, {
     dataField: 'no4',
@@ -38,7 +38,7 @@ const GamesTable = (props) => {
 
   // Remove Result column if there is no username specified
   if (!props.displayWinsAndLosses) {
-    gamesColumns = gamesColumns.filter(function(el) { return el.text !== "Result"; });
+    gamesColumns = gamesColumns.filter(function(el) { return el.text !== "Win/Loss"; });
   }
 
   return (
@@ -90,7 +90,7 @@ function player2Formatter(cell, row, rowIndex) {
 
 function resultFormatter(cell, row, rowIndex) {
   if (row.result === 0) return "-";
-  return row.isWinner ? <span className="result-win">W</span> : <span className="result-loss">L</span>;
+  return row.isWinner ? <span className="result-win"><b>W</b></span> : <span className="result-loss"><b>L</b></span>;
 }
 
 function playerFormatter(cell, row, rowIndex, playerIndex) {
