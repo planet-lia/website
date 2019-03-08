@@ -90,7 +90,7 @@ function player2Formatter(cell, row, rowIndex) {
 
 function resultFormatter(cell, row, rowIndex) {
   if (row.result === 0) return "-";
-  return row.isWinner ? <span className="result-win"><b>W</b></span> : <span className="result-loss"><b>L</b></span>;
+  return row.isWinner ? <span className="result-win"><b>Win</b></span> : <span className="result-loss"><b>Loss</b></span>;
 }
 
 function playerFormatter(cell, row, rowIndex, playerIndex) {
