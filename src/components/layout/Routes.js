@@ -13,6 +13,7 @@ import TermsAndConditions from "../views/TermsAndConditions";
 import PrivacyPolicy from "../views/PrivacyPolicy";
 import SettingsPage from "../pages/SettingsPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
+import BracketsPage from "../finals/BracketsPage";
 import BattleTest from "../pages/BattleTest";
 
 const Routes = () => {
@@ -31,6 +32,7 @@ const Routes = () => {
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/settings" component={SettingsPage} />
       <Route path="/account/reset-password" component={ResetPasswordPage} />
+      <Route path="/event/slt2019" component={BracketsPage} />
       <Route path="/battletest" component={BattleTest} />
     </Switch>
   );

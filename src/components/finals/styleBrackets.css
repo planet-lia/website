@@ -1,0 +1,325 @@
+#main-container {
+  background-color: #1e1e1e;
+  color: #000;
+}
+
+.fullscreen:fullscreen > .cont-brackets {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.battle-indicators {
+  height: 22.85px;
+  margin: 3px 0 3px 13px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-play {
+  font-size: 0.7em;
+  padding: 0 3px;
+  margin-right: 5px;
+  border-radius: 0;
+  border: none;
+  color: #999;
+  background-color: #555;
+}
+
+.btn-game {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #555;
+  margin-left: 5px;
+}
+
+.btn-game.yellow {
+  background-color: #facd3b;
+}
+
+.btn-game.green {
+  background-color: #019170;
+}
+
+.cont-brackets {
+  display: grid;
+  grid-template-columns: 14.2857% 14.2857% 14.2857% 14.2857% 14.2857% 14.2857% 14.2857%;
+  grid-row-gap: 30px;
+
+  font-size: 16px;
+  padding: 30px 20px;
+}
+
+.cont-brackets > div {
+  position: relative;
+}
+
+.cont-brackets > #title {
+  text-align: center;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  grid-column-start: 3;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.cont-brackets > #title > h2:last-child {
+  font-weight: bold;
+}
+
+#logo-lia {
+  height: 90px;
+}
+
+.bracket {
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+  position: relative;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertex {
+  width: 82%;
+}
+
+.player-field {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 6px;
+  margin-top: 6px;
+}
+
+.player-field.player1 {
+  background-image: linear-gradient(to right, #facd3b, #c79a05);
+}
+
+.player-field.player2 {
+  background-image: linear-gradient(to right, #019170, #01654e);
+}
+
+.player-field > div {
+  background-color: #3b3b3b;
+  color: #fff;
+  padding: 4px 0;
+}
+
+.player-field > div:first-child {
+  padding-left: 8px;
+  flex: 1;
+}
+
+.player-field > div:last-child {
+  width: 26px;
+  text-align: center;
+}
+
+.root-edge {
+  width: 9%;
+  height: 100%;
+  position: relative;
+}
+
+.root-edge .edge {
+  width: 100%;
+  position: absolute;
+  border-bottom: 2px solid #999;
+}
+
+.root-edge .edge.left {
+  top: calc(50% - 34px);
+}
+
+.root-edge .edge.right {
+  top: calc(50% + 32px);
+}
+
+.edge-in {
+  width: 6%;
+  height: 100%;
+  position: relative;
+}
+
+.edge-in > .top {
+  width: 100%;
+  height: calc(50% - 90px);
+  position: absolute;
+  top: 57px;
+  border-bottom: 2px solid #999;
+}
+
+.edge-in > .top.left {
+  border-left: 2px solid #999;
+}
+
+.edge-in > .top.right {
+  border-right: 2px solid #999;
+}
+
+.edge-in > .bottom {
+  width: 100%;
+  height: calc(50% - 90px);
+  position: absolute;
+  bottom: 57px;
+  border-top: 2px solid #999;
+}
+
+.edge-in > .bottom.left {
+  border-left: 2px solid #999;
+}
+
+.edge-in > .bottom.right {
+  border-right: 2px solid #999;
+}
+
+.edge-out {
+  width: 12%;
+  height: 100%;
+  position: relative;
+}
+
+.edge-out > .connect {
+  width: 50%;
+  height: calc(111.55px - 25px - 18px); /*vertex height - 1x height of player-field - paddings*/
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border-top: 2px solid #999;
+  border-bottom: 2px solid #999;
+}
+
+.edge-out > .connect.left {
+  left: 0;
+  border-right: 2px solid #999;
+}
+
+.edge-out > .connect.right {
+  right:0;
+  border-left: 2px solid #999;
+}
+
+.edge-out > .edge {
+  width: calc(50% + 3px);
+  height: calc(50% - 12.5px);
+  position: absolute;
+}
+
+.edge-out > .edge.left {
+  right: -2px;
+  border-right: 2px solid #999;
+}
+
+.edge-out > .edge.right {
+  left: -2px;
+  border-left: 2px solid #999;
+}
+
+.edge-out > .edge.top {
+  bottom: 12.5px;
+  border-top: 2px solid #999;
+}
+
+.edge-out > .edge.bottom {
+  top: 12.5px;
+  border-bottom: 2px solid #999;
+}
+
+.edge-out > .edge.top-mid {
+  height: calc((113.55px - 25px - 18px) / 2);
+  bottom: 122.5px;
+  border-top: 2px solid #999;
+}
+
+.edge-out > .edge.bottom-mid {
+  height: calc((113.55px - 25px - 18px) / 2);
+  top: 122.5px;
+  border-bottom: 2px solid #999;
+}
+
+.battle-id {
+  color: #999;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.battle-id.left,
+.battle-id.center {
+  right: 0;
+}
+
+.battle-id.right {
+  left: 0;
+}
+
+
+/* Grid Positions */
+.g-col-1 {
+  grid-column-start: 1;
+}
+
+.g-col-2 {
+  grid-column-start: 2;
+}
+
+.g-col-3 {
+  grid-column-start: 3;
+}
+
+.g-col-4 {
+  grid-column-start: 4;
+}
+
+.g-col-5 {
+  grid-column-start: 5;
+}
+
+.g-col-6 {
+  grid-column-start: 6;
+}
+
+.g-col-7 {
+  grid-column-start: 7;
+}
+
+.g-row-1 {
+  grid-row-start: 1;
+}
+
+.g-row-2 {
+  grid-row-start: 2;
+}
+
+.g-row-3 {
+  grid-row-start: 3;
+}
+
+.g-row-4 {
+  grid-row-start: 4;
+}
+
+.g-row-12 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.g-row-23 {
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.g-row-34 {
+  grid-row-start: 3;
+  grid-row-end: 5;
+}
