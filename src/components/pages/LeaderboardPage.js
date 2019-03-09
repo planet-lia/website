@@ -7,7 +7,6 @@ import countBy from 'lodash/countBy';
 import Countdown from 'react-countdown-now';
 
 import ChallengeButton from '../elems/ChallengeButton';
-import InviteButton from '../elems/InviteButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';

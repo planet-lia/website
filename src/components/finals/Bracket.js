@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
 
 class Bracket extends Component {
   constructor(props) {
