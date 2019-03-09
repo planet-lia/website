@@ -2,9 +2,76 @@ import React, { Component } from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 
 class Bracket extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      col: null,
+      row: null,
+      side: null,
+      vert: null,
+      type: null
+    }
+  }
 
-  render() {
-    const { col, row, side, vert, type, battleId } = this.props
+  componentDidMount = () => {
+    switch(this.props.battleId) {
+      case 1:
+        this.setState({ col:"1", row:"1", side:"left", type:"leaf", vert:"top" });
+        break;
+      case 2:
+        this.setState({ col:"1", row:"2", side:"left", type:"leaf", vert:"bottom" });
+        break;
+      case 3:
+        this.setState({ col:"1", row:"3", side:"left", type:"leaf", vert:"top" });
+        break;
+      case 4:
+        this.setState({ col:"1", row:"4", side:"left", type:"leaf", vert:"bottom" });
+        break;
+      case 9:
+        this.setState({ col:"2", row:"12", side:"left", type:"normal", vert:"top" });
+        break;
+      case 10:
+        this.setState({ col:"2", row:"34", side:"left", type:"normal", vert:"bottom" });
+        break;
+      case 13:
+        this.setState({ col:"3", row:"23", side:"left", type:"normal", vert:"bottom-mid" });
+        break;
+      case 16:
+        this.setState({ col:"4", row:"23", side:"center", type:"root" });
+        break;
+      case 15:
+        this.setState({ col:"4", row:"34", side:"center", type:"outside" });
+        break;
+      case 14:
+        this.setState({ col:"5", row:"23", side:"right", type:"normal", vert:"top-mid" });
+        break;
+      case 11:
+        this.setState({ col:"6", row:"12", side:"right", type:"normal", vert:"top" });
+        break;
+      case 12:
+        this.setState({ col:"6", row:"34", side:"right", type:"normal", vert:"bottom" });
+        break;
+      case 5:
+        this.setState({ col:"7", row:"1", side:"right", type:"leaf", vert:"top" });
+        break;
+      case 6:
+        this.setState({ col:"7", row:"2", side:"right", type:"leaf", vert:"bottom" });
+        break;
+      case 7:
+        this.setState({ col:"7", row:"3", side:"right", type:"leaf", vert:"top" });
+        break;
+      case 8:
+        this.setState({ col:"7", row:"4", side:"right", type:"leaf", vert:"bottom" });
+        break;
+      default:
+        //do nothing
+    }
+  }
+
+  setEdges = () => {
+    const { side, vert, type } = this.state;
+    const { battleId } = this.props;
+
     let edgeIn = null;
     let edgeOut = null;
     let edgeLeft = null;
@@ -62,6 +129,13 @@ class Bracket extends Component {
       edgeLeft = edgeOut;
       edgeRight = edgeIn;
     }
+
+    return {edgeLeft, edgeRight};
+  }
+
+  render() {
+    const { col, row, side } = this.state;
+    const {edgeLeft, edgeRight} = this.setEdges();
 
     return (
       <div className={"g-col-" + col + " g-row-" + row}>

@@ -29,7 +29,7 @@ class BracketsPage extends Component {
 
   render() {
     return (
-      <div>
+      <div id="cont-brackets-page">
         {/*<div onClick={this.goFull} className="text-center">
           <Glyphicon glyph="fullscreen" />
         </div>*/}
@@ -40,25 +40,25 @@ class BracketsPage extends Component {
           <div className="cont-brackets">
             <div id="title">
               <img id="logo-lia" src={ liaLogo } alt="Lia" />
-              <h2>Slovenian Lia Tournament 2019</h2>
-              <h2>Finals</h2>
+              <h3>Slovenian Lia Tournament 2019</h3>
+              <h3>Finals</h3>
             </div>
-            <Bracket col="1" row="1"  battleId="1" side="left"   type="leaf"   vert="top" />
-            <Bracket col="1" row="2"  battleId="2" side="left"   type="leaf"   vert="bottom" />
-            <Bracket col="1" row="3"  battleId="3" side="left"   type="leaf"   vert="top" />
-            <Bracket col="1" row="4"  battleId="4" side="left"   type="leaf"   vert="bottom" />
-            <Bracket col="2" row="12" battleId="9" side="left"   type="normal" vert="top" />
-            <Bracket col="2" row="34" battleId="10" side="left"   type="normal" vert="bottom" />
-            <Bracket col="3" row="23" battleId="13" side="left"   type="normal" vert="bottom-mid" />
-            <Bracket col="4" row="23" battleId="16" side="center" type="root" />
-            <Bracket col="4" row="34"  battleId="15" side="center" type="outside" />
-            <Bracket col="5" row="23" battleId="14" side="right"  type="normal" vert="top-mid" />
-            <Bracket col="6" row="12" battleId="11" side="right"  type="normal" vert="top" />
-            <Bracket col="6" row="34" battleId="12" side="right"  type="normal" vert="bottom" />
-            <Bracket col="7" row="1"  battleId="5" side="right"  type="leaf"   vert="top" />
-            <Bracket col="7" row="2"  battleId="6" side="right"  type="leaf"   vert="bottom" />
-            <Bracket col="7" row="3"  battleId="7" side="right"  type="leaf"   vert="top" />
-            <Bracket col="7" row="4"  battleId="8" side="right"  type="leaf"   vert="bottom" />
+            <Bracket battleId={1} />
+            <Bracket battleId={2} />
+            <Bracket battleId={3} />
+            <Bracket battleId={4} />
+            <Bracket battleId={9} />
+            <Bracket battleId={10} />
+            <Bracket battleId={13} />
+            <Bracket battleId={16} />
+            <Bracket battleId={15} />
+            <Bracket battleId={14} />
+            <Bracket battleId={11} />
+            <Bracket battleId={12} />
+            <Bracket battleId={5} />
+            <Bracket battleId={6} />
+            <Bracket battleId={7} />
+            <Bracket battleId={8} />
           </div>
         </Fullscreen>
       </div>
