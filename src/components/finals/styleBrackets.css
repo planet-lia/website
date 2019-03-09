@@ -1,8 +1,8 @@
 #cont-brackets-page {
   background-color: #1e1e1e;
   color: #000;
-  min-width: 810px;
-  overflow: auto;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .battle-indicators {
@@ -34,8 +34,9 @@
   grid-template-columns: 14.2857% 14.2857% 14.2857% 14.2857% 14.2857% 14.2857% 14.2857%;
   grid-row-gap: 30px;
 
+  min-width: 810px;
   font-size: 16px;
-  padding: 30px 20px;
+  padding: 30px 20px;  
 }
 
 .cont-brackets > div {
