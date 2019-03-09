@@ -237,7 +237,9 @@ class LeaderboardPage extends Component {
               </div>
             </Col>
           </Row>
-          <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData} rowClasses = {this.rowClasses}/>
+          <div className="cont-overflow cont-table">
+            <Table data={leaderboardData} columns={leaderboardColumns} keyField="username" loading={loadingData} rowClasses = {this.rowClasses}/>
+          </div>
           <Moment format="DD/MM/YYYY HH:mm" style={leaderboardUpdatedTextStype}>{lastUpdated}</Moment>
         </div>
 

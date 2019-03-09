@@ -276,6 +276,15 @@ select.placeholder > option {
   width: 100%;
 }
 
+.cont-overflow.cont-table {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+}
+
+.cont-overflow.cont-table table {
+  margin-bottom: 0;
+}
+
 #main-header {
   background-color: #1c1c1a;
   color: #ddd;

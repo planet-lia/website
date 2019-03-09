@@ -42,7 +42,7 @@ const GamesTable = (props) => {
   }
 
   return (
-    <div>
+    <div className="cont-overflow cont-table">
       <Table {...props} columns={gamesColumns} keyField="matchId"/>
     </div>
   )
