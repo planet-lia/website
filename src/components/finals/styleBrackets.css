@@ -1,12 +1,6 @@
-.fullscreen, .fullscreen:fullscreen {
+#cont-brackets-page {
   background-color: #1e1e1e;
   color: #000;
-}
-
-.fullscreen:fullscreen > .cont-brackets {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .battle-indicators {
@@ -14,16 +8,6 @@
   margin: 3px 0 3px 13px;
   display: flex;
   align-items: center;
-}
-
-.btn-play {
-  font-size: 0.7em;
-  padding: 0 3px;
-  margin-right: 5px;
-  border-radius: 0;
-  border: none;
-  color: #999;
-  background-color: #555;
 }
 
 .btn-game {
@@ -65,13 +49,16 @@
   grid-row-start: 1;
   grid-row-end: 3;
 }
+.cont-brackets > #title > h3 {
+  font-weight: normal;
+}
 
-.cont-brackets > #title > h2:last-child {
+.cont-brackets > #title > h3:last-child {
   font-weight: bold;
 }
 
 #logo-lia {
-  height: 90px;
+  height: 75px;
 }
 
 .bracket {

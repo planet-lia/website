@@ -63,6 +63,8 @@ class App extends Component {
 
   render() {
     const isEditor = (window.location.pathname.split("/")[1]==="editor");
+    const darkPages = ["/editor", "/event/slt2019"];
+    const isDark = darkPages.includes(window.location.pathname);
 
     if (this.props.isCheckingAuth) {
       return (
@@ -77,7 +79,7 @@ class App extends Component {
       )
     } else {
       return (
-        <div id="main-container">
+        <div id="main-container" className={isDark ? "dark" : null}>
           <Header foo={() => false}/>
           <div className={isEditor ? "main-content no-footer" : "main-content"}>
             <Route component={withTracker(Routes, { /* additional attributes */ })}/>
