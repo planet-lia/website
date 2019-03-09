@@ -258,7 +258,7 @@ class EditorPage extends Component {
     };
 
     return (
-      <div>
+      <div className="editor-main-cont cont-overflow">
         <div className="cont-fullpage editor-cont-page">
           <div id="editor-left">
             <div id="editor-cont-ui">
