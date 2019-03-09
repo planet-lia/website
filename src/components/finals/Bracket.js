@@ -147,14 +147,14 @@ class Bracket extends Component {
                 {player1}
               </div>
               <div>
-                1
+                0
               </div>
             </div>
             <div className="battle-indicators">
-              <div className="btn-game green"></div>
-              <div className="btn-game green"></div>
-              <div className="btn-game green"></div>
-              <div className="btn-game yellow"></div>
+              <div className="btn-game"></div>
+              <div className="btn-game"></div>
+              <div className="btn-game"></div>
+              <div className="btn-game"></div>
               <div className="btn-game"></div>
             </div>
             <div className="player-field player2">
@@ -162,7 +162,7 @@ class Bracket extends Component {
                 {player2}
               </div>
               <div>
-                3
+                0
               </div>
             </div>
           </div>
