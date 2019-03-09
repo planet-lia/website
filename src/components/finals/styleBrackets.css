@@ -1,5 +1,6 @@
-.fullscreen:fullscreen {
-  background-color: #fff;
+#main-container {
+  background-color: #1e1e1e;
+  color: #000;
 }
 
 .fullscreen:fullscreen > .cont-brackets {
@@ -8,9 +9,9 @@
   transform: translateY(-50%);
 }
 
-.controls {
+.battle-indicators {
   height: 22.85px;
-  margin-left: 10px;
+  margin: 3px 0 3px 13px;
   display: flex;
   align-items: center;
 }
@@ -19,6 +20,10 @@
   font-size: 0.7em;
   padding: 0 3px;
   margin-right: 5px;
+  border-radius: 0;
+  border: none;
+  color: #999;
+  background-color: #555;
 }
 
 .btn-game {
@@ -26,8 +31,16 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #999;
+  background-color: #555;
   margin-left: 5px;
+}
+
+.btn-game.yellow {
+  background-color: #facd3b;
+}
+
+.btn-game.green {
+  background-color: #019170;
 }
 
 .cont-brackets {
@@ -36,15 +49,35 @@
   grid-row-gap: 30px;
 
   font-size: 16px;
+  padding: 30px 20px;
 }
 
 .cont-brackets > div {
   position: relative;
 }
 
+.cont-brackets > #title {
+  text-align: center;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  grid-column-start: 3;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.cont-brackets > #title > h2:last-child {
+  font-weight: bold;
+}
+
+#logo-lia {
+  height: 90px;
+}
+
 .bracket {
   width: 100%;
   height: 100%;
+  padding: 30px 0;
   position: relative;
 
   display: flex;
@@ -58,7 +91,34 @@
 }
 
 .player-field {
-  border: 1px solid #000;
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 6px;
+  margin-top: 6px;
+}
+
+.player-field.player1 {
+  background-image: linear-gradient(to right, #facd3b, #c79a05);
+}
+
+.player-field.player2 {
+  background-image: linear-gradient(to right, #019170, #01654e);
+}
+
+.player-field > div {
+  background-color: #3b3b3b;
+  color: #fff;
+  padding: 4px 0;
+}
+
+.player-field > div:first-child {
+  padding-left: 8px;
+  flex: 1;
+}
+
+.player-field > div:last-child {
+  width: 26px;
+  text-align: center;
 }
 
 .root-edge {
@@ -70,15 +130,15 @@
 .root-edge .edge {
   width: 100%;
   position: absolute;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #999;
 }
 
 .root-edge .edge.left {
-  top: calc(50% - 25px);
+  top: calc(50% - 34px);
 }
 
 .root-edge .edge.right {
-  top: calc(50% + 25px);
+  top: calc(50% + 32px);
 }
 
 .edge-in {
@@ -89,34 +149,34 @@
 
 .edge-in > .top {
   width: 100%;
-  height: calc(50% - 62.5px); /*half - 2.5x height of player-field*/
+  height: calc(50% - 90px);
   position: absolute;
-  top: 39px;  /*1.5x height of player-field*/
-  border-bottom: 1px solid #000;
+  top: 57px;
+  border-bottom: 2px solid #999;
 }
 
 .edge-in > .top.left {
-  border-left: 1px solid #000;
+  border-left: 2px solid #999;
 }
 
 .edge-in > .top.right {
-  border-right: 1px solid #000;
+  border-right: 2px solid #999;
 }
 
 .edge-in > .bottom {
   width: 100%;
-  height: calc(50% - 62.5px); /*half - 3x hight of player-field*/
+  height: calc(50% - 90px);
   position: absolute;
-  bottom: 39px;
-  border-top: 1px solid #000;
+  bottom: 57px;
+  border-top: 2px solid #999;
 }
 
 .edge-in > .bottom.left {
-  border-left: 1px solid #000;
+  border-left: 2px solid #999;
 }
 
 .edge-in > .bottom.right {
-  border-right: 1px solid #000;
+  border-right: 2px solid #999;
 }
 
 .edge-out {
@@ -127,65 +187,66 @@
 
 .edge-out > .connect {
   width: 50%;
-  height: calc(72.55px -  25px); /*vertex height - 1x height of player-field*/
+  height: calc(111.55px - 25px - 18px); /*vertex height - 1x height of player-field - paddings*/
 
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border-top: 2px solid #999;
+  border-bottom: 2px solid #999;
 }
 
 .edge-out > .connect.left {
   left: 0;
-  border-right: 1px solid #000;
+  border-right: 2px solid #999;
 }
 
 .edge-out > .connect.right {
   right:0;
-  border-left: 1px solid #000;
+  border-left: 2px solid #999;
 }
 
 .edge-out > .edge {
-  width: calc(50% + 1px);
+  width: calc(50% + 3px);
   height: calc(50% - 12.5px);
   position: absolute;
 }
 
 .edge-out > .edge.left {
-  right: -1px;
-  border-right: 1px solid #000;
+  right: -2px;
+  border-right: 2px solid #999;
 }
 
 .edge-out > .edge.right {
-  left: -1.1px;
-  border-left: 1px solid #000;
+  left: -2px;
+  border-left: 2px solid #999;
 }
 
 .edge-out > .edge.top {
   bottom: 12.5px;
-  border-top: 1px solid #000;
+  border-top: 2px solid #999;
 }
 
 .edge-out > .edge.bottom {
   top: 12.5px;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #999;
 }
 
 .edge-out > .edge.top-mid {
-  height: calc((72.55px - 25px) / 2); /*vertex height - 1x height of player-field, halfed*/
-  bottom: 62.5px;
-  border-top: 1px solid #000;
+  height: calc((113.55px - 25px - 18px) / 2);
+  bottom: 122.5px;
+  border-top: 2px solid #999;
 }
 
 .edge-out > .edge.bottom-mid {
-  height: calc((72.55px - 25px) / 2); /*vertex height - 1x height of player-field, halfed*/
-  top: 62.5px;
-  border-bottom: 1px solid #000;
+  height: calc((113.55px - 25px - 18px) / 2);
+  top: 122.5px;
+  border-bottom: 2px solid #999;
 }
 
 .battle-id {
+  color: #999;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

@@ -68,20 +68,28 @@ class Bracket extends Component {
         <div className={"bracket " + side}>
           {edgeLeft}
           <div className="vertex">
-            <div className="player-field">
-              Player 1
+            <div className="player-field player1">
+              <div>
+                Player1
+              </div>
+              <div>
+                1
+              </div>
             </div>
-            <div className="controls">
-              <Button className="btn-play" onClick={() => console.log("play")}>
-                <Glyphicon className="pui-btns-glyph" glyph="play" />
-              </Button>
-              <div className="btn-game"></div>
-              <div className="btn-game"></div>
-              <div className="btn-game"></div>
+            <div className="battle-indicators">
+              <div className="btn-game green"></div>
+              <div className="btn-game green"></div>
+              <div className="btn-game green"></div>
+              <div className="btn-game yellow"></div>
               <div className="btn-game"></div>
             </div>
-            <div className="player-field">
-              PrekaljeniLisjak
+            <div className="player-field player2">
+              <div>
+                Player2
+              </div>
+              <div>
+                3
+              </div>
             </div>
           </div>
           {edgeRight}
