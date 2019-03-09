@@ -134,7 +134,8 @@ class Bracket extends Component {
 
   render() {
     const { col, row, side } = this.state;
-    const {edgeLeft, edgeRight} = this.setEdges();
+    const { player1, player2 } = this.props;
+    const { edgeLeft, edgeRight } = this.setEdges();
 
     return (
       <div className={"g-col-" + col + " g-row-" + row}>
@@ -143,7 +144,7 @@ class Bracket extends Component {
           <div className="vertex">
             <div className="player-field player1">
               <div>
-                Player1
+                {player1}
               </div>
               <div>
                 1
@@ -158,7 +159,7 @@ class Bracket extends Component {
             </div>
             <div className="player-field player2">
               <div>
-                Player2
+                {player2}
               </div>
               <div>
                 3
