@@ -236,7 +236,7 @@ class ProfilePage extends Component {
     } = this.state;
 
     const tooltip = (
-      <Tooltip id="tooltip-rank">
+      <Tooltip id="tooltip-rank" className="custom-tooltip">
         <div>Rating = Mu - 3 * Sigma</div>
         <div className="margin-top10">Mu - Estimate of your rank</div>
         <div>Sigma - Certainty of your rank</div>
