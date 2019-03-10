@@ -238,6 +238,26 @@ class LeaderboardPage extends Component {
               />
             </div>
           </div>
+          <div className="lead-sec-prize text-center">
+            <div className="lead-cont-prize">
+              <Prize
+                color="#019170"
+                mainText={"Best ranked high school student"}
+                subText={
+                  <div>
+                    <div className="lead-prize-win">Winner: <Link to="/user/aleksgorica" className="no-underline">aleksgorica</Link></div>
+                    <div>Prize: Razer Cynosa PRO & Deathadder 2000</div>
+                    <div>
+                      <span>by </span>
+                      <a href="https://svet.fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
+                        Student Council FRI
+                      </a>
+                    </div>
+                  </div>
+                }
+              />
+            </div>
+          </div>
           <Row>
             <Col xs={6}>
               <h2>Leaderboard</h2>
