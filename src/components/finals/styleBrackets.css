@@ -173,6 +173,7 @@
 .edge-out {
   width: 12%;
   height: 100%;
+  min-height: 110.84px;
   position: relative;
 }
 

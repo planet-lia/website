@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
 import countBy from 'lodash/countBy';
-import Countdown from 'react-countdown-now';
 
 import ChallengeButton from '../elems/ChallengeButton';
+import InviteButton from '../elems/InviteButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
 import Prize from '../elems/Prize';
-import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 
 import api from '../../utils/api';
 
 import {connect} from "react-redux";
+
+import finalsBracket from '../../assets/bracket.png';
 
 class LeaderboardPage extends Component {
   constructor(props){
@@ -172,6 +173,60 @@ class LeaderboardPage extends Component {
           </div>
           <div className="lead-sec-prize text-center">
             <div className="lead-cont-prize">
+                <Col md={5}>
+                  <a href="/events/slt2019" target="_blank" rel="noopener noreferrer">
+                    <img id="img-bracket" src={ finalsBracket } alt="Finals Bracket" />
+                  </a>
+                </Col>
+                <Col md={7}>
+                  <div className="margin-top20">
+                    <h3 className="tour-title">Slovenian Lia Tournament 2019 - Finals</h3>
+                    <p>
+                      Come and see the finals of the Slovenian Lia Tournament
+                      2019 where top 16 players from the leaderboard will battle
+                      for the final victory!
+                    </p>
+                  </div>
+
+                  <div id="banner-finals-cont-links">
+
+                    <div>
+                      <a href="/events/slt2019" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
+                        Finals Bracket
+                      </a>
+                    </div>
+
+                    <div>
+                      <div className="tour-cont-prize">
+                        <div className="tour-cont-icon-sm tour-prize-icon cont-icon-tickets">
+                          <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
+                          <div className="icon-ticket1-bg">&nbsp;</div>
+                          <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
+                        </div>
+                        <div>
+                          <div className="tour-prize-text">
+                            <a href="https://goo.gl/forms/xF1q9cTzFgerncvo2" target="_blank" rel="noopener noreferrer">
+                              Get Your Free Ticket
+                            </a>
+                          </div>
+                          <div className="tour-prize-subtext">
+                            <div>Slovenian Lia Tournament 2019 - finals</div>
+                            <div>
+                              <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
+                                More details
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </Col>
+            </div>
+          </div>
+          <div className="lead-sec-prize text-center">
+            <div className="lead-cont-prize">
               <Prize
                 color="#019170"
                 mainText={"Leaderboard winner week 3"}
@@ -187,32 +242,6 @@ class LeaderboardPage extends Component {
               />
             </div>
           </div>
-          <div className="lead-sec-prize text-center">
-            <div className="lead-cont-prize">
-              <div className="tour-cont-prize">
-                <div className="tour-cont-icon-sm tour-prize-icon cont-icon-tickets">
-                  <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
-                  <div className="icon-ticket1-bg">&nbsp;</div>
-                  <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
-                </div>
-                <div>
-                  <div className="tour-prize-text">
-                    <a href="https://goo.gl/forms/xF1q9cTzFgerncvo2" target="_blank" rel="noopener noreferrer">
-                      Get Your Free Ticket
-                    </a>
-                  </div>
-                  <div className="tour-prize-subtext">
-                    <div>Slovenian Lia Tournament 2019 - finals</div>
-                    <div>
-                      <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
-                        More details
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <Row>
             <Col xs={6}>
               <h2>Leaderboard</h2>
@@ -222,19 +251,7 @@ class LeaderboardPage extends Component {
               </div>
             </Col>
             <Col xs={6}>
-              <div className="lead-quali">
-                <div className="quali-text">
-                  <div>
-                    Qualifications ending soon!
-                  </div>
-                  <div>
-                    <Link onClick={() => window.scrollTo(0, 0)} to="/tournament/rules" >Who goes to finals?</Link>
-                  </div>
-                </div>
-                <div>
-                  <Countdown date={"2019-03-09T20:00:00"} renderer={countdownRenderer}/>
-                </div>
-              </div>
+              <InviteButton className="btn-invite-lead pull-right"/>
             </Col>
           </Row>
           <div className="cont-overflow cont-table">

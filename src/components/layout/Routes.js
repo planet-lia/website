@@ -31,7 +31,7 @@ const Routes = () => {
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/settings" component={SettingsPage} />
       <Route path="/account/reset-password" component={ResetPasswordPage} />
-      <Route path="/event/slt2019" component={BracketsPage} />
+      <Route path="/events/slt2019" component={BracketsPage} />
     </Switch>
   );
 }

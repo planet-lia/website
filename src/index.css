@@ -128,24 +128,6 @@ select.placeholder > option {
     padding: 10px 0;
 }
 
-.lead-quali .countdown > div {
-  width: 3.1em;
-  margin: 0 3px;
-}
-
-.lead-quali .countdown > div:last-child {
-  margin-right: 0;
-}
-
-.lead-quali .countdown .cd-num {
-  font-size: 1.5em;
-  padding: 7px 0;
-}
-
-.lead-quali .countdown .cd-title {
-  font-size: 0.75em;
-}
-
 .banner {
   display: inline-block;
   background-color: #f3f3f3;
@@ -803,7 +785,7 @@ td .btn.custom-btn {
 }
 
 #tour-what {
-  margin-top: 10px;
+  margin: 10px 0 40px;
 }
 
 #cont-banner-fb {
@@ -846,6 +828,52 @@ td .btn.custom-btn {
 
 #banner-fb .trophy {
   color: #d9c72e;
+}
+
+#tour-cont-addition > .lead-sec-prize {
+  margin-bottom: 0;
+}
+
+#img-bracket {
+  display: block;
+  width: 70%;
+  margin: 35px auto 15px;
+}
+
+#banner-finals-cont-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+#banner-finals-cont-links > div:first-child {
+  margin-right: 60px;
+}
+
+@media screen and (max-width: 1199.98px) {
+  #img-bracket {
+    width: 80%;
+    margin: 50px auto 30px;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  #img-bracket {
+    width: 40%;
+    margin: 30px auto 20px;
+  }
+  #banner-finals-cont-links {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
 }
 
 #tour-cont-plang {
@@ -1315,52 +1343,12 @@ iframe {
   margin-right: 15px;
 }
 
-.lead-quali {
-  margin: 20px 0 5px;
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.quali-text {
-  font-weight: bold;
-  text-align: right;
-  margin-right: 15px;
-}
-
 @media screen and (max-width: 767.98px) {
   .lead-statistics {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-  }
-
-  .lead-quali {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-
-    -webkit-box-align: end;
-    -ms-flex-align: end;
-    align-items: flex-end;
-  }
-
-  .quali-text {
-    font-weight: bold;
-    text-align: right;
-    margin-right: 0;
-    margin-bottom: 5px;
   }
 }
 
