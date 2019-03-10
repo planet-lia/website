@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import { Col, Button } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import Countdown from 'react-countdown-now';
+import { Switch, Route } from 'react-router-dom';
+//import Countdown from 'react-countdown-now';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TournamentMain from '../views/TournamentMain';
 import TournamentRules from '../views/TournamentRules';
-
-import { connect } from 'react-redux';
-import { popupsActions } from '../../utils/actions/popupsActions';
 
 import { languageConst } from '../../utils/constants/languageConst';
 import textEng from '../../assets/texts/tournamentPageEng';
@@ -175,4 +172,4 @@ class TournamentPage extends Component {
   }
 }
 
-export default withRouter(connect()(TournamentPage));
+export default TournamentPage;
