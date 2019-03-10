@@ -144,7 +144,9 @@ class Bracket extends Component {
           <div className="vertex">
             <div className="player-field player1">
               <div>
-                {player1}
+                <a href={"/user/" + player1} target="_blank" rel="noopener noreferrer">
+                  {player1}
+                </a>
               </div>
               <div>
                 0
@@ -159,7 +161,9 @@ class Bracket extends Component {
             </div>
             <div className="player-field player2">
               <div>
+              <a href={"/user/" + player2} target="_blank" rel="noopener noreferrer">
                 {player2}
+              </a>
               </div>
               <div>
                 0
