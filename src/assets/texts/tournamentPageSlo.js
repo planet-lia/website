@@ -19,6 +19,12 @@ const tournamentPageSlo = {
   bnrFBTxt1: (<span><strong>Rezerviraj vstopnico</strong></span>),
   bnrFBTxt2: "in preberi več o dogodku.",
 
+  bnrFinalsTitle: "Finale",
+  bnrFinalsTxt: "Oglej si zaključni turnir tekmovanja Lia 2019, kjer se bo najboljših 16 igralcev kvalifikacijske lestvice potegovalo za končno zmago!",
+  bnrFinalsBtn: "Finalni krog",
+  bnrFinalsTicket1: "Rezerviraj vstopnico",
+  bnrFinalsTicket2: "Več o dogodku",
+
   titleWant: "Bi se rad zabaval in premagal prijatelje v programiranju?",
   txtWant: "Izberi svoj najljubši programski jezik in uporabi že pripravljene začetne bote. Začneš lahko v le nekaj minutah.",
   btnLeaderboard: "Lestvica",
@@ -40,7 +46,7 @@ const tournamentPageSlo = {
   txtAgenda2: "Zadnje izboljšave botov najboljših 16 udeležencev, ki so se uvrstili na zaključni turnir.",
   txtAgenda3: [
     <strong key="0">Zaključni turnir</strong>,
-    <span key="1"> 14. marca ob 16:00 na Fakulteti za računalništvo in informatiko Univerze v
+    <span key="1"> ob 16:00 na Fakulteti za računalništvo in informatiko Univerze v
       Ljubljani v predavalnici P22. Hrana, pijača in zabava zagotovljena!
     </span>
   ],

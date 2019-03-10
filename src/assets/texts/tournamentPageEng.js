@@ -19,6 +19,13 @@ const tournamentPageEng = {
   bnrFBTxt1: (<span><strong>Get your free ticket</strong></span>),
   bnrFBTxt2: "and check event details.",
 
+  bnrFinalsTitle: "Finals",
+  bnrFinalsTxt: "Come and see the finals of the Slovenian Lia Tournament 2019 where top 16 players from the leaderboard will battle for the final victory!",
+  bnrFinalsBtn: "Finals Bracket",
+  bnrFinalsTicket1: "Get Your Free Ticket",
+  bnrFinalsTicket2: "More details",
+
+
   titleWant: "Want to have fun and beat your friends at coding?",
   txtWant: "Pick your favourite language and use our prebuilt starting bots to get you going within minutes.",
   btnLeaderboard: "Leaderboard",
@@ -42,7 +49,7 @@ const tournamentPageEng = {
   txtAgenda3: [
     <span key="0">The </span>,
     <strong key="1">final tournament</strong>,
-    <span key="2"> on March 14th at 16:00 at Faculty of Computer and
+    <span key="2"> at 4:00 pm at Faculty of Computer and
       Information Science University of Ljubljana in room P22. Free food, drinks and loads of fun!
     </span>
   ],
