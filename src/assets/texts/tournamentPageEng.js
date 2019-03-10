@@ -19,7 +19,7 @@ const tournamentPageEng = {
   bnrFBTxt1: (<span><strong>Get your free ticket</strong></span>),
   bnrFBTxt2: "and check event details.",
 
-  bnrFinalsTitle: "Slovenian Lia Tournament 2019 - Finals",
+  bnrFinalsTitle: "Finals",
   bnrFinalsTxt: "Come and see the finals of the Slovenian Lia Tournament 2019 where top 16 players from the leaderboard will battle for the final victory!",
   bnrFinalsBtn: "Finals Bracket",
   bnrFinalsTicket1: "Get Your Free Ticket",

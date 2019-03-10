@@ -19,7 +19,7 @@ const tournamentPageSlo = {
   bnrFBTxt1: (<span><strong>Rezerviraj vstopnico</strong></span>),
   bnrFBTxt2: "in preberi več o dogodku.",
 
-  bnrFinalsTitle: "Slovenski Lia turnir 2019 - Finale",
+  bnrFinalsTitle: "Finale",
   bnrFinalsTxt: "Oglej si zaključni turnir tekmovanja Lia 2019, kjer se bo najboljših 16 igralcev kvalifikacijske lestvice potegovalo za končno zmago!",
   bnrFinalsBtn: "Finalni krog",
   bnrFinalsTicket1: "Rezerviraj vstopnico",

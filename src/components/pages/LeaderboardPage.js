@@ -179,7 +179,7 @@ class LeaderboardPage extends Component {
                   </a>
                 </Col>
                 <Col md={7}>
-                  <div className="margin-top20">
+                  <div className="margin-top35">
                     <h3 className="tour-title">Slovenian Lia Tournament 2019 - Finals</h3>
                     <p>
                       Come and see the finals of the Slovenian Lia Tournament
@@ -210,7 +210,6 @@ class LeaderboardPage extends Component {
                             </a>
                           </div>
                           <div className="tour-prize-subtext">
-                            <div>Slovenian Lia Tournament 2019 - finals</div>
                             <div>
                               <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
                                 More details

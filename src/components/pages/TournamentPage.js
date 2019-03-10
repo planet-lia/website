@@ -112,7 +112,7 @@ class TournamentPage extends Component {
                             </a>
                           </Col>
                           <Col md={7}>
-                            <div className="margin-top20">
+                            <div className="margin-top35">
                               <h3 className="tour-title">{content.bnrFinalsTitle}</h3>
                               <p>{content.bnrFinalsTxt}</p>
                             </div>
@@ -139,7 +139,6 @@ class TournamentPage extends Component {
                                       </a>
                                     </div>
                                     <div className="tour-prize-subtext">
-                                      <div>{content.bnrFinalsTitle}</div>
                                       <div>
                                         <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
                                           {content.bnrFinalsTicket2}

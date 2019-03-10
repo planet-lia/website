@@ -176,6 +176,10 @@ select.placeholder > option {
   margin-top: 20px;
 }
 
+.margin-top35 {
+  margin-top: 35px;
+}
+
 .margin-bottom10 {
   margin-bottom: 10px;
 }
@@ -837,10 +841,12 @@ td .btn.custom-btn {
 #img-bracket {
   display: block;
   width: 70%;
-  margin: 35px auto 15px;
+  margin: 50px auto 20px;
 }
 
 #banner-finals-cont-links {
+  margin: 20px 0 15px;
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -860,14 +866,14 @@ td .btn.custom-btn {
 @media screen and (max-width: 1199.98px) {
   #img-bracket {
     width: 80%;
-    margin: 50px auto 30px;
+    margin: 65px auto 40px;
   }
 }
 
 @media screen and (max-width: 991.98px) {
   #img-bracket {
     width: 40%;
-    margin: 30px auto 20px;
+    margin: 35px auto 20px;
   }
   #banner-finals-cont-links {
     -webkit-box-pack: center;
