@@ -112,6 +112,23 @@
   text-align: center;
 }
 
+.player-field a,
+.player-field a:focus,
+.player-field a:active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.player-field.player1 a:hover{
+  color: #facd3b;
+  text-decoration: none;
+}
+
+.player-field.player2 a:hover{
+  color: #019170;
+  text-decoration: none;
+}
+
 .root-edge {
   width: 9%;
   height: 100%;
