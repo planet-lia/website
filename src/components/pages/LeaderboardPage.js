@@ -180,7 +180,7 @@ class LeaderboardPage extends Component {
                 </Col>
                 <Col md={7}>
                   <div className="margin-top35">
-                    <h3 className="tour-title">Slovenian Lia Tournament 2019 - Finals</h3>
+                    <h3 className="tour-title">Finals</h3>
                     <p>
                       Come and see the finals of the Slovenian Lia Tournament
                       2019 where top 16 players from the leaderboard will battle
