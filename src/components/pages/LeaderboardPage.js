@@ -63,8 +63,8 @@ class LeaderboardPage extends Component {
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
         language: leaderboard.bot.language,
-        lastChange: timeSince(new Date(leaderboard.bot.uploaded)) + " ago",
-        version: leaderboard.bot.version,
+        lastChange: leaderboard.rank < 17 ? "hidden" : (timeSince(new Date(leaderboard.bot.uploaded)) + " ago"),
+        version: leaderboard.rank < 17 ? "hidden" : leaderboard.bot.version,
         achievements: leaderboard.user.achievements ? leaderboard.user.achievements : []
       })
     );

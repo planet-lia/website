@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 class Bracket extends Component {
   constructor(props) {
@@ -134,8 +135,20 @@ class Bracket extends Component {
 
   render() {
     const { col, row, side } = this.state;
-    const { player1, player2 } = this.props;
+    const { battleId, player1, player2, org1, org2 } = this.props;
     const { edgeLeft, edgeRight } = this.setEdges();
+
+    const tooltip1 = (
+      <Tooltip id={"tooltip-bracket-1-" + battleId} className="custom-tooltip">
+        <div>{org1}</div>
+      </Tooltip>
+    );
+
+    const tooltip2 = (
+      <Tooltip id={"tooltip-bracket-2-" + battleId} className="custom-tooltip">
+        <div>{org2}</div>
+      </Tooltip>
+    );
 
     return (
       <div className={"g-col-" + col + " g-row-" + row}>
@@ -146,9 +159,11 @@ class Bracket extends Component {
               <div>
                 {player1
                   ? (
-                    <a href={"/user/" + player1} target="_blank" rel="noopener noreferrer">
-                      {player1}
-                    </a>
+                    <OverlayTrigger placement="bottom" overlay={tooltip1}>
+                      <a href={"/user/" + player1} target="_blank" rel="noopener noreferrer">
+                        {player1}
+                      </a>
+                    </OverlayTrigger>
                   )
                   : (
                     "- - -"
@@ -170,9 +185,11 @@ class Bracket extends Component {
               <div>
                 {player2
                   ? (
-                    <a href={"/user/" + player2} target="_blank" rel="noopener noreferrer">
-                      {player2}
-                    </a>
+                    <OverlayTrigger placement="bottom" overlay={tooltip2}>
+                      <a href={"/user/" + player2} target="_blank" rel="noopener noreferrer">
+                        {player2}
+                      </a>
+                    </OverlayTrigger>
                   )
                   : (
                     "- - -"
