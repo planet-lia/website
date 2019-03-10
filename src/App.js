@@ -79,7 +79,7 @@ class App extends Component {
       )
     } else {
       return (
-        <div id="main-container">
+        <div id="main-container" className={isDark ? "dark" : null}>
           <Header foo={() => false}/>
           <div className={isEditor ? "main-content no-footer" : "main-content"}>
             <Route component={withTracker(Routes, { /* additional attributes */ })}/>
