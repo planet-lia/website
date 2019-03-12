@@ -18,7 +18,7 @@ class GameReplay extends Component {
     this.state = {
       matchId: "",
       replayUrl: "",
-      date: "",
+      date: null,
       player1: "",
       player2: "",
       result: "",
