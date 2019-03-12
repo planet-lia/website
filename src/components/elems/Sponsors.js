@@ -10,6 +10,7 @@ import logoCeltra from '../../assets/logo_celtra.png';
 import logoSolveraLynx from '../../assets/logo_solvera_lynx.svg';
 import logoComtrade from '../../assets/logo_comtrade.png';
 import logoRacDrustvo from '../../assets/logo_rac_drustvo.png';
+import logoEpilog from '../../assets/logo_epilog.png';
 import logoOutfit7 from '../../assets/logo_outfit7.png';
 import logoSFRI from '../../assets/logo_sfri.png';
 import logoSpica from '../../assets/logo_spica.png';
@@ -62,7 +63,7 @@ const Sponsors = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={2} sm={4} xs={6}>
+        <Col md={2} sm={4} smOffset={2} xs={6}>
           <div>
             <a href="https://www.solvera-lynx.com/en/" target="_blank" rel="noopener noreferrer">
               <img id="logo-solvera-lynx" className="tour-company" src={ logoSolveraLynx } alt="Solvera Lynx" />
@@ -76,7 +77,7 @@ const Sponsors = () => {
             </a>
           </div>
         </Col>
-        <Col md={2} sm={4} xs={6}>
+        <Col md={2} mdOffset={0} sm={4} smOffset={2} xs={6}>
           <div>
             <a href="https://racunalnisko-drustvo.si/" target="_blank" rel="noopener noreferrer">
               <img id="logo-rac-drustvo" className="tour-company" src={ logoRacDrustvo } alt="Računalniško društvo" />
@@ -84,6 +85,15 @@ const Sponsors = () => {
           </div>
         </Col>
         <Col md={2} sm={4} xs={6}>
+          <div>
+            <a href="https://www.epilog.net/" target="_blank" rel="noopener noreferrer">
+              <img id="logo-epilog" className="tour-company" src={ logoEpilog } alt="Epilog" />
+            </a>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={2} mdOffset={3} sm={4} xs={6}>
           <div>
             <a href="https://outfit7.com/" target="_blank" rel="noopener noreferrer">
               <img id="logo-outfit7" className="tour-company" src={ logoOutfit7 } alt="Outfit7" />
@@ -97,7 +107,7 @@ const Sponsors = () => {
             </a>
           </div>
         </Col>
-        <Col md={2} sm={4} xs={6}>
+        <Col md={2} sm={4} smOffset={0} xs={6} xsOffset={3}>
           <div>
             <a href="https://www.spica.si/" target="_blank" rel="noopener noreferrer">
               <img id="logo-spica" className="tour-company" src={ logoSpica } alt="Špica" />
