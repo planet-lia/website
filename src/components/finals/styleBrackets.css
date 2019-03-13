@@ -1,3 +1,32 @@
+#battle-round-title {
+  text-align: center;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  margin-top: 100px;
+  font-size: 30px;
+}
+
+.battle-text {
+  color: #fff;
+}
+
+.battle-watch-buttons {
+  margin-top: 30px;
+}
+
+.user1-color {
+  color: #facd3b;
+}
+
+.user2-color {
+  color: #019170;
+}
+
+#back-to-bracket {
+  margin-top: 60px;
+  text-align: center;
+}
+
 #bracket-title {
   text-align: center;
   color: #fff;

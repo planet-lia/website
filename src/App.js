@@ -64,7 +64,11 @@ class App extends Component {
   render() {
     const isEditor = (window.location.pathname.split("/")[1]==="editor");
     const darkPages = ["/editor", "/events/slt2019"];
+    for (let i = 1; i < 17; i++) {
+      darkPages.push("/events/slt2019/battle/" + i)
+    }
     const isDark = darkPages.includes(window.location.pathname);
+
 
     if (this.props.isCheckingAuth) {
       return (
