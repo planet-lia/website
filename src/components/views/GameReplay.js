@@ -87,7 +87,7 @@ class GameReplay extends Component {
             {"Duration: " + seconds2time(duration)}
           </div>
           <div className="game-stats">
-            {"Map seed: " + mapSeed}
+            {"Map seed: " + (mapSeed===-1 ? "unknown" : mapSeed)}
           </div>
         </div>
 
