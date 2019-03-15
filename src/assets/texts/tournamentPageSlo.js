@@ -20,10 +20,8 @@ const tournamentPageSlo = {
   bnrFBTxt2: "in preberi več o dogodku.",
 
   bnrFinalsTitle: "Finale",
-  bnrFinalsTxt: "Oglej si zaključni turnir tekmovanja Lia 2019, kjer se bo najboljših 16 igralcev kvalifikacijske lestvice potegovalo za končno zmago!",
-  bnrFinalsBtn: "Finalni krog",
-  bnrFinalsTicket1: "Rezerviraj vstopnico",
-  bnrFinalsTicket2: "Več o dogodku",
+  bnrFinalsTxt: (<span>Slovenski Lia turnir 2019 je zaključen!<br/>Oglej si rezultate finalnega kroga.</span>),
+  bnrFinalsBtn: "Rezultati finalov",
 
   titleWant: "Bi se rad zabaval in premagal prijatelje v programiranju?",
   txtWant: "Izberi svoj najljubši programski jezik in uporabi že pripravljene začetne bote. Začneš lahko v le nekaj minutah.",
@@ -89,19 +87,20 @@ const tournamentPageSlo = {
   titleRls5: "Priprave na zaključni turnir  (10. marec - 13. marec)",
   txtRls5: "Najboljših 16 igralcev spletne lestvice bo uvrščenih na zaključni turnir. V vmesnem času bodo lahko vsi uvrščeni igralci med 10. marcem od 20:00 in polnočjo 13. marca posodabljali verzijo bota, ki ga bodo uporabili na tekmovanju. Nasprotniki na končnem turnirju bodo znani takoj ob zaključku spletne lestvice, tako da se bodo igralci lahko pripravili na točno določene igralce, ki jih čakajo na zaključnem turnirju. V tem času lestvica ne bo delovala!",
   titleRls6: "Zaključni turnir (14. marec)",
-  txtRls6: [
-    <span key="0">Zaključni turnir bo potekal na Fakulteti za računalništvo in
+  txtRls6: (
+    <span>Zaključni turnir bo potekal na Fakulteti za računalništvo in
       informatiko (FRI) Univerze v Ljubljani na naslovu Večna pot 113, 1000
       Ljubljana ob 16:00 v učilnici P22. Na zaključnem turnirju bo tekmovalo
       16 najboljših igralcev spletne lestvice v formatu best of
       5. <a href="https://www.facebook.com/events/2543198445721481/">Program</a> in
-      ostale podrobnosti si lahko preberete na strani dogodka
-      . <a href="https://goo.gl/forms/ZihOffKFgTC8ZaBF3">PRIJAVITE</a> se lahko tako igralci kot gledalci.</span>,
-    <br key="1"/>,
-    <span key="2">Ekipa Lia bo predvajala vse igre na velikem platnu, po
+      ostale podrobnosti si lahko preberete na strani dogodka. Prijavite se
+      lahko tako igralci kot gledalci.
+      <br/>
+      Ekipa Lia bo predvajala vse igre na velikem platnu, po
       končanem turnirju pa bodo vse igre dostopne tudi preko uradne spletne
-      strani. Na turnirju bo poskrbljeno tako za igralce kot za gledalce.</span>
-  ],
+      strani. Na turnirju bo poskrbljeno tako za igralce kot za gledalce.
+    </span>
+  ),
   btnBack: "Nazaj"
 }
 

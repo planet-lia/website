@@ -841,32 +841,20 @@ td .btn.custom-btn {
 #img-bracket {
   display: block;
   width: 70%;
-  margin: 50px auto 20px;
+  margin: 40px auto 20px;
+}
+
+#banner-finals-cont-txt {
+  margin-top: 35px;
 }
 
 #banner-finals-cont-links {
   margin: 20px 0 15px;
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-#banner-finals-cont-links > div:first-child {
-  margin-right: 60px;
 }
 
 @media screen and (max-width: 1199.98px) {
   #img-bracket {
     width: 80%;
-    margin: 65px auto 40px;
   }
 }
 
@@ -875,10 +863,11 @@ td .btn.custom-btn {
     width: 40%;
     margin: 35px auto 20px;
   }
+  #banner-finals-cont-txt {
+    text-align: center;
+  }
   #banner-finals-cont-links {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    text-align: center;
   }
 }
 
