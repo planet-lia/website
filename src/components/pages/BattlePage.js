@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { OverlayTrigger, Tooltip, Row, Col, Button } from 'react-bootstrap';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 import api from '../../utils/api';
+
 import liaLogo from '../finals/logotip_border_white256.png';
-import OverlayTrigger from "react-bootstrap/es/OverlayTrigger";
-import Tooltip from "react-bootstrap/es/Tooltip";
-import Row from "react-bootstrap/es/Row";
-import Col from "react-bootstrap/es/Col";
-import Button from "react-bootstrap/es/Button";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
+
 
 class BattlePage extends Component {
   constructor(props) {
@@ -45,8 +44,8 @@ class BattlePage extends Component {
       });
 
       // Load players
-      const player1Data = await api.game.getUserPublic(this.state.player1Id);
-      const player2Data = await api.game.getUserPublic(this.state.player2Id);
+      const player1Data = await api.game.getUserPublic(respBattles.battle.player1.userId);
+      const player2Data = await api.game.getUserPublic(respBattles.battle.player2.userId);
       this.setState({
         player1Organization: player1Data.user.organization,
         player2Organization: player2Data.user.organization,
@@ -85,78 +84,73 @@ class BattlePage extends Component {
             <h2>Slovenian Lia Tournament 2019</h2>
             <h2>Finals</h2>
           </div>
-        </div>
-        <div id="battle-round-title">
-          {this.getRoundTitle()}
-        </div>
-        <Row>
-          <Col sm={3}/>
-          <Col sm={6}>
-            <Row className="text-center">
-              <Col sm={5}>
-                <div className="player-field player1 text-left">
-                  <div>
-                    { player1Username
-                      ? (
-                        <OverlayTrigger placement="bottom" overlay={tooltip1}>
-                          <a href={"/user/" + player1Username} target="_blank" rel="noopener noreferrer">
-                            {player1Username}
-                          </a>
-                        </OverlayTrigger>
-                      )
-                      : (
-                        "- - -"
-                      )
-                    }
-                  </div>
-                  <div>
-                    {this.getNumberOfWins(player1Id)}
-                  </div>
-                </div>
-              </Col>
-              <Col sm={2}>
-                <div className="battle-text">v.s.</div>
-              </Col>
-              <Col sm={5}>
-                <div className="player-field player2 text-left">
-                  <div>
-                    { player2Username
-                      ? (
-                        <OverlayTrigger placement="bottom" overlay={tooltip2}>
-                          <a href={"/user/" + player2Username} target="_blank" rel="noopener noreferrer">
-                            {player2Username}
-                          </a>
-                        </OverlayTrigger>
-                      )
-                      : (
-                        "- - -"
-                      )
-                    }
-                  </div>
-                  <div>
-                    {this.getNumberOfWins(player2Id)}
-                  </div>
-                </div>
-              </Col>
-            </Row>
 
-            <Row className={"battle-watch-buttons"}>
-              <Col sm={1}/>
-              <Col sm={2}>{this.getMatchRender(0)}</Col>
-              <Col sm={2}>{this.getMatchRender(1)}</Col>
-              <Col sm={2}>{this.getMatchRender(2)}</Col>
-              <Col sm={2}>{this.getMatchRender(3)}</Col>
-              <Col sm={2}>{this.getMatchRender(4)}</Col>
-              <Col sm={1}/>
-            </Row>
-          </Col>
-          <Col sm={3}/>
-        </Row>
-        <Row>
-          <div id="back-to-bracket">
-            <Button bsClass="btn custom-btn custom-btn-lg" href="/events/slt2019">Back to bracket</Button>
+          <div id="battle-round-title">
+            {this.getRoundTitle()}
           </div>
-        </Row>
+          <Row>
+            <Col md={8} mdOffset={2}>
+              <Row className="text-center">
+                <Col sm={5}>
+                  <div className="player-field player1 text-left">
+                    <div>
+                      { player1Username
+                        ? (
+                          <OverlayTrigger placement="bottom" overlay={tooltip1}>
+                            <a href={"/user/" + player1Username} target="_blank" rel="noopener noreferrer">
+                              {player1Username}
+                            </a>
+                          </OverlayTrigger>
+                        )
+                        : (
+                          "- - -"
+                        )
+                      }
+                    </div>
+                    <div>
+                      {this.getNumberOfWins(player1Id)}
+                    </div>
+                  </div>
+                </Col>
+                <Col sm={2}>
+                  <div className="vs-text">vs</div>
+                </Col>
+                <Col sm={5}>
+                  <div className="player-field player2 text-left">
+                    <div>
+                      { player2Username
+                        ? (
+                          <OverlayTrigger placement="bottom" overlay={tooltip2}>
+                            <a href={"/user/" + player2Username} target="_blank" rel="noopener noreferrer">
+                              {player2Username}
+                            </a>
+                          </OverlayTrigger>
+                        )
+                        : (
+                          "- - -"
+                        )
+                      }
+                    </div>
+                    <div>
+                      {this.getNumberOfWins(player2Id)}
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row className={"battle-watch-buttons"}>
+                <Col lg={2} lgOffset={1} sm={4} xs={12}>{this.getMatchRender(0)}</Col>
+                <Col lg={2} sm={4} xs={12}>{this.getMatchRender(1)}</Col>
+                <Col lg={2} sm={4} smOffset={0} xs={12}>{this.getMatchRender(2)}</Col>
+                <Col lg={2} lgOffset={0} sm={4} smOffset={2} xs={12}>{this.getMatchRender(3)}</Col>
+                <Col lg={2} sm={4} xs={12}>{this.getMatchRender(4)}</Col>
+              </Row>
+            </Col>
+          </Row>
+          <div id="back-to-bracket">
+            <Link className="btn custom-btn custom-btn-lg" to="/events/slt2019">Back to bracket</Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -178,12 +172,12 @@ class BattlePage extends Component {
 
     let className = (match.winnerUserId === this.state.player1Id) ? "user1-color" : "user2-color";
 
-    return <div className="battle-text text-center">
-        <div className={className}>
+    return <div className="match-text text-center">
+        <div className={"game-id " + className}>
           <b>Game {matchIndex + 1}</b>
           </div>
         <Button
-          className="btn btn-watch"
+          className="btn custom-btn btn-red"
           href={"/games/" + match.matchId} target="_blank" rel="noopener noreferrer"
         >
           <span><FontAwesomeIcon icon="tv" /></span>

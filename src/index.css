@@ -575,11 +575,10 @@ a.btn.custom-btn:hover {
   background-color: rgba(0,0,0,0.1);
 }
 
-.custom-btn.btn-red,
-.custom-btn.btn-red:hover,
-.custom-btn.btn-red:active,
-.custom-btn.btn-red:focus {
-  background-color: #9a3f1b;
+.btn.custom-btn.btn-red,
+.btn.custom-btn.btn-red:active,
+.btn.custom-btn.btn-red:focus {
+  background-color: #9a362b;
 }
 
 .custom-btn.btn-gray,
@@ -589,6 +588,10 @@ a.btn.custom-btn:hover {
 .open > .dropdown-menu.custom-btn.btn-gray:hover,
 .dropdown-menu.custom-btn.btn-gray > li > a {
   background-color: #555;
+}
+
+.custom-btn-sm {
+  font-size: 12px;
 }
 
 .custom-btn-lg {
@@ -615,6 +618,10 @@ td .btn.custom-btn {
 .open > .dropdown-toggle.custom-btn.btn-gray:hover,
 .dropdown-menu.custom-btn.btn-gray > li > a:hover  {
   background-color: #494949
+}
+
+.btn.custom-btn.btn-red:hover {
+  background-color: #832E25;
 }
 
 .btn-subtext {

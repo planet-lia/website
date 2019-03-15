@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 class Bracket extends Component {
   constructor(props) {
@@ -66,6 +68,7 @@ class Bracket extends Component {
       default:
         //do nothing
     }
+
   }
 
   setEdges = () => {
@@ -133,11 +136,91 @@ class Bracket extends Component {
     return {edgeLeft, edgeRight};
   }
 
+  getMatches = () => {
+    const{ battleId, player1, player2 } = this.props;
+    let indicators = [];
+    let player1Wins = 0;
+    let player2Wins = 0;
+    let battleMatches = null;
+
+    if(Array.isArray(this.props.matches)) {
+      //console.log(battle.matches); //DEBUG
+      battleMatches = this.props.matches.filter(
+        (match) => { return (match.status === "completed") }
+      );
+    }
+
+    if(battleMatches && battleMatches.length===5) {
+
+      for(let i=0; i<5; i++){
+        if(battleMatches[i].isPublic) {
+          if(battleMatches[i].winnerUserId === player1.userId){
+            indicators.push("yellow");
+            player1Wins++;
+          } else if(battleMatches[i].winnerUserId === player2.userId) {
+            indicators.push("green");
+            player2Wins++;
+          } else {
+            console.log("Error: WinnerUserId does not match with any player. BattleId: " + battleId);
+            return ({
+              indicators: null,
+              player1Wins: 0,
+              player2Wins: 0,
+              isError: true
+            })
+          }
+
+        } else {
+          indicators.push("");
+        }
+      }
+
+      return ({
+        indicators,
+        player1Wins,
+        player2Wins,
+        isGenerated: true,
+        isError: false
+      });
+
+    } else {
+      //console.log("Not ready: There are not 5 matches in this battle. BattleId: " + battleId);
+      return ({
+        indicators: null,
+        player1Wins: 0,
+        player2Wins: 0,
+        isGenerated: false
+      });
+    }
+  }
+
+  getIndicators = (indicators) => {
+    let res = [];
+
+    if(indicators && indicators.length===5){
+      for(let i = 0; i<5; i++){
+        res.push(
+          <div key={i} className={"btn-game " + indicators[i]}></div>
+        );
+      }
+    } else {
+      for(let i = 0; i<5; i++){
+        res.push(
+          <div key={i} className="btn-game"></div>
+        );
+      }
+    }
+    return res;
+  }
+
   render() {
     const { col, row, side } = this.state;
-    const { battleId, player1, player2, org1, org2 } = this.props;
+    const { battleId, player1, player2 } = this.props;
     const { edgeLeft, edgeRight } = this.setEdges();
 
+    const matchesResults = this.getMatches();
+
+    /*
     const tooltip1 = (
       <Tooltip id={"tooltip-bracket-1-" + battleId} className="custom-tooltip">
         <div>{org1}</div>
@@ -149,6 +232,7 @@ class Bracket extends Component {
         <div>{org2}</div>
       </Tooltip>
     );
+    */
 
     return (
       <div className={"g-col-" + col + " g-row-" + row}>
@@ -159,11 +243,9 @@ class Bracket extends Component {
               <div>
                 {player1
                   ? (
-                    <OverlayTrigger placement="bottom" overlay={tooltip1}>
-                      <a href={"/user/" + player1} target="_blank" rel="noopener noreferrer">
-                        {player1}
-                      </a>
-                    </OverlayTrigger>
+                    <a href={"/user/" + player1.username} target="_blank" rel="noopener noreferrer">
+                      {player1.username}
+                    </a>
                   )
                   : (
                     "- - -"
@@ -175,21 +257,15 @@ class Bracket extends Component {
               </div>
             </div>
             <div className="battle-indicators">
-              <div className="btn-game"></div>
-              <div className="btn-game"></div>
-              <div className="btn-game"></div>
-              <div className="btn-game"></div>
-              <div className="btn-game"></div>
+              {this.getIndicators(matchesResults.indicators)}
             </div>
             <div className="player-field player2">
               <div>
                 {player2
                   ? (
-                    <OverlayTrigger placement="bottom" overlay={tooltip2}>
-                      <a href={"/user/" + player2} target="_blank" rel="noopener noreferrer">
-                        {player2}
-                      </a>
-                    </OverlayTrigger>
+                    <a href={"/user/" + player2.username} target="_blank" rel="noopener noreferrer">
+                      {player2.username}
+                    </a>
                   )
                   : (
                     "- - -"
@@ -199,6 +275,15 @@ class Bracket extends Component {
               <div>
                 0
               </div>
+            </div>
+            <div className="bracket-btn-watch">
+              <Link
+                className="btn custom-btn btn-red"
+                to={"/events/slt2019/battle/" + battleId}
+              >
+                <span><FontAwesomeIcon icon="tv" /></span>
+                <span> Watch</span>
+              </Link>
             </div>
           </div>
           {edgeRight}
