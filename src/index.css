@@ -1345,12 +1345,23 @@ iframe {
   margin-right: 15px;
 }
 
+.lead-text-right {
+  font-size: 1.3em;
+  color: #cc3300;
+  text-align: right;
+  margin-top: 63px;
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 767.98px) {
   .lead-statistics {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  .lead-text-right {
+    margin-top: 77px;
   }
 }
 

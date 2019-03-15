@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import countBy from 'lodash/countBy';
 
 import ChallengeButton from '../elems/ChallengeButton';
-import InviteButton from '../elems/InviteButton';
+//import InviteButton from '../elems/InviteButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
@@ -209,7 +209,10 @@ class LeaderboardPage extends Component {
               </div>
             </Col>
             <Col xs={6}>
-              <InviteButton className="btn-invite-lead pull-right"/>
+              {/*<InviteButton className="btn-invite-lead pull-right"/>*/}
+              <div className="lead-text-right">
+                Leaderboard is now closed
+              </div>
             </Col>
           </Row>
           <div className="cont-overflow cont-table">
