@@ -1,14 +1,68 @@
 import React, { Component } from 'react';
 
-import Bracket from './Bracket'
+import Bracket from './Bracket';
+
+import api from '../../utils/api';
 
 import liaLogo from './logotip_border_white256.png';
 import './styleBrackets.css'
 
+const NUM_BATTLES = 16;
+
 class BracketsPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      battles: [],
+      error: null
+    }
+  }
+
+  componentDidMount = () => {
+    this.getBattles();
+  }
+
+  getBattles = async () => {
+    try {
+      const respBattles = await api.game.getBattles();
+      this.setState({battles: respBattles.battles});
+    } catch(err) {
+      this.setState({error: "Network Error"});
+      console.log(err.message);
+    }
+  }
+
+  getBracket = () => {
+    const { battles } = this.state;
+    let res = [];
+
+    if(battles && battles.length===NUM_BATTLES){
+
+      for(let i=0; i<NUM_BATTLES; i++){
+        res.push(
+          <Bracket
+            key={i+1}
+            battleId={battles[i].battleId}
+            player1={battles[i].player1}
+            player2={battles[i].player2}
+            matches={battles[i].matches}
+          />
+        );
+      }
+    } else {
+      for(let i = 1; i<17; i++){
+        res.push(
+          <Bracket
+            key={i}
+            battleId={i}
+            player1={null}
+            player2={null}
+            matches={null}
+          />
+        );
+      }
+    }
+    return res;
   }
 
   render() {
@@ -23,102 +77,7 @@ class BracketsPage extends Component {
         </div>
         <div id="cont-brackets-page">
           <div className="cont-brackets">
-            <Bracket
-              battleId={1}
-              player1="grekiki1234"
-              org1="University of Ljubljana - FMF"
-              player2="aleksgorica"
-              org2="Gymnasium Nova Gorica"
-            />
-            <Bracket
-              battleId={2}
-              player1="neverlucky"
-              org1="University of Ljubljana - FMF"
-              player2="3Head"
-              org2="Gymnasium Vegova"
-            />
-            <Bracket
-              battleId={3}
-              player1="ailia"
-              org1="University of Ljubljana - FRI"
-              player2="Cmaster"
-              org2="University of Maribor - FERI"
-            />
-            <Bracket
-              battleId={4}
-              player1="Bubberducky"
-              org1="University of Ljubljana - FRI"
-              player2="Gnorts"
-              org2="University of Ljubljana - FRI"
-            />
-            <Bracket
-              battleId={9}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={10}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={13}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={16}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={15}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={14}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={11}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={12}
-              player1=""
-              player2=""
-            />
-            <Bracket
-              battleId={5}
-              player1="root"
-              org1="University of Ljubljana - FRI"
-              player2="HocemPS4"
-              org2="University of Ljubljana - FU"
-            />
-            <Bracket
-              battleId={6}
-              player1="HugeSmile"
-              org1="University of Ljubljana - FRI"
-              player2="Shaggy"
-              org2="University of Ljubljana - FRI"
-            />
-            <Bracket
-              battleId={7}
-              player1="Sever"
-              org1="University of Ljubljana - FRI"
-              player2="mmartinnee"
-              org2="University of Ljubljana - FRI"
-            />
-            <Bracket
-              battleId={8}
-              player1="PrekaljeniLisjak"
-              org1="University of Ljubljana - FRI"
-              player2="TheKing"
-              org2="Gymnasium Vegova"
-            />
+            {this.getBracket()}
           </div>
         </div>
       </div>

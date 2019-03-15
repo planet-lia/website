@@ -4550,8 +4550,8 @@
     this.fontSmall_wv5uwf$_0 = this.fontSmall_wv5uwf$_0;
     this.particleHit = 'bulletHitSomething';
     this.particleResource = 'resourcePickedUp';
-    this.particleUnitDiedTeam1 = 'unitDiedTeam1';
-    this.particleUnitDiedTeam2 = 'unitDiedTeam2';
+    this.particleUnitDiedTeam1_ehx5hb$_0 = this.particleUnitDiedTeam1_ehx5hb$_0;
+    this.particleUnitDiedTeam2_ehx5gg$_0 = this.particleUnitDiedTeam2_ehx5gg$_0;
   }
   Object.defineProperty(AssetManager.prototype, 'warrior1', {
     get: function () {
@@ -4673,19 +4673,51 @@
       this.fontSmall_wv5uwf$_0 = fontSmall;
     }
   });
-  AssetManager.prototype.load_r7nzd6$ = function (platform) {
-    this.warrior1 = platform.loadTexture('warrior1.png');
-    this.warrior2 = platform.loadTexture('warrior2.png');
-    this.worker1 = platform.loadTexture('worker1.png');
-    this.worker2 = platform.loadTexture('worker2.png');
+  Object.defineProperty(AssetManager.prototype, 'particleUnitDiedTeam1', {
+    get: function () {
+      if (this.particleUnitDiedTeam1_ehx5hb$_0 == null)
+        return throwUPAE('particleUnitDiedTeam1');
+      return this.particleUnitDiedTeam1_ehx5hb$_0;
+    },
+    set: function (particleUnitDiedTeam1) {
+      this.particleUnitDiedTeam1_ehx5hb$_0 = particleUnitDiedTeam1;
+    }
+  });
+  Object.defineProperty(AssetManager.prototype, 'particleUnitDiedTeam2', {
+    get: function () {
+      if (this.particleUnitDiedTeam2_ehx5gg$_0 == null)
+        return throwUPAE('particleUnitDiedTeam2');
+      return this.particleUnitDiedTeam2_ehx5gg$_0;
+    },
+    set: function (particleUnitDiedTeam2) {
+      this.particleUnitDiedTeam2_ehx5gg$_0 = particleUnitDiedTeam2;
+    }
+  });
+  AssetManager.prototype.load_x9hett$ = function (platform, swapTeamColors) {
+    this.warrior1 = platform.loadTexture('warrior' + this.teamIndex_fzusl$(1, swapTeamColors) + '.png');
+    this.warrior2 = platform.loadTexture('warrior' + this.teamIndex_fzusl$(2, swapTeamColors) + '.png');
+    this.worker1 = platform.loadTexture('worker' + this.teamIndex_fzusl$(1, swapTeamColors) + '.png');
+    this.worker2 = platform.loadTexture('worker' + this.teamIndex_fzusl$(2, swapTeamColors) + '.png');
     this.bgPatch = platform.loadTexture('bg-patch.png');
     this.hudPatch = platform.loadTexture('hud-patch.png');
     this.cooler = platform.loadTexture('cooler.png');
     this.block = platform.loadTexture('block.png');
     this.resource = platform.loadTexture('resource.png');
+    this.particleUnitDiedTeam1 = 'unitDiedTeam' + this.teamIndex_fzusl$(1, swapTeamColors);
+    this.particleUnitDiedTeam2 = 'unitDiedTeam' + this.teamIndex_fzusl$(2, swapTeamColors);
     this.fontMedium = platform.loadFont('medium.ttf', Config_getInstance().FONT_MEDIUM_SIZE);
     this.fontLarge = platform.loadFont('large.ttf', Config_getInstance().FONT_LARGE_SIZE);
     this.fontSmall = platform.loadFont('small-font.ttf', Config_getInstance().FONT_SMALL_SIZE);
+  };
+  AssetManager.prototype.teamIndex_fzusl$ = function (index, swapTeamColors) {
+    var tmp$;
+    if (swapTeamColors && index === 1)
+      tmp$ = 2;
+    else if (swapTeamColors && index === 2)
+      tmp$ = 1;
+    else
+      tmp$ = index;
+    return tmp$;
   };
   AssetManager.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4807,8 +4839,9 @@
     }
     return Config_instance;
   }
-  function GameLogic(platform) {
+  function GameLogic(platform, swapTeamColors) {
     this.platform_0 = platform;
+    this.swapTeamColors = swapTeamColors;
     this.engine = new Engine();
     this.db_0 = new Database();
     this.curvesListener_0 = new CurvesListener(this);
@@ -4842,7 +4875,7 @@
   });
   GameLogic.prototype.setup = function () {
     var tmp$;
-    AssetManager_getInstance().load_r7nzd6$(this.platform_0);
+    AssetManager_getInstance().load_x9hett$(this.platform_0, this.swapTeamColors);
     var systems = [new GroupManager(), new VisibilitySystem(this.stopwatch, this.platform_0), new HealthBarSystem(this.stopwatch), new AmmunitionBarSystem(this.stopwatch), new ResourcePickupSystem(this.stopwatch, this.platform_0), new RenderSystem(this.platform_0, this.stopwatch), new HudSystem(this, this.actionReporter, this.platform_0, this.stopwatch)];
     for (tmp$ = 0; tmp$ !== systems.length; ++tmp$) {
       var s = systems[tmp$];
@@ -6025,6 +6058,8 @@
     this.actionReporter_0 = actionReporter;
     this.platform_0 = platform;
     this.stopwatch_0 = stopwatch;
+    this.team1Color = this.gameLogic_0.swapTeamColors ? Config_getInstance().COLOR_UNIT_GREEN : Config_getInstance().COLOR_GOLD;
+    this.team2Color = this.gameLogic_0.swapTeamColors ? Config_getInstance().COLOR_GOLD : Config_getInstance().COLOR_UNIT_GREEN;
   }
   HudSystem.prototype.update_mx4ult$ = function (delta) {
     var team1 = this.actionReporter_0.getTeamStats_5yasai$(Team$TEAM_1_getInstance());
@@ -6032,12 +6067,12 @@
     this.drawHudBackground_0();
     this.drawPowerLevelBar_0(team1.power, team2.power);
     this.drawBotNames_0();
-    this.drawHudElement_0(AssetManager_getInstance().worker1, Config_getInstance().WORKER_1_POSITION_X, Config_getInstance().COLOR_GOLD, team1.workers);
-    this.drawHudElement_0(AssetManager_getInstance().warrior1, Config_getInstance().WARRIOR_1_POSITION_X, Config_getInstance().COLOR_GOLD, team1.warriors);
-    this.drawHudElement_0(AssetManager_getInstance().resource, Config_getInstance().RESOURCE_1_POSITION_X, Config_getInstance().COLOR_GOLD, team1.resources);
-    this.drawHudElement_0(AssetManager_getInstance().worker2, Config_getInstance().WORKER_2_POSITION_X, Config_getInstance().COLOR_UNIT_GREEN, team2.workers);
-    this.drawHudElement_0(AssetManager_getInstance().warrior2, Config_getInstance().WARRIOR_2_POSITION_X, Config_getInstance().COLOR_UNIT_GREEN, team2.warriors);
-    this.drawHudElement_0(AssetManager_getInstance().resource, Config_getInstance().RESOURCE_2_POSITION_X, Config_getInstance().COLOR_UNIT_GREEN, team2.resources);
+    this.drawHudElement_0(AssetManager_getInstance().worker1, Config_getInstance().WORKER_1_POSITION_X, this.team1Color, team1.workers);
+    this.drawHudElement_0(AssetManager_getInstance().warrior1, Config_getInstance().WARRIOR_1_POSITION_X, this.team1Color, team1.warriors);
+    this.drawHudElement_0(AssetManager_getInstance().resource, Config_getInstance().RESOURCE_1_POSITION_X, this.team1Color, team1.resources);
+    this.drawHudElement_0(AssetManager_getInstance().worker2, Config_getInstance().WORKER_2_POSITION_X, this.team2Color, team2.workers);
+    this.drawHudElement_0(AssetManager_getInstance().warrior2, Config_getInstance().WARRIOR_2_POSITION_X, this.team2Color, team2.warriors);
+    this.drawHudElement_0(AssetManager_getInstance().resource, Config_getInstance().RESOURCE_2_POSITION_X, this.team2Color, team2.resources);
     this.drawTime_0();
     this.drawBotCrashedText_0(Team$TEAM_1_getInstance());
     this.drawBotCrashedText_0(Team$TEAM_2_getInstance());
@@ -6072,12 +6107,12 @@
     var sum = powerTeam1 + powerTeam2;
     var widthTeam1 = powerTeam1 / sum * Config_getInstance().POWER_LEVEL_WIDTH;
     var widthTeam2 = powerTeam2 / sum * Config_getInstance().POWER_LEVEL_WIDTH;
-    this.platform_0.drawRect(ShapeType$Filled_getInstance(), 0.0, Config_getInstance().COLOR_GOLD.r, Config_getInstance().COLOR_GOLD.g, Config_getInstance().COLOR_GOLD.b, Config_getInstance().COLOR_GOLD.a, Config_getInstance().POWER_LEVEL_POSITION.x, Config_getInstance().POWER_LEVEL_POSITION.y, widthTeam1, Config_getInstance().POWER_LEVEL_HEIGHT, Config_getInstance().HUD_LAYER, true);
-    this.platform_0.drawRect(ShapeType$Filled_getInstance(), 0.0, Config_getInstance().COLOR_UNIT_GREEN.r, Config_getInstance().COLOR_UNIT_GREEN.g, Config_getInstance().COLOR_UNIT_GREEN.b, Config_getInstance().COLOR_UNIT_GREEN.a, Config_getInstance().POWER_LEVEL_POSITION.x + widthTeam1, Config_getInstance().POWER_LEVEL_POSITION.y, widthTeam2, Config_getInstance().POWER_LEVEL_HEIGHT, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawRect(ShapeType$Filled_getInstance(), 0.0, this.team1Color.r, this.team1Color.g, this.team1Color.b, this.team1Color.a, Config_getInstance().POWER_LEVEL_POSITION.x, Config_getInstance().POWER_LEVEL_POSITION.y, widthTeam1, Config_getInstance().POWER_LEVEL_HEIGHT, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawRect(ShapeType$Filled_getInstance(), 0.0, this.team2Color.r, this.team2Color.g, this.team2Color.b, this.team2Color.a, Config_getInstance().POWER_LEVEL_POSITION.x + widthTeam1, Config_getInstance().POWER_LEVEL_POSITION.y, widthTeam2, Config_getInstance().POWER_LEVEL_HEIGHT, Config_getInstance().HUD_LAYER, true);
   };
   HudSystem.prototype.drawBotNames_0 = function () {
-    this.platform_0.drawText(AssetManager_getInstance().fontSmall, Config_getInstance().USERNAME_1, Config_getInstance().USERNAME_1_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, Config_getInstance().COLOR_GOLD.r, Config_getInstance().COLOR_GOLD.g, Config_getInstance().COLOR_GOLD.b, Config_getInstance().COLOR_GOLD.a, Align_getInstance().left, Config_getInstance().HUD_LAYER, true);
-    this.platform_0.drawText(AssetManager_getInstance().fontSmall, Config_getInstance().USERNAME_2, Config_getInstance().USERNAME_2_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, Config_getInstance().COLOR_UNIT_GREEN.r, Config_getInstance().COLOR_UNIT_GREEN.g, Config_getInstance().COLOR_UNIT_GREEN.b, Config_getInstance().COLOR_UNIT_GREEN.a, Align_getInstance().right, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawText(AssetManager_getInstance().fontSmall, Config_getInstance().USERNAME_1, Config_getInstance().USERNAME_1_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, this.team1Color.r, this.team1Color.g, this.team1Color.b, this.team1Color.a, Align_getInstance().left, Config_getInstance().HUD_LAYER, true);
+    this.platform_0.drawText(AssetManager_getInstance().fontSmall, Config_getInstance().USERNAME_2, Config_getInstance().USERNAME_2_POSITION_X, Config_getInstance().HUD_TEXT_POSITION_Y, this.team2Color.r, this.team2Color.g, this.team2Color.b, this.team2Color.a, Align_getInstance().right, Config_getInstance().HUD_LAYER, true);
   };
   HudSystem.prototype.drawTime_0 = function () {
     var prefix = numberToInt(this.stopwatch_0.time);
@@ -6134,10 +6169,10 @@
     var tmp$;
     switch (team.name) {
       case 'TEAM_1':
-        tmp$ = Config_getInstance().COLOR_GOLD;
+        tmp$ = this.team1Color;
         break;
       case 'TEAM_2':
-        tmp$ = Config_getInstance().COLOR_UNIT_GREEN;
+        tmp$ = this.team2Color;
         break;
       case 'NONE':
         throw Exception_init('Team should be specified.');
@@ -93916,7 +93951,7 @@ module.exports = {
 
 
 function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToBannedWordsList, setGameDuration, setTime,
-                    setGameStatisticsFoo, player1AllowBubbles, player2AllowBubbles) {
+                    setGameStatisticsFoo, player1AllowBubbles, player2AllowBubbles, swapTeamColors) {
     global.kotlin = require('kotlin')
     let pixi = require('pixi.js')
     let Sprite = pixi.Sprite
@@ -93972,7 +94007,7 @@ function playReplay(divId, pathToAssets, pathToReplay, replayFileBase64, pathToB
 
     // Setup game logic
     let jsAdapter = new JsAdapter(app, pathToAssets)
-    let gameLogic = new logic.GameLogic(jsAdapter)
+    let gameLogic = new logic.GameLogic(jsAdapter, swapTeamColors)
     let logicAdapter = new logic.adapters.LogicAdapter(gameLogic)
     logicAdapter.setupLogic()
 

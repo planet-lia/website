@@ -1,3 +1,47 @@
+#battle-round-title {
+  text-align: center;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 100px 0 30px;
+  font-size: 30px;
+}
+
+.match-text {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.vs-text {
+  color: #fff;
+  font-size: 1.2em;
+  padding-top: 10px;
+}
+
+.battle-watch-buttons {
+  margin-top: 30px;
+}
+
+.game-id {
+  margin-bottom: 5px;
+}
+
+.user1-color {
+  color: #facd3b;
+}
+
+.user2-color {
+  color: #019170;
+}
+
+.user-color {
+  color: #555;
+}
+
+#back-to-bracket {
+  margin-top: 60px;
+  text-align: center;
+}
+
 #bracket-title {
   text-align: center;
   color: #fff;
@@ -40,11 +84,11 @@
   margin-left: 5px;
 }
 
-.btn-game.yellow {
+.yellow {
   background-color: #facd3b;
 }
 
-.btn-game.green {
+.green {
   background-color: #019170;
 }
 
@@ -55,7 +99,7 @@
 
   min-width: 810px;
   font-size: 16px;
-  padding: 0 20px;
+  padding: 0 20px 47px;
 }
 
 .cont-brackets > div {
@@ -127,6 +171,13 @@
 .player-field.player2 a:hover{
   color: #019170;
   text-decoration: none;
+}
+
+.bracket-btn-watch {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 15px;
 }
 
 .root-edge {

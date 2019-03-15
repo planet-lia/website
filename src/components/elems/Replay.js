@@ -18,7 +18,8 @@ class Replay extends Component {
       showCameras: false,
       isFull: false,
       overlayOpacity: 0,
-      forceReplayWidth: "100%"
+      forceReplayWidth: "100%",
+      swapTeamColors: false
     }
     this.puiRef = React.createRef();
   }
@@ -33,6 +34,9 @@ class Replay extends Component {
     this.updateReplayWidth();
     if(this.props.number || this.props.replayFileBase64 || this.props.replayUrl){
       this.checkAndRun();
+    }
+    if (this.props.swapTeamColors) {
+      this.setState({swapTeamColors: this.props.swapTeamColors})
     }
   }
 
@@ -71,7 +75,7 @@ class Replay extends Component {
   }
 
   checkAndRun = () => {
-    const { replayUrl, containerId, replayFileBase64, setGameStatistics, bubblesAllow } = this.props;
+    const { replayUrl, containerId, replayFileBase64, setGameStatistics, bubblesAllow, swapTeamColors } = this.props;
 
     if(window.liaGame){
       let url = "/assets/replays/replay_" + this.props.number + ".lia";
@@ -92,7 +96,8 @@ class Replay extends Component {
             ? setGameStatistics
             : function(){ return false },
           bubblesAllow ? bubblesAllow[0] : true,
-          bubblesAllow ? bubblesAllow[1] : true
+          bubblesAllow ? bubblesAllow[1] : true,
+          swapTeamColors
         )
       });
     } else {
