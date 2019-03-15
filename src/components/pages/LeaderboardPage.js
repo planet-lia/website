@@ -63,8 +63,8 @@ class LeaderboardPage extends Component {
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
         language: leaderboard.bot.language,
-        lastChange: leaderboard.rank < 17 ? "Hidden" : (timeSince(new Date(leaderboard.bot.uploaded)) + " ago"),
-        version: leaderboard.rank < 17 ? "Hidden" : leaderboard.bot.version,
+        lastChange: (timeSince(new Date(leaderboard.bot.uploaded)) + " ago"),
+        version: leaderboard.bot.version,
         achievements: leaderboard.user.achievements ? leaderboard.user.achievements : []
       })
     );
@@ -167,7 +167,7 @@ class LeaderboardPage extends Component {
           </div>
         </div>
         <div className="container">
-        
+
           <div className="tour-lb-sponsors text-center">
             <p>Sponsored by</p>
             <Sponsors />

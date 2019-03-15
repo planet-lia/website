@@ -366,7 +366,7 @@ class ProfilePage extends Component {
                       [
                         {
                           label: "Version:",
-                          value: (rank < 17 && !isPrivate) ? "Hidden" : version
+                          value: version
                         },
                         {
                           label: "Language:",
@@ -374,7 +374,7 @@ class ProfilePage extends Component {
                         },
                         {
                           label: "Upload time:",
-                          value: (rank < 17 && !isPrivate) ? "Hidden" : ((uploadTime === "") ? "" : <Moment format="DD/MM/YY HH:mm">{uploadTime}</Moment>)
+                          value: ((uploadTime === "") ? "" : <Moment format="DD/MM/YY HH:mm">{uploadTime}</Moment>)
                         }
                       ]
                       : []
