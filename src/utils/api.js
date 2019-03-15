@@ -117,8 +117,7 @@ export default {
         .then((response) => response.data),
 
     getBattles: () =>
-      axios.get(API_BASE_URL + "/game/battles/",
-    )
+      axios.get(API_BASE_URL + "/game/battles/")
         .then((response) => response.data),
 
     getBattle: (battleId) =>
