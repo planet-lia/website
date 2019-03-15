@@ -150,9 +150,9 @@ class Bracket extends Component {
       );
     }
 
-    if(battleMatches && battleMatches.length===5) {
+    if(battleMatches) {
 
-      for(let i=0; i<5; i++){
+      for(let i=0; i<battleMatches.length; i++) {
         if(battleMatches[i].isPublic) {
           if(battleMatches[i].winnerUserId === player1.userId){
             indicators.push("yellow");
@@ -173,6 +173,10 @@ class Bracket extends Component {
         } else {
           indicators.push("");
         }
+      }
+
+      for(let i=0; i<5-battleMatches.length; i++){
+        indicators.push("");
       }
 
       return ({
@@ -210,7 +214,31 @@ class Bracket extends Component {
         );
       }
     }
+
+
     return res;
+  }
+
+  getPlayerToolTip = ( player ) => {
+    const { battleId } = this.props;
+    let organization = "No organization"
+    let level = "No level"
+
+    if(player){
+      if(player.organization){
+        organization = player.organization
+      }
+
+      if(player.level){
+        level = player.level
+      }
+    }
+
+    return (
+      <Tooltip id={"tooltip-bracket-1-" + battleId} className="custom-tooltip">
+        <div>{organization + " (" + level + ")"}</div>
+      </Tooltip>
+    )
   }
 
   render() {
@@ -220,19 +248,10 @@ class Bracket extends Component {
 
     const matchesResults = this.getMatches();
 
-    /*
-    const tooltip1 = (
-      <Tooltip id={"tooltip-bracket-1-" + battleId} className="custom-tooltip">
-        <div>{org1}</div>
-      </Tooltip>
-    );
 
-    const tooltip2 = (
-      <Tooltip id={"tooltip-bracket-2-" + battleId} className="custom-tooltip">
-        <div>{org2}</div>
-      </Tooltip>
-    );
-    */
+    const tooltip1 = this.getPlayerToolTip(player1);
+
+    const tooltip2 = this.getPlayerToolTip(player2)
 
     return (
       <div className={"g-col-" + col + " g-row-" + row}>
@@ -243,9 +262,11 @@ class Bracket extends Component {
               <div>
                 {player1
                   ? (
-                    <a href={"/user/" + player1.username} target="_blank" rel="noopener noreferrer">
-                      {player1.username}
-                    </a>
+                    <OverlayTrigger placement="bottom" overlay={tooltip1}>
+                      <a href={"/user/" + player1.username} target="_blank" rel="noopener noreferrer">
+                        {player1.username}
+                      </a>
+                    </OverlayTrigger>
                   )
                   : (
                     "- - -"
@@ -253,7 +274,7 @@ class Bracket extends Component {
                 }
               </div>
               <div>
-                0
+                {matchesResults.player1Wins}
               </div>
             </div>
             <div className="battle-indicators">
@@ -263,9 +284,11 @@ class Bracket extends Component {
               <div>
                 {player2
                   ? (
-                    <a href={"/user/" + player2.username} target="_blank" rel="noopener noreferrer">
-                      {player2.username}
-                    </a>
+                    <OverlayTrigger placement="bottom" overlay={tooltip1}>
+                      <a href={"/user/" + player2.username} target="_blank" rel="noopener noreferrer">
+                        {player2.username}
+                      </a>
+                    </OverlayTrigger>
                   )
                   : (
                     "- - -"
@@ -273,7 +296,7 @@ class Bracket extends Component {
                 }
               </div>
               <div>
-                0
+                {matchesResults.player2Wins}
               </div>
             </div>
             <div className="bracket-btn-watch">

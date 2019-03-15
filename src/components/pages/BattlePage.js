@@ -166,24 +166,39 @@ class BattlePage extends Component {
   }
 
   getMatchRender = (matchIndex) => {
-    if (this.state.matches == null) return "";
+    const { matches, player1Id } = this.state;
+    if (matches == null) return "";
 
-    let match = this.state.matches[matchIndex];
+    if (matches && matchIndex < matches.length){
+      let match = matches[matchIndex];
 
-    let className = (match.winnerUserId === this.state.player1Id) ? "user1-color" : "user2-color";
+      let className = (match.winnerUserId === player1Id) ? "user1-color" : "user2-color";
 
-    return <div className="match-text text-center">
-        <div className={"game-id " + className}>
-          <b>Game {matchIndex + 1}</b>
+      return (
+        <div className="match-text text-center">
+          <div className={"game-id " + className}>
+            <b>Game {matchIndex + 1}</b>
           </div>
-        <Button
-          className="btn custom-btn btn-red"
-          href={"/games/" + match.matchId} target="_blank" rel="noopener noreferrer"
-        >
-          <span><FontAwesomeIcon icon="tv" /></span>
-          <span> Watch</span>
-        </Button>
-      </div>
+          <Button
+            className="btn custom-btn btn-red"
+            href={"/games/" + match.matchId} target="_blank" rel="noopener noreferrer"
+          >
+            <span><FontAwesomeIcon icon="tv" /></span>
+            <span> Watch</span>
+          </Button>
+        </div>
+      );
+
+    } else {
+      let className = "user-color";
+
+      return <div className="match-text text-center">
+          <div className={"game-id " + className}>
+            <b>Game {matchIndex + 1}</b>
+          </div>
+        </div>
+
+    }
   }
 
 

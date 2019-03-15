@@ -33,6 +33,10 @@
   color: #019170;
 }
 
+.user-color {
+  color: #555;
+}
+
 #back-to-bracket {
   margin-top: 60px;
   text-align: center;
@@ -80,11 +84,11 @@
   margin-left: 5px;
 }
 
-.btn-game.yellow {
+.yellow {
   background-color: #facd3b;
 }
 
-.btn-game.green {
+.green {
   background-color: #019170;
 }
 
