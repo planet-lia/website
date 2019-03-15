@@ -42,7 +42,7 @@ class Bracket extends Component {
         this.setState({ col:"4", row:"23", side:"center", type:"root" });
         break;
       case 15:
-        this.setState({ col:"4", row:"34", side:"center", type:"outside" });
+        this.setState({ col:"4", row:"4", side:"center", type:"outside" });
         break;
       case 14:
         this.setState({ col:"5", row:"23", side:"right", type:"normal", vert:"top-mid" });
