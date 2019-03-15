@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { Switch, Route } from 'react-router-dom';
 //import Countdown from 'react-countdown-now';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TournamentMain from '../views/TournamentMain';
 import TournamentRules from '../views/TournamentRules';

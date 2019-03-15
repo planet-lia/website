@@ -10,7 +10,6 @@ import ChallengeButton from '../elems/ChallengeButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
-import Prize from '../elems/Prize';
 
 import api from '../../utils/api';
 

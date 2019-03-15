@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import Loader from 'react-loader-spinner';
 
 import Bracket from './Bracket';
 
@@ -15,6 +17,7 @@ class BracketsPage extends Component {
     super(props);
     this.state = {
       battles: [],
+      isLoading: true,
       error: null
     }
   }
@@ -26,9 +29,15 @@ class BracketsPage extends Component {
   getBattles = async () => {
     try {
       const respBattles = await api.game.getBattles();
-      this.setState({battles: respBattles.battles});
+      this.setState({
+        battles: respBattles.battles,
+        isLoading: false
+      });
     } catch(err) {
-      this.setState({error: "Network Error"});
+      this.setState({
+        error: "Network Error",
+        isLoading: false
+      });
       console.log(err.message);
     }
   }
@@ -39,7 +48,7 @@ class BracketsPage extends Component {
 
     if(battles && battles.length===NUM_BATTLES){
 
-      for(let i=0; i<NUM_BATTLES; i++){
+      for(let i=NUM_BATTLES-1; i>=0; i--){
         res.push(
           <Bracket
             key={i+1}
@@ -68,9 +77,21 @@ class BracketsPage extends Component {
 
   getWinners = () => {
     let winners = {
-      first: "",
-      second: "",
-      third: "",
+      first: {
+        username: "",
+        organization: "",
+        level: ""
+      },
+      second: {
+        username: "",
+        organization: "",
+        level: ""
+      },
+      third: {
+        username: "",
+        organization: "",
+        level: ""
+      },
       isWinners: true
     };
 
@@ -103,11 +124,23 @@ class BracketsPage extends Component {
       }
 
       if(player1WinFinal > player2WinFinal) {
-        winners.first = battleFinal.player1.username;
-        winners.second = battleFinal.player2.username;
+        winners.first.username = battleFinal.player1.username;
+        winners.first.organization = battleFinal.player1.organization;
+        winners.first.level = battleFinal.player1.level;
+
+        winners.second.username = battleFinal.player2.username;
+        winners.second.organization = battleFinal.player2.organization;
+        winners.second.level = battleFinal.player2.level;
+
       } else if(player1WinFinal < player2WinFinal){
-        winners.first = battleFinal.player2.username;
-        winners.second = battleFinal.player1.username;
+        winners.first.username = battleFinal.player2.username;
+        winners.first.organization = battleFinal.player2.organization;
+        winners.first.level = battleFinal.player2.level;
+
+        winners.second.username = battleFinal.player1.username;
+        winners.second.organization = battleFinal.player1.organization;
+        winners.second.level = battleFinal.player1.level;
+
       } else {
         winners.isWinners = false;
       }
@@ -126,9 +159,15 @@ class BracketsPage extends Component {
       }
 
       if(player1WinForThird > player2WinForThird) {
-        winners.third = battleForThird.player1.username;
+        winners.third.username = battleForThird.player1.username;
+        winners.third.organization = battleForThird.player1.organization;
+        winners.third.level = battleForThird.player1.level;
+
       } else if(player1WinForThird < player2WinForThird){
-        winners.third = battleForThird.player2.username;
+        winners.third.username = battleForThird.player2.username;
+        winners.third.organization = battleForThird.player2.organization;
+        winners.third.level = battleForThird.player2.level;
+
       } else {
         winners.isWinners = false;
       }
@@ -142,52 +181,118 @@ class BracketsPage extends Component {
       return winners;
     } else {
       return {
-        first: "- - -",
-        second: "- - -",
-        third: "- - -",
-        isWinners: true
+        first: null,
+        second: null,
+        third: null,
+        isWinners: false
+      }
+    }
+  }
+
+  getPlayerToolTip = ( player, id ) => {
+    let organization = "No organization"
+    let level = "No level"
+
+    if(player){
+      if(player.organization){
+        organization = player.organization
+      }
+
+      if(player.level){
+        level = player.level
       }
     }
 
-
+    return (
+      <Tooltip id={"tooltip-bracket-w-" + id} className="custom-tooltip">
+        <div>{organization + " (" + level + ")"}</div>
+      </Tooltip>
+    )
   }
 
   render() {
-    const winners = this.getWinners();
-
-    return (
-      <div>
-        <div className="container">
-          <div id="bracket-title">
-            <img id="logo-lia" src={ liaLogo } alt="Lia" />
-            <h2>Slovenian Lia Tournament 2019</h2>
-            <h2>Finals</h2>
-          </div>
+    if (this.state.isLoading) {
+      return (
+        <div className="cont-loader">
+          <Loader
+            type="Triangle"
+            color="#019170"
+            height="100"
+            width="100"
+          />
         </div>
-        <div id="cont-brackets-page">
-          <div className="cont-brackets">
-            {this.getBracket()}
-            <div id="brackets-winners">
-              <div>
-                <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#d9c72e"/></div>
-                <div className="cont-win-name">{winners.first}</div>
-                <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#d9c72e"/></div>
+      )
+    } else {
+      const winners = this.getWinners();
+
+      return (
+        <div>
+          <div className="container">
+            <div id="bracket-title">
+              <img id="logo-lia" src={ liaLogo } alt="Lia" />
+              <h2>Slovenian Lia Tournament 2019</h2>
+              <h2>Finals</h2>
+            </div>
+          </div>
+          <div id="cont-brackets-page">
+            <div className="cont-brackets">
+              <div id="brackets-winners">
+                <div>
+                  <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#d9c72e"/></div>
+                  <div className="cont-win-name">
+                    {winners.isWinners
+                      ? (
+                        <OverlayTrigger placement="bottom" overlay={this.getPlayerToolTip(winners.first, 1)}>
+                          <a href={"/user/" + winners.first.username} target="_blank" rel="noopener noreferrer">
+                            {winners.first.username}
+                          </a>
+                        </OverlayTrigger>
+                      )
+                      : "- - -"
+                    }
+                  </div>
+                  <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#d9c72e"/></div>
+                </div>
+                <div>
+                  <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9b9b92"/></div>
+                  <div className="cont-win-name">
+                  {winners.isWinners
+                    ? (
+                      <OverlayTrigger placement="bottom" overlay={this.getPlayerToolTip(winners.second, 2)}>
+                        <a href={"/user/" + winners.second.username} target="_blank" rel="noopener noreferrer">
+                          {winners.second.username}
+                        </a>
+                      </OverlayTrigger>
+                    )
+                    : "- - -"
+                  }
+                  </div>
+                  <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9b9b92"/></div>
+                </div>
+                <div>
+                  <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9a3f1b"/></div>
+                  <div className="cont-win-name">
+                  {winners.isWinners
+                    ? (
+                      <OverlayTrigger placement="bottom" overlay={this.getPlayerToolTip(winners.third, 3)}>
+                        <a href={"/user/" + winners.third.username} target="_blank" rel="noopener noreferrer">
+                          {winners.third.username}
+                        </a>
+                      </OverlayTrigger>
+                    )
+                    : "- - -"
+                  }
+                  </div>
+                  <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9a3f1b"/></div>
+                </div>
               </div>
-              <div>
-                <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9b9b92"/></div>
-                <div className="cont-win-name">{winners.second}</div>
-                <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9b9b92"/></div>
-              </div>
-              <div>
-                <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9a3f1b"/></div>
-                <div className="cont-win-name">{winners.third}</div>
-                <div className="cont-win-icon"><FontAwesomeIcon icon="trophy" color="#9a3f1b"/></div>
-              </div>
+              {this.getBracket()}
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
+
   }
 }
 

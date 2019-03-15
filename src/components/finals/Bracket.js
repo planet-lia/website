@@ -219,7 +219,7 @@ class Bracket extends Component {
     return res;
   }
 
-  getPlayerToolTip = ( player ) => {
+  getPlayerToolTip = ( player, id ) => {
     const { battleId } = this.props;
     let organization = "No organization"
     let level = "No level"
@@ -235,7 +235,7 @@ class Bracket extends Component {
     }
 
     return (
-      <Tooltip id={"tooltip-bracket-1-" + battleId} className="custom-tooltip">
+      <Tooltip id={"tooltip-bracket-" + id + "-" + battleId} className="custom-tooltip">
         <div>{organization + " (" + level + ")"}</div>
       </Tooltip>
     )
@@ -248,11 +248,6 @@ class Bracket extends Component {
 
     const matchesResults = this.getMatches();
 
-
-    const tooltip1 = this.getPlayerToolTip(player1);
-
-    const tooltip2 = this.getPlayerToolTip(player2)
-
     return (
       <div className={"g-col-" + col + " g-row-" + row}>
         <div className={"bracket " + side}>
@@ -262,7 +257,7 @@ class Bracket extends Component {
               <div>
                 {player1
                   ? (
-                    <OverlayTrigger placement="bottom" overlay={tooltip1}>
+                    <OverlayTrigger placement="bottom" overlay={this.getPlayerToolTip(player1, 1)}>
                       <a href={"/user/" + player1.username} target="_blank" rel="noopener noreferrer">
                         {player1.username}
                       </a>
@@ -284,7 +279,7 @@ class Bracket extends Component {
               <div>
                 {player2
                   ? (
-                    <OverlayTrigger placement="bottom" overlay={tooltip1}>
+                    <OverlayTrigger placement="bottom" overlay={this.getPlayerToolTip(player2, 2)}>
                       <a href={"/user/" + player2.username} target="_blank" rel="noopener noreferrer">
                         {player2.username}
                       </a>

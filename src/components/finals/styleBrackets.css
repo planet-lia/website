@@ -132,6 +132,17 @@
   min-width: 246px;
 }
 
+.cont-win-name > a,
+.cont-win-name > a:focus,
+.cont-win-name > a:active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.cont-win-name > a:hover {
+  color: #ccc;
+}
+
 .cont-win-icon {
   margin: 0 33px;
   font-size: 36px;
