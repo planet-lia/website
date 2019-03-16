@@ -107,6 +107,9 @@ class BattlePage extends Component {
             <div id="battle-round-title">
               {this.getRoundTitle()}
             </div>
+            <div id="battle-title">
+              {"Battle " + battleId}
+            </div>
             <Row>
               <Col md={8} mdOffset={2}>
                 <Row className="text-center">
