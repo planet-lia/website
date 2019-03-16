@@ -130,13 +130,13 @@ class LandingPage extends Component {
             }
             <Row>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="lia-general vs lia-miner" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="3Head vs neverlucky" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="lia-general vs lia-warrior" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="PrekaljeniLisjak vs grekiki1234" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="lia-miner vs lia-warrior" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="root vs ailia" /></Scrollchor>
               </Col>
             </Row>
           </div>
