@@ -20,11 +20,8 @@ const tournamentPageEng = {
   bnrFBTxt2: "and check event details.",
 
   bnrFinalsTitle: "Finals",
-  bnrFinalsTxt: "Come and see the finals of the Slovenian Lia Tournament 2019 where top 16 players from the leaderboard will battle for the final victory!",
-  bnrFinalsBtn: "Finals Bracket",
-  bnrFinalsTicket1: "Get Your Free Ticket",
-  bnrFinalsTicket2: "More details",
-
+  bnrFinalsTxt: (<span>Slovenian Lia tournament 2019 is now finished!<br/>See how the finals turned out.</span>),
+  bnrFinalsBtn: "Finals Results",
 
   titleWant: "Want to have fun and beat your friends at coding?",
   txtWant: "Pick your favourite language and use our prebuilt starting bots to get you going within minutes.",
@@ -105,16 +102,17 @@ const tournamentPageEng = {
   txtRls5: "Top 16 players from the online leaderboard get to play on the final tournament. In the period between March 10th 8:00 pm until March 13th midnight they have a chance to make the final tweaks to their bots and upload them to our website. Since the leaderboard will not be running, you won't be able to test those changes against other players, so be careful!",
   titleRls6: "Final tournament  (14 Mar)",
   txtRls6: [
-    <span key="0">Final tournament will be held at Faculty of Computer and
+    <span>Final tournament will be held at Faculty of Computer and
       Information Science (FRI) of University of Ljubljana at Večna pot 113,
-      1000 Ljubljana at 16:00 pm in the classroom P22 The final tournament
+      1000 Ljubljana at 4:00 pm in the classroom P22 The final tournament
       will feature a top 16 players competing between each other in the best of 5 format.
-      See the event schedule and other details at the <a href="https://www.facebook.com/events/2543198445721481/">EVENT PAGE</a> and
-      get your <a href="https://goo.gl/forms/ZihOffKFgTC8ZaBF3">FREE TICKET</a>. Anyone is welcome!</span>,
-    <br key="1"/>,
-    <span key="2">Lia team will stream the games on the big canvas. After the
+      See the event schedule and other details at the <a href="https://www.facebook.com/events/2543198445721481/">EVENT PAGE</a>.
+      Anyone is welcome!
+      <br/>
+      Lia team will stream the games on the big canvas. After the
       final tournament all the games from all rounds will be available online
-      for everyone to view.</span>
+      for everyone to view.
+    </span>
   ],
   btnBack: "Back"
 }

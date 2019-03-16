@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Glyphicon, Button } from 'react-bootstrap';
 import Scrollchor from 'react-scrollchor';
 import { Link } from 'react-router-dom';
-//import Countdown from 'react-countdown-now';
 
 import Replay from '../elems/Replay';
 import ReplayThumb from '../elems/ReplayThumb';
@@ -10,7 +9,6 @@ import SubscriptionPopup from '../views/SubscriptionPopup';
 import Supporters from '../elems/Supporters';
 import Contacts from '../elems/Contacts';
 import queryString from 'query-string';
-//import { countdownRenderer } from '../../utils/helpers/countdownRenderer';
 
 import api from '../../utils/api';
 
@@ -86,12 +84,7 @@ class LandingPage extends Component {
               a little bit of programming?<br />
               Join Lia and battle for the coding glory!
             </p>
-            <h3 id="live-now" className="tour-title">Join us at the Finals!</h3>
-            {/*
-            <div className="cont-countdown">
-              <Countdown date={"2019-03-09T20:00:00"} renderer={countdownRenderer}/>
-            </div>
-            */}
+            <h3 id="live-now" className="tour-title">See the results!</h3>
             <Link to="/tournament" className="btn custom-btn custom-btn-xl margin-top20">Tournament Page</Link>
             <Supporters />
           </div>
@@ -137,13 +130,13 @@ class LandingPage extends Component {
             }
             <Row>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="lia-general vs lia-miner" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb1} onThumbClick={ () => this.setState({ gameId: 1 }) } replayTitle="3Head vs neverlucky" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="lia-general vs lia-warrior" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb2} onThumbClick={ () => this.setState({ gameId: 2 }) } replayTitle="PrekaljeniLisjak vs grekiki1234" /></Scrollchor>
               </Col>
               <Col md={4}>
-                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="lia-miner vs lia-warrior" /></Scrollchor>
+                <Scrollchor to="#land-cont-watch"><ReplayThumb imageSrc={thumb3} onThumbClick={ () => this.setState({ gameId: 3 }) } replayTitle="root vs ailia" /></Scrollchor>
               </Col>
             </Row>
           </div>

@@ -1,3 +1,54 @@
+#battle-round-title {
+  text-align: center;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 100px 0 0;
+  font-size: 30px;
+}
+
+#battle-title {
+  text-align: center;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0 0 30px;
+}
+
+.match-text {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.vs-text {
+  color: #fff;
+  font-size: 1.2em;
+  padding-top: 10px;
+}
+
+.battle-watch-buttons {
+  margin-top: 30px;
+}
+
+.game-id {
+  margin-bottom: 5px;
+}
+
+.user1-color {
+  color: #facd3b;
+}
+
+.user2-color {
+  color: #019170;
+}
+
+.user-color {
+  color: #555;
+}
+
+#back-to-bracket {
+  margin-top: 60px;
+  text-align: center;
+}
+
 #bracket-title {
   text-align: center;
   color: #fff;
@@ -40,11 +91,11 @@
   margin-left: 5px;
 }
 
-.btn-game.yellow {
+.yellow {
   background-color: #facd3b;
 }
 
-.btn-game.green {
+.green {
   background-color: #019170;
 }
 
@@ -55,11 +106,53 @@
 
   min-width: 810px;
   font-size: 16px;
-  padding: 0 20px;
+  padding: 0 20px 47px;
 }
 
 .cont-brackets > div {
   position: relative;
+}
+
+#brackets-winners {
+  grid-column-start: 3;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 3;
+
+  font-size: 22px;
+  margin-top: 60px;
+}
+
+#brackets-winners > div {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.cont-win-name {
+  color: #fff;
+  background: #3b3b3b;
+  text-align: center;
+  padding: 3px 16px;
+  min-width: 246px;
+}
+
+.cont-win-name > a,
+.cont-win-name > a:focus,
+.cont-win-name > a:active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.cont-win-name > a:hover {
+  color: #ccc;
+}
+
+.cont-win-icon {
+  margin: 0 33px;
+  font-size: 36px;
 }
 
 .bracket {
@@ -127,6 +220,13 @@
 .player-field.player2 a:hover{
   color: #019170;
   text-decoration: none;
+}
+
+.bracket-btn-watch {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 15px;
 }
 
 .root-edge {

@@ -115,36 +115,54 @@ export default {
     challengeUser: (userId) =>
       axios.post(API_BASE_URL + "/game/user/" + userId + "/challenge/")
         .then((response) => response.data),
+
+    getBattles: () =>
+      axios.get(API_BASE_URL + "/game/battles/")
+        .then((response) => response.data),
+
+    getBattle: (battleId) =>
+      axios.get(API_BASE_URL + "/game/battle/" + battleId + "/")
+        .then((response) => response.data),
+
     getLeaderboard: () =>
       axios.get(API_BASE_URL + "/game/leaderboard/")
         .then((response) => response.data),
+
     getGamesList: (offset = 0) =>
       axios.get(API_BASE_URL + "/game/match/latest/?offset=" + encodeURI(offset))
         .then((response) => response.data),
+
     getGame: (matchId) =>
       axios.get(API_BASE_URL + "/game/match/" + matchId + "/")
         .then((response) => response.data),
+
     getUserPublic: (userId) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/")
         .then((response) => response.data),
+
     getUserGames: (userId, offset) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/matches/?offset=" + encodeURI(offset))
         .then((response) => response.data),
+
     getActiveBot: () =>
       axios.get(API_BASE_URL + "/game/bot/active/")
         .then((response) => response.data),
+
     getLatestBot: () =>
       axios.get(API_BASE_URL + "/game/bot/latest/")
         .then((response) => response.data),
     getBot: (botId) =>
       axios.get(API_BASE_URL + "/game/bot/" + botId + "/")
         .then((response) => response.data),
+
     getChallengesStats: () =>
       axios.get(API_BASE_URL + "/game/challenges/")
         .then((response) => response.data),
+
     getUserChallenges: (userId, offset) =>
       axios.get(API_BASE_URL + "/game/user/" + userId + "/challenges/?offset=" + encodeURI(offset))
         .then((response) => response.data),
+
     submitBasicSource: (sourceCode, language) =>
       axios.post(API_BASE_URL + "/game/bot/upload/basic-source/", {sourceCode, language})
         .then((response) => response.data),

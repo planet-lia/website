@@ -575,11 +575,10 @@ a.btn.custom-btn:hover {
   background-color: rgba(0,0,0,0.1);
 }
 
-.custom-btn.btn-red,
-.custom-btn.btn-red:hover,
-.custom-btn.btn-red:active,
-.custom-btn.btn-red:focus {
-  background-color: #9a3f1b;
+.btn.custom-btn.btn-red,
+.btn.custom-btn.btn-red:active,
+.btn.custom-btn.btn-red:focus {
+  background-color: #9a362b;
 }
 
 .custom-btn.btn-gray,
@@ -589,6 +588,10 @@ a.btn.custom-btn:hover {
 .open > .dropdown-menu.custom-btn.btn-gray:hover,
 .dropdown-menu.custom-btn.btn-gray > li > a {
   background-color: #555;
+}
+
+.custom-btn-sm {
+  font-size: 12px;
 }
 
 .custom-btn-lg {
@@ -617,6 +620,10 @@ td .btn.custom-btn {
   background-color: #494949
 }
 
+.btn.custom-btn.btn-red:hover {
+  background-color: #832E25;
+}
+
 .btn-subtext {
   font-size: 0.5em;
 }
@@ -643,7 +650,6 @@ td .btn.custom-btn {
 .result-win {
   color: #019170;
 }
-
 
 .btn-watch,
 .btn-watch:hover,
@@ -841,32 +847,20 @@ td .btn.custom-btn {
 #img-bracket {
   display: block;
   width: 70%;
-  margin: 50px auto 20px;
+  margin: 40px auto 20px;
+}
+
+#banner-finals-cont-txt {
+  margin-top: 35px;
 }
 
 #banner-finals-cont-links {
   margin: 20px 0 15px;
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-#banner-finals-cont-links > div:first-child {
-  margin-right: 60px;
 }
 
 @media screen and (max-width: 1199.98px) {
   #img-bracket {
     width: 80%;
-    margin: 65px auto 40px;
   }
 }
 
@@ -875,10 +869,11 @@ td .btn.custom-btn {
     width: 40%;
     margin: 35px auto 20px;
   }
+  #banner-finals-cont-txt {
+    text-align: center;
+  }
   #banner-finals-cont-links {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -1350,12 +1345,23 @@ iframe {
   margin-right: 15px;
 }
 
+.lead-text-right {
+  font-size: 1.3em;
+  color: #cc3300;
+  text-align: right;
+  margin-top: 63px;
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 767.98px) {
   .lead-statistics {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  .lead-text-right {
+    margin-top: 77px;
   }
 }
 

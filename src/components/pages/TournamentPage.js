@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { Switch, Route } from 'react-router-dom';
 //import Countdown from 'react-countdown-now';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TournamentMain from '../views/TournamentMain';
 import TournamentRules from '../views/TournamentRules';
@@ -112,43 +111,17 @@ class TournamentPage extends Component {
                             </a>
                           </Col>
                           <Col md={7}>
-                            <div className="margin-top35">
+                            <div id="banner-finals-cont-txt">
                               <h3 className="tour-title">{content.bnrFinalsTitle}</h3>
                               <p>{content.bnrFinalsTxt}</p>
                             </div>
 
                             <div id="banner-finals-cont-links">
-
                               <div>
                                 <a href="/events/slt2019" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
                                   {content.bnrFinalsBtn}
                                 </a>
                               </div>
-
-                              <div>
-                                <div className="tour-cont-prize">
-                                  <div className="tour-cont-icon-sm tour-prize-icon cont-icon-tickets">
-                                    <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
-                                    <div className="icon-ticket1-bg">&nbsp;</div>
-                                    <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
-                                  </div>
-                                  <div>
-                                    <div className="tour-prize-text">
-                                      <a href="https://goo.gl/forms/xF1q9cTzFgerncvo2" target="_blank" rel="noopener noreferrer">
-                                        {content.bnrFinalsTicket1}
-                                      </a>
-                                    </div>
-                                    <div className="tour-prize-subtext">
-                                      <div>
-                                        <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
-                                          {content.bnrFinalsTicket2}
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
                             </div>
                           </Col>
                       </div>

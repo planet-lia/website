@@ -6,11 +6,10 @@ import Moment from 'react-moment';
 import countBy from 'lodash/countBy';
 
 import ChallengeButton from '../elems/ChallengeButton';
-import InviteButton from '../elems/InviteButton';
+//import InviteButton from '../elems/InviteButton';
 import Table from '../elems/Table';
 import Sponsors from '../elems/Sponsors';
 import { timeSince } from '../../utils/helpers/time';
-import Prize from '../elems/Prize';
 
 import api from '../../utils/api';
 
@@ -63,8 +62,8 @@ class LeaderboardPage extends Component {
         tier: leaderboard.user.level,
         organization: leaderboard.user.organization,
         language: leaderboard.bot.language,
-        lastChange: leaderboard.rank < 17 ? "Hidden" : (timeSince(new Date(leaderboard.bot.uploaded)) + " ago"),
-        version: leaderboard.rank < 17 ? "Hidden" : leaderboard.bot.version,
+        lastChange: (timeSince(new Date(leaderboard.bot.uploaded)) + " ago"),
+        version: leaderboard.bot.version,
         achievements: leaderboard.user.achievements ? leaderboard.user.achievements : []
       })
     );
@@ -167,10 +166,12 @@ class LeaderboardPage extends Component {
           </div>
         </div>
         <div className="container">
+
           <div className="tour-lb-sponsors text-center">
             <p>Sponsored by</p>
             <Sponsors />
           </div>
+
           <div className="lead-sec-prize text-center">
             <div className="lead-cont-prize">
                 <Col md={5}>
@@ -179,85 +180,25 @@ class LeaderboardPage extends Component {
                   </a>
                 </Col>
                 <Col md={7}>
-                  <div className="margin-top35">
+                  <div id="banner-finals-cont-txt">
                     <h3 className="tour-title">Finals</h3>
                     <p>
-                      Come and see the finals of the Slovenian Lia Tournament
-                      2019 where top 16 players from the leaderboard will battle
-                      for the final victory!
+                      Slovenian Lia tournament 2019 is now finished!<br/>
+                      See how the finals turned out.
                     </p>
                   </div>
 
                   <div id="banner-finals-cont-links">
-
                     <div>
                       <a href="/events/slt2019" target="_blank" rel="noopener noreferrer" className="btn custom-btn custom-btn-lg">
-                        Finals Bracket
+                        Finals Results
                       </a>
                     </div>
-
-                    <div>
-                      <div className="tour-cont-prize">
-                        <div className="tour-cont-icon-sm tour-prize-icon cont-icon-tickets">
-                          <FontAwesomeIcon icon="ticket-alt" className="icon-ticket2"/>
-                          <div className="icon-ticket1-bg">&nbsp;</div>
-                          <FontAwesomeIcon icon="ticket-alt" className="icon-ticket1"/>
-                        </div>
-                        <div>
-                          <div className="tour-prize-text">
-                            <a href="https://goo.gl/forms/xF1q9cTzFgerncvo2" target="_blank" rel="noopener noreferrer">
-                              Get Your Free Ticket
-                            </a>
-                          </div>
-                          <div className="tour-prize-subtext">
-                            <div>
-                              <a href="https://www.facebook.com/events/2543198445721481/" target="_blank" rel="noopener noreferrer">
-                                More details
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                   </div>
                 </Col>
             </div>
           </div>
-          <div className="lead-sec-prize text-center">
-            <div className="lead-cont-prize">
-              <Prize
-                color="#019170"
-                mainText={"Leaderboard winner week 3"}
-                subText={
-                  <div>
-                    <div className="lead-prize-win">Winner: <Link to="/user/root" className="no-underline">root</Link></div>
-                    <div>Prize: JBL GO bluetooth speaker</div>
-                  </div>
-                }
-              />
-            </div>
-          </div>
-          <div className="lead-sec-prize text-center">
-            <div className="lead-cont-prize">
-              <Prize
-                color="#019170"
-                mainText={"Best ranked high school student"}
-                subText={
-                  <div>
-                    <div className="lead-prize-win">Winner: <Link to="/user/aleksgorica" className="no-underline">aleksgorica</Link></div>
-                    <div>Prize: Razer Cynosa PRO & Deathadder 2000</div>
-                    <div>
-                      <span>by </span>
-                      <a href="https://svet.fri.uni-lj.si/" target="_blank" rel="noopener noreferrer">
-                        Student Council FRI
-                      </a>
-                    </div>
-                  </div>
-                }
-              />
-            </div>
-          </div>
+
           <Row>
             <Col xs={6}>
               <h2>Leaderboard</h2>
@@ -267,7 +208,10 @@ class LeaderboardPage extends Component {
               </div>
             </Col>
             <Col xs={6}>
-              <InviteButton className="btn-invite-lead pull-right"/>
+              {/*<InviteButton className="btn-invite-lead pull-right"/>*/}
+              <div className="lead-text-right">
+                Leaderboard is now closed
+              </div>
             </Col>
           </Row>
           <div className="cont-overflow cont-table">
