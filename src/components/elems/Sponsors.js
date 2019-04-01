@@ -28,7 +28,7 @@ const Sponsors = () => {
         </Col>
         <Col md={2} sm={4} xs={6}>
           <div>
-            <a href="https://www.intheloop.io/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.intheloop.io/summer-challenge/" target="_blank" rel="noopener noreferrer">
               <img id="logo-loop" className="tour-company" src={ logoLoop } alt="Loop" />
             </a>
           </div>
